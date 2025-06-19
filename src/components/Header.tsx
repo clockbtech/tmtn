@@ -40,7 +40,9 @@ const Header = () => {
             whileHover={{ scale: 1.05 }}
             className="flex-shrink-0"
           >
-            <h1 className="text-2xl lg:text-3xl font-bebas uppercase text-nepal-primary">
+            <h1 className={`text-2xl lg:text-3xl font-bebas uppercase tracking-[15px] transition-colors duration-300 ${
+              isScrolled ? 'text-nepal-primary' : 'text-white'
+            }`}>
               TAKE ME TO NEPAL
             </h1>
           </motion.div>
@@ -73,7 +75,9 @@ const Header = () => {
                 key={item.name}
                 href={item.href}
                 whileHover={{ y: -2 }}
-                className="text-white font-bebas uppercase font-medium transition-colors duration-200 px-4 py-4"
+                className={`font-bebas uppercase font-medium transition-all duration-300 px-4 py-4 tracking-[15px] ${
+                  isScrolled ? 'text-nepal-primary hover:text-nepal-orange' : 'text-white hover:text-nepal-orange'
+                }`}
                 style={{ 
                   fontSize: '23px', 
                   fontWeight: 500, 
@@ -94,7 +98,9 @@ const Header = () => {
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-700 hover:text-nepal-primary"
+              className={`transition-colors duration-300 ${
+                isScrolled ? 'text-nepal-primary hover:text-nepal-orange' : 'text-white hover:text-nepal-orange'
+              }`}
             >
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </motion.button>
@@ -127,7 +133,7 @@ const Header = () => {
                     key={item.name}
                     href={item.href}
                     whileHover={{ x: 5 }}
-                    className="block text-sm font-bebas text-gray-700 hover:text-nepal-primary font-medium py-2 px-4 uppercase"
+                    className="block text-sm font-bebas text-nepal-primary hover:text-nepal-orange font-medium py-2 px-4 uppercase tracking-[15px]"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.name}

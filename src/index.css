@@ -101,6 +101,11 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Global Bebas Neue heading styles with consistent letter spacing */
+  .font-bebas {
+    letter-spacing: 15px;
+  }
 }
 
 @layer components {
