@@ -83,7 +83,7 @@ const PopularDestinations = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl lg:text-5xl font-bebas uppercase font-bold text-nepal-primary mb-4 tracking-[15px]">
+          <h2 className="text-4xl lg:text-5xl font-bebas uppercase font-bold text-nepal-primary mb-4">
             Popular Destinations
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -110,7 +110,7 @@ const PopularDestinations = () => {
                 </div>
                 
                 <div className="p-6">
-                  <h3 className="text-2xl font-bebas uppercase font-semibold text-nepal-primary mb-2 tracking-[15px]">
+                  <h3 className="text-2xl font-bebas uppercase font-semibold text-nepal-primary mb-2">
                     {destination.name}
                   </h3>
                   <p className="text-gray-600 mb-4">

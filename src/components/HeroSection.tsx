@@ -116,7 +116,7 @@ const HeroSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.3 }}
               >
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bebas uppercase text-white mb-6 leading-tight tracking-[15px]">
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bebas uppercase text-white mb-6 leading-tight">
                   TAKEMETONEPAL.COM
                 </h1>
                 <p className="text-lg md:text-xl lg:text-2xl font-roboto text-white/90 mb-12 font-light max-w-2xl mx-auto">

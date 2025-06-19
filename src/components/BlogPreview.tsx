@@ -87,7 +87,7 @@ const BlogPreview = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl lg:text-5xl font-bebas font-bold text-nepal-primary mb-4 uppercase tracking-[15px]">
+          <h2 className="text-4xl lg:text-5xl font-playfair font-bold text-nepal-primary mb-4">
             Travel Stories & Insights
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
