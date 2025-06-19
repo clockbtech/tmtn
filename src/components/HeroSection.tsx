@@ -7,19 +7,34 @@ const HeroSection = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const slides = [
+  const heroContent = [
     {
-      image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      type: 'image',
+      src: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       title: 'Mount Everest Base Camp',
       subtitle: 'Experience the world\'s highest peak'
     },
     {
-      image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=2073&q=80',
+      type: 'video',
+      src: 'https://player.vimeo.com/external/342333493.sd.mp4?s=e90dcaba73c02b95a5996b86b65c668b1b8cc1a9&profile_id=164&oauth2_token_id=57447761',
+      title: 'Himalayan Adventure',
+      subtitle: 'Immerse yourself in Nepal\'s majesty'
+    },
+    {
+      type: 'image',
+      src: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=2073&q=80',
       title: 'Ancient Temples & Culture',
       subtitle: 'Discover Nepal\'s spiritual heritage'
     },
     {
-      image: 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      type: 'video',
+      src: 'https://player.vimeo.com/external/370467553.sd.mp4?s=1b0c0b8d0d0e0f1a1b1c1d1e1f20212223242526&profile_id=164',
+      title: 'Cultural Journey',
+      subtitle: 'Experience authentic Nepalese culture'
+    },
+    {
+      type: 'image',
+      src: 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       title: 'Pristine Mountain Lakes',
       subtitle: 'Serenity in the Himalayas'
     }
@@ -27,11 +42,11 @@ const HeroSection = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
+      setCurrentSlide((prev) => (prev + 1) % heroContent.length);
+    }, 6000);
 
     return () => clearInterval(interval);
-  }, [slides.length]);
+  }, [heroContent.length]);
 
   useEffect(() => {
     if (heroRef.current) {
@@ -51,7 +66,7 @@ const HeroSection = () => {
       );
 
       gsap.fromTo(
-        '.hero-image',
+        '.hero-media',
         {
           scale: 1.2,
         },
@@ -68,9 +83,9 @@ const HeroSection = () => {
 
   return (
     <section ref={heroRef} className="relative h-screen overflow-hidden">
-      {/* Background Images */}
+      {/* Background Media */}
       <div className="absolute inset-0">
-        {slides.map((slide, index) => (
+        {heroContent.map((content, index) => (
           <motion.div
             key={index}
             className="absolute inset-0"
@@ -81,30 +96,42 @@ const HeroSection = () => {
             }}
             transition={{ duration: 1.5, ease: 'easeInOut' }}
           >
-            <div
-              className="hero-image w-full h-full bg-cover bg-center bg-no-repeat"
-              style={{ backgroundImage: `url(${slide.image})` }}
-            />
-            <div className="absolute inset-0 bg-hero-gradient" />
+            {content.type === 'video' ? (
+              <video
+                className="hero-media w-full h-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+              >
+                <source src={content.src} type="video/mp4" />
+              </video>
+            ) : (
+              <div
+                className="hero-media w-full h-full bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: `url(${content.src})` }}
+              />
+            )}
+            <div className="absolute inset-0 bg-black/40" />
           </motion.div>
         ))}
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 h-full flex items-center">
+      {/* Content - Centered */}
+      <div className="relative z-10 h-full flex items-center justify-center">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-end">
-            <div className="hero-content text-right max-w-2xl">
+          <div className="text-center">
+            <div className="hero-content max-w-4xl mx-auto">
               <motion.div
                 key={currentSlide}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.3 }}
               >
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-playfair font-bold text-white mb-4 leading-tight">
-                  takemetonepal.com
+                <h1 className="text-heading font-bebas uppercase text-white mb-6 leading-tight">
+                  TAKEMETONEPAL.COM
                 </h1>
-                <p className="text-xl sm:text-2xl lg:text-3xl text-white/90 mb-8 font-light">
+                <p className="text-body font-roboto text-white/90 mb-12 font-light max-w-2xl mx-auto">
                   Your trusted gateway to exploring<br />
                   the wonders of Nepal
                 </p>
@@ -115,9 +142,9 @@ const HeroSection = () => {
                     boxShadow: '0 10px 30px rgba(255, 125, 51, 0.4)' 
                   }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-nepal-orange hover:bg-orange-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 shadow-lg"
+                  className="bg-nepal-orange hover:bg-orange-600 text-white px-12 py-6 rounded-full text-xl font-bebas uppercase tracking-wider transition-all duration-300 shadow-lg"
                 >
-                  Discover Nepal
+                  DISCOVER NEPAL
                 </motion.button>
               </motion.div>
             </div>
@@ -125,31 +152,19 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Slide Indicators */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
-        {slides.map((_, index) => (
+      {/* Slide Indicators - Centered */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
+        {heroContent.map((_, index) => (
           <motion.button
             key={index}
             whileHover={{ scale: 1.2 }}
             onClick={() => setCurrentSlide(index)}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              index === currentSlide ? 'bg-nepal-orange' : 'bg-white/50'
+              index === currentSlide ? 'bg-nepal-orange scale-125' : 'bg-white/50'
             }`}
           />
         ))}
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white/80"
-      >
-        <div className="flex flex-col items-center">
-          <span className="text-sm mb-2">Scroll Down</span>
-          <div className="w-px h-8 bg-white/50"></div>
-        </div>
-      </motion.div>
     </section>
   );
 };

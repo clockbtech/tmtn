@@ -20,8 +20,18 @@ export default {
 		},
 		extend: {
 			fontFamily: {
+				'bebas': ['Bebas Neue', 'cursive'],
+				'roboto': ['Roboto Flex', 'sans-serif'],
 				'poppins': ['Poppins', 'sans-serif'],
 				'playfair': ['Playfair Display', 'serif'],
+			},
+			fontSize: {
+				'heading': '60px',
+				'body': '26.86px',
+				'nav': '23px',
+			},
+			lineHeight: {
+				'nav': '20.7px',
 			},
 			colors: {
 				'nepal-primary': '#126894',
