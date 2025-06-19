@@ -9,14 +9,14 @@ const HeroSection = () => {
 
   const heroContent = [
     {
-      type: 'image',
-      src: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      type: 'video',
+      src: 'https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-beautiful-resort-2905-large.mp4',
       title: 'Mount Everest Base Camp',
       subtitle: 'Experience the world\'s highest peak'
     },
     {
       type: 'video',
-      src: 'https://player.vimeo.com/external/342333493.sd.mp4?s=e90dcaba73c02b95a5996b86b65c668b1b8cc1a9&profile_id=164&oauth2_token_id=57447761',
+      src: 'https://assets.mixkit.co/videos/preview/mixkit-mountain-range-in-the-mist-4310-large.mp4',
       title: 'Himalayan Adventure',
       subtitle: 'Immerse yourself in Nepal\'s majesty'
     },
@@ -28,7 +28,7 @@ const HeroSection = () => {
     },
     {
       type: 'video',
-      src: 'https://player.vimeo.com/external/370467553.sd.mp4?s=1b0c0b8d0d0e0f1a1b1c1d1e1f20212223242526&profile_id=164',
+      src: 'https://assets.mixkit.co/videos/preview/mixkit-buddhist-temple-in-the-forest-4015-large.mp4',
       title: 'Cultural Journey',
       subtitle: 'Experience authentic Nepalese culture'
     },
@@ -128,10 +128,10 @@ const HeroSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.3 }}
               >
-                <h1 className="text-heading font-bebas uppercase text-white mb-6 leading-tight">
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bebas uppercase text-white mb-6 leading-tight">
                   TAKEMETONEPAL.COM
                 </h1>
-                <p className="text-body font-roboto text-white/90 mb-12 font-light max-w-2xl mx-auto">
+                <p className="text-lg md:text-xl lg:text-2xl font-roboto text-white/90 mb-12 font-light max-w-2xl mx-auto">
                   Your trusted gateway to exploring<br />
                   the wonders of Nepal
                 </p>

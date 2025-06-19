@@ -99,26 +99,7 @@
   }
 
   body {
-    @apply bg-background text-foreground font-roboto;
-    font-size: 26.86px;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-bebas uppercase;
-    font-size: 60px;
-  }
-
-  .heading {
-    @apply font-bebas uppercase text-heading;
-  }
-
-  .body-text {
-    @apply font-roboto text-body;
-  }
-
-  .nav-text {
-    @apply font-bebas uppercase text-nav;
-    line-height: 20.7px;
+    @apply bg-background text-foreground;
   }
 }
 

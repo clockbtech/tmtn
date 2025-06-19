@@ -58,7 +58,7 @@ const Header = () => {
                 <input
                   type="text"
                   placeholder="Search destinations, experiences..."
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-nepal-orange focus:border-transparent font-roboto"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-nepal-orange focus:border-transparent"
                   onFocus={() => setIsSearchFocused(true)}
                   onBlur={() => setIsSearchFocused(false)}
                 />
@@ -73,8 +73,7 @@ const Header = () => {
                 key={item.name}
                 href={item.href}
                 whileHover={{ y: -2 }}
-                className="text-nav font-bebas text-gray-700 hover:text-nepal-primary font-medium transition-colors duration-200 px-4 py-[15px] leading-nav"
-                style={{ lineHeight: '20.7px' }}
+                className="text-sm font-bebas text-gray-700 hover:text-nepal-primary font-medium transition-colors duration-200 px-3 py-2 uppercase"
               >
                 {item.name}
               </motion.a>
@@ -112,7 +111,7 @@ const Header = () => {
                   <input
                     type="text"
                     placeholder="Search destinations..."
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-nepal-orange font-roboto"
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-nepal-orange"
                   />
                 </div>
                 
@@ -122,9 +121,8 @@ const Header = () => {
                     key={item.name}
                     href={item.href}
                     whileHover={{ x: 5 }}
-                    className="block text-nav font-bebas text-gray-700 hover:text-nepal-primary font-medium py-2 px-4 leading-nav"
+                    className="block text-sm font-bebas text-gray-700 hover:text-nepal-primary font-medium py-2 px-4 uppercase"
                     onClick={() => setIsMenuOpen(false)}
-                    style={{ lineHeight: '20.7px' }}
                   >
                     {item.name}
                   </motion.a>
