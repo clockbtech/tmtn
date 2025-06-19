@@ -73,7 +73,13 @@ const Header = () => {
                 key={item.name}
                 href={item.href}
                 whileHover={{ y: -2 }}
-                className="text-sm font-bebas text-gray-700 hover:text-nepal-primary font-medium transition-colors duration-200 px-3 py-2 uppercase"
+                className="text-white font-bebas uppercase font-medium transition-colors duration-200 px-4 py-4"
+                style={{ 
+                  fontSize: '23px', 
+                  fontWeight: 500, 
+                  lineHeight: '20.7px', 
+                  padding: '15px' 
+                }}
               >
                 {item.name}
               </motion.a>

@@ -9,34 +9,34 @@ const HeroSection = () => {
 
   const heroContent = [
     {
-      type: 'video',
-      src: 'https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-beautiful-resort-2905-large.mp4',
-      title: 'Mount Everest Base Camp',
-      subtitle: 'Experience the world\'s highest peak'
-    },
-    {
-      type: 'video',
-      src: 'https://assets.mixkit.co/videos/preview/mixkit-mountain-range-in-the-mist-4310-large.mp4',
-      title: 'Himalayan Adventure',
-      subtitle: 'Immerse yourself in Nepal\'s majesty'
-    },
-    {
       type: 'image',
       src: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=2073&q=80',
       title: 'Ancient Temples & Culture',
       subtitle: 'Discover Nepal\'s spiritual heritage'
     },
     {
-      type: 'video',
-      src: 'https://assets.mixkit.co/videos/preview/mixkit-buddhist-temple-in-the-forest-4015-large.mp4',
-      title: 'Cultural Journey',
-      subtitle: 'Experience authentic Nepalese culture'
-    },
-    {
       type: 'image',
       src: 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       title: 'Pristine Mountain Lakes',
       subtitle: 'Serenity in the Himalayas'
+    },
+    {
+      type: 'image',
+      src: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2073&q=80',
+      title: 'Mount Everest Base Camp',
+      subtitle: 'Experience the world\'s highest peak'
+    },
+    {
+      type: 'image',
+      src: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2073&q=80',
+      title: 'Himalayan Adventure',
+      subtitle: 'Immerse yourself in Nepal\'s majesty'
+    },
+    {
+      type: 'image',
+      src: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-4.0.3&auto=format&fit=crop&w=2073&q=80',
+      title: 'Wildlife Safari',
+      subtitle: 'Experience Nepal\'s diverse wildlife'
     }
   ];
 
@@ -96,22 +96,10 @@ const HeroSection = () => {
             }}
             transition={{ duration: 1.5, ease: 'easeInOut' }}
           >
-            {content.type === 'video' ? (
-              <video
-                className="hero-media w-full h-full object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-              >
-                <source src={content.src} type="video/mp4" />
-              </video>
-            ) : (
-              <div
-                className="hero-media w-full h-full bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: `url(${content.src})` }}
-              />
-            )}
+            <div
+              className="hero-media w-full h-full bg-cover bg-center bg-no-repeat"
+              style={{ backgroundImage: `url(${content.src})` }}
+            />
             <div className="absolute inset-0 bg-black/40" />
           </motion.div>
         ))}
@@ -142,7 +130,7 @@ const HeroSection = () => {
                     boxShadow: '0 10px 30px rgba(255, 125, 51, 0.4)' 
                   }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-nepal-orange hover:bg-orange-600 text-white px-12 py-6 rounded-full text-xl font-bebas uppercase tracking-wider transition-all duration-300 shadow-lg"
+                  className="bg-nepal-orange hover:bg-orange-600 text-white px-8 py-3 rounded-full text-lg font-bebas uppercase tracking-wider transition-all duration-300 shadow-lg"
                 >
                   DISCOVER NEPAL
                 </motion.button>

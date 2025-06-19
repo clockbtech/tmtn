@@ -60,7 +60,7 @@ const Footer = () => {
     <footer className="bg-gray-900 text-white" id="contact">
       {/* Main Footer Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
           {/* Company Info */}
           <div className="lg:col-span-2">
             <motion.div
@@ -112,32 +112,101 @@ const Footer = () => {
             </motion.div>
           </div>
 
-          {/* Footer Links */}
-          {Object.entries(footerLinks).map(([category, links], categoryIndex) => (
-            <motion.div
-              key={category}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
-            >
-              <h4 className="text-lg font-bebas uppercase font-semibold text-white mb-4">
-                {category.replace(/([A-Z])/g, ' $1').trim()}
-              </h4>
-              <ul className="space-y-2">
-                {links.map((link, linkIndex) => (
-                  <li key={linkIndex}>
-                    <motion.a
-                      href="#"
-                      whileHover={{ x: 5 }}
-                      className="text-gray-300 hover:text-nepal-orange transition-colors duration-200 text-sm"
-                    >
-                      {link}
-                    </motion.a>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+          {/* Footer Links - Destinations */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <h4 className="text-lg font-bebas uppercase font-semibold text-white mb-4">
+              Destinations
+            </h4>
+            <ul className="space-y-2">
+              {footerLinks.destinations.map((link, index) => (
+                <li key={index}>
+                  <motion.a
+                    href="#"
+                    whileHover={{ x: 5 }}
+                    className="text-gray-300 hover:text-nepal-orange transition-colors duration-200 text-sm"
+                  >
+                    {link}
+                  </motion.a>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Footer Links - Experiences */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <h4 className="text-lg font-bebas uppercase font-semibold text-white mb-4">
+              Experiences
+            </h4>
+            <ul className="space-y-2">
+              {footerLinks.experiences.map((link, index) => (
+                <li key={index}>
+                  <motion.a
+                    href="#"
+                    whileHover={{ x: 5 }}
+                    className="text-gray-300 hover:text-nepal-orange transition-colors duration-200 text-sm"
+                  >
+                    {link}
+                  </motion.a>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Footer Links - Company */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <h4 className="text-lg font-bebas uppercase font-semibold text-white mb-4">
+              Company
+            </h4>
+            <ul className="space-y-2">
+              {footerLinks.company.map((link, index) => (
+                <li key={index}>
+                  <motion.a
+                    href="#"
+                    whileHover={{ x: 5 }}
+                    className="text-gray-300 hover:text-nepal-orange transition-colors duration-200 text-sm"
+                  >
+                    {link}
+                  </motion.a>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Footer Links - Support */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <h4 className="text-lg font-bebas uppercase font-semibold text-white mb-4">
+              Support
+            </h4>
+            <ul className="space-y-2">
+              {footerLinks.support.map((link, index) => (
+                <li key={index}>
+                  <motion.a
+                    href="#"
+                    whileHover={{ x: 5 }}
+                    className="text-gray-300 hover:text-nepal-orange transition-colors duration-200 text-sm"
+                  >
+                    {link}
+                  </motion.a>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
         </div>
       </div>
 
