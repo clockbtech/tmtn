@@ -68,7 +68,7 @@ const WhyChooseUs = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl lg:text-5xl font-playfair font-bold mb-4">
+          <h2 className="text-4xl lg:text-5xl font-bebas uppercase font-bold mb-4">
             Why Choose Take Me To Nepal?
           </h2>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto">
@@ -94,7 +94,7 @@ const WhyChooseUs = () => {
                     <IconComponent className="w-8 h-8 text-white" />
                   </motion.div>
                   
-                  <h3 className="text-xl font-playfair font-semibold mb-4">
+                  <h3 className="text-xl font-bebas uppercase font-semibold mb-4">
                     {feature.title}
                   </h3>
                   
@@ -125,7 +125,7 @@ const WhyChooseUs = () => {
               whileHover={{ scale: 1.05 }}
               className="bg-white/10 backdrop-blur-sm rounded-xl p-6"
             >
-              <div className="text-3xl lg:text-4xl font-bold text-nepal-orange mb-2">
+              <div className="text-3xl lg:text-4xl font-bebas uppercase font-bold text-nepal-orange mb-2">
                 {stat.number}
               </div>
               <div className="text-blue-100">

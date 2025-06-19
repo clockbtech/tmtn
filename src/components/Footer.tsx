@@ -68,7 +68,7 @@ const Footer = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h3 className="text-3xl font-playfair font-bold text-nepal-orange mb-4">
+              <h3 className="text-3xl font-bebas uppercase font-bold text-nepal-orange mb-4">
                 Take Me To Nepal
               </h3>
               <p className="text-gray-300 mb-6 max-w-md">
@@ -120,7 +120,7 @@ const Footer = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
             >
-              <h4 className="text-lg font-semibold text-white mb-4 capitalize">
+              <h4 className="text-lg font-bebas uppercase font-semibold text-white mb-4">
                 {category.replace(/([A-Z])/g, ' $1').trim()}
               </h4>
               <ul className="space-y-2">
