@@ -116,7 +116,7 @@ const BlogPreview = () => {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl font-playfair font-semibold text-nepal-primary mb-3 group-hover:text-nepal-orange transition-colors duration-200">
+                  <h3 className="font-bebas uppercase text-nepal-primary mb-3 group-hover:text-nepal-orange transition-colors duration-200 text-xl font-semibold px-0">
                     {post.title}
                   </h3>
 
