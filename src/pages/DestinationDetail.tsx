@@ -19,16 +19,16 @@ import {
   Zap,
   Lightbulb
 } from 'lucide-react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Keyboard, A11y } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import AttractionCard from '../components/AttractionCard';
+import ExperienceCard from '../components/ExperienceCard';
 import { useTranslation } from '../contexts/TranslationContext';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '../components/ui/carousel';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 
 const DestinationDetail = () => {
@@ -73,45 +73,92 @@ const DestinationDetail = () => {
       {
         id: 1,
         name: 'Tengboche Monastery',
-        description: 'Ancient Buddhist monastery with stunning mountain views',
+        description: 'Ancient Buddhist monastery with stunning mountain views and rich spiritual heritage',
         image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        location: 'Tengboche, Khumbu'
+        location: 'Tengboche, Khumbu',
+        rating: 4.8,
+        duration: '2-3 hours',
+        price: 25
       },
       {
         id: 2,
         name: 'Namche Bazaar',
-        description: 'Gateway to Everest and vibrant Sherpa trading hub',
+        description: 'Gateway to Everest and vibrant Sherpa trading hub with colorful markets',
         image: 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        location: 'Namche, Khumbu'
+        location: 'Namche, Khumbu',
+        rating: 4.6,
+        duration: 'Full day',
+        price: 15
       },
       {
         id: 3,
         name: 'Kala Patthar',
-        description: 'Best viewpoint for Everest panoramic views',
+        description: 'Best viewpoint for Everest panoramic views and sunrise photography',
         image: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        location: 'Gorak Shep, Khumbu'
+        location: 'Gorak Shep, Khumbu',
+        rating: 4.9,
+        duration: '4-5 hours',
+        price: 35
+      },
+      {
+        id: 4,
+        name: 'Sagarmatha National Park',
+        description: 'UNESCO World Heritage site with diverse flora and fauna',
+        image: 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        location: 'Khumbu Region',
+        rating: 4.7,
+        duration: 'Multi-day',
+        price: 50
       }
     ],
     experiences: [
       {
         id: 1,
         name: 'Everest Base Camp Trek - 14 Days',
-        description: 'Complete guided trek to Everest Base Camp',
+        description: 'Complete guided trek to Everest Base Camp with expert Sherpa guides and full support',
         image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
         duration: '14 days',
         difficulty: 'Challenging',
         price: 2500,
-        includes: ['All meals', 'Accommodation', 'Guide', 'Permits']
+        includes: ['All meals', 'Accommodation', 'Guide', 'Permits', 'Insurance'],
+        rating: 4.8,
+        groupSize: '8-12 people'
       },
       {
         id: 2,
         name: 'Helicopter Tour to Base Camp',
-        description: 'Quick helicopter flight to Everest Base Camp',
+        description: 'Quick helicopter flight to Everest Base Camp with aerial mountain views',
         image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
         duration: '1 day',
         difficulty: 'Easy',
         price: 1200,
-        includes: ['Helicopter flight', 'Landing at base camp', 'Breakfast']
+        includes: ['Helicopter flight', 'Landing at base camp', 'Breakfast', 'Guide'],
+        rating: 4.9,
+        groupSize: '4-6 people'
+      },
+      {
+        id: 3,
+        name: 'Everest View Trek - 5 Days',
+        description: 'Shorter trek to Hotel Everest View with stunning mountain panoramas',
+        image: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        duration: '5 days',
+        difficulty: 'Moderate',
+        price: 850,
+        includes: ['Meals', 'Lodge stay', 'Guide', 'Permits'],
+        rating: 4.6,
+        groupSize: '6-10 people'
+      },
+      {
+        id: 4,
+        name: 'Photography Workshop Trek',
+        description: 'Specialized photography trek with professional mountain photography guidance',
+        image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        duration: '10 days',
+        difficulty: 'Moderate',
+        price: 1800,
+        includes: ['Photography guide', 'Equipment', 'Meals', 'Accommodation'],
+        rating: 4.7,
+        groupSize: '4-8 people'
       }
     ],
     travelTips: {
@@ -297,7 +344,7 @@ const DestinationDetail = () => {
               </div>
             </motion.section>
 
-            {/* Linked Attractions */}
+            {/* Nearby Attractions Slider */}
             <motion.section
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -306,30 +353,54 @@ const DestinationDetail = () => {
               <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
                 Nearby Attractions
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {destination.attractions.map((attraction) => (
-                  <Card key={attraction.id} className="group cursor-pointer hover:shadow-lg transition-shadow">
-                    <div className="relative overflow-hidden">
-                      <img
-                        src={attraction.image}
-                        alt={attraction.name}
-                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                    <CardContent className="p-4">
-                      <h3 className="font-bold text-nepal-primary mb-2">{attraction.name}</h3>
-                      <p className="text-sm text-gray-600 mb-2">{attraction.description}</p>
-                      <div className="flex items-center text-xs text-gray-500">
-                        <MapPin className="w-3 h-3 mr-1" />
-                        {attraction.location}
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
+              <div className="attractions-slider">
+                <Swiper
+                  modules={[Navigation, Pagination, Keyboard, A11y]}
+                  spaceBetween={24}
+                  slidesPerView={1}
+                  breakpoints={{
+                    640: {
+                      slidesPerView: 2,
+                    },
+                  }}
+                  navigation={{
+                    nextEl: '.attractions-next',
+                    prevEl: '.attractions-prev',
+                  }}
+                  pagination={{
+                    el: '.attractions-pagination',
+                    clickable: true,
+                  }}
+                  keyboard={{
+                    enabled: true,
+                  }}
+                  a11y={{
+                    prevSlideMessage: 'Previous attraction',
+                    nextSlideMessage: 'Next attraction',
+                  }}
+                  className="pb-12"
+                >
+                  {destination.attractions.map((attraction) => (
+                    <SwiperSlide key={attraction.id}>
+                      <AttractionCard {...attraction} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+                
+                {/* Custom Navigation */}
+                <div className="flex items-center justify-center gap-4 mt-6">
+                  <button className="attractions-prev flex items-center justify-center w-10 h-10 rounded-full bg-nepal-primary text-white hover:bg-nepal-orange transition-colors disabled:opacity-50">
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <div className="attractions-pagination flex gap-2"></div>
+                  <button className="attractions-next flex items-center justify-center w-10 h-10 rounded-full bg-nepal-primary text-white hover:bg-nepal-orange transition-colors disabled:opacity-50">
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
             </motion.section>
 
-            {/* Linked Experiences */}
+            {/* Available Experiences Slider */}
             <motion.section
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -338,52 +409,50 @@ const DestinationDetail = () => {
               <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
                 Available Experiences
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {destination.experiences.map((experience) => (
-                  <Card key={experience.id} className="group hover:shadow-lg transition-shadow">
-                    <div className="relative overflow-hidden">
-                      <img
-                        src={experience.image}
-                        alt={experience.name}
-                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
-                        <span className="text-sm font-semibold text-nepal-primary">
-                          {experience.difficulty}
-                        </span>
-                      </div>
-                    </div>
-                    <CardContent className="p-6">
-                      <h3 className="text-xl font-bold text-nepal-primary mb-2">{experience.name}</h3>
-                      <p className="text-gray-600 mb-4">{experience.description}</p>
-                      
-                      <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                        <div className="flex items-center">
-                          <Clock className="w-4 h-4 mr-1" />
-                          {experience.duration}
-                        </div>
-                        <div className="text-2xl font-bold text-nepal-primary">
-                          {formatPrice(experience.price)}
-                        </div>
-                      </div>
-
-                      <div className="mb-4">
-                        <div className="text-sm text-gray-600 mb-2">Includes:</div>
-                        <div className="flex flex-wrap gap-1">
-                          {experience.includes.map((item, index) => (
-                            <span key={index} className="text-xs bg-gray-100 px-2 py-1 rounded">
-                              {item}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      <button className="w-full bg-nepal-orange hover:bg-orange-600 text-white py-3 rounded-lg font-semibold transition-colors duration-200">
-                        Book Now
-                      </button>
-                    </CardContent>
-                  </Card>
-                ))}
+              <div className="experiences-slider">
+                <Swiper
+                  modules={[Navigation, Pagination, Keyboard, A11y]}
+                  spaceBetween={24}
+                  slidesPerView={1}
+                  breakpoints={{
+                    640: {
+                      slidesPerView: 2,
+                    },
+                  }}
+                  navigation={{
+                    nextEl: '.experiences-next',
+                    prevEl: '.experiences-prev',
+                  }}
+                  pagination={{
+                    el: '.experiences-pagination',
+                    clickable: true,
+                  }}
+                  keyboard={{
+                    enabled: true,
+                  }}
+                  a11y={{
+                    prevSlideMessage: 'Previous experience',
+                    nextSlideMessage: 'Next experience',
+                  }}
+                  className="pb-12"
+                >
+                  {destination.experiences.map((experience) => (
+                    <SwiperSlide key={experience.id}>
+                      <ExperienceCard {...experience} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+                
+                {/* Custom Navigation */}
+                <div className="flex items-center justify-center gap-4 mt-6">
+                  <button className="experiences-prev flex items-center justify-center w-10 h-10 rounded-full bg-nepal-primary text-white hover:bg-nepal-orange transition-colors disabled:opacity-50">
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <div className="experiences-pagination flex gap-2"></div>
+                  <button className="experiences-next flex items-center justify-center w-10 h-10 rounded-full bg-nepal-primary text-white hover:bg-nepal-orange transition-colors disabled:opacity-50">
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
             </motion.section>
           </div>
