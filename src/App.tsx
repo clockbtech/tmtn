@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { TranslationProvider } from "./contexts/TranslationContext";
 import Index from "./pages/Index";
 import Destinations from "./pages/Destinations";
+import DestinationDetail from "./pages/DestinationDetail";
 import Attractions from "./pages/Attractions";
 import Experiences from "./pages/Experiences";
 import NotFound from "./pages/NotFound";
@@ -23,6 +24,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/destinations" element={<Destinations />} />
+            <Route path="/destinations/:id" element={<DestinationDetail />} />
             <Route path="/attractions" element={<Attractions />} />
             <Route path="/experiences" element={<Experiences />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

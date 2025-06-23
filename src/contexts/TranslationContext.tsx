@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 export interface Language {
@@ -38,7 +37,7 @@ const translations: Record<string, Record<string, string>> = {
     'nav.contact': 'CONTACT',
     
     // Search
-    'search.placeholder': 'Search destinations, experiences...',
+    'search.placeholder': 'Search destinations...',
     'search.mobile.placeholder': 'Search destinations...',
     
     // Hero Section
@@ -86,7 +85,7 @@ const translations: Record<string, Record<string, string>> = {
     'nav.contact': 'CONTACTO',
     
     // Search
-    'search.placeholder': 'Buscar destinos, experiencias...',
+    'search.placeholder': 'Buscar destinos...',
     'search.mobile.placeholder': 'Buscar destinos...',
     
     // Hero Section
@@ -134,7 +133,7 @@ const translations: Record<string, Record<string, string>> = {
     'nav.contact': 'KONTAKT',
     
     // Search
-    'search.placeholder': 'Reiseziele, Erfahrungen suchen...',
+    'search.placeholder': 'Reiseziele suchen...',
     'search.mobile.placeholder': 'Reiseziele suchen...',
     
     // Hero Section
@@ -182,7 +181,7 @@ const translations: Record<string, Record<string, string>> = {
     'nav.contact': 'CONTACT',
     
     // Search
-    'search.placeholder': 'Rechercher destinations, expériences...',
+    'search.placeholder': 'Rechercher destinations...',
     'search.mobile.placeholder': 'Rechercher destinations...',
     
     // Hero Section
@@ -230,7 +229,7 @@ const translations: Record<string, Record<string, string>> = {
     'nav.contact': 'اتصل بنا',
     
     // Search
-    'search.placeholder': 'البحث عن الوجهات والتجارب...',
+    'search.placeholder': 'البحث عن الوجهات...',
     'search.mobile.placeholder': 'البحث عن الوجهات...',
     
     // Hero Section
@@ -278,7 +277,7 @@ const translations: Record<string, Record<string, string>> = {
     'nav.contact': '联系我们',
     
     // Search
-    'search.placeholder': '搜索目的地、体验...',
+    'search.placeholder': '搜索目的地...',
     'search.mobile.placeholder': '搜索目的地...',
     
     // Hero Section
