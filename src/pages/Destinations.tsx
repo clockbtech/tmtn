@@ -66,7 +66,7 @@ const Destinations = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-20 pb-16 bg-gradient-to-r from-nepal-primary to-blue-600 py-[150px]">
+      <section className="bg-gradient-to-r from-nepal-primary to-blue-600 py-[150px]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{
           opacity: 0,
