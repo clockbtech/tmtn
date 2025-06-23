@@ -3,48 +3,50 @@ import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useTranslation } from '../contexts/TranslationContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const PopularDestinations = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
 
   const destinations = [
     {
       id: 1,
-      name: 'Everest Base Camp',
+      nameKey: 'destinations.everest',
+      descKey: 'destinations.everest.desc',
       image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      description: 'Trek to the base of the world\'s highest mountain'
     },
     {
       id: 2,
-      name: 'Annapurna Circuit',
+      nameKey: 'destinations.annapurna',
+      descKey: 'destinations.annapurna.desc',
       image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      description: 'Experience diverse landscapes and cultures'
     },
     {
       id: 3,
-      name: 'Pokhara Valley',
+      nameKey: 'destinations.pokhara',
+      descKey: 'destinations.pokhara.desc',
       image: 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      description: 'Serene lakes beneath towering peaks'
     },
     {
       id: 4,
-      name: 'Kathmandu Valley',
+      nameKey: 'destinations.kathmandu',
+      descKey: 'destinations.kathmandu.desc',
       image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      description: 'Ancient temples and rich cultural heritage'
     },
     {
       id: 5,
-      name: 'Chitwan National Park',
+      nameKey: 'destinations.chitwan',
+      descKey: 'destinations.chitwan.desc',
       image: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      description: 'Wildlife safari in the Terai lowlands'
     },
     {
       id: 6,
-      name: 'Langtang Valley',
+      nameKey: 'destinations.langtang',
+      descKey: 'destinations.langtang.desc',
       image: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      description: 'The valley of glaciers and yaks'
     }
   ];
 
@@ -84,10 +86,10 @@ const PopularDestinations = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl lg:text-5xl font-bebas uppercase font-bold text-nepal-primary mb-4">
-            Popular Destinations
+            {t('destinations.title')}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Discover the most breathtaking locations Nepal has to offer, from towering peaks to ancient temples
+            {t('destinations.subtitle')}
           </p>
         </motion.div>
 
@@ -103,7 +105,7 @@ const PopularDestinations = () => {
                 <div className="relative overflow-hidden">
                   <img
                     src={destination.image}
-                    alt={destination.name}
+                    alt={t(destination.nameKey)}
                     className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -111,10 +113,10 @@ const PopularDestinations = () => {
                 
                 <div className="p-6">
                   <h3 className="text-2xl font-bebas uppercase font-semibold text-nepal-primary mb-2">
-                    {destination.name}
+                    {t(destination.nameKey)}
                   </h3>
                   <p className="text-gray-600 mb-4">
-                    {destination.description}
+                    {t(destination.descKey)}
                   </p>
                   
                   <motion.button
@@ -122,7 +124,7 @@ const PopularDestinations = () => {
                     whileTap={{ scale: 0.95 }}
                     className="text-nepal-orange hover:text-orange-600 font-semibold transition-colors duration-200 flex items-center"
                   >
-                    View More
+                    {t('destinations.viewMore')}
                     <motion.span
                       animate={{ x: [0, 5, 0] }}
                       transition={{ duration: 1.5, repeat: Infinity }}

@@ -2,30 +2,16 @@
 import React, { useState } from 'react';
 import { ChevronDown, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-
-interface Language {
-  code: string;
-  name: string;
-  flag: string;
-}
-
-const languages: Language[] = [
-  { code: 'en', name: 'English', flag: '🇺🇸' },
-  { code: 'es', name: 'Spanish', flag: '🇪🇸' },
-  { code: 'de', name: 'German', flag: '🇩🇪' },
-  { code: 'fr', name: 'French', flag: '🇫🇷' },
-  { code: 'ar', name: 'Arabic', flag: '🇸🇦' },
-  { code: 'zh', name: 'Mandarin', flag: '🇨🇳' },
-];
+import { useTranslation } from '../contexts/TranslationContext';
+import { languages, Language } from '../contexts/TranslationContext';
 
 const LanguageSwitcher = () => {
-  const [currentLanguage, setCurrentLanguage] = useState<Language>(languages[0]);
+  const { currentLanguage, setCurrentLanguage } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleLanguageChange = (language: Language) => {
     setCurrentLanguage(language);
     setIsOpen(false);
-    // Here you would integrate with your translation service (Transifex/Lokalise/Crowdin/Weglot)
     console.log(`Switching to ${language.name} (${language.code})`);
   };
 
