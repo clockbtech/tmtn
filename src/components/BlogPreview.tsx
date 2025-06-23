@@ -152,7 +152,7 @@ const BlogPreview = () => {
           scale: 1.05
         }} whileTap={{
           scale: 0.95
-        }} className="bg-nepal-primary hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 shadow-lg">
+        }} className="bg-nepal-primary hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg font-bebas uppercase font-semibold transition-all duration-300 shadow-lg">
             View All Articles
           </motion.button>
         </motion.div>
