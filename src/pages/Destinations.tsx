@@ -131,9 +131,7 @@ const Destinations = () => {
                   scale: 1.05
                 }} whileTap={{
                   scale: 0.95
-                }} className="w-full bg-nepal-orange hover:bg-orange-600 text-white py-3 rounded-lg font-semibold transition-colors duration-200">
-                      Learn More
-                    </motion.button>
+                }} className="w-full bg-nepal-orange hover:bg-orange-600 text-white py-3 rounded-lg font-semibold transition-colors duration-200">Explore</motion.button>
                   </div>
                 </div>
               </motion.div>)}
