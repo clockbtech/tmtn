@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -353,7 +352,7 @@ const DestinationDetail = () => {
               <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
                 Nearby Attractions
               </h2>
-              <div className="attractions-slider">
+              <div className="relative">
                 <Swiper
                   modules={[Navigation, Pagination, Keyboard, A11y]}
                   spaceBetween={24}
@@ -378,7 +377,7 @@ const DestinationDetail = () => {
                     prevSlideMessage: 'Previous attraction',
                     nextSlideMessage: 'Next attraction',
                   }}
-                  className="pb-12"
+                  className="pb-16"
                 >
                   {destination.attractions.map((attraction) => (
                     <SwiperSlide key={attraction.id}>
@@ -387,20 +386,20 @@ const DestinationDetail = () => {
                   ))}
                 </Swiper>
                 
-                {/* Custom Navigation */}
-                <div className="flex items-center justify-center gap-4 mt-6">
-                  <button className="attractions-prev flex items-center justify-center w-10 h-10 rounded-full bg-nepal-primary text-white hover:bg-nepal-orange transition-colors disabled:opacity-50">
-                    <ChevronLeft className="w-5 h-5" />
-                  </button>
-                  <div className="attractions-pagination flex gap-2"></div>
-                  <button className="attractions-next flex items-center justify-center w-10 h-10 rounded-full bg-nepal-primary text-white hover:bg-nepal-orange transition-colors disabled:opacity-50">
-                    <ChevronRight className="w-5 h-5" />
-                  </button>
-                </div>
+                {/* Custom Navigation - Positioned at edges */}
+                <button className="attractions-prev absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 z-10 flex items-center justify-center w-12 h-12 rounded-full bg-nepal-primary text-white hover:bg-nepal-orange transition-colors shadow-lg disabled:opacity-50">
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <button className="attractions-next absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 z-10 flex items-center justify-center w-12 h-12 rounded-full bg-nepal-primary text-white hover:bg-nepal-orange transition-colors shadow-lg disabled:opacity-50">
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+                
+                {/* Pagination - Centered below */}
+                <div className="attractions-pagination flex justify-center gap-2 mt-8"></div>
               </div>
             </motion.section>
 
-            {/* Available Experiences Slider */}
+            {/* Available Experiences - Card Grid */}
             <motion.section
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -409,50 +408,10 @@ const DestinationDetail = () => {
               <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
                 Available Experiences
               </h2>
-              <div className="experiences-slider">
-                <Swiper
-                  modules={[Navigation, Pagination, Keyboard, A11y]}
-                  spaceBetween={24}
-                  slidesPerView={1}
-                  breakpoints={{
-                    640: {
-                      slidesPerView: 2,
-                    },
-                  }}
-                  navigation={{
-                    nextEl: '.experiences-next',
-                    prevEl: '.experiences-prev',
-                  }}
-                  pagination={{
-                    el: '.experiences-pagination',
-                    clickable: true,
-                  }}
-                  keyboard={{
-                    enabled: true,
-                  }}
-                  a11y={{
-                    prevSlideMessage: 'Previous experience',
-                    nextSlideMessage: 'Next experience',
-                  }}
-                  className="pb-12"
-                >
-                  {destination.experiences.map((experience) => (
-                    <SwiperSlide key={experience.id}>
-                      <ExperienceCard {...experience} />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-                
-                {/* Custom Navigation */}
-                <div className="flex items-center justify-center gap-4 mt-6">
-                  <button className="experiences-prev flex items-center justify-center w-10 h-10 rounded-full bg-nepal-primary text-white hover:bg-nepal-orange transition-colors disabled:opacity-50">
-                    <ChevronLeft className="w-5 h-5" />
-                  </button>
-                  <div className="experiences-pagination flex gap-2"></div>
-                  <button className="experiences-next flex items-center justify-center w-10 h-10 rounded-full bg-nepal-primary text-white hover:bg-nepal-orange transition-colors disabled:opacity-50">
-                    <ChevronRight className="w-5 h-5" />
-                  </button>
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {destination.experiences.map((experience) => (
+                  <ExperienceCard key={experience.id} {...experience} hidePrice={true} />
+                ))}
               </div>
             </motion.section>
           </div>

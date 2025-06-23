@@ -2,7 +2,6 @@
 import React from 'react';
 import { Clock, Users, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useTranslation } from '../contexts/TranslationContext';
 
 interface ExperienceCardProps {
   id: number;
@@ -16,6 +15,7 @@ interface ExperienceCardProps {
   rating?: number;
   groupSize?: string;
   onClick?: () => void;
+  hidePrice?: boolean;
 }
 
 const ExperienceCard: React.FC<ExperienceCardProps> = ({
@@ -24,14 +24,12 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
   image,
   duration,
   difficulty,
-  price,
   includes,
   rating,
   groupSize,
-  onClick
+  onClick,
+  hidePrice = false
 }) => {
-  const { formatPrice } = useTranslation();
-
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty.toLowerCase()) {
       case 'easy':
@@ -107,11 +105,8 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
             </div>
           </div>
 
-          <div className="flex items-center justify-between pt-2 border-t">
-            <div className="text-2xl font-bold text-nepal-primary">
-              {formatPrice(price)}
-            </div>
-            <button className="bg-nepal-orange hover:bg-orange-600 text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200">
+          <div className={`pt-2 border-t ${hidePrice ? 'flex justify-center' : 'flex items-center justify-between'}`}>
+            <button className="bg-nepal-orange hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors duration-200 w-full">
               Book Now
             </button>
           </div>

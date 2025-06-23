@@ -89,11 +89,11 @@
 
 /* Custom Swiper Styles */
 .swiper-pagination-bullet {
-  @apply w-3 h-3 bg-gray-300 opacity-100;
+  @apply w-3 h-3 bg-gray-300 opacity-100 rounded-full transition-all duration-200;
 }
 
 .swiper-pagination-bullet-active {
-  @apply bg-orange-500;
+  @apply bg-nepal-primary;
 }
 
 .swiper-button-next,
@@ -111,12 +111,18 @@
 }
 
 /* Custom pagination styles for our sliders */
-.attractions-pagination .swiper-pagination-bullet,
+.attractions-pagination .swiper-pagination-bullet {
+  @apply w-3 h-3 bg-gray-300 rounded-full mx-1 cursor-pointer transition-all duration-200;
+}
+
+.attractions-pagination .swiper-pagination-bullet-active {
+  @apply bg-nepal-primary;
+}
+
 .experiences-pagination .swiper-pagination-bullet {
   @apply w-2 h-2 bg-gray-300 rounded-full mx-1 cursor-pointer transition-all duration-200;
 }
 
-.attractions-pagination .swiper-pagination-bullet-active,
 .experiences-pagination .swiper-pagination-bullet-active {
   @apply bg-orange-500 w-6;
 }
