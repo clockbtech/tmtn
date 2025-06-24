@@ -319,7 +319,7 @@ const Attractions = () => {
                       </div>
                       
                       <div className="p-6">
-                        <h3 className="text-xl font-normal uppercase font-semibold text-nepal-primary mb-2">
+                        <h3 className="text-xl font-normal font-semibold text-nepal-primary mb-2">
                           {attraction.name}
                         </h3>
                         <p className="text-gray-600 mb-4 text-base">
@@ -341,7 +341,7 @@ const Attractions = () => {
                     scale: 1.05
                   }} whileTap={{
                     scale: 0.95
-                  }} className="w-full bg-nepal-primary hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-colors duration-200">
+                  }} className="w-full bg-nepal-primary hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-colors duration-200 text-base">
                           Explore Attraction
                         </motion.button>
                       </div>
