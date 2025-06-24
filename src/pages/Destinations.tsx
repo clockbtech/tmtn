@@ -151,7 +151,7 @@ const Destinations = () => {
       <section className="relative bg-cover bg-center bg-no-repeat py-[150px]" style={{
       backgroundImage: 'url(https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80)'
     }}>
-        <div className="absolute inset-0 bg-gradient-to-r from-nepal-primary/80 to-blue-600/60"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-nepal-primary/80 to-blue-600/80 my-0"></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div initial={{
           opacity: 0,
