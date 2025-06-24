@@ -266,7 +266,7 @@ const Destinations = () => {
                         </div>
                         
                         <div className="p-6">
-                          <h3 className="text-2xl font-bebas uppercase font-semibold text-nepal-primary mb-2">
+                          <h3 className="text-2xl font-normal font-semibold text-nepal-primary mb-2">
                             {t(destination.nameKey)}
                           </h3>
                           <p className="text-gray-600 mb-4">
