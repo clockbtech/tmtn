@@ -144,7 +144,7 @@ const Experiences = () => {
                   </div>
                   
                   <div className="p-6">
-                    <h3 className="text-xl font-bebas uppercase font-semibold text-nepal-primary mb-2">
+                    <h3 className="text-xl font-normal font-semibold text-nepal-primary mb-2">
                       {experience.name}
                     </h3>
                     <p className="text-gray-600 mb-4">
