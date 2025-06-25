@@ -322,7 +322,7 @@ const AttractionsDetail = () => {
                       </Card>
                     </CarouselItem>)}
                 </CarouselContent>
-                <CarouselPrevious />
+                <CarouselPrevious className="bg-slate-50 mx-[34px]" />
                 <CarouselNext />
               </Carousel>
             </motion.section>
