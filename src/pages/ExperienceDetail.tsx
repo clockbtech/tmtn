@@ -1,37 +1,30 @@
 
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Calendar, MapPin, Clock, Users, Camera, X, ChevronLeft, ChevronRight, Play, Pause, Shield, Zap, Lightbulb, Star, Phone, Mail, User, Check, Minus, MessageCircle, ThumbsUp, ChevronDown, ChevronUp } from 'lucide-react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay, Thumbs, Zoom } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/thumbs';
-import 'swiper/css/zoom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useTranslation } from '../contexts/TranslationContext';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../components/ui/carousel';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 
 const ExperienceDetail = () => {
   const { id } = useParams();
   const { t, formatPrice } = useTranslation();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [autoPlay, setAutoPlay] = useState(true);
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [isBookingSticky, setIsBookingSticky] = useState(false);
   const [showMobileBooking, setShowMobileBooking] = useState(false);
   const [priceBreakdownOpen, setPriceBreakdownOpen] = useState(false);
   const [currentReviewPage, setCurrentReviewPage] = useState(1);
+  const [relatedExperiencesIndex, setRelatedExperiencesIndex] = useState(0);
+  const [activeTab, setActiveTab] = useState('overview');
   const reviewsPerPage = 5;
 
   // Booking form state
@@ -244,7 +237,7 @@ const ExperienceDetail = () => {
   const calculateTotal = () => {
     const basePrice = experience.price;
     const adultTotal = basePrice * bookingData.adults;
-    const childrenTotal = basePrice * 0.5 * bookingData.children; // 50% for children
+    const childrenTotal = basePrice * 0.5 * bookingData.children;
     return adultTotal + childrenTotal;
   };
 
@@ -255,16 +248,64 @@ const ExperienceDetail = () => {
     currentReviewPage * reviewsPerPage
   );
 
+  // Handle tab navigation from URL hash
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    const hash = location.hash.replace('#', '');
+    if (hash && ['overview', 'itinerary', 'inclusions', 'reviews'].includes(hash)) {
+      setActiveTab(hash);
+    }
+  }, [location.hash]);
 
+  // Handle tab change with URL update
+  const handleTabChange = (value: string) => {
+    setActiveTab(value);
+    navigate(`#${value}`, { replace: true });
+    
+    // Smooth scroll to content
+    setTimeout(() => {
+      const element = document.getElementById('tab-content');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
+  };
+
+  // Sticky booking form effect
   useEffect(() => {
     const handleScroll = () => {
-      setIsBookingSticky(window.scrollY > 100);
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const footerHeight = 400; // Approximate footer height
+      
+      // Start sticking after 200px scroll
+      const shouldStick = scrollY > 200;
+      
+      // Stop sticking before footer
+      const shouldStopBeforeFooter = scrollY + windowHeight > documentHeight - footerHeight;
+      
+      setIsBookingSticky(shouldStick && !shouldStopBeforeFooter);
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Related experiences carousel navigation
+  const nextRelatedExperience = () => {
+    if (relatedExperiencesIndex < experience.relatedExperiences.length - 2) {
+      setRelatedExperiencesIndex(relatedExperiencesIndex + 1);
+    }
+  };
+
+  const prevRelatedExperience = () => {
+    if (relatedExperiencesIndex > 0) {
+      setRelatedExperiencesIndex(relatedExperiencesIndex - 1);
+    }
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
   }, []);
 
   return (
@@ -320,7 +361,7 @@ const ExperienceDetail = () => {
           {/* Main Content */}
           <div className="lg:col-span-2">
             {/* Tabs Navigation */}
-            <Tabs defaultValue="overview" className="w-full">
+            <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
               <TabsList className="grid w-full grid-cols-4 mb-8">
                 <TabsTrigger value="overview">Overview</TabsTrigger>
                 <TabsTrigger value="itinerary">Itinerary</TabsTrigger>
@@ -328,322 +369,302 @@ const ExperienceDetail = () => {
                 <TabsTrigger value="reviews">Reviews</TabsTrigger>
               </TabsList>
 
-              {/* Overview Tab */}
-              <TabsContent value="overview" className="space-y-12">
-                {/* Photo Gallery with SwiperJS */}
-                <motion.section
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary">
+              <div id="tab-content">
+                {/* Overview Tab */}
+                <TabsContent value="overview" className="space-y-12">
+                  {/* Photo Gallery */}
+                  <motion.section
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
                       Photo Gallery
                     </h2>
-                    <div className="flex items-center gap-4">
-                      <button
-                        onClick={() => setAutoPlay(!autoPlay)}
-                        className="flex items-center gap-2 text-sm text-gray-600 hover:text-nepal-primary"
-                      >
-                        {autoPlay ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                        {autoPlay ? 'Pause' : 'Play'}
-                      </button>
-                    </div>
-                  </div>
 
-                  <div className="space-y-4">
-                    {/* Main Gallery */}
-                    <Swiper
-                      modules={[Navigation, Pagination, Autoplay, Thumbs, Zoom]}
-                      spaceBetween={10}
-                      navigation
-                      pagination={{ clickable: true }}
-                      autoplay={autoPlay ? { delay: 3000, disableOnInteraction: false } : false}
-                      thumbs={{ swiper: thumbsSwiper }}
-                      zoom={{ maxRatio: 3 }}
-                      className="h-96 rounded-lg"
-                    >
-                      {experience.gallery.map((image, index) => (
-                        <SwiperSlide key={index}>
-                          <div className="swiper-zoom-container">
+                    <div className="space-y-4">
+                      {/* Main Image */}
+                      <div className="relative h-96 rounded-lg overflow-hidden">
+                        <img
+                          src={experience.gallery[selectedImageIndex]}
+                          alt={`Gallery ${selectedImageIndex + 1}`}
+                          className="w-full h-full object-cover cursor-pointer"
+                          onClick={() => setIsModalOpen(true)}
+                        />
+                        <button
+                          onClick={() => setIsModalOpen(true)}
+                          className="absolute top-4 right-4 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+                        >
+                          <Camera className="w-5 h-5" />
+                        </button>
+                      </div>
+
+                      {/* Thumbnail Grid */}
+                      <div className="grid grid-cols-6 gap-2">
+                        {experience.gallery.map((image, index) => (
+                          <button
+                            key={index}
+                            onClick={() => setSelectedImageIndex(index)}
+                            className={`relative h-20 rounded overflow-hidden ${
+                              selectedImageIndex === index ? 'ring-2 ring-nepal-orange' : ''
+                            }`}
+                          >
                             <img
                               src={image}
-                              alt={`Gallery ${index + 1}`}
-                              className="w-full h-full object-cover cursor-pointer"
-                              onClick={() => setIsModalOpen(true)}
+                              alt={`Thumbnail ${index + 1}`}
+                              className="w-full h-full object-cover hover:opacity-80 transition-opacity"
                             />
-                          </div>
-                        </SwiperSlide>
-                      ))}
-                    </Swiper>
-
-                    {/* Thumbnail Navigation */}
-                    <Swiper
-                      onSwiper={setThumbsSwiper}
-                      spaceBetween={10}
-                      slidesPerView={6}
-                      freeMode={true}
-                      watchSlidesProgress={true}
-                      modules={[Navigation, Thumbs]}
-                      className="h-20"
-                    >
-                      {experience.gallery.map((image, index) => (
-                        <SwiperSlide key={index}>
-                          <img
-                            src={image}
-                            alt={`Thumbnail ${index + 1}`}
-                            className="w-full h-full object-cover rounded cursor-pointer"
-                          />
-                        </SwiperSlide>
-                      ))}
-                    </Swiper>
-                  </div>
-                </motion.section>
-
-                {/* Description */}
-                <motion.section
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
-                    About This Experience
-                  </h2>
-                  <div className="prose prose-lg max-w-none text-gray-700 mb-8">
-                    {experience.description.split('\n\n').map((paragraph, index) => (
-                      <p key={index} className="mb-4">
-                        {paragraph.trim()}
-                      </p>
-                    ))}
-                  </div>
-
-                  <div className="mb-8">
-                    <h3 className="text-xl font-bold text-gray-900 mb-4">Key Highlights</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {experience.highlights.map((highlight, index) => (
-                        <div key={index} className="flex items-center text-gray-700">
-                          <div className="w-2 h-2 bg-nepal-orange rounded-full mr-3"></div>
-                          {highlight}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </motion.section>
-
-                {/* Host Information */}
-                <motion.section
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
-                    Your Guide
-                  </h2>
-                  <div className="flex items-start gap-4 p-6 bg-gray-50 rounded-lg">
-                    <img
-                      src={experience.guide.avatar}
-                      alt={experience.guide.name}
-                      className="w-16 h-16 rounded-full object-cover"
-                    />
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-nepal-primary mb-1">
-                        {experience.guide.name}
-                      </h3>
-                      <p className="text-sm text-gray-600 mb-2">
-                        {experience.guide.experience} of guiding experience
-                      </p>
-                      <p className="text-gray-700 mb-3">{experience.guide.bio}</p>
-                      <div className="flex flex-wrap gap-2">
-                        {experience.guide.certifications.map((cert, index) => (
-                          <span key={index} className="px-2 py-1 bg-nepal-primary/10 text-nepal-primary text-xs rounded-full">
-                            {cert}
-                          </span>
+                          </button>
                         ))}
                       </div>
                     </div>
-                  </div>
-                </motion.section>
-              </TabsContent>
+                  </motion.section>
 
-              {/* Itinerary Tab */}
-              <TabsContent value="itinerary">
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
-                    Detailed Itinerary
-                  </h2>
-                  <div className="space-y-8">
-                    {experience.itinerary.map((day, index) => (
-                      <div key={day.day} className="flex gap-6">
-                        {/* Timeline */}
-                        <div className="flex flex-col items-center">
-                          <div className="w-8 h-8 bg-nepal-primary text-white rounded-full flex items-center justify-center text-sm font-bold">
-                            {day.day}
+                  {/* Description */}
+                  <motion.section
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
+                      About This Experience
+                    </h2>
+                    <div className="prose prose-lg max-w-none text-gray-700 mb-8">
+                      {experience.description.split('\n\n').map((paragraph, index) => (
+                        <p key={index} className="mb-4">
+                          {paragraph.trim()}
+                        </p>
+                      ))}
+                    </div>
+
+                    <div className="mb-8">
+                      <h3 className="text-xl font-bold text-gray-900 mb-4">Key Highlights</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {experience.highlights.map((highlight, index) => (
+                          <div key={index} className="flex items-center text-gray-700">
+                            <div className="w-2 h-2 bg-nepal-orange rounded-full mr-3"></div>
+                            {highlight}
                           </div>
-                          {index < experience.itinerary.length - 1 && (
-                            <div className="w-0.5 h-16 bg-gray-300 mt-2"></div>
-                          )}
-                        </div>
-                        
-                        {/* Content */}
-                        <div className="flex-1 pb-8">
-                          <h3 className="text-xl font-bold text-nepal-primary mb-2">
-                            Day {day.day}: {day.title}
-                          </h3>
-                          <p className="text-gray-700 mb-4">{day.description}</p>
-                          
-                          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                            <div className="flex items-center gap-2">
-                              <Clock className="w-4 h-4 text-gray-500" />
-                              <span>{day.time}</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <MapPin className="w-4 h-4 text-gray-500" />
-                              <span>{day.distance}</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <Users className="w-4 h-4 text-gray-500" />
-                              <span>{day.accommodation}</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <Calendar className="w-4 h-4 text-gray-500" />
-                              <span>{day.meals}</span>
-                            </div>
-                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.section>
+
+                  {/* Host Information */}
+                  <motion.section
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
+                      Your Guide
+                    </h2>
+                    <div className="flex items-start gap-4 p-6 bg-gray-50 rounded-lg">
+                      <img
+                        src={experience.guide.avatar}
+                        alt={experience.guide.name}
+                        className="w-16 h-16 rounded-full object-cover"
+                      />
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-nepal-primary mb-1">
+                          {experience.guide.name}
+                        </h3>
+                        <p className="text-sm text-gray-600 mb-2">
+                          {experience.guide.experience} of guiding experience
+                        </p>
+                        <p className="text-gray-700 mb-3">{experience.guide.bio}</p>
+                        <div className="flex flex-wrap gap-2">
+                          {experience.guide.certifications.map((cert, index) => (
+                            <span key={index} className="px-2 py-1 bg-nepal-primary/10 text-nepal-primary text-xs rounded-full">
+                              {cert}
+                            </span>
+                          ))}
                         </div>
                       </div>
-                    ))}
-                  </div>
-                </motion.div>
-              </TabsContent>
+                    </div>
+                  </motion.section>
+                </TabsContent>
 
-              {/* Inclusions Tab */}
-              <TabsContent value="inclusions">
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                  className="space-y-8"
-                >
-                  <div>
+                {/* Itinerary Tab */}
+                <TabsContent value="itinerary">
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                  >
                     <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
-                      What's Included
+                      Detailed Itinerary
                     </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {experience.includes.map((item, index) => (
-                        <div key={index} className="flex items-center text-gray-700">
-                          <Check className="w-5 h-5 text-green-500 mr-3" />
-                          {item}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
-                      What's Not Included
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {experience.excludes.map((item, index) => (
-                        <div key={index} className="flex items-center text-gray-700">
-                          <Minus className="w-5 h-5 text-red-500 mr-3" />
-                          {item}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              </TabsContent>
-
-              {/* Reviews Tab */}
-              <TabsContent value="reviews">
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary">
-                      Traveler Reviews
-                    </h2>
-                    <div className="text-sm text-gray-600">
-                      Showing {((currentReviewPage - 1) * reviewsPerPage) + 1}-{Math.min(currentReviewPage * reviewsPerPage, totalReviews)} of {totalReviews} reviews
-                    </div>
-                  </div>
-
-                  <div className="space-y-6">
-                    {currentReviews.map((review) => (
-                      <div key={review.id} className="border-b border-gray-200 pb-6">
-                        <div className="flex items-start gap-4">
-                          <img
-                            src={review.avatar}
-                            alt={review.name}
-                            className="w-12 h-12 rounded-full object-cover"
-                          />
-                          <div className="flex-1">
-                            <div className="flex items-center justify-between mb-2">
-                              <h4 className="font-semibold text-gray-900">{review.name}</h4>
-                              <span className="text-sm text-gray-500">{review.date}</span>
+                    <div className="space-y-8">
+                      {experience.itinerary.map((day, index) => (
+                        <div key={day.day} className="flex gap-6">
+                          {/* Timeline */}
+                          <div className="flex flex-col items-center">
+                            <div className="w-8 h-8 bg-nepal-primary text-white rounded-full flex items-center justify-center text-sm font-bold">
+                              {day.day}
                             </div>
-                            <div className="flex items-center gap-2 mb-3">
-                              {renderStars(review.rating)}
-                              <span className="text-sm text-gray-600">({review.rating}/5)</span>
-                            </div>
-                            <p className="text-gray-700 mb-3">{review.comment}</p>
-                            {review.photos.length > 0 && (
-                              <div className="flex gap-2">
-                                {review.photos.map((photo, index) => (
-                                  <img
-                                    key={index}
-                                    src={photo}
-                                    alt={`Review photo ${index + 1}`}
-                                    className="w-16 h-16 rounded object-cover cursor-pointer hover:opacity-80"
-                                  />
-                                ))}
-                              </div>
+                            {index < experience.itinerary.length - 1 && (
+                              <div className="w-0.5 h-16 bg-gray-300 mt-2"></div>
                             )}
                           </div>
+                          
+                          {/* Content */}
+                          <div className="flex-1 pb-8">
+                            <h3 className="text-xl font-bold text-nepal-primary mb-2">
+                              Day {day.day}: {day.title}
+                            </h3>
+                            <p className="text-gray-700 mb-4">{day.description}</p>
+                            
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                              <div className="flex items-center gap-2">
+                                <Clock className="w-4 h-4 text-gray-500" />
+                                <span>{day.time}</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <MapPin className="w-4 h-4 text-gray-500" />
+                                <span>{day.distance}</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <Users className="w-4 h-4 text-gray-500" />
+                                <span>{day.accommodation}</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <Calendar className="w-4 h-4 text-gray-500" />
+                                <span>{day.meals}</span>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Pagination */}
-                  {totalPages > 1 && (
-                    <div className="flex items-center justify-center gap-2 mt-8">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setCurrentReviewPage(Math.max(1, currentReviewPage - 1))}
-                        disabled={currentReviewPage === 1}
-                      >
-                        <ChevronLeft className="w-4 h-4" />
-                      </Button>
-                      {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                        <Button
-                          key={page}
-                          variant={currentReviewPage === page ? "default" : "outline"}
-                          size="sm"
-                          onClick={() => setCurrentReviewPage(page)}
-                        >
-                          {page}
-                        </Button>
                       ))}
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setCurrentReviewPage(Math.min(totalPages, currentReviewPage + 1))}
-                        disabled={currentReviewPage === totalPages}
-                      >
-                        <ChevronRight className="w-4 h-4" />
-                      </Button>
                     </div>
-                  )}
-                </motion.div>
-              </TabsContent>
+                  </motion.div>
+                </TabsContent>
+
+                {/* Inclusions Tab */}
+                <TabsContent value="inclusions">
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    className="space-y-8"
+                  >
+                    <div>
+                      <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
+                        What's Included
+                      </h2>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {experience.includes.map((item, index) => (
+                          <div key={index} className="flex items-center text-gray-700">
+                            <Check className="w-5 h-5 text-green-500 mr-3" />
+                            {item}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
+                        What's Not Included
+                      </h2>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {experience.excludes.map((item, index) => (
+                          <div key={index} className="flex items-center text-gray-700">
+                            <Minus className="w-5 h-5 text-red-500 mr-3" />
+                            {item}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                </TabsContent>
+
+                {/* Reviews Tab */}
+                <TabsContent value="reviews">
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <div className="flex items-center justify-between mb-6">
+                      <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary">
+                        Traveler Reviews
+                      </h2>
+                      <div className="text-sm text-gray-600">
+                        Showing {((currentReviewPage - 1) * reviewsPerPage) + 1}-{Math.min(currentReviewPage * reviewsPerPage, totalReviews)} of {totalReviews} reviews
+                      </div>
+                    </div>
+
+                    <div className="space-y-6">
+                      {currentReviews.map((review) => (
+                        <div key={review.id} className="border-b border-gray-200 pb-6">
+                          <div className="flex items-start gap-4">
+                            <img
+                              src={review.avatar}
+                              alt={review.name}
+                              className="w-12 h-12 rounded-full object-cover"
+                            />
+                            <div className="flex-1">
+                              <div className="flex items-center justify-between mb-2">
+                                <h4 className="font-semibold text-gray-900">{review.name}</h4>
+                                <span className="text-sm text-gray-500">{review.date}</span>
+                              </div>
+                              <div className="flex items-center gap-2 mb-3">
+                                {renderStars(review.rating)}
+                                <span className="text-sm text-gray-600">({review.rating}/5)</span>
+                              </div>
+                              <p className="text-gray-700 mb-3">{review.comment}</p>
+                              {review.photos.length > 0 && (
+                                <div className="flex gap-2">
+                                  {review.photos.map((photo, index) => (
+                                    <img
+                                      key={index}
+                                      src={photo}
+                                      alt={`Review photo ${index + 1}`}
+                                      className="w-16 h-16 rounded object-cover cursor-pointer hover:opacity-80"
+                                    />
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Pagination */}
+                    {totalPages > 1 && (
+                      <div className="flex items-center justify-center gap-2 mt-8">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setCurrentReviewPage(Math.max(1, currentReviewPage - 1))}
+                          disabled={currentReviewPage === 1}
+                        >
+                          <ChevronLeft className="w-4 h-4" />
+                        </Button>
+                        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                          <Button
+                            key={page}
+                            variant={currentReviewPage === page ? "default" : "outline"}
+                            size="sm"
+                            onClick={() => setCurrentReviewPage(page)}
+                          >
+                            {page}
+                          </Button>
+                        ))}
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setCurrentReviewPage(Math.min(totalPages, currentReviewPage + 1))}
+                          disabled={currentReviewPage === totalPages}
+                        >
+                          <ChevronRight className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    )}
+                  </motion.div>
+                </TabsContent>
+              </div>
             </Tabs>
 
             {/* Related Experiences */}
@@ -656,58 +677,90 @@ const ExperienceDetail = () => {
               <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
                 Related Experiences
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {experience.relatedExperiences.map((relatedExp) => (
-                  <Link key={relatedExp.id} to={`/experiences/${relatedExp.id}`}>
-                    <motion.div whileHover={{ y: -10 }} className="group cursor-pointer">
-                      <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100">
-                        <div className="relative overflow-hidden">
-                          <img
-                            src={relatedExp.image}
-                            alt={relatedExp.name}
-                            className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                          />
-                          <div className={`absolute top-4 left-4 text-white px-3 py-1 rounded-full text-sm font-semibold ${getDifficultyColor(relatedExp.difficulty)}`}>
-                            {relatedExp.difficulty}
-                          </div>
-                          <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
-                            <span className="text-lg font-bold text-nepal-primary">
-                              {formatPrice(relatedExp.price)}
-                            </span>
-                          </div>
-                        </div>
-                        
-                        <div className="p-6">
-                          <div className="flex items-center gap-2 mb-2">
-                            {renderStars(relatedExp.rating)}
-                            <span className="text-sm text-gray-600">({relatedExp.rating})</span>
-                          </div>
-                          <h3 className="text-xl font-semibold text-nepal-primary mb-2">
-                            {relatedExp.name}
-                          </h3>
-                          <p className="text-gray-600 mb-4">
-                            {relatedExp.description}
-                          </p>
-                          
-                          <div className="space-y-2 mb-4">
-                            <div className="flex items-center text-sm text-gray-500">
-                              <Calendar className="w-4 h-4 mr-2" />
-                              <span>{relatedExp.duration}</span>
+              
+              <div className="relative">
+                {/* Navigation Arrows */}
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md hover:bg-gray-50"
+                  onClick={prevRelatedExperience}
+                  disabled={relatedExperiencesIndex === 0}
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </Button>
+                
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md hover:bg-gray-50"
+                  onClick={nextRelatedExperience}
+                  disabled={relatedExperiencesIndex >= experience.relatedExperiences.length - 2}
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </Button>
+
+                {/* Cards Container */}
+                <div className="overflow-hidden px-12">
+                  <div 
+                    className="flex transition-transform duration-300 ease-in-out gap-6"
+                    style={{ transform: `translateX(-${relatedExperiencesIndex * 50}%)` }}
+                  >
+                    {experience.relatedExperiences.map((relatedExp) => (
+                      <div key={relatedExp.id} className="flex-shrink-0 w-1/2">
+                        <Link to={`/experiences/${relatedExp.id}`}>
+                          <motion.div whileHover={{ y: -10 }} className="group cursor-pointer">
+                            <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100">
+                              <div className="relative overflow-hidden">
+                                <img
+                                  src={relatedExp.image}
+                                  alt={relatedExp.name}
+                                  className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                                />
+                                <div className={`absolute top-4 left-4 text-white px-3 py-1 rounded-full text-sm font-semibold ${getDifficultyColor(relatedExp.difficulty)}`}>
+                                  {relatedExp.difficulty}
+                                </div>
+                                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
+                                  <span className="text-lg font-bold text-nepal-primary">
+                                    {formatPrice(relatedExp.price)}
+                                  </span>
+                                </div>
+                              </div>
+                              
+                              <div className="p-6">
+                                <div className="flex items-center gap-2 mb-2">
+                                  {renderStars(relatedExp.rating)}
+                                  <span className="text-sm text-gray-600">({relatedExp.rating})</span>
+                                </div>
+                                <h3 className="text-xl font-semibold text-nepal-primary mb-2">
+                                  {relatedExp.name}
+                                </h3>
+                                <p className="text-gray-600 mb-4">
+                                  {relatedExp.description}
+                                </p>
+                                
+                                <div className="space-y-2 mb-4">
+                                  <div className="flex items-center text-sm text-gray-500">
+                                    <Calendar className="w-4 h-4 mr-2" />
+                                    <span>{relatedExp.duration}</span>
+                                  </div>
+                                  <div className="flex items-center text-sm text-gray-500">
+                                    <MapPin className="w-4 h-4 mr-2" />
+                                    <span>{relatedExp.location}</span>
+                                  </div>
+                                </div>
+                                
+                                <Button className="w-full bg-nepal-orange hover:bg-orange-600 text-white">
+                                  View Details
+                                </Button>
+                              </div>
                             </div>
-                            <div className="flex items-center text-sm text-gray-500">
-                              <MapPin className="w-4 h-4 mr-2" />
-                              <span>{relatedExp.location}</span>
-                            </div>
-                          </div>
-                          
-                          <Button className="w-full bg-nepal-orange hover:bg-orange-600 text-white">
-                            View Details
-                          </Button>
-                        </div>
+                          </motion.div>
+                        </Link>
                       </div>
-                    </motion.div>
-                  </Link>
-                ))}
+                    ))}
+                  </div>
+                </div>
               </div>
             </motion.section>
           </div>
@@ -985,6 +1038,58 @@ const ExperienceDetail = () => {
           </div>
         )}
       </div>
+
+      {/* Gallery Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4">
+          <div className="relative max-w-4xl w-full">
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-4 right-4 text-white hover:text-gray-300 z-10"
+            >
+              <X className="w-8 h-8" />
+            </button>
+            
+            <div className="relative">
+              <img
+                src={experience.gallery[selectedImageIndex]}
+                alt={`Gallery ${selectedImageIndex + 1}`}
+                className="w-full h-auto max-h-[80vh] object-contain"
+              />
+              
+              {selectedImageIndex > 0 && (
+                <button
+                  onClick={() => setSelectedImageIndex(selectedImageIndex - 1)}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-300"
+                >
+                  <ChevronLeft className="w-8 h-8" />
+                </button>
+              )}
+              
+              {selectedImageIndex < experience.gallery.length - 1 && (
+                <button
+                  onClick={() => setSelectedImageIndex(selectedImageIndex + 1)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-300"
+                >
+                  <ChevronRight className="w-8 h-8" />
+                </button>
+              )}
+            </div>
+            
+            <div className="flex justify-center mt-4 gap-2">
+              {experience.gallery.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setSelectedImageIndex(index)}
+                  className={`w-3 h-3 rounded-full ${
+                    selectedImageIndex === index ? 'bg-white' : 'bg-white/50'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Add bottom padding for mobile to account for fixed CTA */}
       <div className="lg:hidden h-20"></div>
