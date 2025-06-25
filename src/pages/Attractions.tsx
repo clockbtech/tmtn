@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Search, Filter, ChevronDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useTranslation } from '../contexts/TranslationContext';
@@ -11,7 +12,9 @@ import { Pagination, PaginationContent, PaginationItem, PaginationLink, Paginati
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuCheckboxItem, DropdownMenuTrigger } from '../components/ui/dropdown-menu';
 import { Input } from '../components/ui/input';
+
 gsap.registerPlugin(ScrollTrigger);
+
 interface Attraction {
   id: number;
   name: string;
@@ -23,6 +26,7 @@ interface Attraction {
   type: 'Cultural' | 'Adventure' | 'Nature' | 'UNESCO';
   popularity: number;
 }
+
 const Attractions = () => {
   const {
     t
@@ -159,7 +163,8 @@ const Attractions = () => {
   const categories = ['Cultural', 'Adventure', 'Nature', 'UNESCO'];
   const filteredAndSortedAttractions = useMemo(() => {
     let filtered = attractions.filter(attraction => {
-      const matchesSearch = attraction.name.toLowerCase().includes(searchTerm.toLowerCase()) || attraction.description.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesSearch = attraction.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+        attraction.description.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(attraction.type);
       return matchesSearch && matchesCategory;
     });
@@ -200,9 +205,12 @@ const Attractions = () => {
       <Header />
       
       {/* Enhanced Hero Section with Background Image */}
-      <section className="relative bg-cover bg-center bg-no-repeat py-[150px]" style={{
-      backgroundImage: 'url(https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80)'
-    }}>
+      <section 
+        className="relative bg-cover bg-center bg-no-repeat py-[150px]"
+        style={{
+          backgroundImage: 'url(https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80)'
+        }}
+      >
         <div className="absolute inset-0 bg-gradient-to-r from-nepal-orange/80 to-orange-600/80"></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div initial={{
@@ -305,47 +313,49 @@ const Attractions = () => {
             }} whileHover={{
               y: -10
             }} className="group cursor-pointer">
-                    <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100">
-                      <div className="relative overflow-hidden">
-                        <img src={attraction.image} alt={attraction.name} className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" />
-                        <div className="absolute top-4 left-4 bg-nepal-orange text-white px-3 py-1 rounded-full text-sm font-semibold">
-                          {attraction.type}
-                        </div>
-                        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full flex items-center">
-                          <Star className="w-4 h-4 text-yellow-500 mr-1" />
-                          <span className="text-sm font-semibold">{attraction.rating}</span>
-                        </div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      </div>
-                      
-                      <div className="p-6">
-                        <h3 className="text-xl font-normal font-semibold text-nepal-primary mb-2">
-                          {attraction.name}
-                        </h3>
-                        <p className="text-gray-600 mb-4 text-base">
-                          {attraction.description}
-                        </p>
-                        
-                        <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                          <div className="flex items-center">
-                            <MapPin className="w-4 h-4 mr-1" />
-                            <span>{attraction.location}</span>
+                    <Link to={`/attractions/${attraction.id}`}>
+                      <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100">
+                        <div className="relative overflow-hidden">
+                          <img src={attraction.image} alt={attraction.name} className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" />
+                          <div className="absolute top-4 left-4 bg-nepal-orange text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            {attraction.type}
                           </div>
-                          <div className="flex items-center">
-                            <Clock className="w-4 h-4 mr-1" />
-                            <span>{attraction.duration}</span>
+                          <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full flex items-center">
+                            <Star className="w-4 h-4 text-yellow-500 mr-1" />
+                            <span className="text-sm font-semibold">{attraction.rating}</span>
                           </div>
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </div>
                         
-                        <motion.button whileHover={{
+                        <div className="p-6">
+                          <h3 className="text-xl font-normal font-semibold text-nepal-primary mb-2">
+                            {attraction.name}
+                          </h3>
+                          <p className="text-gray-600 mb-4 text-base">
+                            {attraction.description}
+                          </p>
+                          
+                          <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                            <div className="flex items-center">
+                              <MapPin className="w-4 h-4 mr-1" />
+                              <span>{attraction.location}</span>
+                            </div>
+                            <div className="flex items-center">
+                              <Clock className="w-4 h-4 mr-1" />
+                              <span>{attraction.duration}</span>
+                            </div>
+                          </div>
+                          
+                          <motion.button whileHover={{
                     scale: 1.05
                   }} whileTap={{
                     scale: 0.95
                   }} className="w-full bg-nepal-primary hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-colors duration-200 text-base">
-                          Explore Attraction
-                        </motion.button>
+                            Explore Attraction
+                          </motion.button>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   </motion.div>)}
               </div>
 
