@@ -2,12 +2,24 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Calendar, MapPin, Clock, Users, Camera, X, ChevronLeft, ChevronRight, Play, Pause, Shield, Zap, Lightbulb, Star } from 'lucide-react';
+import { ArrowLeft, Calendar, MapPin, Clock, Users, Camera, X, ChevronLeft, ChevronRight, Play, Pause, Shield, Zap, Lightbulb, Star, Phone, Mail, User, Check, Minus, MessageCircle, ThumbsUp, ChevronDown, ChevronUp } from 'lucide-react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay, Thumbs, Zoom } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/thumbs';
+import 'swiper/css/zoom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useTranslation } from '../contexts/TranslationContext';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../components/ui/carousel';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
+import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
+import { Label } from '../components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 
 const ExperienceDetail = () => {
   const { id } = useParams();
@@ -15,36 +27,154 @@ const ExperienceDetail = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [autoPlay, setAutoPlay] = useState(true);
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [isBookingSticky, setIsBookingSticky] = useState(false);
+  const [showMobileBooking, setShowMobileBooking] = useState(false);
+  const [priceBreakdownOpen, setPriceBreakdownOpen] = useState(false);
+  const [currentReviewPage, setCurrentReviewPage] = useState(1);
+  const reviewsPerPage = 5;
 
-  // Mock data - in real app this would come from API/JSON
+  // Booking form state
+  const [bookingData, setBookingData] = useState({
+    fullName: '',
+    email: '',
+    phone: '',
+    startDate: '',
+    adults: 1,
+    children: 0,
+    infants: 0,
+    flexibleDate: false
+  });
+
+  // Mock data - enhanced with new fields
   const experience = {
     id: parseInt(id || '1'),
     name: 'Everest Base Camp Trek',
     subtitle: 'The Ultimate Himalayan Adventure to the Base of the World\'s Highest Peak',
+    rating: 4.5,
+    reviewCount: 127,
     heroImage: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
     description: `The Everest Base Camp Trek is one of the most iconic and challenging adventures in the world. This legendary journey takes you through the heart of the Khumbu region, following in the footsteps of famous mountaineers to reach the base camp of Mount Everest at 5,364 meters.
 
-    The trek offers an incredible combination of natural beauty, cultural immersion, and personal achievement. You'll traverse through traditional Sherpa villages, ancient Buddhist monasteries, and dramatic mountain landscapes while acclimatizing to the high altitude.
-
-    Experience the warm hospitality of the Sherpa people, witness stunning sunrise views over the world's highest peaks, and stand at the foot of Mount Everest. This life-changing adventure requires good physical fitness and mental determination, but rewards you with memories that will last a lifetime.`,
-    highlights: ['Trek to Mount Everest Base Camp at 5,364m', 'Experience Sherpa culture and traditions', 'Visit Tengboche Monastery', 'Stunning views of Everest, Lhotse, and Ama Dablam', 'Cross suspension bridges over deep gorges', 'Acclimatization in Namche Bazaar'],
+    The trek offers an incredible combination of natural beauty, cultural immersion, and personal achievement. You'll traverse through traditional Sherpa villages, ancient Buddhist monasteries, and dramatic mountain landscapes while acclimatizing to the high altitude.`,
+    highlights: ['Trek to Mount Everest Base Camp at 5,364m', 'Experience Sherpa culture and traditions', 'Visit Tengboche Monastery', 'Stunning views of Everest, Lhotse, and Ama Dablam'],
     duration: '14 days',
     groupSize: '8-12 people',
     difficulty: 'Extreme',
     price: 1299,
     location: 'Khumbu Region',
     includes: ['Professional guide', 'Porter service', 'Accommodation in teahouses', 'All meals during trek', 'Flight tickets (Kathmandu-Lukla-Kathmandu)', 'Permits and entrance fees'],
+    excludes: ['International flights', 'Travel insurance', 'Personal equipment', 'Tips for guides and porters', 'Alcoholic beverages', 'Emergency evacuation'],
     itinerary: [
-      { day: 1, title: 'Fly to Lukla, trek to Phakding', description: 'Scenic flight to Lukla, begin trek to Phakding (2,651m)' },
-      { day: 2, title: 'Trek to Namche Bazaar', description: 'Cross suspension bridges, first glimpse of Everest' },
-      { day: 3, title: 'Acclimatization day in Namche', description: 'Rest day with optional hike to Everest View Hotel' },
-      { day: 4, title: 'Trek to Tengboche', description: 'Visit famous monastery with Everest views' },
-      { day: 5, title: 'Trek to Dingboche', description: 'Enter the alpine zone, spectacular mountain views' }
+      { 
+        day: 1, 
+        title: 'Fly to Lukla, trek to Phakding', 
+        description: 'Scenic flight to Lukla, begin trek to Phakding (2,651m)',
+        time: '4-5 hours',
+        distance: '8 km',
+        accommodation: 'Tea House',
+        meals: 'Lunch, Dinner'
+      },
+      { 
+        day: 2, 
+        title: 'Trek to Namche Bazaar', 
+        description: 'Cross suspension bridges, first glimpse of Everest',
+        time: '6-7 hours',
+        distance: '11 km',
+        accommodation: 'Tea House',
+        meals: 'Breakfast, Lunch, Dinner'
+      },
+      { 
+        day: 3, 
+        title: 'Acclimatization day in Namche', 
+        description: 'Rest day with optional hike to Everest View Hotel',
+        time: '3-4 hours (optional)',
+        distance: '5 km (optional)',
+        accommodation: 'Tea House',
+        meals: 'Breakfast, Lunch, Dinner'
+      },
+      { 
+        day: 4, 
+        title: 'Trek to Tengboche', 
+        description: 'Visit famous monastery with Everest views',
+        time: '5-6 hours',
+        distance: '10 km',
+        accommodation: 'Tea House',
+        meals: 'Breakfast, Lunch, Dinner'
+      },
+      { 
+        day: 5, 
+        title: 'Trek to Dingboche', 
+        description: 'Enter the alpine zone, spectacular mountain views',
+        time: '5-6 hours',
+        distance: '12 km',
+        accommodation: 'Tea House',
+        meals: 'Breakfast, Lunch, Dinner'
+      }
     ],
-    bestSeasons: [
-      { icon: '🌸', months: 'March - May', description: 'Clear skies and warmer temperatures' },
-      { icon: '🍂', months: 'September - November', description: 'Excellent visibility and stable weather' }
+    reviews: [
+      {
+        id: 1,
+        name: 'Sarah Johnson',
+        rating: 5,
+        date: '2024-05-15',
+        comment: 'Absolutely incredible experience! The views were breathtaking and our guide was fantastic.',
+        avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
+        photos: ['https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80']
+      },
+      {
+        id: 2,
+        name: 'Michael Chen',
+        rating: 4,
+        date: '2024-04-22',
+        comment: 'Great trek but physically demanding. Make sure you\'re well prepared!',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
+        photos: []
+      },
+      {
+        id: 3,
+        name: 'Emma Wilson',
+        rating: 5,
+        date: '2024-04-10',
+        comment: 'Life-changing adventure. The Sherpa culture and hospitality were amazing.',
+        avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
+        photos: ['https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80']
+      },
+      {
+        id: 4,
+        name: 'David Rodriguez',
+        rating: 4,
+        date: '2024-03-28',
+        comment: 'Amazing trek with stunning views. The accommodation was basic but adequate.',
+        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
+        photos: []
+      },
+      {
+        id: 5,
+        name: 'Lisa Thompson',
+        rating: 5,
+        date: '2024-03-15',
+        comment: 'Exceeded all expectations! Perfect organization and incredible experience.',
+        avatar: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
+        photos: ['https://images.unsplash.com/photo-1464822759844-d150baec0494?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80']
+      },
+      {
+        id: 6,
+        name: 'James Park',
+        rating: 4,
+        date: '2024-02-20',
+        comment: 'Great adventure but weather was challenging. Still worth every moment!',
+        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
+        photos: []
+      }
     ],
+    guide: {
+      name: 'Pemba Sherpa',
+      experience: '15 years',
+      certifications: ['Mountain Guide License', 'First Aid Certified', 'English Speaking'],
+      avatar: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
+      bio: 'Pemba is an experienced mountain guide with over 15 years of trekking experience in the Himalayas.'
+    },
     gallery: [
       'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -63,7 +193,8 @@ const ExperienceDetail = () => {
         groupSize: '6-10 people',
         difficulty: 'Moderate',
         price: 899,
-        location: 'Annapurna Region'
+        location: 'Annapurna Region',
+        rating: 4.3
       },
       {
         id: 3,
@@ -74,39 +205,24 @@ const ExperienceDetail = () => {
         groupSize: '6-10 people',
         difficulty: 'Moderate',
         price: 699,
-        location: 'Langtang Region'
-      }
-    ],
-    nearbyAttractions: [
-      {
-        id: 1,
-        name: 'Swayambhunath Stupa',
-        description: 'Ancient Buddhist temple with panoramic valley views',
-        image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        location: 'Kathmandu',
-        duration: '2-3 hours',
-        rating: 4.8,
-        type: 'UNESCO'
+        location: 'Langtang Region',
+        rating: 4.6
       },
       {
-        id: 2,
-        name: 'Tengboche Monastery',
-        description: 'Famous monastery with stunning Everest views',
-        image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        location: 'Khumbu',
-        duration: '1-2 hours',
-        rating: 4.9,
-        type: 'Cultural'
+        id: 4,
+        name: 'Manaslu Circuit Trek',
+        description: 'Off-the-beaten-path adventure around the eighth highest mountain',
+        image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        duration: '12 days',
+        groupSize: '8-12 people',
+        difficulty: 'Extreme',
+        price: 1099,
+        location: 'Manaslu Region',
+        rating: 4.7
       }
-    ],
-    travelTips: {
-      safety: ['Acclimatize properly to avoid altitude sickness', 'Carry comprehensive travel insurance', 'Follow your guide\'s instructions at all times', 'Stay hydrated and avoid alcohol at high altitude'],
-      quickFacts: ['Max altitude: 5,364m', 'Best months: Mar-May, Sep-Nov', 'Fitness level: High', 'Group size: 8-12 people', 'Duration: 14 days'],
-      proTips: ['Book flights early as weather can cause delays', 'Pack layers for varying temperatures', 'Bring high-quality trekking boots', 'Consider hiring additional porter for comfort']
-    }
+    ]
   };
 
-  // Helper function to get difficulty badge color
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case 'Easy': return 'bg-green-500';
@@ -116,22 +232,40 @@ const ExperienceDetail = () => {
     }
   };
 
+  const renderStars = (rating: number, size: string = 'w-4 h-4') => {
+    return Array.from({ length: 5 }, (_, index) => (
+      <Star
+        key={index}
+        className={`${size} ${index < Math.floor(rating) ? 'text-yellow-500 fill-yellow-500' : index < rating ? 'text-yellow-500 fill-yellow-500/50' : 'text-gray-300'}`}
+      />
+    ));
+  };
+
+  const calculateTotal = () => {
+    const basePrice = experience.price;
+    const adultTotal = basePrice * bookingData.adults;
+    const childrenTotal = basePrice * 0.5 * bookingData.children; // 50% for children
+    return adultTotal + childrenTotal;
+  };
+
+  const totalReviews = experience.reviews.length;
+  const totalPages = Math.ceil(totalReviews / reviewsPerPage);
+  const currentReviews = experience.reviews.slice(
+    (currentReviewPage - 1) * reviewsPerPage,
+    currentReviewPage * reviewsPerPage
+  );
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
-    if (!autoPlay) return;
-    const interval = setInterval(() => {
-      setSelectedImageIndex(prev => prev === experience.gallery.length - 1 ? 0 : prev + 1);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [autoPlay, experience.gallery.length]);
-
-  const openModal = (index: number) => {
-    setSelectedImageIndex(index);
-    setIsModalOpen(true);
-  };
+    const handleScroll = () => {
+      setIsBookingSticky(window.scrollY > 100);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <div className="min-h-screen bg-white">
@@ -151,16 +285,25 @@ const ExperienceDetail = () => {
                 <ArrowLeft className="w-5 h-5 mr-2" />
                 Back to Experiences
               </Link>
+              
+              {/* Star Rating */}
               <div className="flex items-center gap-4 mb-4">
+                <div className="flex items-center gap-2 bg-white/90 backdrop-blur-sm px-3 py-2 rounded-full">
+                  <div className="flex items-center">
+                    {renderStars(experience.rating, 'w-5 h-5')}
+                  </div>
+                  <span className="text-lg font-bold text-nepal-primary">
+                    {experience.rating}/5
+                  </span>
+                  <span className="text-sm text-gray-600">
+                    ({experience.reviewCount} reviews)
+                  </span>
+                </div>
                 <div className={`text-white px-3 py-1 rounded-full text-sm font-semibold ${getDifficultyColor(experience.difficulty)}`}>
                   {experience.difficulty}
                 </div>
-                <div className="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
-                  <span className="text-lg font-bold text-nepal-primary">
-                    {formatPrice(experience.price)}
-                  </span>
-                </div>
               </div>
+              
               <h1 className="text-5xl lg:text-7xl font-bebas uppercase font-bold text-white mb-4">
                 {experience.name}
               </h1>
@@ -175,348 +318,564 @@ const ExperienceDetail = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Main Content */}
-          <div className="lg:col-span-2 space-y-12">
-            {/* Overview Section */}
-            <motion.section
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
-                Overview
-              </h2>
-              <div className="prose prose-lg max-w-none text-gray-700 mb-8">
-                {experience.description.split('\n\n').map((paragraph, index) => (
-                  <p key={index} className="mb-4">
-                    {paragraph.trim()}
-                  </p>
-                ))}
-              </div>
+          <div className="lg:col-span-2">
+            {/* Tabs Navigation */}
+            <Tabs defaultValue="overview" className="w-full">
+              <TabsList className="grid w-full grid-cols-4 mb-8">
+                <TabsTrigger value="overview">Overview</TabsTrigger>
+                <TabsTrigger value="itinerary">Itinerary</TabsTrigger>
+                <TabsTrigger value="inclusions">Inclusions</TabsTrigger>
+                <TabsTrigger value="reviews">Reviews</TabsTrigger>
+              </TabsList>
 
-              {/* Key Highlights */}
-              <div className="mb-8">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Key Highlights</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {experience.highlights.map((highlight, index) => (
-                    <div key={index} className="flex items-center text-gray-700">
-                      <div className="w-2 h-2 bg-nepal-orange rounded-full mr-3"></div>
-                      {highlight}
+              {/* Overview Tab */}
+              <TabsContent value="overview" className="space-y-12">
+                {/* Photo Gallery with SwiperJS */}
+                <motion.section
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary">
+                      Photo Gallery
+                    </h2>
+                    <div className="flex items-center gap-4">
+                      <button
+                        onClick={() => setAutoPlay(!autoPlay)}
+                        className="flex items-center gap-2 text-sm text-gray-600 hover:text-nepal-primary"
+                      >
+                        {autoPlay ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                        {autoPlay ? 'Pause' : 'Play'}
+                      </button>
                     </div>
-                  ))}
-                </div>
-              </div>
+                  </div>
 
-              {/* What's Included */}
-              <div className="mb-8">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">What's Included</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {experience.includes.map((item, index) => (
-                    <div key={index} className="flex items-center text-gray-700">
-                      <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
-                      {item}
+                  <div className="space-y-4">
+                    {/* Main Gallery */}
+                    <Swiper
+                      modules={[Navigation, Pagination, Autoplay, Thumbs, Zoom]}
+                      spaceBetween={10}
+                      navigation
+                      pagination={{ clickable: true }}
+                      autoplay={autoPlay ? { delay: 3000, disableOnInteraction: false } : false}
+                      thumbs={{ swiper: thumbsSwiper }}
+                      zoom={{ maxRatio: 3 }}
+                      className="h-96 rounded-lg"
+                    >
+                      {experience.gallery.map((image, index) => (
+                        <SwiperSlide key={index}>
+                          <div className="swiper-zoom-container">
+                            <img
+                              src={image}
+                              alt={`Gallery ${index + 1}`}
+                              className="w-full h-full object-cover cursor-pointer"
+                              onClick={() => setIsModalOpen(true)}
+                            />
+                          </div>
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+
+                    {/* Thumbnail Navigation */}
+                    <Swiper
+                      onSwiper={setThumbsSwiper}
+                      spaceBetween={10}
+                      slidesPerView={6}
+                      freeMode={true}
+                      watchSlidesProgress={true}
+                      modules={[Navigation, Thumbs]}
+                      className="h-20"
+                    >
+                      {experience.gallery.map((image, index) => (
+                        <SwiperSlide key={index}>
+                          <img
+                            src={image}
+                            alt={`Thumbnail ${index + 1}`}
+                            className="w-full h-full object-cover rounded cursor-pointer"
+                          />
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  </div>
+                </motion.section>
+
+                {/* Description */}
+                <motion.section
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
+                    About This Experience
+                  </h2>
+                  <div className="prose prose-lg max-w-none text-gray-700 mb-8">
+                    {experience.description.split('\n\n').map((paragraph, index) => (
+                      <p key={index} className="mb-4">
+                        {paragraph.trim()}
+                      </p>
+                    ))}
+                  </div>
+
+                  <div className="mb-8">
+                    <h3 className="text-xl font-bold text-gray-900 mb-4">Key Highlights</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {experience.highlights.map((highlight, index) => (
+                        <div key={index} className="flex items-center text-gray-700">
+                          <div className="w-2 h-2 bg-nepal-orange rounded-full mr-3"></div>
+                          {highlight}
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              </div>
+                  </div>
+                </motion.section>
 
-              {/* Best Seasons */}
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Best Seasons</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {experience.bestSeasons.map((season, index) => (
-                    <div key={index} className="flex items-center p-4 bg-gray-50 rounded-lg">
-                      <span className="text-3xl mr-4">{season.icon}</span>
-                      <div>
-                        <div className="font-semibold text-nepal-primary">{season.months}</div>
-                        <div className="text-sm text-gray-600">{season.description}</div>
+                {/* Host Information */}
+                <motion.section
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
+                    Your Guide
+                  </h2>
+                  <div className="flex items-start gap-4 p-6 bg-gray-50 rounded-lg">
+                    <img
+                      src={experience.guide.avatar}
+                      alt={experience.guide.name}
+                      className="w-16 h-16 rounded-full object-cover"
+                    />
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-nepal-primary mb-1">
+                        {experience.guide.name}
+                      </h3>
+                      <p className="text-sm text-gray-600 mb-2">
+                        {experience.guide.experience} of guiding experience
+                      </p>
+                      <p className="text-gray-700 mb-3">{experience.guide.bio}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {experience.guide.certifications.map((cert, index) => (
+                          <span key={index} className="px-2 py-1 bg-nepal-primary/10 text-nepal-primary text-xs rounded-full">
+                            {cert}
+                          </span>
+                        ))}
                       </div>
                     </div>
-                  ))}
-                </div>
-              </div>
-            </motion.section>
+                  </div>
+                </motion.section>
+              </TabsContent>
 
-            {/* Photo Gallery */}
-            <motion.section
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary">
-                  Photo Gallery
-                </h2>
-                <div className="flex items-center gap-4">
-                  <button
-                    onClick={() => setAutoPlay(!autoPlay)}
-                    className="flex items-center gap-2 text-sm text-gray-600 hover:text-nepal-primary"
-                  >
-                    {autoPlay ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                    {autoPlay ? 'Pause' : 'Play'}
-                  </button>
-                </div>
-              </div>
-
-              {/* Main Gallery Image */}
-              <div className="relative mb-4">
-                <img
-                  src={experience.gallery[selectedImageIndex]}
-                  alt={`Gallery ${selectedImageIndex + 1}`}
-                  className="w-full h-96 object-cover rounded-lg cursor-pointer"
-                  onClick={() => openModal(selectedImageIndex)}
-                />
-                <button
-                  onClick={() => openModal(selectedImageIndex)}
-                  className="absolute top-4 right-4 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+              {/* Itinerary Tab */}
+              <TabsContent value="itinerary">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
                 >
-                  <Camera className="w-5 h-5" />
-                </button>
-              </div>
+                  <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
+                    Detailed Itinerary
+                  </h2>
+                  <div className="space-y-8">
+                    {experience.itinerary.map((day, index) => (
+                      <div key={day.day} className="flex gap-6">
+                        {/* Timeline */}
+                        <div className="flex flex-col items-center">
+                          <div className="w-8 h-8 bg-nepal-primary text-white rounded-full flex items-center justify-center text-sm font-bold">
+                            {day.day}
+                          </div>
+                          {index < experience.itinerary.length - 1 && (
+                            <div className="w-0.5 h-16 bg-gray-300 mt-2"></div>
+                          )}
+                        </div>
+                        
+                        {/* Content */}
+                        <div className="flex-1 pb-8">
+                          <h3 className="text-xl font-bold text-nepal-primary mb-2">
+                            Day {day.day}: {day.title}
+                          </h3>
+                          <p className="text-gray-700 mb-4">{day.description}</p>
+                          
+                          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                            <div className="flex items-center gap-2">
+                              <Clock className="w-4 h-4 text-gray-500" />
+                              <span>{day.time}</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <MapPin className="w-4 h-4 text-gray-500" />
+                              <span>{day.distance}</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Users className="w-4 h-4 text-gray-500" />
+                              <span>{day.accommodation}</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Calendar className="w-4 h-4 text-gray-500" />
+                              <span>{day.meals}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              </TabsContent>
 
-              {/* Thumbnail Gallery */}
-              <div className="grid grid-cols-6 gap-2">
-                {experience.gallery.map((image, index) => (
-                  <img
-                    key={index}
-                    src={image}
-                    alt={`Thumbnail ${index + 1}`}
-                    className={`w-full h-20 object-cover rounded cursor-pointer transition-opacity ${
-                      selectedImageIndex === index ? 'opacity-100 ring-2 ring-nepal-primary' : 'opacity-70 hover:opacity-100'
-                    }`}
-                    onClick={() => setSelectedImageIndex(index)}
-                  />
-                ))}
-              </div>
-            </motion.section>
+              {/* Inclusions Tab */}
+              <TabsContent value="inclusions">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  className="space-y-8"
+                >
+                  <div>
+                    <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
+                      What's Included
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {experience.includes.map((item, index) => (
+                        <div key={index} className="flex items-center text-gray-700">
+                          <Check className="w-5 h-5 text-green-500 mr-3" />
+                          {item}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
+                      What's Not Included
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {experience.excludes.map((item, index) => (
+                        <div key={index} className="flex items-center text-gray-700">
+                          <Minus className="w-5 h-5 text-red-500 mr-3" />
+                          {item}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              </TabsContent>
+
+              {/* Reviews Tab */}
+              <TabsContent value="reviews">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary">
+                      Traveler Reviews
+                    </h2>
+                    <div className="text-sm text-gray-600">
+                      Showing {((currentReviewPage - 1) * reviewsPerPage) + 1}-{Math.min(currentReviewPage * reviewsPerPage, totalReviews)} of {totalReviews} reviews
+                    </div>
+                  </div>
+
+                  <div className="space-y-6">
+                    {currentReviews.map((review) => (
+                      <div key={review.id} className="border-b border-gray-200 pb-6">
+                        <div className="flex items-start gap-4">
+                          <img
+                            src={review.avatar}
+                            alt={review.name}
+                            className="w-12 h-12 rounded-full object-cover"
+                          />
+                          <div className="flex-1">
+                            <div className="flex items-center justify-between mb-2">
+                              <h4 className="font-semibold text-gray-900">{review.name}</h4>
+                              <span className="text-sm text-gray-500">{review.date}</span>
+                            </div>
+                            <div className="flex items-center gap-2 mb-3">
+                              {renderStars(review.rating)}
+                              <span className="text-sm text-gray-600">({review.rating}/5)</span>
+                            </div>
+                            <p className="text-gray-700 mb-3">{review.comment}</p>
+                            {review.photos.length > 0 && (
+                              <div className="flex gap-2">
+                                {review.photos.map((photo, index) => (
+                                  <img
+                                    key={index}
+                                    src={photo}
+                                    alt={`Review photo ${index + 1}`}
+                                    className="w-16 h-16 rounded object-cover cursor-pointer hover:opacity-80"
+                                  />
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Pagination */}
+                  {totalPages > 1 && (
+                    <div className="flex items-center justify-center gap-2 mt-8">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setCurrentReviewPage(Math.max(1, currentReviewPage - 1))}
+                        disabled={currentReviewPage === 1}
+                      >
+                        <ChevronLeft className="w-4 h-4" />
+                      </Button>
+                      {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                        <Button
+                          key={page}
+                          variant={currentReviewPage === page ? "default" : "outline"}
+                          size="sm"
+                          onClick={() => setCurrentReviewPage(page)}
+                        >
+                          {page}
+                        </Button>
+                      ))}
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setCurrentReviewPage(Math.min(totalPages, currentReviewPage + 1))}
+                        disabled={currentReviewPage === totalPages}
+                      >
+                        <ChevronRight className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  )}
+                </motion.div>
+              </TabsContent>
+            </Tabs>
 
             {/* Related Experiences */}
             <motion.section
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
+              className="mt-16"
             >
               <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
                 Related Experiences
               </h2>
-              <Carousel className="w-full" opts={{ align: "start", loop: true }}>
-                <CarouselContent className="-ml-4">
-                  {experience.relatedExperiences.map((relatedExp) => (
-                    <CarouselItem key={relatedExp.id} className="pl-4 md:basis-1/2">
-                      <Link to={`/experiences/${relatedExp.id}`}>
-                        <motion.div whileHover={{ y: -10 }} className="group cursor-pointer">
-                          <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100">
-                            <div className="relative overflow-hidden">
-                              <img
-                                src={relatedExp.image}
-                                alt={relatedExp.name}
-                                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                              />
-                              <div className={`absolute top-4 left-4 text-white px-3 py-1 rounded-full text-sm font-semibold ${getDifficultyColor(relatedExp.difficulty)}`}>
-                                {relatedExp.difficulty}
-                              </div>
-                              <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
-                                <span className="text-lg font-bold text-nepal-primary">
-                                  {formatPrice(relatedExp.price)}
-                                </span>
-                              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {experience.relatedExperiences.map((relatedExp) => (
+                  <Link key={relatedExp.id} to={`/experiences/${relatedExp.id}`}>
+                    <motion.div whileHover={{ y: -10 }} className="group cursor-pointer">
+                      <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100">
+                        <div className="relative overflow-hidden">
+                          <img
+                            src={relatedExp.image}
+                            alt={relatedExp.name}
+                            className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                          />
+                          <div className={`absolute top-4 left-4 text-white px-3 py-1 rounded-full text-sm font-semibold ${getDifficultyColor(relatedExp.difficulty)}`}>
+                            {relatedExp.difficulty}
+                          </div>
+                          <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
+                            <span className="text-lg font-bold text-nepal-primary">
+                              {formatPrice(relatedExp.price)}
+                            </span>
+                          </div>
+                        </div>
+                        
+                        <div className="p-6">
+                          <div className="flex items-center gap-2 mb-2">
+                            {renderStars(relatedExp.rating)}
+                            <span className="text-sm text-gray-600">({relatedExp.rating})</span>
+                          </div>
+                          <h3 className="text-xl font-semibold text-nepal-primary mb-2">
+                            {relatedExp.name}
+                          </h3>
+                          <p className="text-gray-600 mb-4">
+                            {relatedExp.description}
+                          </p>
+                          
+                          <div className="space-y-2 mb-4">
+                            <div className="flex items-center text-sm text-gray-500">
+                              <Calendar className="w-4 h-4 mr-2" />
+                              <span>{relatedExp.duration}</span>
                             </div>
-                            
-                            <div className="p-6">
-                              <h3 className="text-xl font-semibold text-nepal-primary mb-2">
-                                {relatedExp.name}
-                              </h3>
-                              <p className="text-gray-600 mb-4">
-                                {relatedExp.description}
-                              </p>
-                              
-                              <div className="space-y-2 mb-4">
-                                <div className="flex items-center text-sm text-gray-500">
-                                  <Calendar className="w-4 h-4 mr-2" />
-                                  <span>{relatedExp.duration}</span>
-                                </div>
-                                <div className="flex items-center text-sm text-gray-500">
-                                  <Users className="w-4 h-4 mr-2" />
-                                  <span>{relatedExp.groupSize}</span>
-                                </div>
-                                <div className="flex items-center text-sm text-gray-500">
-                                  <MapPin className="w-4 h-4 mr-2" />
-                                  <span>{relatedExp.location}</span>
-                                </div>
-                              </div>
-                              
-                              <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="w-full bg-nepal-orange hover:bg-orange-600 text-white py-3 rounded-lg font-semibold transition-colors duration-200"
-                              >
-                                Book Experience
-                              </motion.button>
+                            <div className="flex items-center text-sm text-gray-500">
+                              <MapPin className="w-4 h-4 mr-2" />
+                              <span>{relatedExp.location}</span>
                             </div>
                           </div>
-                        </motion.div>
-                      </Link>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <CarouselPrevious className="bg-white shadow-lg border-0 hover:bg-gray-50" />
-                <CarouselNext className="bg-white shadow-lg border-0 hover:bg-gray-50" />
-              </Carousel>
-            </motion.section>
-
-            {/* Nearby Attractions */}
-            <motion.section
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
-                Nearby Attractions
-              </h2>
-              <Carousel className="w-full" opts={{ align: "start", loop: true }}>
-                <CarouselContent className="-ml-4">
-                  {experience.nearbyAttractions.map((attraction) => (
-                    <CarouselItem key={attraction.id} className="pl-4 md:basis-1/2">
-                      <Link to={`/attractions/${attraction.id}`}>
-                        <motion.div whileHover={{ y: -10 }} className="group cursor-pointer">
-                          <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100">
-                            <div className="relative overflow-hidden">
-                              <img
-                                src={attraction.image}
-                                alt={attraction.name}
-                                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                              />
-                              <div className="absolute top-4 left-4 bg-nepal-orange text-white px-3 py-1 rounded-full text-sm font-semibold">
-                                {attraction.type}
-                              </div>
-                              <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full flex items-center">
-                                <Star className="w-4 h-4 text-yellow-500 mr-1" />
-                                <span className="text-sm font-semibold">{attraction.rating}</span>
-                              </div>
-                            </div>
-                            
-                            <div className="p-6">
-                              <h3 className="text-xl font-semibold text-nepal-primary mb-2">
-                                {attraction.name}
-                              </h3>
-                              <p className="text-gray-600 mb-4">
-                                {attraction.description}
-                              </p>
-                              
-                              <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                                <div className="flex items-center">
-                                  <MapPin className="w-4 h-4 mr-1" />
-                                  <span>{attraction.location}</span>
-                                </div>
-                                <div className="flex items-center">
-                                  <Clock className="w-4 h-4 mr-1" />
-                                  <span>{attraction.duration}</span>
-                                </div>
-                              </div>
-                              
-                              <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="w-full bg-nepal-primary hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-colors duration-200"
-                              >
-                                Explore Attraction
-                              </motion.button>
-                            </div>
-                          </div>
-                        </motion.div>
-                      </Link>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <CarouselPrevious className="bg-white shadow-lg border-0 hover:bg-gray-50" />
-                <CarouselNext className="bg-white shadow-lg border-0 hover:bg-gray-50" />
-              </Carousel>
+                          
+                          <Button className="w-full bg-nepal-orange hover:bg-orange-600 text-white">
+                            View Details
+                          </Button>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </Link>
+                ))}
+              </div>
             </motion.section>
           </div>
 
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-6 space-y-6">
-              {/* Experience Details */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center text-nepal-primary">
-                    <Calendar className="w-5 h-5 mr-2" />
-                    Experience Details
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-700">Duration:</span>
-                    <span className="text-sm font-semibold text-nepal-primary">{experience.duration}</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-700">Group Size:</span>
-                    <span className="text-sm font-semibold text-nepal-primary">{experience.groupSize}</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-700">Difficulty:</span>
-                    <span className={`text-sm font-semibold text-white px-2 py-1 rounded ${getDifficultyColor(experience.difficulty)}`}>
-                      {experience.difficulty}
+          {/* Sticky Booking Panel (Desktop) */}
+          <div className="lg:col-span-1 hidden lg:block">
+            <div className={`transition-all duration-300 ${isBookingSticky ? 'fixed top-6 right-6 z-40 w-80' : 'sticky top-6'}`}>
+              <Card className="shadow-xl border-2">
+                <CardHeader className="pb-4">
+                  <CardTitle className="flex items-center justify-between">
+                    <span className="text-xl text-nepal-primary">Book This Experience</span>
+                    <span className="text-2xl font-bold text-nepal-orange">
+                      {formatPrice(experience.price)}
                     </span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {/* Traveler Details */}
+                  <div className="space-y-3">
+                    <h4 className="font-semibold flex items-center gap-2">
+                      <User className="w-4 h-4" />
+                      Traveler Details
+                    </h4>
+                    <div className="space-y-2">
+                      <Input
+                        placeholder="Full Name *"
+                        value={bookingData.fullName}
+                        onChange={(e) => setBookingData({...bookingData, fullName: e.target.value})}
+                      />
+                      <Input
+                        type="email"
+                        placeholder="Email Address *"
+                        value={bookingData.email}
+                        onChange={(e) => setBookingData({...bookingData, email: e.target.value})}
+                      />
+                      <Input
+                        type="tel"
+                        placeholder="Phone Number *"
+                        value={bookingData.phone}
+                        onChange={(e) => setBookingData({...bookingData, phone: e.target.value})}
+                      />
+                    </div>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-700">Location:</span>
-                    <span className="text-sm font-semibold text-nepal-primary">{experience.location}</span>
+
+                  {/* Tour Date */}
+                  <div className="space-y-3">
+                    <h4 className="font-semibold flex items-center gap-2">
+                      <Calendar className="w-4 h-4" />
+                      Tour Date & Duration
+                    </h4>
+                    <Input
+                      type="date"
+                      value={bookingData.startDate}
+                      onChange={(e) => setBookingData({...bookingData, startDate: e.target.value})}
+                    />
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        id="flexible"
+                        checked={bookingData.flexibleDate}
+                        onChange={(e) => setBookingData({...bookingData, flexibleDate: e.target.checked})}
+                      />
+                      <Label htmlFor="flexible" className="text-sm">Flexible dates</Label>
+                    </div>
                   </div>
-                </CardContent>
-              </Card>
 
-              {/* Safety Notes */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center text-nepal-primary">
-                    <Shield className="w-5 h-5 mr-2" />
-                    Safety Notes
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  {experience.travelTips.safety.map((tip, index) => (
-                    <div key={index} className="flex items-start">
-                      <div className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                      <span className="text-sm text-gray-700">{tip}</span>
+                  {/* Guests */}
+                  <div className="space-y-3">
+                    <h4 className="font-semibold flex items-center gap-2">
+                      <Users className="w-4 h-4" />
+                      Guests
+                    </h4>
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <Label>Adults</Label>
+                        <div className="flex items-center gap-2">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => setBookingData({...bookingData, adults: Math.max(1, bookingData.adults - 1)})}
+                          >
+                            -
+                          </Button>
+                          <span className="w-8 text-center">{bookingData.adults}</span>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => setBookingData({...bookingData, adults: bookingData.adults + 1})}
+                          >
+                            +
+                          </Button>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <Label>Children</Label>
+                        <div className="flex items-center gap-2">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => setBookingData({...bookingData, children: Math.max(0, bookingData.children - 1)})}
+                          >
+                            -
+                          </Button>
+                          <span className="w-8 text-center">{bookingData.children}</span>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => setBookingData({...bookingData, children: bookingData.children + 1})}
+                          >
+                            +
+                          </Button>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <Label>Infants</Label>
+                        <div className="flex items-center gap-2">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => setBookingData({...bookingData, infants: Math.max(0, bookingData.infants - 1)})}
+                          >
+                            -
+                          </Button>
+                          <span className="w-8 text-center">{bookingData.infants}</span>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => setBookingData({...bookingData, infants: bookingData.infants + 1})}
+                          >
+                            +
+                          </Button>
+                        </div>
+                      </div>
                     </div>
-                  ))}
-                </CardContent>
-              </Card>
+                  </div>
 
-              {/* Quick Facts */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center text-nepal-primary">
-                    <Zap className="w-5 h-5 mr-2" />
-                    Quick Facts
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  {experience.travelTips.quickFacts.map((fact, index) => (
-                    <div key={index} className="flex items-center justify-between">
-                      <span className="text-sm text-gray-700">{fact.split(':')[0]}:</span>
-                      <span className="text-sm font-semibold text-nepal-primary">{fact.split(':')[1]}</span>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
+                  {/* Price Breakdown */}
+                  <div className="space-y-3">
+                    <button
+                      onClick={() => setPriceBreakdownOpen(!priceBreakdownOpen)}
+                      className="flex items-center justify-between w-full font-semibold"
+                    >
+                      <span>Price Breakdown</span>
+                      {priceBreakdownOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                    </button>
+                    {priceBreakdownOpen && (
+                      <div className="space-y-2 text-sm border-t pt-3">
+                        <div className="flex justify-between">
+                          <span>Adults ({bookingData.adults})</span>
+                          <span>{formatPrice(experience.price * bookingData.adults)}</span>
+                        </div>
+                        {bookingData.children > 0 && (
+                          <div className="flex justify-between">
+                            <span>Children ({bookingData.children})</span>
+                            <span>{formatPrice(experience.price * 0.5 * bookingData.children)}</span>
+                          </div>
+                        )}
+                        <div className="border-t pt-2 flex justify-between font-semibold">
+                          <span>Total</span>
+                          <span>{formatPrice(calculateTotal())}</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
 
-              {/* Pro Tips */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center text-nepal-primary">
-                    <Lightbulb className="w-5 h-5 mr-2" />
-                    Pro Tips
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  {experience.travelTips.proTips.map((tip, index) => (
-                    <div key={index} className="flex items-start">
-                      <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                      <span className="text-sm text-gray-700">{tip}</span>
-                    </div>
-                  ))}
+                  <Button className="w-full bg-nepal-orange hover:bg-orange-600 text-white text-lg py-3">
+                    Book Now - {formatPrice(calculateTotal())}
+                  </Button>
                 </CardContent>
               </Card>
             </div>
@@ -524,43 +883,111 @@ const ExperienceDetail = () => {
         </div>
       </div>
 
-      {/* Image Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center">
-          <div className="relative max-w-7xl max-h-full p-4">
-            <button
-              onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-4 text-white hover:text-gray-300 z-10"
+      {/* Mobile Booking CTA */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t shadow-lg">
+        {!showMobileBooking ? (
+          <div className="p-4">
+            <Button
+              onClick={() => setShowMobileBooking(true)}
+              className="w-full bg-nepal-orange hover:bg-orange-600 text-white text-lg py-3"
             >
-              <X className="w-8 h-8" />
-            </button>
+              Book Now - {formatPrice(calculateTotal())}
+            </Button>
+          </div>
+        ) : (
+          <div className="p-4 max-h-96 overflow-y-auto">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold">Book Experience</h3>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setShowMobileBooking(false)}
+              >
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
             
-            <img
-              src={experience.gallery[selectedImageIndex]}
-              alt={`Gallery ${selectedImageIndex + 1}`}
-              className="max-w-full max-h-full object-contain"
-            />
-            
-            <button
-              onClick={() => setSelectedImageIndex(selectedImageIndex === 0 ? experience.gallery.length - 1 : selectedImageIndex - 1)}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300"
-            >
-              <ChevronLeft className="w-8 h-8" />
-            </button>
-            
-            <button
-              onClick={() => setSelectedImageIndex(selectedImageIndex === experience.gallery.length - 1 ? 0 : selectedImageIndex + 1)}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300"
-            >
-              <ChevronRight className="w-8 h-8" />
-            </button>
-            
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-sm">
-              {selectedImageIndex + 1} / {experience.gallery.length}
+            <div className="space-y-4">
+              <Input
+                placeholder="Select Date"
+                type="date"
+                value={bookingData.startDate}
+                onChange={(e) => setBookingData({...bookingData, startDate: e.target.value})}
+              />
+              
+              <div className="grid grid-cols-3 gap-2">
+                <div className="text-center">
+                  <Label className="text-xs">Adults</Label>
+                  <div className="flex items-center justify-center gap-1 mt-1">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => setBookingData({...bookingData, adults: Math.max(1, bookingData.adults - 1)})}
+                    >
+                      -
+                    </Button>
+                    <span className="text-sm w-6 text-center">{bookingData.adults}</span>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => setBookingData({...bookingData, adults: bookingData.adults + 1})}
+                    >
+                      +
+                    </Button>
+                  </div>
+                </div>
+                <div className="text-center">
+                  <Label className="text-xs">Children</Label>
+                  <div className="flex items-center justify-center gap-1 mt-1">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => setBookingData({...bookingData, children: Math.max(0, bookingData.children - 1)})}
+                    >
+                      -
+                    </Button>
+                    <span className="text-sm w-6 text-center">{bookingData.children}</span>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => setBookingData({...bookingData, children: bookingData.children + 1})}
+                    >
+                      +
+                    </Button>
+                  </div>
+                </div>
+                <div className="text-center">
+                  <Label className="text-xs">Infants</Label>
+                  <div className="flex items-center justify-center gap-1 mt-1">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => setBookingData({...bookingData, infants: Math.max(0, bookingData.infants - 1)})}
+                    >
+                      -
+                    </Button>
+                    <span className="text-sm w-6 text-center">{bookingData.infants}</span>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => setBookingData({...bookingData, infants: bookingData.infants + 1})}
+                    >
+                      +
+                    </Button>
+                  </div>
+                </div>
+              </div>
+              
+              <Button className="w-full bg-nepal-orange hover:bg-orange-600 text-white">
+                Confirm Booking - {formatPrice(calculateTotal())}
+              </Button>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
+
+      {/* Add bottom padding for mobile to account for fixed CTA */}
+      <div className="lg:hidden h-20"></div>
 
       <Footer />
     </div>
