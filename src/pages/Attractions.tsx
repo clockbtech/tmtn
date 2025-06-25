@@ -12,9 +12,7 @@ import { Pagination, PaginationContent, PaginationItem, PaginationLink, Paginati
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuCheckboxItem, DropdownMenuTrigger } from '../components/ui/dropdown-menu';
 import { Input } from '../components/ui/input';
-
 gsap.registerPlugin(ScrollTrigger);
-
 interface Attraction {
   id: number;
   name: string;
@@ -26,7 +24,6 @@ interface Attraction {
   type: 'Cultural' | 'Adventure' | 'Nature' | 'UNESCO';
   popularity: number;
 }
-
 const Attractions = () => {
   const {
     t
@@ -163,8 +160,7 @@ const Attractions = () => {
   const categories = ['Cultural', 'Adventure', 'Nature', 'UNESCO'];
   const filteredAndSortedAttractions = useMemo(() => {
     let filtered = attractions.filter(attraction => {
-      const matchesSearch = attraction.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-        attraction.description.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesSearch = attraction.name.toLowerCase().includes(searchTerm.toLowerCase()) || attraction.description.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(attraction.type);
       return matchesSearch && matchesCategory;
     });
@@ -205,12 +201,9 @@ const Attractions = () => {
       <Header />
       
       {/* Enhanced Hero Section with Background Image */}
-      <section 
-        className="relative bg-cover bg-center bg-no-repeat py-[150px]"
-        style={{
-          backgroundImage: 'url(https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80)'
-        }}
-      >
+      <section className="relative bg-cover bg-center bg-no-repeat py-[150px]" style={{
+      backgroundImage: 'url(https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80)'
+    }}>
         <div className="absolute inset-0 bg-gradient-to-r from-nepal-orange/80 to-orange-600/80"></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div initial={{
@@ -347,10 +340,10 @@ const Attractions = () => {
                           </div>
                           
                           <motion.button whileHover={{
-                    scale: 1.05
-                  }} whileTap={{
-                    scale: 0.95
-                  }} className="w-full bg-nepal-primary hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-colors duration-200 text-base">
+                      scale: 1.05
+                    }} whileTap={{
+                      scale: 0.95
+                    }} className="w-full bg-nepal-primary text-white py-3 rounded-lg font-semibold transition-colors duration-200 text-base bg-orange-600 hover:bg-orange-500">
                             Explore Attraction
                           </motion.button>
                         </div>
