@@ -614,7 +614,7 @@ const ExperienceDetail = () => {
               
               <div className="relative">
                 {/* Navigation Arrows */}
-                <Button variant="outline" size="icon" className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md hover:bg-gray-50" onClick={prevRelatedExperience} disabled={relatedExperiencesIndex === 0}>
+                <Button variant="outline" size="icon" onClick={prevRelatedExperience} disabled={relatedExperiencesIndex === 0} className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md hover:bg-gray-50 rounded-full mx-0 px-0">
                   <ChevronLeft className="w-4 h-4" />
                 </Button>
                 
