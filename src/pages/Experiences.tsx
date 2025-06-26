@@ -176,16 +176,21 @@ const Experiences = () => {
     <div className="min-h-screen bg-white font-poppins">
       <Header />
       
-      {/* Enhanced Hero Section */}
-      <section className="relative bg-gradient-to-r from-green-600 to-green-800 py-[150px] overflow-hidden">
-        <div className="absolute inset-0 bg-black/20 z-10"></div>
+      {/* Enhanced Hero Section with Background Image and Gradient */}
+      <section className="relative py-[150px] overflow-hidden">
+        {/* Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage: 'url(https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80)'
           }}
         ></div>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
+        
+        {/* Semi-transparent gradient overlay using current blue color scheme */}
+        <div className="absolute inset-0 bg-gradient-to-r from-green-600/80 to-green-800/80 z-10"></div>
+        <div className="absolute inset-0 bg-black/20 z-20"></div>
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-30">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
