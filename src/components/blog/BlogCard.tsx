@@ -52,7 +52,8 @@ const BlogCard = ({ blog }: BlogCardProps) => {
         <Link to={`/blog/${blog.slug}`}>
           <Button 
             variant="outline" 
-            className="w-full border-nepal-primary text-nepal-primary hover:bg-nepal-primary hover:text-white"
+            // className="w-full border-nepal-primary text-nepal-primary hover:bg-nepal-primary hover:text-white"
+            className="w-full bg-nepal-orange hover:bg-orange-600 text-white py-3 rounded-lg font-semibold transition-colors duration-200"
           >
             Read More
           </Button>

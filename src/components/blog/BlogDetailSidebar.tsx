@@ -35,16 +35,19 @@ const relatedExperiences = [
   {
     title: "Helicopter Tour to Everest Base Camp",
     slug: "helicopter-everest-tour",
+    image: "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=300&h=200&fit=crop",
     price: "NPR 125,000"
   },
   {
     title: "15-Day Everest Base Camp Trek",
     slug: "everest-base-camp-trek",
+    image: "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=300&h=200&fit=crop",
     price: "NPR 45,000"
   },
   {
     title: "Sherpa Culture Experience",
     slug: "sherpa-culture-experience",
+    image: "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=300&h=200&fit=crop",
     price: "NPR 12,000"
   }
 ];

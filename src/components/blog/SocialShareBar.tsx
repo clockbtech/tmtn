@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '../ui/button';
+import { Facebook, Instagram, Linkedin, MessageCircleMore } from 'lucide-react';
 
 interface SocialShareBarProps {
   blog: {
@@ -51,16 +52,16 @@ const SocialShareBar = ({ blog }: SocialShareBarProps) => {
               onClick={() => handleShare('facebook')}
               className="w-10 h-10 rounded-full hover:bg-blue-600 hover:text-white border-blue-600 text-blue-600"
             >
-              <span className="text-xs font-bold">f</span>
+              <span className="text-xs font-bold"> <Facebook /></span>
             </Button>
             
             <Button
               variant="outline"
               size="icon"
-              onClick={() => handleShare('twitter')}
-              className="w-10 h-10 rounded-full hover:bg-blue-400 hover:text-white border-blue-400 text-blue-400"
+              onClick={() => handleShare('X')}
+              className="w-10 h-10 rounded-full hover:bg-black-400 hover:text-white border-black-400 text-black-400"
             >
-              <span className="text-xs font-bold">𝕏</span>
+              <span className="text-xs font-bold">x</span>
             </Button>
             
             <Button
@@ -69,7 +70,7 @@ const SocialShareBar = ({ blog }: SocialShareBarProps) => {
               onClick={() => handleShare('instagram')}
               className="w-10 h-10 rounded-full hover:bg-pink-600 hover:text-white border-pink-600 text-pink-600"
             >
-              <span className="text-xs font-bold">📷</span>
+              <span className="text-xs font-bold"><Instagram /></span>
             </Button>
             
             <Button
@@ -78,7 +79,7 @@ const SocialShareBar = ({ blog }: SocialShareBarProps) => {
               onClick={() => handleShare('linkedin')}
               className="w-10 h-10 rounded-full hover:bg-blue-700 hover:text-white border-blue-700 text-blue-700"
             >
-              <span className="text-xs font-bold">in</span>
+              <span className="text-xs font-bold"> <Linkedin /></span>
             </Button>
             
             <Button
@@ -87,7 +88,7 @@ const SocialShareBar = ({ blog }: SocialShareBarProps) => {
               onClick={() => handleShare('whatsapp')}
               className="w-10 h-10 rounded-full hover:bg-green-600 hover:text-white border-green-600 text-green-600"
             >
-              <span className="text-xs font-bold">📱</span>
+              <span className="text-xs font-bold"><MessageCircleMore /></span>
             </Button>
           </div>
         </div>
