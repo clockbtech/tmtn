@@ -25,8 +25,8 @@ const Header = () => {
     { name: t('nav.attractions'), href: '/attractions' },
     { name: t('nav.experiences'), href: '/experiences' },
     { name: t('nav.about'), href: '#about' },
-    { name: t('nav.blog'), href: '#blog' },
-    { name: t('nav.contact'), href: '#contact' }
+    { name: t('nav.blog'), href: '/blog' },
+    { name: t('nav.contact'), href: '/contact' }
   ];
 
   // Dynamic text color based on background
