@@ -24,7 +24,7 @@ const LanguageSwitcher = () => {
         className="flex items-center space-x-2 px-3 py-2 rounded-md hover:bg-gray-100 transition-colors duration-200"
       >
         <Globe className="w-4 h-4 text-gray-600" />
-        <span className="text-sm font-medium text-gray-700">
+        <span className="text-sm font-medium text-gray-700 font-inter">
           {currentLanguage.flag} {currentLanguage.name}
         </span>
         <ChevronDown 
@@ -51,7 +51,7 @@ const LanguageSwitcher = () => {
                   className="w-full flex items-center space-x-3 px-4 py-2 text-left hover:bg-gray-50 transition-colors duration-150"
                 >
                   <span className="text-lg">{language.flag}</span>
-                  <span className="text-sm font-medium text-gray-700">
+                  <span className="text-sm font-medium text-gray-700 font-inter">
                     {language.name}
                   </span>
                   {currentLanguage.code === language.code && (

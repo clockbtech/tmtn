@@ -24,6 +24,8 @@ export default {
 				'roboto': ['Roboto Flex', 'sans-serif'],
 				'poppins': ['Poppins', 'sans-serif'],
 				'playfair': ['Playfair Display', 'serif'],
+				'plus-jakarta': ['Plus Jakarta Sans', 'sans-serif'],
+				'inter': ['Inter', 'sans-serif'],
 			},
 			fontSize: {
 				'heading': '60px',

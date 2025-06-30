@@ -41,7 +41,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white font-poppins">
+    <div className="min-h-screen bg-white font-inter">
       <Header />
       <main>
         <HeroSection />
