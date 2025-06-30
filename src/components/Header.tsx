@@ -30,7 +30,7 @@ const Header = () => {
   ];
 
   // Dynamic text color based on background
-  const textColor = isScrolled ? 'text-white' : 'text-black';
+  const textColor = isScrolled ? 'text-black' : 'text-white';
   const logoFilter = isScrolled ? 'brightness(0)' : 'brightness(0)';
 
   return (
