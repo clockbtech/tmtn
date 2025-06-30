@@ -85,9 +85,9 @@ const Blog = () => {
 
   // Paginate filtered blogs
   const currentBlogs = filteredBlogs.slice((currentPage - 1) * blogsPerPage, currentPage * blogsPerPage);
-  return <div className="min-h-screen bg-white">
+  return <div className="min-h-screen bg-white py-0">
       <Header />
-      <main className="py-[150px]">
+      <main className="py-0">
         <BlogHero />
         
         <div className="container mx-auto px-4 py-12">
