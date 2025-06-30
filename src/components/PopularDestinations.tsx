@@ -1,58 +1,47 @@
-
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTranslation } from '../contexts/TranslationContext';
-
 gsap.registerPlugin(ScrollTrigger);
-
 const PopularDestinations = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const { t } = useTranslation();
-
-  const destinations = [
-    {
-      id: 1,
-      nameKey: 'destinations.everest',
-      descKey: 'destinations.everest.desc',
-      image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 2,
-      nameKey: 'destinations.annapurna',
-      descKey: 'destinations.annapurna.desc',
-      image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 3,
-      nameKey: 'destinations.pokhara',
-      descKey: 'destinations.pokhara.desc',
-      image: 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 4,
-      nameKey: 'destinations.kathmandu',
-      descKey: 'destinations.kathmandu.desc',
-      image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 5,
-      nameKey: 'destinations.chitwan',
-      descKey: 'destinations.chitwan.desc',
-      image: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 6,
-      nameKey: 'destinations.langtang',
-      descKey: 'destinations.langtang.desc',
-      image: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-    }
-  ];
-
+  const {
+    t
+  } = useTranslation();
+  const destinations = [{
+    id: 1,
+    nameKey: 'destinations.everest',
+    descKey: 'destinations.everest.desc',
+    image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+  }, {
+    id: 2,
+    nameKey: 'destinations.annapurna',
+    descKey: 'destinations.annapurna.desc',
+    image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+  }, {
+    id: 3,
+    nameKey: 'destinations.pokhara',
+    descKey: 'destinations.pokhara.desc',
+    image: 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+  }, {
+    id: 4,
+    nameKey: 'destinations.kathmandu',
+    descKey: 'destinations.kathmandu.desc',
+    image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+  }, {
+    id: 5,
+    nameKey: 'destinations.chitwan',
+    descKey: 'destinations.chitwan.desc',
+    image: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+  }, {
+    id: 6,
+    nameKey: 'destinations.langtang',
+    descKey: 'destinations.langtang.desc',
+    image: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+  }];
   useEffect(() => {
     const cards = gsap.utils.toArray('.destination-card');
-    
     gsap.fromTo(cards, {
       opacity: 0,
       y: 60,
@@ -72,17 +61,18 @@ const PopularDestinations = () => {
       }
     });
   }, []);
-
-  return (
-    <section ref={sectionRef} className="py-20 bg-gray-50" id="destinations">
+  return <section ref={sectionRef} className="py-20 bg-gray-50" id="destinations">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl lg:text-5xl font-plus-jakarta font-bold text-nepal-primary mb-4">
+        <motion.div initial={{
+        opacity: 0,
+        y: 30
+      }} whileInView={{
+        opacity: 1,
+        y: 0
+      }} transition={{
+        duration: 0.8
+      }} className="text-center mb-16">
+          <h2 className="text-4xl lg:text-5xl font-tm-sans font-bold text-nepal-primary mb-4">
             {t('destinations.title')}
           </h2>
           <p className="text-xl font-inter text-gray-600 max-w-3xl mx-auto">
@@ -91,20 +81,14 @@ const PopularDestinations = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {destinations.map((destination, index) => (
-            <motion.div
-              key={destination.id}
-              className="destination-card group cursor-pointer"
-              whileHover={{ y: -10 }}
-              transition={{ duration: 0.3 }}
-            >
+          {destinations.map((destination, index) => <motion.div key={destination.id} className="destination-card group cursor-pointer" whileHover={{
+          y: -10
+        }} transition={{
+          duration: 0.3
+        }}>
               <div className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 h-80">
                 {/* Full-bleed image */}
-                <img 
-                  src={destination.image} 
-                  alt={t(destination.nameKey)}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
+                <img src={destination.image} alt={t(destination.nameKey)} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 
                 {/* Gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent group-hover:from-black/80 group-hover:via-black/40 transition-all duration-300"></div>
@@ -118,28 +102,26 @@ const PopularDestinations = () => {
                     {t(destination.descKey)}
                   </p>
                   
-                  <motion.button 
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="text-nepal-orange hover:text-orange-400 font-plus-jakarta font-semibold transition-colors duration-200 flex items-center drop-shadow-lg"
-                  >
+                  <motion.button whileHover={{
+                scale: 1.05
+              }} whileTap={{
+                scale: 0.95
+              }} className="text-nepal-orange hover:text-orange-400 font-plus-jakarta font-semibold transition-colors duration-200 flex items-center drop-shadow-lg">
                     {t('destinations.viewMore')}
-                    <motion.span
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                      className="ml-2"
-                    >
+                    <motion.span animate={{
+                  x: [0, 5, 0]
+                }} transition={{
+                  duration: 1.5,
+                  repeat: Infinity
+                }} className="ml-2">
                       →
                     </motion.span>
                   </motion.button>
                 </div>
               </div>
-            </motion.div>
-          ))}
+            </motion.div>)}
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default PopularDestinations;
