@@ -18,7 +18,7 @@ const TrendingExperiences = () => {
   }, {
     id: 2,
     title: 'Annapurna Helicopter Tour',
-    image: 'https://images.unsplash.com/photo-1697621535550-1c671d4969c4?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: 'https://images.unsplash.com/photo-1495554698253-681539e9ea84?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     description: 'Aerial views of the Annapurna range',
     rating: 4.8,
     reviews: 187,
