@@ -55,7 +55,7 @@ const WhyChooseUs = () => {
       }} transition={{
         duration: 0.8
       }} className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-tm-sans uppercase font-extrabold mb-4">
+          <h2 className="text-4xl lg:text-4xl font-tm-sans uppercase font-extrabold mb-4">
             Why Choose Take Me To Nepal?
           </h2>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto">
