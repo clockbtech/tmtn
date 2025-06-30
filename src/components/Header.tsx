@@ -66,7 +66,7 @@ const Header = () => {
               scale: isSearchFocused ? 1.05 : 1
             }} className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input type="text" placeholder={t('search.placeholder')} onFocus={() => setIsSearchFocused(true)} onBlur={() => setIsSearchFocused(false)} className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-nepal-orange focus:border-transparent px-[130px]" />
+                <input type="text" placeholder={t('search.placeholder')} onFocus={() => setIsSearchFocused(true)} onBlur={() => setIsSearchFocused(false)} className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-nepal-orange focus:border-transparent px-[150px]" />
               </motion.div>
             </div>
           </div>
