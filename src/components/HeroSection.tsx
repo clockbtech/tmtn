@@ -6,27 +6,27 @@ const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const heroContent = [{
     type: 'image',
-    src: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=2073&q=80',
+    src: 'https://cdn.pixabay.com/photo/2017/02/14/03/03/ama-dablam-2064522_1280.jpg',
     title: 'Ancient Temples & Culture',
     subtitle: 'Discover Nepal\'s spiritual heritage'
   }, {
     type: 'image',
-    src: 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    src: 'https://cdn.pixabay.com/photo/2020/11/30/06/45/temple-5790023_1280.jpg',
     title: 'Pristine Mountain Lakes',
     subtitle: 'Serenity in the Himalayas'
   }, {
     type: 'image',
-    src: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2073&q=80',
+    src: 'https://www.rhinolandchitwan.com/images/2nights/1.jpg',
     title: 'Mount Everest Base Camp',
     subtitle: 'Experience the world\'s highest peak'
   }, {
     type: 'image',
-    src: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2073&q=80',
+    src: 'https://cdn.pixabay.com/photo/2022/01/01/04/57/boat-6906926_1280.jpg',
     title: 'Himalayan Adventure',
     subtitle: 'Immerse yourself in Nepal\'s majesty'
   }, {
     type: 'image',
-    src: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-4.0.3&auto=format&fit=crop&w=2073&q=80',
+    src: 'https://cdn.pixabay.com/photo/2018/08/16/08/39/hallstatt-3609863_1280.jpg',
     title: 'Wildlife Safari',
     subtitle: 'Experience Nepal\'s diverse wildlife'
   }];
