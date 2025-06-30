@@ -116,7 +116,7 @@ const HeroSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.3 }}
               >
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bebas uppercase text-white mb-6 leading-tight">
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-tm-sans uppercase text-white mb-6 leading-tight">
                   TAKEMETONEPAL.COM
                 </h1>
                 <p className="text-lg md:text-xl lg:text-2xl font-roboto text-white/90 mb-12 font-light max-w-2xl mx-auto">
@@ -130,7 +130,7 @@ const HeroSection = () => {
                     boxShadow: '0 10px 30px rgba(255, 125, 51, 0.4)' 
                   }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-nepal-orange hover:bg-orange-600 text-white px-8 py-3 rounded-full text-lg font-bebas uppercase tracking-wider transition-all duration-300 shadow-lg"
+                  className="bg-nepal-orange hover:bg-orange-600 text-white px-8 py-3 rounded-full text-lg font-tm-sans uppercase tracking-wider transition-all duration-300 shadow-lg"
                 >
                   DISCOVER NEPAL
                 </motion.button>

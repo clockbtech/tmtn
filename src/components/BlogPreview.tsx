@@ -4,7 +4,9 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Calendar, User, ArrowRight } from 'lucide-react';
 import { useTranslation } from '../contexts/TranslationContext';
+
 gsap.registerPlugin(ScrollTrigger);
+
 const BlogPreview = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const {
@@ -69,16 +71,13 @@ const BlogPreview = () => {
   };
   return <section ref={sectionRef} className="py-20 bg-white" id="blog">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div initial={{
-        opacity: 0,
-        y: 30
-      }} whileInView={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.8
-      }} className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bebas uppercase font-bold text-nepal-primary mb-4">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl lg:text-5xl font-tm-sans uppercase font-bold text-nepal-primary mb-4">
             {t('blog.title')}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -142,25 +141,22 @@ const BlogPreview = () => {
         </div>
 
         {/* View All Button */}
-        <motion.div initial={{
-        opacity: 0,
-        y: 30
-      }} whileInView={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.8,
-        delay: 0.3
-      }} className="text-center mt-12">
-          <motion.button whileHover={{
-          scale: 1.05
-        }} whileTap={{
-          scale: 0.95
-        }} className="bg-nepal-primary hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg font-normal font-semibold transition-all duration-300 shadow-lg">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="text-center mt-12"
+        >
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-nepal-primary hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg font-tm-sans font-semibold transition-all duration-300 shadow-lg"
+          >
             {t('blog.viewAll')}
           </motion.button>
         </motion.div>
       </div>
     </section>;
 };
+
 export default BlogPreview;

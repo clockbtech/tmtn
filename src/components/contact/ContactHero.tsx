@@ -10,7 +10,7 @@ const ContactHero = () => {
       }}
     >
       <div className="text-center text-white">
-        <h1 className="text-5xl md:text-6xl font-bebas font-bold mb-4">
+        <h1 className="text-5xl md:text-6xl font-tm-sans font-bold mb-4">
           Contact Us
         </h1>
         <p className="text-xl md:text-2xl font-poppins max-w-2xl mx-auto">

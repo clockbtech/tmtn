@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -20,15 +19,14 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'bebas': ['Bebas Neue', 'cursive'],
 				'roboto': ['Roboto Flex', 'sans-serif'],
 				'poppins': ['Poppins', 'sans-serif'],
 				'playfair': ['Playfair Display', 'serif'],
 				'plus-jakarta': ['Plus Jakarta Sans', 'sans-serif'],
 				'inter': ['Inter', 'sans-serif'],
+				'tm-sans': ['TM Sans', 'sans-serif'],
 			},
 			fontSize: {
-				'heading': '60px',
 				'body': '26.86px',
 				'nav': '23px',
 			},
