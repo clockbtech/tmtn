@@ -86,7 +86,7 @@ const PopularDestinations = () => {
         }} transition={{
           duration: 0.3
         }}>
-              <div className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 h-80">
+              <div className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 h-96">
                 {/* Full-bleed image */}
                 <img src={destination.image} alt={t(destination.nameKey)} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 
