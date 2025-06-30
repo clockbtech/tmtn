@@ -38,7 +38,7 @@ const Newsletter = () => {
               <Mail className="w-8 h-8 text-white" />
             </div>
             
-            <h2 className="text-4xl lg:text-5xl font-tm-sans uppercase font-extrabold text-white mb-4">
+            <h2 className="text-4xl lg:text-4xl font-tm-sans uppercase font-extrabold text-white mb-4">
               Stay Connected with Nepal
             </h2>
             
