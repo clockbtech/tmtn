@@ -106,9 +106,7 @@ const HeroSection = () => {
                 boxShadow: '0 10px 30px rgba(255, 125, 51, 0.4)'
               }} whileTap={{
                 scale: 0.95
-              }} className="bg-nepal-orange hover:bg-orange-600 text-white px-8 py-3 rounded-full text-lg font-tm-sans uppercase tracking-wider transition-all duration-300 shadow-lg">
-                  DISCOVER NEPAL
-                </motion.button>
+              }} className="bg-nepal-orange hover:bg-orange-600 text-white px-8 py-3 rounded-full text-lg font-tm-sans tracking-wider transition-all duration-300 shadow-lg">Discover Nepal</motion.button>
               </motion.div>
             </div>
           </div>
