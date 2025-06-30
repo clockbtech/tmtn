@@ -24,7 +24,7 @@ const AttractionsDetail = () => {
     id: parseInt(id || '1'),
     name: 'Swayambhunath Stupa',
     subtitle: 'Ancient Buddhist Temple with Panoramic Valley Views',
-    heroImage: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+    heroImage: 'https://images.unsplash.com/photo-1706188540639-d2ad13995266?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     description: `Swayambhunath Stupa, also known as the Monkey Temple, is an ancient religious complex perched atop a hill in the Kathmandu Valley. This sacred Buddhist site dates back over 2,000 years and offers breathtaking panoramic views of the entire Kathmandu Valley.
 
     The temple complex features a magnificent white dome stupa crowned with a golden spire, adorned with the famous Buddha eyes looking out in all four directions. The site is renowned for its resident monkey population, which gives the temple its popular nickname.
@@ -40,12 +40,12 @@ const AttractionsDetail = () => {
       months: 'October - December',
       description: 'Excellent visibility and mild weather'
     }],
-    gallery: ['https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1466442929976-97f336a657be?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'],
+    gallery: ['https://plus.unsplash.com/premium_photo-1691735665916-cf31006dffe3?q=80&w=1176&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1466442929976-97f336a657be?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'],
     linkedAttractions: [{
       id: 2,
       name: 'Pashupatinath Temple',
       description: 'Sacred Hindu temple complex dedicated to Lord Shiva',
-      image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1731052368947-9f262c4e9f4c?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       location: 'Kathmandu',
       duration: '2-4 hours',
       rating: 4.7,
@@ -54,7 +54,7 @@ const AttractionsDetail = () => {
       id: 3,
       name: 'Boudhanath Stupa',
       description: 'One of the largest Buddhist stupas in the world',
-      image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1623268964161-a4d07243f8cc?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       location: 'Kathmandu',
       duration: '1-2 hours',
       rating: 4.6,
@@ -64,7 +64,7 @@ const AttractionsDetail = () => {
       id: 1,
       name: 'Sunrise Photography Tour',
       description: 'Capture the golden hour at Swayambhunath with professional guidance',
-      image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1706188630011-b2af45af4531?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       duration: '3 hours',
       groupSize: '2-6 people',
       difficulty: 'Easy',
@@ -75,7 +75,7 @@ const AttractionsDetail = () => {
       id: 2,
       name: 'Buddhist Meditation Experience',
       description: 'Learn meditation techniques with local monks',
-      image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1706188540639-d2ad13995266?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       duration: '2 hours',
       groupSize: '4-8 people',
       difficulty: 'Easy',
