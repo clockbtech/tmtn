@@ -8,12 +8,12 @@ const HeroSection = () => {
     type: 'image',
     src: 'https://cdn.pixabay.com/photo/2017/02/14/03/03/ama-dablam-2064522_1280.jpg',
     title: 'Ancient Temples & Culture',
-    subtitle: 'Discover Nepal\'s spiritual heritage'
+    subtitle: 'Discover Nepal\'s Serenity in the Himalayas'
   }, {
     type: 'image',
-    src: 'https://cdn.pixabay.com/photo/2020/11/30/06/45/temple-5790023_1280.jpg',
+    src: 'https://photo.ntb.gov.np/public/uploads/preview/1572888050332_MG_3033_1572888083.jpg',
     title: 'Pristine Mountain Lakes',
-    subtitle: 'Serenity in the Himalayas'
+    subtitle: 'Spiritual heritage'
   }, {
     type: 'image',
     src: 'https://www.rhinolandchitwan.com/images/2nights/1.jpg',
@@ -21,12 +21,12 @@ const HeroSection = () => {
     subtitle: 'Experience the world\'s highest peak'
   }, {
     type: 'image',
-    src: 'https://cdn.pixabay.com/photo/2022/01/01/04/57/boat-6906926_1280.jpg',
+    src: 'https://images.unsplash.com/photo-1540961018629-a53dfce2fb66?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     title: 'Himalayan Adventure',
     subtitle: 'Immerse yourself in Nepal\'s majesty'
   }, {
     type: 'image',
-    src: 'https://cdn.pixabay.com/photo/2018/08/16/08/39/hallstatt-3609863_1280.jpg',
+    src: 'https://cdn.pixabay.com/photo/2020/10/23/09/02/mountain-5678172_1280.jpg',
     title: 'Wildlife Safari',
     subtitle: 'Experience Nepal\'s diverse wildlife'
   }];

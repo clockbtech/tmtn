@@ -13,32 +13,32 @@ const PopularDestinations = () => {
     id: 1,
     nameKey: 'destinations.everest',
     descKey: 'destinations.everest.desc',
-    image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    image: 'https://th.bing.com/th/id/R.34473dbb198fe12d841a25f710ab79f6?rik=o4bJt8X5xPLRJg&pid=ImgRaw&r=0'
   }, {
     id: 2,
     nameKey: 'destinations.annapurna',
     descKey: 'destinations.annapurna.desc',
-    image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    image: 'https://th.bing.com/th/id/R.961a120f44d7bfad36cac131dc90a11c?rik=JHq%2bNzIjK5TFyg&riu=http%3a%2f%2fwww.gtreview.com%2fwp-content%2fuploads%2f2014%2f11%2fNepal-Annapurna-Base-Camp.jpg&ehk=hWKVJuFF2tBCklm4pGQKA0olC4rTUvUjUqyaGcPrjks%3d&risl=1&pid=ImgRaw&r=0'
   }, {
     id: 3,
     nameKey: 'destinations.pokhara',
     descKey: 'destinations.pokhara.desc',
-    image: 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1610997686651-98492fd08108?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   }, {
     id: 4,
     nameKey: 'destinations.kathmandu',
     descKey: 'destinations.kathmandu.desc',
-    image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1653104626949-bc7f6413a5b7?q=80&w=1437&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   }, {
     id: 5,
     nameKey: 'destinations.chitwan',
     descKey: 'destinations.chitwan.desc',
-    image: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1549888668-19281758dfbe?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   }, {
     id: 6,
     nameKey: 'destinations.langtang',
     descKey: 'destinations.langtang.desc',
-    image: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1516132006923-6cf348e5dee2?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   }];
   useEffect(() => {
     const cards = gsap.utils.toArray('.destination-card');
