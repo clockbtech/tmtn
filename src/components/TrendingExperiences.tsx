@@ -9,7 +9,7 @@ const TrendingExperiences = () => {
   const experiences = [{
     id: 1,
     title: 'Everest Base Camp Trek',
-    image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1609660062508-1ac4a930232d?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     description: '14-day adventure to the base of Mount Everest',
     rating: 4.9,
     reviews: 234,
@@ -18,7 +18,7 @@ const TrendingExperiences = () => {
   }, {
     id: 2,
     title: 'Annapurna Helicopter Tour',
-    image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1697621535550-1c671d4969c4?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     description: 'Aerial views of the Annapurna range',
     rating: 4.8,
     reviews: 187,
@@ -27,7 +27,7 @@ const TrendingExperiences = () => {
   }, {
     id: 3,
     title: 'Cultural Heritage Tour',
-    image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1728145993747-e7b51192076d?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     description: 'Explore ancient temples and traditions',
     rating: 4.7,
     reviews: 156,
@@ -36,7 +36,7 @@ const TrendingExperiences = () => {
   }, {
     id: 4,
     title: 'Pokhara Lake Adventure',
-    image: 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1735533441842-33c5e47b22ae?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     description: 'Kayaking and paragliding in Pokhara',
     rating: 4.6,
     reviews: 203,
@@ -45,7 +45,7 @@ const TrendingExperiences = () => {
   }, {
     id: 5,
     title: 'Wildlife Safari',
-    image: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1710077539513-6d0b9cf273e2?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     description: 'Chitwan National Park expedition',
     rating: 4.5,
     reviews: 128,
@@ -54,7 +54,7 @@ const TrendingExperiences = () => {
   }, {
     id: 6,
     title: 'Langtang Valley Trek',
-    image: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1701012563262-5c0cfb7d1f1d?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     description: 'Trek through pristine mountain valleys',
     rating: 4.8,
     reviews: 165,
@@ -63,7 +63,7 @@ const TrendingExperiences = () => {
   }, {
     id: 7,
     title: 'Meditation Retreat',
-    image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1582053403072-ca114ba69a42?q=80&w=1305&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     description: 'Spiritual journey in monastery settings',
     rating: 4.9,
     reviews: 89,
@@ -72,7 +72,7 @@ const TrendingExperiences = () => {
   }, {
     id: 8,
     title: 'Mountain Biking Adventure',
-    image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1629056125090-215baa911b9a?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     description: 'Thrilling rides through mountain trails',
     rating: 4.4,
     reviews: 142,
@@ -81,7 +81,7 @@ const TrendingExperiences = () => {
   }, {
     id: 9,
     title: 'Photography Workshop',
-    image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1541516160071-4bb0c5af65ba?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     description: 'Capture stunning Himalayan landscapes',
     rating: 4.7,
     reviews: 76,
@@ -90,7 +90,7 @@ const TrendingExperiences = () => {
   }, {
     id: 10,
     title: 'Cooking Experience',
-    image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    image: 'https://plus.unsplash.com/premium_photo-1724260602450-a4e66a03ae06?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     description: 'Learn traditional Nepali cuisine',
     rating: 4.6,
     reviews: 95,
