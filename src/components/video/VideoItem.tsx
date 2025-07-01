@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Play } from 'lucide-react';
 import { Video } from './types';
@@ -11,6 +11,25 @@ interface VideoItemProps {
 }
 
 const VideoItem: React.FC<VideoItemProps> = ({ video, index, onVideoClick }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const videoElement = videoRef.current;
+    if (videoElement) {
+      // Ensure video plays when component mounts
+      const playVideo = async () => {
+        try {
+          await videoElement.play();
+        } catch (error) {
+          console.log('Video autoplay failed:', error);
+        }
+      };
+      
+      // Small delay to ensure the video element is ready
+      setTimeout(playVideo, 100);
+    }
+  }, []);
+
   return (
     <div
       className="flex-shrink-0 w-70"
@@ -25,13 +44,21 @@ const VideoItem: React.FC<VideoItemProps> = ({ video, index, onVideoClick }) => 
       >
         {/* Video Element */}
         <video
+          ref={videoRef}
           className="w-full h-full object-cover"
           autoPlay
           muted
           loop
           playsInline
-          preload={index < 3 ? "metadata" : "none"}
+          preload="metadata"
+          controls={false}
           aria-label={`Video: ${video.title}`}
+          onLoadedData={() => {
+            // Ensure video plays when loaded
+            if (videoRef.current) {
+              videoRef.current.play().catch(console.log);
+            }
+          }}
         >
           <source src={video.url} type="video/mp4" />
           Your browser does not support the video tag.

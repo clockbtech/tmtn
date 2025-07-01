@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Video } from './types';
@@ -19,6 +19,23 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
   onClose,
   onNavigate
 }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const videoElement = videoRef.current;
+    if (videoElement && video) {
+      const playVideo = async () => {
+        try {
+          await videoElement.play();
+        } catch (error) {
+          console.log('Fullscreen video autoplay failed:', error);
+        }
+      };
+      
+      setTimeout(playVideo, 100);
+    }
+  }, [video]);
+
   if (!video) return null;
 
   return (
@@ -61,13 +78,20 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
       {/* Video container */}
       <div className="relative w-full h-full max-w-md mx-auto">
         <video
+          ref={videoRef}
           key={video.id}
           className="w-full h-full object-cover"
           autoPlay
           muted
           loop
           playsInline
+          controls={false}
           aria-label={`Video: ${video.title}`}
+          onLoadedData={() => {
+            if (videoRef.current) {
+              videoRef.current.play().catch(console.log);
+            }
+          }}
         >
           <source src={video.url} type="video/mp4" />
           Your browser does not support the video tag.
