@@ -149,7 +149,7 @@ const Destinations = () => {
       
       {/* Enhanced Hero Section with Background Image */}
       <section className="relative bg-cover bg-center bg-no-repeat py-[150px]" style={{
-      backgroundImage: 'https://images.unsplash.com/photo-1740066361389-90bb4444c43e?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      backgroundImage: 'https://images.unsplash.com/photo-1740066361389-90bb4444c43e?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     }}>
         <div className="absolute inset-0 bg-gradient-to-r from-nepal-primary/80 to-blue-600/80 my-0"></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -162,7 +162,7 @@ const Destinations = () => {
         }} transition={{
           duration: 0.8
         }} className="text-center text-white">
-            <h1 className="text-5xl lg:text-6xl font-TM Sans font-extrabold mb-6">
+            <h1 className="text-5xl lg:text-6xl font-TM Sans font-uppercase font-extrabold mb-6">
               {t('destinations.title')}
             </h1>
             <p className="text-xl max-w-4xl mx-auto lg:text-xl">
