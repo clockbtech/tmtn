@@ -23,37 +23,37 @@ const VideoCarousel = () => {
     {
       id: '1',
       title: 'Everest Base Camp Trek',
-      url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+      url: 'https://pixabay.com/videos/nepal-himalayas-trekking-mountain-258662/',
       thumbnail: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=800&fit=crop'
     },
     {
       id: '2',
       title: 'Annapurna Circuit',
-      url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+      url: 'https://pixabay.com/videos/village-hills-mist-lake-tree-231479/',
       thumbnail: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400&h=800&fit=crop'
     },
     {
       id: '3',
       title: 'Kathmandu Culture',
-      url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+      url: 'Video by shiva  rijal from Pexels: https://www.pexels.com/video/majestic-view-of-boudhanath-stupa-28863617/',
       thumbnail: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=800&fit=crop'
     },
     {
       id: '4',
       title: 'Chitwan Safari',
-      url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+      url: 'Video by Videogrammer .com from Pexels: https://www.pexels.com/video/an-antelope-in-captivity-2354900/',
       thumbnail: 'https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=400&h=800&fit=crop'
     },
     {
       id: '5',
       title: 'Pokhara Lakes',
-      url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+      url: 'Video by ILOVESwitzerland from Pexels: https://www.pexels.com/video/paraglider-over-scenic-alpine-landscape-31967684/',
       thumbnail: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=800&fit=crop'
     },
     {
       id: '6',
       title: 'Mountain Views',
-      url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+      url: 'https://pixabay.com/videos/nepal-himalayas-trekking-snow-258654/',
       thumbnail: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400&h=800&fit=crop'
     }
   ];
