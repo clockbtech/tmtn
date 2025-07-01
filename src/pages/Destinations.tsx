@@ -85,7 +85,7 @@ const Destinations = () => {
     id: 5,
     nameKey: 'destinations.chitwan',
     descKey: 'destinations.chitwan.desc',
-    image: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1456926631375-92c8ce872def?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8d2lsZGxpZmV8ZW58MHwwfDB8fHww',
     difficulty: 'Easy',
     duration: '2-4 days',
     altitude: '415m',
@@ -149,7 +149,7 @@ const Destinations = () => {
       
       {/* Enhanced Hero Section with Background Image */}
       <section className="relative bg-cover bg-center bg-no-repeat py-[150px]" style={{
-      backgroundImage: 'url(https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80)'
+      backgroundImage: 'https://th.bing.com/th/id/R.34473dbb198fe12d841a25f710ab79f6?rik=o4bJt8X5xPLRJg&pid=ImgRaw&r=0'
     }}>
         <div className="absolute inset-0 bg-gradient-to-r from-nepal-primary/80 to-blue-600/80 my-0"></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
