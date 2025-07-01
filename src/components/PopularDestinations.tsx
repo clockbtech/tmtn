@@ -95,7 +95,7 @@ const PopularDestinations = () => {
                 
                 {/* Text overlay at bottom */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                  <h3 className="text-2xl font-plus-jakarta font-bold mb-2 drop-shadow-lg">
+                  <h3 className="text-2xl font-tm-sans font-bold mb-2 drop-shadow-lg">
                     {t(destination.nameKey)}
                   </h3>
                   <p className="font-inter text-gray-200 mb-4 line-clamp-2 drop-shadow-md">
