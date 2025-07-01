@@ -38,6 +38,9 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
 
   if (!video) return null;
 
+  // Check if this is a local video (starts with blob:)
+  const isLocalVideo = video.url.startsWith('blob:');
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -86,6 +89,7 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
           loop
           playsInline
           controls={false}
+          poster={video.thumbnail}
           aria-label={`Video: ${video.title}`}
           onLoadedData={() => {
             if (videoRef.current) {
@@ -94,6 +98,13 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
           }}
         >
           <source src={video.url} type="video/mp4" />
+          {/* Fallback for different video formats */}
+          {isLocalVideo && (
+            <>
+              <source src={video.url} type="video/webm" />
+              <source src={video.url} type="video/ogg" />
+            </>
+          )}
           Your browser does not support the video tag.
         </video>
 

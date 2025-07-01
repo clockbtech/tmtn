@@ -30,6 +30,9 @@ const VideoItem: React.FC<VideoItemProps> = ({ video, index, onVideoClick }) => 
     }
   }, []);
 
+  // Check if this is a local video (starts with blob:)
+  const isLocalVideo = video.url.startsWith('blob:');
+
   return (
     <div
       className="flex-shrink-0 w-70"
@@ -53,6 +56,7 @@ const VideoItem: React.FC<VideoItemProps> = ({ video, index, onVideoClick }) => 
           preload="metadata"
           controls={false}
           aria-label={`Video: ${video.title}`}
+          poster={video.thumbnail}
           onLoadedData={() => {
             // Ensure video plays when loaded
             if (videoRef.current) {
@@ -61,6 +65,13 @@ const VideoItem: React.FC<VideoItemProps> = ({ video, index, onVideoClick }) => 
           }}
         >
           <source src={video.url} type="video/mp4" />
+          {/* Fallback for different video formats */}
+          {isLocalVideo && (
+            <>
+              <source src={video.url} type="video/webm" />
+              <source src={video.url} type="video/ogg" />
+            </>
+          )}
           Your browser does not support the video tag.
         </video>
 
@@ -83,7 +94,7 @@ const VideoItem: React.FC<VideoItemProps> = ({ video, index, onVideoClick }) => 
 
         {/* Top Brand Badge */}
         <div className="absolute top-4 left-4 bg-nepal-orange text-white px-3 py-1 rounded-full text-sm font-bold">
-          NEPAL
+          {isLocalVideo ? 'UPLOADED' : 'NEPAL'}
         </div>
       </motion.div>
     </div>

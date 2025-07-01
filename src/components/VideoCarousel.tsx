@@ -1,26 +1,30 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { videos } from './video/videoData';
+import { videos as defaultVideos } from './video/videoData';
 import { Video } from './video/types';
 import VideoItem from './video/VideoItem';
 import FullscreenModal from './video/FullscreenModal';
 import CarouselControls from './video/CarouselControls';
 import ProgressIndicator from './video/ProgressIndicator';
+import VideoUpload from './video/VideoUpload';
 
 const VideoCarousel = () => {
+  const [uploadedVideos, setUploadedVideos] = useState<Video[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [fullscreenVideo, setFullscreenVideo] = useState<Video | null>(null);
   const [fullscreenIndex, setFullscreenIndex] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Combine default videos with uploaded videos
+  const allVideos = [...defaultVideos, ...uploadedVideos];
   // Duplicate videos for infinite scroll
-  const extendedVideos = [...videos, ...videos, ...videos];
+  const extendedVideos = [...allVideos, ...allVideos, ...allVideos];
 
   // Auto-advance carousel continuously
   useEffect(() => {
-    if (isPlaying && !fullscreenVideo) {
+    if (isPlaying && !fullscreenVideo && allVideos.length > 0) {
       intervalRef.current = setInterval(() => {
         setCurrentIndex((prev) => prev + 1);
       }, 3000);
@@ -31,20 +35,25 @@ const VideoCarousel = () => {
         clearInterval(intervalRef.current);
       }
     };
-  }, [isPlaying, fullscreenVideo]);
+  }, [isPlaying, fullscreenVideo, allVideos.length]);
 
   // Reset position when reaching the end for infinite loop
   useEffect(() => {
-    if (currentIndex >= videos.length * 2) {
+    if (currentIndex >= allVideos.length * 2) {
       setTimeout(() => {
-        setCurrentIndex(videos.length);
+        setCurrentIndex(allVideos.length);
       }, 300);
     }
-  }, [currentIndex]);
+  }, [currentIndex, allVideos.length]);
+
+  const handleVideosAdd = (newVideos: Video[]) => {
+    setUploadedVideos(prev => [...prev, ...newVideos]);
+    console.log('Added new videos:', newVideos);
+  };
 
   const openFullscreen = (video: Video, index: number) => {
     setFullscreenVideo(video);
-    setFullscreenIndex(index % videos.length);
+    setFullscreenIndex(index % allVideos.length);
     setIsPlaying(false);
   };
 
@@ -57,11 +66,11 @@ const VideoCarousel = () => {
     if (direction === 'prev' && fullscreenIndex > 0) {
       const newIndex = fullscreenIndex - 1;
       setFullscreenIndex(newIndex);
-      setFullscreenVideo(videos[newIndex]);
-    } else if (direction === 'next' && fullscreenIndex < videos.length - 1) {
+      setFullscreenVideo(allVideos[newIndex]);
+    } else if (direction === 'next' && fullscreenIndex < allVideos.length - 1) {
       const newIndex = fullscreenIndex + 1;
       setFullscreenIndex(newIndex);
-      setFullscreenVideo(videos[newIndex]);
+      setFullscreenVideo(allVideos[newIndex]);
     }
   };
 
@@ -83,40 +92,55 @@ const VideoCarousel = () => {
             </p>
           </motion.div>
 
-          <CarouselControls 
-            isPlaying={isPlaying}
-            onTogglePlay={() => setIsPlaying(!isPlaying)}
-          />
+          {/* Video Upload Component */}
+          <VideoUpload onVideosAdd={handleVideosAdd} />
 
-          {/* Video Carousel Container */}
-          <div className="relative">
-            <div className="overflow-hidden">
-              <motion.div
-                className="flex gap-4"
-                animate={{
-                  x: `${-currentIndex * (280 + 16)}px`
-                }}
-                transition={{
-                  duration: 0.8,
-                  ease: "easeInOut"
-                }}
-              >
-                {extendedVideos.map((video, index) => (
-                  <VideoItem
-                    key={`${video.id}-${index}`}
-                    video={video}
-                    index={index}
-                    onVideoClick={openFullscreen}
-                  />
-                ))}
-              </motion.div>
+          {allVideos.length > 0 && (
+            <>
+              <CarouselControls 
+                isPlaying={isPlaying}
+                onTogglePlay={() => setIsPlaying(!isPlaying)}
+              />
+
+              {/* Video Carousel Container */}
+              <div className="relative">
+                <div className="overflow-hidden">
+                  <motion.div
+                    className="flex gap-4"
+                    animate={{
+                      x: `${-currentIndex * (280 + 16)}px`
+                    }}
+                    transition={{
+                      duration: 0.8,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    {extendedVideos.map((video, index) => (
+                      <VideoItem
+                        key={`${video.id}-${index}`}
+                        video={video}
+                        index={index}
+                        onVideoClick={openFullscreen}
+                      />
+                    ))}
+                  </motion.div>
+                </div>
+              </div>
+
+              <ProgressIndicator 
+                totalItems={allVideos.length}
+                currentIndex={currentIndex}
+              />
+            </>
+          )}
+
+          {allVideos.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-gray-500 text-lg">
+                Upload your first videos to get started!
+              </p>
             </div>
-          </div>
-
-          <ProgressIndicator 
-            totalItems={videos.length}
-            currentIndex={currentIndex}
-          />
+          )}
         </div>
       </section>
 
@@ -126,7 +150,7 @@ const VideoCarousel = () => {
           <FullscreenModal
             video={fullscreenVideo}
             currentIndex={fullscreenIndex}
-            totalVideos={videos.length}
+            totalVideos={allVideos.length}
             onClose={closeFullscreen}
             onNavigate={navigateFullscreen}
           />
