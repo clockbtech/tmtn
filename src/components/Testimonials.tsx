@@ -104,43 +104,7 @@ const Testimonials = () => {
       </div>
 
       {/* Scattered Travel Icons */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Mountain Icon - Top Left */}
-        <motion.div 
-          className="absolute top-16 left-12 text-nepal-primary opacity-[0.07] hidden lg:block"
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <Mountain size={120} strokeWidth={1} />
-        </motion.div>
-
-        {/* Plane Icon - Top Right */}
-        <motion.div 
-          className="absolute top-32 right-24 text-nepal-orange opacity-[0.06] hidden lg:block"
-          animate={{ y: [0, 8, 0], rotate: [0, 2, 0] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <Plane size={80} strokeWidth={1} />
-        </motion.div>
-
-        {/* Temple Icon - Bottom Left */}
-        <motion.div 
-          className="absolute bottom-24 left-16 text-nepal-primary opacity-[0.08] hidden lg:block"
-          animate={{ y: [0, -6, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <Church size={100} strokeWidth={1} />
-        </motion.div>
-
-        {/* Mobile - Single Mountain Icon */}
-        <motion.div 
-          className="absolute top-1/4 right-8 text-nepal-primary opacity-[0.05] lg:hidden"
-          animate={{ y: [0, -8, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <Mountain size={60} strokeWidth={1} />
-        </motion.div>
-      </div>
+     
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
