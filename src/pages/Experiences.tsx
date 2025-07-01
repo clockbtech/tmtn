@@ -177,7 +177,7 @@ const Experiences = () => {
         }} transition={{
           duration: 0.8
         }} className="text-center text-white">
-            <h1 className="text-5xl font-bebas uppercase mb-6 lg:text-6xl font-extrabold">
+            <h1 className="text-5xl font-tm-sans uppercase mb-6 lg:text-6xl font-extrabold">
               {t('nav.experiences')}
             </h1>
             <p className="text-xl lg:text-2xl max-w-4xl mx-auto">
