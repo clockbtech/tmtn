@@ -162,7 +162,7 @@ const Destinations = () => {
         }} transition={{
           duration: 0.8
         }} className="text-center text-white">
-            <h1 className="text-5xl lg:text-6xl font-TM Sans font-uppercase font-extrabold mb-6">
+            <h1 className="text-5xl lg:text-6xl font-tm-sans uppercase mb-6">
               {t('destinations.title')}
             </h1>
             <p className="text-xl max-w-4xl mx-auto lg:text-xl">
