@@ -39,7 +39,7 @@ const Footer = () => {
     <footer className="text-white relative overflow-hidden" id="contact">
       {/* Background Image Layer */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-70"
         style={{
           backgroundImage: 'url(/lovable-uploads/a26300b1-f01d-4f86-880d-99c4fc88d181.png)'
         }}

@@ -11,7 +11,7 @@ const HeroSection = () => {
     subtitle: 'Discover Nepal\'s Serenity in the Himalayas'
   }, {
     type: 'image',
-    src: 'https://photo.ntb.gov.np/public/uploads/preview/1572888050332_MG_3033_1572888083.jpg',
+    src: 'https://images.unsplash.com/photo-1731052368947-9f262c4e9f4c?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     title: 'Pristine Mountain Lakes',
     subtitle: 'Spiritual heritage'
   }, {
