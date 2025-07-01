@@ -9,6 +9,7 @@ import TrendingExperiences from '../components/TrendingExperiences';
 import WhyChooseUs from '../components/WhyChooseUs';
 import Testimonials from '../components/Testimonials';
 import BlogPreview from '../components/BlogPreview';
+import VideoCarousel from '../components/VideoCarousel';
 import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
 
@@ -50,6 +51,7 @@ const Index = () => {
         <WhyChooseUs />
         <Testimonials />
         <BlogPreview />
+        <VideoCarousel />
         <Newsletter />
       </main>
       <Footer />
