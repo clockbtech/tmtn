@@ -100,7 +100,7 @@ const Testimonials = () => {
         }}
       >
         {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-white/85"></div>
+        {/* <div className="absolute inset-0 bg-white/85"></div> */}
       </div>
 
       {/* Scattered Travel Icons */}
