@@ -35,19 +35,19 @@ const VideoCarousel = () => {
     {
       id: '3',
       title: 'Kathmandu Culture',
-      url: 'Video by shiva  rijal from Pexels: https://www.pexels.com/video/majestic-view-of-boudhanath-stupa-28863617/',
+      url: 'https://www.pexels.com/video/majestic-view-of-boudhanath-stupa-28863617/',
       thumbnail: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=800&fit=crop'
     },
     {
       id: '4',
       title: 'Chitwan Safari',
-      url: 'Video by Videogrammer .com from Pexels: https://www.pexels.com/video/an-antelope-in-captivity-2354900/',
+      url: 'https://www.pexels.com/video/an-antelope-in-captivity-2354900/',
       thumbnail: 'https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=400&h=800&fit=crop'
     },
     {
       id: '5',
       title: 'Pokhara Lakes',
-      url: 'Video by ILOVESwitzerland from Pexels: https://www.pexels.com/video/paraglider-over-scenic-alpine-landscape-31967684/',
+      url: 'https://www.pexels.com/video/paraglider-over-scenic-alpine-landscape-31967684/',
       thumbnail: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=800&fit=crop'
     },
     {
