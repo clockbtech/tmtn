@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Facebook, Instagram, ArrowUp } from 'lucide-react';
+
 const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({
@@ -8,28 +9,48 @@ const Footer = () => {
       behavior: 'smooth'
     });
   };
+
   const footerLinks = {
     destinations: ['Everest Base Camp', 'Annapurna Circuit', 'Pokhara Valley', 'Kathmandu Valley', 'Chitwan National Park', 'Langtang Valley'],
     experiences: ['Trekking Tours', 'Cultural Tours', 'Wildlife Safari', 'Helicopter Tours', 'Photography Tours', 'Spiritual Retreats'],
     company: ['About Us', 'Our Team', 'Careers', 'Contact', 'Travel Insurance', 'Terms & Conditions'],
     support: ['Help Center', 'Safety Guidelines', 'Packing Lists', 'Travel Tips', 'FAQs', 'Customer Reviews']
   };
-  const socialLinks = [{
-    icon: Facebook,
-    href: '#',
-    label: 'Facebook'
-  }, {
-    icon: Instagram,
-    href: '#',
-    label: 'Instagram'
-  }, {
-    icon: Mail,
-    href: '#',
-    label: 'Email'
-  }];
-  return <footer className="bg-gray-900 text-white" id="contact">
+
+  const socialLinks = [
+    {
+      icon: Facebook,
+      href: '#',
+      label: 'Facebook'
+    },
+    {
+      icon: Instagram,
+      href: '#',
+      label: 'Instagram'
+    },
+    {
+      icon: Mail,
+      href: '#',
+      label: 'Email'
+    }
+  ];
+
+  return (
+    <footer className="text-white relative overflow-hidden" id="contact">
+      {/* Background Image Layer */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+        style={{
+          backgroundImage: 'url(/lovable-uploads/a26300b1-f01d-4f86-880d-99c4fc88d181.png)'
+        }}
+      />
+      
+      {/* Dark overlay for better text readability */}
+      <div className="absolute inset-0 bg-gray-900/90"></div>
+
       {/* Main Footer Content */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
+        {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
           {/* Company Info */}
           <div className="lg:col-span-2">
@@ -185,31 +206,33 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-gray-700">
+      <div className="border-t border-gray-700 relative z-10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <motion.div initial={{
-            opacity: 0
-          }} whileInView={{
-            opacity: 1
-          }} transition={{
-            duration: 0.6
-          }} className="text-gray-400 text-sm mb-4 md:mb-0">
+            <motion.div 
+              initial={{ opacity: 0 }} 
+              whileInView={{ opacity: 1 }} 
+              transition={{ duration: 0.6 }} 
+              className="text-gray-400 text-sm mb-4 md:mb-0"
+            >
               © 2024 Take Me To Nepal. All rights reserved. | Privacy Policy | Terms of Service
             </motion.div>
             
             {/* Back to Top Button */}
-            <motion.button onClick={scrollToTop} whileHover={{
-            scale: 1.1,
-            y: -2
-          }} whileTap={{
-            scale: 0.95
-          }} className="bg-nepal-orange hover:bg-orange-600 text-white p-2 rounded-full transition-all duration-200" aria-label="Back to top">
+            <motion.button
+              onClick={scrollToTop}
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-nepal-orange hover:bg-orange-600 text-white p-2 rounded-full transition-all duration-200"
+              aria-label="Back to top"
+            >
               <ArrowUp className="w-5 h-5" />
             </motion.button>
           </div>
         </div>
       </div>
-    </footer>;
+    </footer>
+  );
 };
+
 export default Footer;

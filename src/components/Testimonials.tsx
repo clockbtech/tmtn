@@ -68,32 +68,6 @@ const Testimonials = () => {
     });
   }, [currentIndex]);
 
-  // Nepalese Mandala Pattern SVG Component
-  const MandalaPattern = () => (
-    <svg className="absolute inset-0 w-full h-full opacity-[0.06]" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <pattern id="mandala" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-          <g transform="translate(50,50)">
-            <circle cx="0" cy="0" r="2" fill="currentColor" opacity="0.3"/>
-            <g transform="rotate(45)">
-              <circle cx="15" cy="0" r="1" fill="currentColor" opacity="0.2"/>
-              <circle cx="-15" cy="0" r="1" fill="currentColor" opacity="0.2"/>
-              <circle cx="0" cy="15" r="1" fill="currentColor" opacity="0.2"/>
-              <circle cx="0" cy="-15" r="1" fill="currentColor" opacity="0.2"/>
-            </g>
-            <g transform="rotate(22.5)">
-              <circle cx="20" cy="0" r="0.5" fill="currentColor" opacity="0.15"/>
-              <circle cx="-20" cy="0" r="0.5" fill="currentColor" opacity="0.15"/>
-              <circle cx="0" cy="20" r="0.5" fill="currentColor" opacity="0.15"/>
-              <circle cx="0" cy="-20" r="0.5" fill="currentColor" opacity="0.15"/>
-            </g>
-          </g>
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#mandala)" className="text-nepal-primary"/>
-    </svg>
-  );
-
   // Prayer Flag Dots Animation
   const PrayerFlagDots = () => (
     <div className="absolute top-4 right-4 hidden lg:flex space-x-1 opacity-[0.08]">
@@ -117,13 +91,16 @@ const Testimonials = () => {
   );
 
   return (
-    <section className="py-20 bg-gray-50 overflow-hidden relative">
-      {/* Background Pattern Layer */}
-      <div className="absolute inset-0">
-        <MandalaPattern />
-        
-        {/* Gradient Overlay for Readability */}
-        <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-gray-50/60"></div>
+    <section className="py-20 overflow-hidden relative">
+      {/* Background Image Layer */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: 'url(/lovable-uploads/cd69aa7a-1ff4-42aa-b8fa-d8ee8cdf17c4.png)'
+        }}
+      >
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-white/85"></div>
       </div>
 
       {/* Scattered Travel Icons */}
