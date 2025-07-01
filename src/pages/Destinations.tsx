@@ -41,7 +41,7 @@ const Destinations = () => {
     id: 1,
     nameKey: 'destinations.everest',
     descKey: 'destinations.everest.desc',
-    image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: 'https://th.bing.com/th/id/R.34473dbb198fe12d841a25f710ab79f6?rik=o4bJt8X5xPLRJg&pid=ImgRaw&r=0',
     difficulty: 'Extreme',
     duration: '14-16 days',
     altitude: '5,364m',
@@ -52,7 +52,7 @@ const Destinations = () => {
     id: 2,
     nameKey: 'destinations.annapurna',
     descKey: 'destinations.annapurna.desc',
-    image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1549926506-afba2eb9fb6f?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     difficulty: 'Moderate',
     duration: '12-20 days',
     altitude: '5,416m',
@@ -63,7 +63,7 @@ const Destinations = () => {
     id: 3,
     nameKey: 'destinations.pokhara',
     descKey: 'destinations.pokhara.desc',
-    image: 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1718180555560-0c5f890f8098?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzh8fFBva2hhcmF8ZW58MHwwfDB8fHww',
     difficulty: 'Easy',
     duration: '2-5 days',
     altitude: '822m',
@@ -74,7 +74,7 @@ const Destinations = () => {
     id: 4,
     nameKey: 'destinations.kathmandu',
     descKey: 'destinations.kathmandu.desc',
-    image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1552353338-0944fa7abdcd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fEthdGhtYW5kdXxlbnwwfDB8MHx8fDA%3D',
     difficulty: 'Easy',
     duration: '3-7 days',
     altitude: '1,400m',
@@ -96,7 +96,7 @@ const Destinations = () => {
     id: 6,
     nameKey: 'destinations.langtang',
     descKey: 'destinations.langtang.desc',
-    image: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1657857051629-dac459639676?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHx8',
     difficulty: 'Moderate',
     duration: '7-12 days',
     altitude: '4,984m',
@@ -149,7 +149,7 @@ const Destinations = () => {
       
       {/* Enhanced Hero Section with Background Image */}
       <section className="relative bg-cover bg-center bg-no-repeat py-[150px]" style={{
-      backgroundImage: 'https://th.bing.com/th/id/R.34473dbb198fe12d841a25f710ab79f6?rik=o4bJt8X5xPLRJg&pid=ImgRaw&r=0'
+      backgroundImage: 'https://th.bing.com/th/id/R.34473dbb198fe12d841a25f710ab79f6?rik=o4bJt8X5xPLRJg&pid=ImgRaw&r=0',
     }}>
         <div className="absolute inset-0 bg-gradient-to-r from-nepal-primary/80 to-blue-600/80 my-0"></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
