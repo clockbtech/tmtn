@@ -43,7 +43,7 @@ const DestinationDetail = () => {
     id: parseInt(id || '1'),
     name: 'Everest Base Camp',
     subtitle: 'Trek to the Foot of the World\'s Highest Peak',
-    heroImage: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+    heroImage: 'https://images.unsplash.com/photo-1486911278844-a81c5267e227?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     description: `The Everest Base Camp trek is one of the most iconic adventures in the world, taking you through the heart of the Khumbu region to the base of Mount Everest. This incredible journey offers breathtaking mountain views, rich Sherpa culture, and the chance to stand at the foot of the world's highest peak.
 
     The trek passes through traditional Sherpa villages, ancient monasteries, and some of the most spectacular mountain scenery on Earth. You'll experience the unique culture of the Himalayas while challenging yourself physically and mentally on this unforgettable adventure.
@@ -62,33 +62,33 @@ const DestinationDetail = () => {
       { icon: '🍂', months: 'September - November', description: 'Clear mountain views and stable weather' }
     ],
     gallery: [
-      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1433086966358-54859d0ed716?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1458668383970-8ddd3927deed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+      'https://images.unsplash.com/photo-1513614835783-51537729c8ba?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1529556253689-cf147e0fb3d9?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1571401835393-8c5f35328320?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1571330177234-54304dac2beb?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1745059177820-ddca8ef74f41?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1551932733-09ad7c5b2bc5?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     ],
     attractions: [
       {
         id: 1,
         name: 'Tengboche Monastery',
         description: 'Ancient Buddhist monastery with stunning mountain views',
-        image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1693039201083-2bf80bfe200c?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         location: 'Tengboche, Khumbu'
       },
       {
         id: 2,
         name: 'Namche Bazaar',
         description: 'Gateway to Everest and vibrant Sherpa trading hub',
-        image: 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1511215579272-6192432f83bc?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         location: 'Namche, Khumbu'
       },
       {
         id: 3,
         name: 'Kala Patthar',
         description: 'Best viewpoint for Everest panoramic views',
-        image: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1669873904455-d2a5f0e2c9da?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         location: 'Gorak Shep, Khumbu'
       }
     ],
@@ -97,7 +97,7 @@ const DestinationDetail = () => {
         id: 1,
         name: 'Everest Base Camp Trek - 14 Days',
         description: 'Complete guided trek to Everest Base Camp',
-        image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1673505413397-0cd0dc4f5854?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         duration: '14 days',
         difficulty: 'Challenging',
         price: 2500,
@@ -107,7 +107,7 @@ const DestinationDetail = () => {
         id: 2,
         name: 'Helicopter Tour to Base Camp',
         description: 'Quick helicopter flight to Everest Base Camp',
-        image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        image: 'https://images.unsplash.com/flagged/photo-1571470690590-2080c1276242?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         duration: '1 day',
         difficulty: 'Easy',
         price: 1200,
