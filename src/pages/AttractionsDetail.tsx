@@ -165,7 +165,7 @@ const AttractionsDetail = () => {
           }} transition={{
             duration: 0.6
           }}>
-              <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
+              <h2 className="font-bebas uppercase text-nepal-primary mb-6 text-2xl font-extrabold">
                 Overview
               </h2>
               <div className="prose prose-lg max-w-none text-gray-700 mb-8">
@@ -211,7 +211,7 @@ const AttractionsDetail = () => {
             duration: 0.6
           }}>
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary">
+                <h2 className="font-bebas uppercase text-nepal-primary text-2xl font-extrabold">
                   Photo Gallery
                 </h2>
                 <div className="flex items-center gap-4">
@@ -246,7 +246,7 @@ const AttractionsDetail = () => {
           }} transition={{
             duration: 0.6
           }}>
-              <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
+              <h2 className="font-bebas uppercase text-nepal-primary mb-6 text-2xl font-extrabold">
                 Nearby Attractions
               </h2>
               <Carousel className="w-full" opts={{
@@ -319,7 +319,7 @@ const AttractionsDetail = () => {
           }} transition={{
             duration: 0.6
           }}>
-              <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
+              <h2 className="font-bebas uppercase text-nepal-primary mb-6 text-2xl font-extrabold">
                 Available Experiences
               </h2>
               <Carousel className="w-full" opts={{
