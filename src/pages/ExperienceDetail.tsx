@@ -480,7 +480,7 @@ const ExperienceDetail = () => {
                 }} transition={{
                   duration: 0.6
                 }}>
-                    <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
+                    <h2 className="font-tm-sans uppercase text-nepal-primary text-2xl font-extrabold mb-6">
                       Detailed Itinerary
                     </h2>
                     <div className="space-y-8">
@@ -536,7 +536,7 @@ const ExperienceDetail = () => {
                   duration: 0.6
                 }} className="space-y-8">
                     <div>
-                      <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
+                      <h2 className="font-tm-sans uppercase text-nepal-primary text-2xl font-extrabold mb-6">
                         What's Included
                       </h2>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -548,7 +548,7 @@ const ExperienceDetail = () => {
                     </div>
 
                     <div>
-                      <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
+                      <h2 className="font-tm-sans uppercase text-nepal-primary text-2xl font-extrabold mb-6">
                         What's Not Included
                       </h2>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
