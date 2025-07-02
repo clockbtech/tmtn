@@ -70,8 +70,19 @@ const Destinations = () => {
     region: 'Hills',
     popularity: 85,
     price: 300
-  }, {
+  },{
     id: 4,
+    nameKey: 'destinations.pokhara',
+    descKey: 'destinations.pokhara.desc',
+    image: 'https://images.unsplash.com/photo-1718180555560-0c5f890f8098?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzh8fFBva2hhcmF8ZW58MHwwfDB8fHww',
+    difficulty: 'Easy',
+    duration: '2-5 days',
+    altitude: '822m',
+    region: 'Hills',
+    popularity: 85,
+    price: 300
+  }, {
+    id: 5,
     nameKey: 'destinations.kathmandu',
     descKey: 'destinations.kathmandu.desc',
     image: 'https://images.unsplash.com/photo-1552353338-0944fa7abdcd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fEthdGhtYW5kdXxlbnwwfDB8MHx8fDA%3D',
@@ -82,7 +93,7 @@ const Destinations = () => {
     popularity: 80,
     price: 400
   }, {
-    id: 5,
+    id: 6,
     nameKey: 'destinations.chitwan',
     descKey: 'destinations.chitwan.desc',
     image: 'https://images.unsplash.com/photo-1456926631375-92c8ce872def?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8d2lsZGxpZmV8ZW58MHwwfDB8fHww',
@@ -93,7 +104,18 @@ const Destinations = () => {
     popularity: 75,
     price: 250
   }, {
-    id: 6,
+    id: 7,
+    nameKey: 'destinations.everest',
+    descKey: 'destinations.everest.desc',
+    image: 'https://th.bing.com/th/id/R.34473dbb198fe12d841a25f710ab79f6?rik=o4bJt8X5xPLRJg&pid=ImgRaw&r=0',
+    difficulty: 'Extreme',
+    duration: '14-16 days',
+    altitude: '5,364m',
+    region: 'Himalayan Region',
+    popularity: 95,
+    price: 2500
+  },{
+    id: 8,
     nameKey: 'destinations.langtang',
     descKey: 'destinations.langtang.desc',
     image: 'https://images.unsplash.com/photo-1657857051629-dac459639676?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHx8',
