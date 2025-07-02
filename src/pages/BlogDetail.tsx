@@ -23,10 +23,8 @@ const mockBlogDetail = {
   category: "Adventure",
   tags: ["Everest", "Trekking", "Nepal", "Adventure", "Himalayas"],
   content: `
-    <p>The Everest Base Camp trek is one of the most iconic adventure experiences in the world. Standing at the foot of the world's tallest mountain, you'll witness breathtaking views and experience the unique culture of the Sherpa people.</p>
-    
-    <h2>Planning Your Trek</h2>
-    <p>Proper planning is essential for a successful Everest Base Camp trek. The journey typically takes 12-14 days and requires good physical fitness and mental preparation.</p>
+    <p>Everest Base Camp Trek is one of the most iconic and popular treks in the world, drawing thousands of trekkers every year to the foothills of Mount Everest. This epic adventure takes you through Sherpa villages, Buddhist monasteries, lush valleys, and breathtaking mountain vistas, ultimately leading to Everest Base Camp itself while offering an incredible opportunity to witness the grandeur of the world’s highest peak, experience Sherpa culture, and explore the rugged Himalayan landscapes.
+    This trek is suitable for trekkers with moderate to good fitness levels and is often undertaken by those seeking the ultimate trekking experience in Nepal. While the trek offers incredible natural beauty and the thrill of being at the foot of Everest, it also challenges trekkers with the altitude and long, strenuous days. The Everest Base Camp Trek takes you through the Sagarmatha National Park, a UNESCO World Heritage Site, and provides incredible views of Mount Everest, as well as surrounding peaks such as Lhotse, Makalu, and Cho Oyu. The trek starts in Lukla, following a well-trodden path through picturesque villages, green forests, and alpine meadows, all while being surrounded by snow-capped peaks.Along the way, trekkers will pass through famous Sherpa villages like Namche Bazaar, Tengboche, and Dingboche, all of which offer unique cultural experiences and panoramic views.</p>
     
     <blockquote>"The mountains are calling and I must go." - John Muir</blockquote>
     
@@ -51,11 +49,10 @@ const mockBlogDetail = {
     </ol>
     
     <h2>The Trek Experience</h2>
-    <p>The journey to Everest Base Camp is as rewarding as the destination itself. You'll pass through traditional Sherpa villages, ancient monasteries, and stunning landscapes that change dramatically with altitude.</p>
+    <p>The Everest region is part of the Mahalangur mountain range in the central Himalayas and is often characterized by dramatic landscapes, including glaciers, alpine meadows, rocky ridges, and steep mountain valleys. Mount Everest is a tectonic collision of the Indian and Eurasian plates, which has given rise to the Himalayan mountain range. The trek takes trekkers through glaciers like the Khumbu Glacier, deep valleys, and rugged ridgelines. The geological history of the region is evidenced by the varied rock formations and rugged terrain that surround Everest and its neighboring peaks. The Everest Base Camp Trek passes through diverse ecosystems, each supporting different species of flora and fauna. The flora changes as you ascend through the different altitudes, with lower regions covered in lush forests of pine, rhododendron, and oak, while higher altitudes feature alpine meadows and sparse vegetation.</p>
     
     <blockquote>"It is not the mountain we conquer, but ourselves." - Sir Edmund Hillary</blockquote>
     
-    <p>Each day brings new challenges and rewards. From the bustling markets of Namche Bazaar to the serene beauty of the Khumbu Valley, every step tells a story of human determination and natural wonder.</p>
   `,
   socialLinks: {
     facebook: "https://facebook.com/takemetonepal",
