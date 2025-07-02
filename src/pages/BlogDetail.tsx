@@ -14,7 +14,7 @@ import SocialShareBar from '../components/blog/SocialShareBar';
 const mockBlogDetail = {
   id: 1,
   title: "Ultimate Guide to Everest Base Camp Trek",
-  heroImage: "https://images.prismic.io/elite-exped/YjdiMGZhZTgtN2IxMS00ZDQ1LTg0YmQtN2ViMzBlZWEyYmIz_314b898d-286a-4ec9-b4d4-96474f771ab9_everest-ridge.jpg?auto=compress,format&rect=0,0,4890,3260&w=2400&h=1600",
+  heroImage: "https://images.prismic.io/elite-exped/4271c813-1ed3-4bb9-81d0-97bc070a3b05_Nimsdai-Elite-Exped-Everest-Edits-Guy-Bolton190.jpg?auto=compress,format&rect=0,0,2048,1461&w=2400&h=1712",
   author: "Sarah Chen",
   authorImage: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fEdpcmx8ZW58MHx8MHx8fDA%3D",
   authorBio: "Sarah is an experienced mountaineer and travel writer who has trekked through the Himalayas multiple times. She specializes in high-altitude adventures and sustainable tourism.",
@@ -28,7 +28,6 @@ const mockBlogDetail = {
     
     <blockquote>"The mountains are calling and I must go." - John Muir</blockquote>
     <br/>
-    
     <img src="https://images.unsplash.com/photo-1597666864156-2e7ae49fca5a?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mountain vista during trek" />
    <br/>
     <p>The Everest region is part of the Mahalangur mountain range in the central Himalayas and is often characterized by dramatic landscapes, including glaciers, alpine meadows, rocky ridges, and steep mountain valleys. Mount Everest is a tectonic collision of the Indian and Eurasian plates, which has given rise to the Himalayan mountain range. The trek takes trekkers through glaciers like the Khumbu Glacier, deep valleys, and rugged ridgelines. The geological history of the region is evidenced by the varied rock formations and rugged terrain that surround Everest and its neighboring peaks. The Everest Base Camp Trek passes through diverse ecosystems, each supporting different species of flora and fauna. The flora changes as you ascend through the different altitudes, with lower regions covered in lush forests of pine, rhododendron, and oak, while higher altitudes feature alpine meadows and sparse vegetation.</p>
