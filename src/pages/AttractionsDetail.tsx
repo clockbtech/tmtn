@@ -211,7 +211,7 @@ const AttractionsDetail = () => {
             duration: 0.6
           }}>
               <div className="flex items-center justify-between mb-6">
-                <h2 className="font-bebas uppercase text-nepal-primary text-2xl font-extrabold">
+                <h2 className="font-tm-sans uppercase text-nepal-primary text-2xl font-extrabold">
                   Photo Gallery
                 </h2>
                 <div className="flex items-center gap-4">
