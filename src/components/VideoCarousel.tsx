@@ -15,8 +15,14 @@ const VideoCarousel = () => {
   const [fullscreenIndex, setFullscreenIndex] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Duplicate videos for infinite scroll
-  const extendedVideos = [...videos, ...videos, ...videos];
+  // Create enough copies for smooth infinite scrolling
+  const extendedVideos = [...videos, ...videos, ...videos, ...videos];
+  const startIndex = videos.length; // Start from the middle set
+
+  // Initialize at the middle set for infinite loop
+  useEffect(() => {
+    setCurrentIndex(startIndex);
+  }, []);
 
   // Auto-advance carousel continuously
   useEffect(() => {
@@ -33,12 +39,19 @@ const VideoCarousel = () => {
     };
   }, [isPlaying, fullscreenVideo]);
 
-  // Reset position when reaching the end for infinite loop
+  // Handle infinite loop reset without animation
   useEffect(() => {
-    if (currentIndex >= videos.length * 2) {
+    // When we reach the end of the third set, jump back to the second set
+    if (currentIndex >= videos.length * 3) {
       setTimeout(() => {
         setCurrentIndex(videos.length);
-      }, 300);
+      }, 50); // Very short delay to complete current animation
+    }
+    // When we go before the first set, jump to the second set
+    else if (currentIndex < 0) {
+      setTimeout(() => {
+        setCurrentIndex(videos.length * 2 - 1);
+      }, 50);
     }
   }, [currentIndex]);
 
@@ -97,13 +110,13 @@ const VideoCarousel = () => {
                   x: `${-currentIndex * (280 + 16)}px`
                 }}
                 transition={{
-                  duration: 0.8,
+                  duration: currentIndex >= videos.length * 3 || currentIndex < 0 ? 0 : 0.8,
                   ease: "easeInOut"
                 }}
               >
                 {extendedVideos.map((video, index) => (
                   <VideoItem
-                    key={`${video.id}-${index}`}
+                    key={`${video.id}-${Math.floor(index / videos.length)}-${index % videos.length}`}
                     video={video}
                     index={index}
                     onVideoClick={openFullscreen}
@@ -115,7 +128,7 @@ const VideoCarousel = () => {
 
           <ProgressIndicator 
             totalItems={videos.length}
-            currentIndex={currentIndex}
+            currentIndex={currentIndex - startIndex}
           />
         </div>
       </section>
