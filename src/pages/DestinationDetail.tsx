@@ -228,70 +228,27 @@ const DestinationDetail = () => {
           }} transition={{
             duration: 0.6
           }}>
-              <h2 className="font-bebas uppercase text-nepal-primary mb-6 text-2xl font-extrabold">
+              <h2 className="font-bebas uppercase text-nepal-primary mb-6 font-extrabold text-2xl">
                 Nearby Attractions
               </h2>
-              <Carousel className="w-full" opts={{
-              align: "start",
-              loop: true
-            }}>
-                <CarouselContent className="-ml-4">
-                  {attraction.linkedAttractions.map(linkedAttraction => <CarouselItem key={linkedAttraction.id} className="pl-4 md:basis-1/2">
-                      <Link to={`/attractions/${linkedAttraction.id}`}>
-                        <motion.div whileHover={{
-                      y: -10
-                    }} className="group cursor-pointer">
-                          <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100">
-                            <div className="relative overflow-hidden">
-                              <img src={linkedAttraction.image} alt={linkedAttraction.name} className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" />
-                              <div className="absolute top-4 left-4 bg-nepal-orange text-white px-3 py-1 rounded-full text-sm font-semibold">
-                                {linkedAttraction.type}
-                              </div>
-                              <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full flex items-center">
-                                <Star className="w-4 h-4 text-yellow-500 mr-1" />
-                                <span className="text-sm font-semibold">{linkedAttraction.rating}</span>
-                              </div>
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                            </div>
-                            
-                            <div className="p-6">
-                              <h3 className="text-xl font-normal font-semibold text-nepal-primary mb-2">
-                                {linkedAttraction.name}
-                              </h3>
-                              <p className="text-gray-600 mb-4 text-base">
-                                {linkedAttraction.description}
-                              </p>
-                              
-                              <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                                <div className="flex items-center">
-                                  <MapPin className="w-4 h-4 mr-1" />
-                                  <span>{linkedAttraction.location}</span>
-                                </div>
-                                <div className="flex items-center">
-                                  <Clock className="w-4 h-4 mr-1" />
-                                  <span>{linkedAttraction.duration}</span>
-                                </div>
-                              </div>
-                              
-                              <motion.button whileHover={{
-                            scale: 1.05
-                          }} whileTap={{
-                            scale: 0.95
-                          }} className="w-full bg-nepal-primary text-white py-3 rounded-lg font-semibold transition-colors duration-200 text-base bg-orange-600 hover:bg-orange-500">
-                                Explore Attraction
-                              </motion.button>
-                            </div>
-                          </div>
-                        </motion.div>
-                      </Link>
-                    </CarouselItem>)}
-                </CarouselContent>
-                <CarouselPrevious className="bg-white shadow-lg border-0 hover:bg-gray-50" />
-                <CarouselNext className="bg-white shadow-lg border-0 hover:bg-gray-50" />
-              </Carousel>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {destination.attractions.map(attraction => <Card key={attraction.id} className="group cursor-pointer hover:shadow-lg transition-shadow">
+                    <div className="relative overflow-hidden">
+                      <img src={attraction.image} alt={attraction.name} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
+                    </div>
+                    <CardContent className="p-4">
+                      <h3 className="font-bold text-nepal-primary mb-2">{attraction.name}</h3>
+                      <p className="text-sm text-gray-600 mb-2">{attraction.description}</p>
+                      <div className="flex items-center text-xs text-gray-500">
+                        <MapPin className="w-3 h-3 mr-1" />
+                        {attraction.location}
+                      </div>
+                    </CardContent>
+                  </Card>)}
+              </div>
             </motion.section>
 
-            {/* Linked Experiences - Updated to match Experiences page design */}
+            {/* Linked Experiences */}
             <motion.section initial={{
             opacity: 0,
             y: 30
