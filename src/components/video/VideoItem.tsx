@@ -1,5 +1,5 @@
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Play } from 'lucide-react';
 import { Video } from './types';
@@ -12,23 +12,37 @@ interface VideoItemProps {
 
 const VideoItem: React.FC<VideoItemProps> = ({ video, index, onVideoClick }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     const videoElement = videoRef.current;
-    if (videoElement) {
-      // Ensure video plays when component mounts
+    if (videoElement && isLoaded) {
       const playVideo = async () => {
         try {
+          videoElement.currentTime = 0;
           await videoElement.play();
+          console.log(`Video ${video.id} started playing`);
         } catch (error) {
-          console.log('Video autoplay failed:', error);
+          console.log(`Video ${video.id} autoplay failed:`, error);
         }
       };
       
-      // Small delay to ensure the video element is ready
-      setTimeout(playVideo, 100);
+      setTimeout(playVideo, 200);
     }
-  }, []);
+  }, [isLoaded, video.id]);
+
+  const handleLoadedData = () => {
+    console.log(`Video ${video.id} loaded successfully`);
+    setIsLoaded(true);
+    setHasError(false);
+  };
+
+  const handleError = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+    console.error(`Video ${video.id} failed to load:`, e);
+    setHasError(true);
+    setIsLoaded(false);
+  };
 
   return (
     <div
@@ -43,26 +57,48 @@ const VideoItem: React.FC<VideoItemProps> = ({ video, index, onVideoClick }) => 
         onClick={() => onVideoClick(video, index)}
       >
         {/* Video Element */}
-        <video
-          ref={videoRef}
-          className="w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          controls={false}
-          aria-label={`Video: ${video.title}`}
-          onLoadedData={() => {
-            // Ensure video plays when loaded
-            if (videoRef.current) {
-              videoRef.current.play().catch(console.log);
-            }
-          }}
-        >
-          <source src={video.url} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        {!hasError ? (
+          <video
+            ref={videoRef}
+            className="w-full h-full object-cover"
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            controls={false}
+            aria-label={`Video: ${video.title}`}
+            onLoadedData={handleLoadedData}
+            onError={handleError}
+            onCanPlay={() => {
+              if (videoRef.current && isLoaded) {
+                videoRef.current.play().catch(err => 
+                  console.log(`Delayed play failed for video ${video.id}:`, err)
+                );
+              }
+            }}
+          >
+            <source src={video.url} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        ) : (
+          // Fallback to thumbnail if video fails to load
+          <img
+            src={video.thumbnail}
+            alt={video.title}
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              console.error(`Thumbnail failed to load for video ${video.id}`);
+              e.currentTarget.src = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=800&fit=crop';
+            }}
+          />
+        )}
+
+        {/* Loading state */}
+        {!isLoaded && !hasError && (
+          <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-nepal-orange"></div>
+          </div>
+        )}
 
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
