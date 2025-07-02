@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Video } from './types';
@@ -19,13 +19,24 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
   onClose,
   onNavigate
 }) => {
-  if (!video) return null;
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Extract TikTok video ID from URL for embedding
-  const getTikTokEmbedUrl = (url: string) => {
-    const videoId = url.split('/video/')[1]?.split('?')[0];
-    return `https://www.tiktok.com/embed/v2/${videoId}`;
-  };
+  useEffect(() => {
+    const videoElement = videoRef.current;
+    if (videoElement && video) {
+      const playVideo = async () => {
+        try {
+          await videoElement.play();
+        } catch (error) {
+          console.log('Fullscreen video autoplay failed:', error);
+        }
+      };
+      
+      setTimeout(playVideo, 100);
+    }
+  }, [video]);
+
+  if (!video) return null;
 
   return (
     <motion.div
@@ -64,22 +75,30 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
         </button>
       )}
 
-      {/* TikTok Embed container */}
+      {/* Video container */}
       <div className="relative w-full h-full max-w-md mx-auto">
-        <iframe
+        <video
+          ref={videoRef}
           key={video.id}
-          src={getTikTokEmbedUrl(video.url)}
-          width="100%"
-          height="100%"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          className="w-full h-full"
-          title={video.title}
-        />
+          className="w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          controls={false}
+          aria-label={`Video: ${video.title}`}
+          onLoadedData={() => {
+            if (videoRef.current) {
+              videoRef.current.play().catch(console.log);
+            }
+          }}
+        >
+          <source src={video.url} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
 
         {/* Title overlay */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
+        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
           <h3 className="text-white text-xl font-bold drop-shadow-lg">
             {video.title}
           </h3>
