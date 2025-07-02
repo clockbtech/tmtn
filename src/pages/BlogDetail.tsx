@@ -14,9 +14,9 @@ import SocialShareBar from '../components/blog/SocialShareBar';
 const mockBlogDetail = {
   id: 1,
   title: "Ultimate Guide to Everest Base Camp Trek",
-  heroImage: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&h=600&fit=crop",
+  heroImage: "https://images.prismic.io/elite-exped/YjdiMGZhZTgtN2IxMS00ZDQ1LTg0YmQtN2ViMzBlZWEyYmIz_314b898d-286a-4ec9-b4d4-96474f771ab9_everest-ridge.jpg?auto=compress,format&rect=0,0,4890,3260&w=2400&h=1600",
   author: "Sarah Chen",
-  authorImage: "https://images.unsplash.com/photo-1494790108755-2616c28ca1bd?w=100&h=100&fit=crop&crop=face",
+  authorImage: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fEdpcmx8ZW58MHx8MHx8fDA%3D",
   authorBio: "Sarah is an experienced mountaineer and travel writer who has trekked through the Himalayas multiple times. She specializes in high-altitude adventures and sustainable tourism.",
   date: "2024-06-20",
   readTime: "8 min read",
