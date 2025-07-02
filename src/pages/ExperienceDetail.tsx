@@ -10,14 +10,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs'
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
+
 const ExperienceDetail = () => {
-  const {
-    id
-  } = useParams();
-  const {
-    t,
-    formatPrice
-  } = useTranslation();
+  const { id } = useParams();
+  const { t, formatPrice } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -26,10 +22,11 @@ const ExperienceDetail = () => {
   const [currentReviewPage, setCurrentReviewPage] = useState(1);
   const [relatedExperiencesIndex, setRelatedExperiencesIndex] = useState(0);
   const [activeTab, setActiveTab] = useState('overview');
-
+  
   // Gallery auto-scroll state
   const [isGalleryPlaying, setIsGalleryPlaying] = useState(true);
   const [showMobileBooking, setShowMobileBooking] = useState(false);
+  
   const reviewsPerPage = 5;
 
   // Booking form state
@@ -63,96 +60,109 @@ const ExperienceDetail = () => {
     location: 'Khumbu Region',
     includes: ['Professional guide', 'Porter service', 'Accommodation in teahouses', 'All meals during trek', 'Flight tickets (Kathmandu-Lukla-Kathmandu)', 'Permits and entrance fees'],
     excludes: ['International flights', 'Travel insurance', 'Personal equipment', 'Tips for guides and porters', 'Alcoholic beverages', 'Emergency evacuation'],
-    itinerary: [{
-      day: 1,
-      title: 'Fly to Lukla, trek to Phakding',
-      description: 'Scenic flight to Lukla, begin trek to Phakding (2,651m)',
-      time: '4-5 hours',
-      distance: '8 km',
-      accommodation: 'Tea House',
-      meals: 'Lunch, Dinner'
-    }, {
-      day: 2,
-      title: 'Trek to Namche Bazaar',
-      description: 'Cross suspension bridges, first glimpse of Everest',
-      time: '6-7 hours',
-      distance: '11 km',
-      accommodation: 'Tea House',
-      meals: 'Breakfast, Lunch, Dinner'
-    }, {
-      day: 3,
-      title: 'Acclimatization day in Namche',
-      description: 'Rest day with optional hike to Everest View Hotel',
-      time: '3-4 hours (optional)',
-      distance: '5 km (optional)',
-      accommodation: 'Tea House',
-      meals: 'Breakfast, Lunch, Dinner'
-    }, {
-      day: 4,
-      title: 'Trek to Tengboche',
-      description: 'Visit famous monastery with Everest views',
-      time: '5-6 hours',
-      distance: '10 km',
-      accommodation: 'Tea House',
-      meals: 'Breakfast, Lunch, Dinner'
-    }, {
-      day: 5,
-      title: 'Trek to Dingboche',
-      description: 'Enter the alpine zone, spectacular mountain views',
-      time: '5-6 hours',
-      distance: '12 km',
-      accommodation: 'Tea House',
-      meals: 'Breakfast, Lunch, Dinner'
-    }],
-    reviews: [{
-      id: 1,
-      name: 'Sarah Johnson',
-      rating: 5,
-      date: '2024-05-15',
-      comment: 'Absolutely incredible experience! The views were breathtaking and our guide was fantastic.',
-      avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
-      photos: ['https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80']
-    }, {
-      id: 2,
-      name: 'Michael Chen',
-      rating: 4,
-      date: '2024-04-22',
-      comment: 'Great trek but physically demanding. Make sure you\'re well prepared!',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
-      photos: []
-    }, {
-      id: 3,
-      name: 'Emma Wilson',
-      rating: 5,
-      date: '2024-04-10',
-      comment: 'Life-changing adventure. The Sherpa culture and hospitality were amazing.',
-      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
-      photos: ['https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80']
-    }, {
-      id: 4,
-      name: 'David Rodriguez',
-      rating: 4,
-      date: '2024-03-28',
-      comment: 'Amazing trek with stunning views. The accommodation was basic but adequate.',
-      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
-      photos: []
-    }, {
-      id: 5,
-      name: 'Lisa Thompson',
-      rating: 5,
-      date: '2024-03-15',
-      comment: 'Exceeded all expectations! Perfect organization and incredible experience.',
-      avatar: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
-      photos: ['https://images.unsplash.com/photo-1500375592092-40eb2168fd21?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80']
-    }, {
-      id: 6,
-      name: 'James Park',
-      rating: 4,
-      date: '2024-02-20',
-      comment: 'Great adventure but weather was challenging. Still worth every moment!',
-      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
-      photos: []
-    }],
+    itinerary: [
+      {
+        day: 1,
+        title: 'Fly to Lukla, trek to Phakding',
+        description: 'Scenic flight to Lukla, begin trek to Phakding (2,651m)',
+        time: '4-5 hours',
+        distance: '8 km',
+        accommodation: 'Tea House',
+        meals: 'Lunch, Dinner'
+      },
+      {
+        day: 2,
+        title: 'Trek to Namche Bazaar',
+        description: 'Cross suspension bridges, first glimpse of Everest',
+        time: '6-7 hours',
+        distance: '11 km',
+        accommodation: 'Tea House',
+        meals: 'Breakfast, Lunch, Dinner'
+      },
+      {
+        day: 3,
+        title: 'Acclimatization day in Namche',
+        description: 'Rest day with optional hike to Everest View Hotel',
+        time: '3-4 hours (optional)',
+        distance: '5 km (optional)',
+        accommodation: 'Tea House',
+        meals: 'Breakfast, Lunch, Dinner'
+      },
+      {
+        day: 4,
+        title: 'Trek to Tengboche',
+        description: 'Visit famous monastery with Everest views',
+        time: '5-6 hours',
+        distance: '10 km',
+        accommodation: 'Tea House',
+        meals: 'Breakfast, Lunch, Dinner'
+      },
+      {
+        day: 5,
+        title: 'Trek to Dingboche',
+        description: 'Enter the alpine zone, spectacular mountain views',
+        time: '5-6 hours',
+        distance: '12 km',
+        accommodation: 'Tea House',
+        meals: 'Breakfast, Lunch, Dinner'
+      }
+    ],
+    reviews: [
+      {
+        id: 1,
+        name: 'Sarah Johnson',
+        rating: 5,
+        date: '2024-05-15',
+        comment: 'Absolutely incredible experience! The views were breathtaking and our guide was fantastic.',
+        avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
+        photos: ['https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80']
+      },
+      {
+        id: 2,
+        name: 'Michael Chen',
+        rating: 4,
+        date: '2024-04-22',
+        comment: 'Great trek but physically demanding. Make sure you\'re well prepared!',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
+        photos: []
+      },
+      {
+        id: 3,
+        name: 'Emma Wilson',
+        rating: 5,
+        date: '2024-04-10',
+        comment: 'Life-changing adventure. The Sherpa culture and hospitality were amazing.',
+        avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
+        photos: ['https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80']
+      },
+      {
+        id: 4,
+        name: 'David Rodriguez',
+        rating: 4,
+        date: '2024-03-28',
+        comment: 'Amazing trek with stunning views. The accommodation was basic but adequate.',
+        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
+        photos: []
+      },
+      {
+        id: 5,
+        name: 'Lisa Thompson',
+        rating: 5,
+        date: '2024-03-15',
+        comment: 'Exceeded all expectations! Perfect organization and incredible experience.',
+        avatar: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
+        photos: ['https://images.unsplash.com/photo-1500375592092-40eb2168fd21?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80']
+      },
+      {
+        id: 6,
+        name: 'James Park',
+        rating: 4,
+        date: '2024-02-20',
+        comment: 'Great adventure but weather was challenging. Still worth every moment!',
+        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
+        photos: []
+      }
+    ],
     guide: {
       name: 'Pemba Sherpa',
       experience: '15 years',
@@ -161,57 +171,73 @@ const ExperienceDetail = () => {
       bio: 'Pemba is an experienced mountain guide with over 15 years of trekking experience in the Himalayas.'
     },
     // Updated gallery with high-quality working images
-    gallery: ['https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'],
-    relatedExperiences: [{
-      id: 2,
-      name: 'Annapurna Circuit Trek',
-      description: 'Classic trek through diverse landscapes and traditional villages',
-      image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      duration: '16 days',
-      groupSize: '6-10 people',
-      difficulty: 'Moderate',
-      price: 899,
-      location: 'Annapurna Region',
-      rating: 4.3
-    }, {
-      id: 3,
-      name: 'Langtang Valley Trek',
-      description: 'Trek through the beautiful valley of glaciers and friendly locals',
-      image: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      duration: '9 days',
-      groupSize: '6-10 people',
-      difficulty: 'Moderate',
-      price: 699,
-      location: 'Langtang Region',
-      rating: 4.6
-    }, {
-      id: 4,
-      name: 'Manaslu Circuit Trek',
-      description: 'Off-the-beaten-path adventure around the eighth highest mountain',
-      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      duration: '12 days',
-      groupSize: '8-12 people',
-      difficulty: 'Extreme',
-      price: 1099,
-      location: 'Manaslu Region',
-      rating: 4.7
-    }]
+    gallery: [
+      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    ],
+    relatedExperiences: [
+      {
+        id: 2,
+        name: 'Annapurna Circuit Trek',
+        description: 'Classic trek through diverse landscapes and traditional villages',
+        image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        duration: '16 days',
+        groupSize: '6-10 people',
+        difficulty: 'Moderate',
+        price: 899,
+        location: 'Annapurna Region',
+        rating: 4.3
+      },
+      {
+        id: 3,
+        name: 'Langtang Valley Trek',
+        description: 'Trek through the beautiful valley of glaciers and friendly locals',
+        image: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        duration: '9 days',
+        groupSize: '6-10 people',
+        difficulty: 'Moderate',
+        price: 699,
+        location: 'Langtang Region',
+        rating: 4.6
+      },
+      {
+        id: 4,
+        name: 'Manaslu Circuit Trek',
+        description: 'Off-the-beaten-path adventure around the eighth highest mountain',
+        image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        duration: '12 days',
+        groupSize: '8-12 people',
+        difficulty: 'Extreme',
+        price: 1099,
+        location: 'Manaslu Region',
+        rating: 4.7
+      }
+    ]
   };
 
   // Gallery auto-scroll effect
   useEffect(() => {
     let interval: NodeJS.Timeout;
+    
     if (isGalleryPlaying) {
       interval = setInterval(() => {
-        setSelectedImageIndex(prevIndex => prevIndex === experience.gallery.length - 1 ? 0 : prevIndex + 1);
+        setSelectedImageIndex((prevIndex) => 
+          prevIndex === experience.gallery.length - 1 ? 0 : prevIndex + 1
+        );
       }, 5000); // Auto-scroll every 5 seconds
     }
+    
     return () => {
       if (interval) {
         clearInterval(interval);
       }
     };
   }, [isGalleryPlaying, experience.gallery.length]);
+
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case 'Easy':
@@ -224,20 +250,35 @@ const ExperienceDetail = () => {
         return 'bg-gray-500';
     }
   };
+
   const renderStars = (rating: number, size: string = 'w-4 h-4') => {
-    return Array.from({
-      length: 5
-    }, (_, index) => <Star key={index} className={`${size} ${index < Math.floor(rating) ? 'text-yellow-500 fill-yellow-500' : index < rating ? 'text-yellow-500 fill-yellow-500/50' : 'text-gray-300'}`} />);
+    return Array.from({ length: 5 }, (_, index) => (
+      <Star
+        key={index}
+        className={`${size} ${
+          index < Math.floor(rating)
+            ? 'text-yellow-500 fill-yellow-500'
+            : index < rating
+            ? 'text-yellow-500 fill-yellow-500/50'
+            : 'text-gray-300'
+        }`}
+      />
+    ));
   };
+
   const calculateTotal = () => {
     const basePrice = experience.price;
     const adultTotal = basePrice * bookingData.adults;
     const childrenTotal = basePrice * 0.5 * bookingData.children;
     return adultTotal + childrenTotal;
   };
+
   const totalReviews = experience.reviews.length;
   const totalPages = Math.ceil(totalReviews / reviewsPerPage);
-  const currentReviews = experience.reviews.slice((currentReviewPage - 1) * reviewsPerPage, currentReviewPage * reviewsPerPage);
+  const currentReviews = experience.reviews.slice(
+    (currentReviewPage - 1) * reviewsPerPage,
+    currentReviewPage * reviewsPerPage
+  );
 
   // Handle tab navigation from URL hash
   useEffect(() => {
@@ -250,18 +291,13 @@ const ExperienceDetail = () => {
   // Handle tab change with URL update
   const handleTabChange = (value: string) => {
     setActiveTab(value);
-    navigate(`#${value}`, {
-      replace: true
-    });
+    navigate(`#${value}`, { replace: true });
 
     // Smooth scroll to content
     setTimeout(() => {
       const element = document.getElementById('tab-content');
       if (element) {
-        element.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }, 100);
   };
@@ -272,34 +308,38 @@ const ExperienceDetail = () => {
       setRelatedExperiencesIndex(relatedExperiencesIndex + 1);
     }
   };
+
   const prevRelatedExperience = () => {
     if (relatedExperiencesIndex > 0) {
       setRelatedExperiencesIndex(relatedExperiencesIndex - 1);
     }
   };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  return <div className="min-h-screen bg-white">
+
+  return (
+    <div className="min-h-screen bg-white">
       <Header />
 
       {/* Hero Banner */}
-      <section className="relative h-[70vh] bg-cover bg-center bg-no-repeat" style={{
-      backgroundImage: `url(${experience.heroImage})`
-    }}>
+      <section
+        className="relative h-[70vh] bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${experience.heroImage})` }}
+      >
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
         <div className="absolute inset-0 flex items-end">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-            <motion.div initial={{
-            opacity: 0,
-            y: 50
-          }} animate={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.8
-          }}>
-              <Link to="/experiences" className="inline-flex items-center text-white/80 hover:text-white mb-6 transition-colors">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <Link
+                to="/experiences"
+                className="inline-flex items-center text-white/80 hover:text-white mb-6 transition-colors"
+              >
                 <ArrowLeft className="w-5 h-5 mr-2" />
                 Back to Experiences
               </Link>
@@ -350,73 +390,100 @@ const ExperienceDetail = () => {
                 {/* Overview Tab */}
                 <TabsContent value="overview" className="space-y-12">
                   {/* Photo Gallery with Enhanced Controls */}
-                  <motion.section initial={{
-                  opacity: 0,
-                  y: 30
-                }} whileInView={{
-                  opacity: 1,
-                  y: 0
-                }} transition={{
-                  duration: 0.6
-                }}>
+                  <motion.section
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                  >
                     <div className="flex items-center justify-between mb-6">
-                      <h2 className="font-tm-sans uppercase text-nepal-primary text-2xl font-extrabold">
+                      <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary">
                         Photo Gallery
                       </h2>
                       
                       {/* Play/Pause Control */}
-                      <Button variant="outline" size="sm" onClick={() => setIsGalleryPlaying(!isGalleryPlaying)} className="flex items-center gap-2">
-                        {isGalleryPlaying ? <>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setIsGalleryPlaying(!isGalleryPlaying)}
+                        className="flex items-center gap-2"
+                      >
+                        {isGalleryPlaying ? (
+                          <>
                             <Pause className="w-4 h-4" />
                             Pause
-                          </> : <>
+                          </>
+                        ) : (
+                          <>
                             <Play className="w-4 h-4" />
                             Play
-                          </>}
+                          </>
+                        )}
                       </Button>
                     </div>
 
                     <div className="space-y-4">
                       {/* Main Image */}
                       <div className="relative h-96 rounded-lg overflow-hidden">
-                        <img src={experience.gallery[selectedImageIndex]} alt={`Gallery ${selectedImageIndex + 1}`} className="w-full h-full object-cover cursor-pointer" onClick={() => setIsModalOpen(true)} />
-                        <button onClick={() => setIsModalOpen(true)} className="absolute top-4 right-4 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors">
+                        <img
+                          src={experience.gallery[selectedImageIndex]}
+                          alt={`Gallery ${selectedImageIndex + 1}`}
+                          className="w-full h-full object-cover cursor-pointer"
+                          onClick={() => setIsModalOpen(true)}
+                        />
+                        <button
+                          onClick={() => setIsModalOpen(true)}
+                          className="absolute top-4 right-4 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+                        >
                           <Camera className="w-5 h-5" />
                         </button>
                         
                         {/* Navigation Arrows */}
-                        <button onClick={() => setSelectedImageIndex(selectedImageIndex === 0 ? experience.gallery.length - 1 : selectedImageIndex - 1)} className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors">
+                        <button
+                          onClick={() => setSelectedImageIndex(
+                            selectedImageIndex === 0 ? experience.gallery.length - 1 : selectedImageIndex - 1
+                          )}
+                          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+                        >
                           <ChevronLeft className="w-5 h-5" />
                         </button>
                         
-                        <button onClick={() => setSelectedImageIndex(selectedImageIndex === experience.gallery.length - 1 ? 0 : selectedImageIndex + 1)} className="absolute right-14 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors">
+                        <button
+                          onClick={() => setSelectedImageIndex(
+                            selectedImageIndex === experience.gallery.length - 1 ? 0 : selectedImageIndex + 1
+                          )}
+                          className="absolute right-14 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+                        >
                           <ChevronRight className="w-5 h-5" />
                         </button>
                       </div>
 
                       {/* Thumbnail Grid */}
                       <div className="grid grid-cols-6 gap-2">
-                        {experience.gallery.map((image, index) => <button key={index} onClick={() => {
-                        setSelectedImageIndex(index);
-                        setIsGalleryPlaying(false); // Pause auto-scroll when manually selecting
-                      }} className={`relative h-20 rounded overflow-hidden ${selectedImageIndex === index ? 'ring-2 ring-nepal-orange' : ''}`}>
-                            <img src={image} alt={`Thumbnail ${index + 1}`} className="w-full h-full object-cover hover:opacity-80 transition-opacity" />
-                          </button>)}
+                        {experience.gallery.map((image, index) => (
+                          <button
+                            key={index}
+                            onClick={() => {
+                              setSelectedImageIndex(index);
+                              setIsGalleryPlaying(false); // Pause auto-scroll when manually selecting
+                            }}
+                            className={`relative h-20 rounded overflow-hidden ${
+                              selectedImageIndex === index ? 'ring-2 ring-nepal-orange' : ''
+                            }`}
+                          >
+                            <img
+                              src={image}
+                              alt={`Thumbnail ${index + 1}`}
+                              className="w-full h-full object-cover hover:opacity-80 transition-opacity"
+                            />
+                          </button>
+                        ))}
                       </div>
                     </div>
                   </motion.section>
 
                   {/* Description */}
-                  <motion.section initial={{
-                  opacity: 0,
-                  y: 30
-                }} whileInView={{
-                  opacity: 1,
-                  y: 0
-                }} transition={{
-                  duration: 0.6
-                }}>
-                    <h2 className="font-tm-sans uppercase text-nepal-primary mb-6 text-2xl font-extrabold ">
+                  <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+                    <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
                       About This Experience
                     </h2>
                     <div className="prose prose-lg max-w-none text-gray-700 mb-8">
@@ -437,16 +504,8 @@ const ExperienceDetail = () => {
                   </motion.section>
 
                   {/* Host Information */}
-                  <motion.section initial={{
-                  opacity: 0,
-                  y: 30
-                }} whileInView={{
-                  opacity: 1,
-                  y: 0
-                }} transition={{
-                  duration: 0.6
-                }}>
-                    <h2 className="font-tm-sans uppercase text-nepal-primary mb-6 text-2xl font-extrabold">
+                  <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+                    <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
                       Your Guide
                     </h2>
                     <div className="flex items-start gap-4 p-6 bg-gray-50 rounded-lg">
@@ -471,15 +530,7 @@ const ExperienceDetail = () => {
 
                 {/* Itinerary Tab */}
                 <TabsContent value="itinerary">
-                  <motion.div initial={{
-                  opacity: 0,
-                  y: 30
-                }} whileInView={{
-                  opacity: 1,
-                  y: 0
-                }} transition={{
-                  duration: 0.6
-                }}>
+                  <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
                     <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
                       Detailed Itinerary
                     </h2>
@@ -526,15 +577,7 @@ const ExperienceDetail = () => {
 
                 {/* Inclusions Tab */}
                 <TabsContent value="inclusions">
-                  <motion.div initial={{
-                  opacity: 0,
-                  y: 30
-                }} whileInView={{
-                  opacity: 1,
-                  y: 0
-                }} transition={{
-                  duration: 0.6
-                }} className="space-y-8">
+                  <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="space-y-8">
                     <div>
                       <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
                         What's Included
@@ -563,15 +606,7 @@ const ExperienceDetail = () => {
 
                 {/* Reviews Tab */}
                 <TabsContent value="reviews">
-                  <motion.div initial={{
-                  opacity: 0,
-                  y: 30
-                }} whileInView={{
-                  opacity: 1,
-                  y: 0
-                }} transition={{
-                  duration: 0.6
-                }}>
+                  <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
                     <div className="flex items-center justify-between mb-6">
                       <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary">
                         Traveler Reviews
@@ -608,9 +643,7 @@ const ExperienceDetail = () => {
                         <Button variant="outline" size="sm" onClick={() => setCurrentReviewPage(Math.max(1, currentReviewPage - 1))} disabled={currentReviewPage === 1}>
                           <ChevronLeft className="w-4 h-4" />
                         </Button>
-                        {Array.from({
-                      length: totalPages
-                    }, (_, i) => i + 1).map(page => <Button key={page} variant={currentReviewPage === page ? "default" : "outline"} size="sm" onClick={() => setCurrentReviewPage(page)}>
+                        {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => <Button key={page} variant={currentReviewPage === page ? "default" : "outline"} size="sm" onClick={() => setCurrentReviewPage(page)}>
                             {page}
                           </Button>)}
                         <Button variant="outline" size="sm" onClick={() => setCurrentReviewPage(Math.min(totalPages, currentReviewPage + 1))} disabled={currentReviewPage === totalPages}>
@@ -623,16 +656,8 @@ const ExperienceDetail = () => {
             </Tabs>
 
             {/* Related Experiences */}
-            <motion.section initial={{
-            opacity: 0,
-            y: 30
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.6
-          }} className="mt-16">
-              <h2 className="font-tm-sans uppercase text-nepal-primary mb-6 text-2xl font-extrabold">
+            <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="mt-16">
+              <h2 className="text-3xl font-bebas uppercase font-bold text-nepal-primary mb-6">
                 Related Experiences
               </h2>
               
@@ -648,14 +673,10 @@ const ExperienceDetail = () => {
 
                 {/* Cards Container */}
                 <div className="overflow-hidden px-0">
-                  <div className="flex transition-transform duration-300 ease-in-out gap-6" style={{
-                  transform: `translateX(-${relatedExperiencesIndex * 50}%)`
-                }}>
+                  <div className="flex transition-transform duration-300 ease-in-out gap-6" style={{ transform: `translateX(-${relatedExperiencesIndex * 50}%)` }}>
                     {experience.relatedExperiences.map(relatedExp => <div key={relatedExp.id} className="flex-shrink-0 w-1/2">
                         <Link to={`/experiences/${relatedExp.id}`}>
-                          <motion.div whileHover={{
-                        y: -10
-                      }} className="group cursor-pointer">
+                          <motion.div whileHover={{ y: -10 }} className="group cursor-pointer">
                             <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100">
                               <div className="relative overflow-hidden">
                                 <img src={relatedExp.image} alt={relatedExp.name} className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
@@ -726,18 +747,9 @@ const ExperienceDetail = () => {
                       Traveler Details
                     </h4>
                     <div className="space-y-2">
-                      <Input placeholder="Full Name *" value={bookingData.fullName} onChange={e => setBookingData({
-                      ...bookingData,
-                      fullName: e.target.value
-                    })} />
-                      <Input type="email" placeholder="Email Address *" value={bookingData.email} onChange={e => setBookingData({
-                      ...bookingData,
-                      email: e.target.value
-                    })} />
-                      <Input type="tel" placeholder="Phone Number *" value={bookingData.phone} onChange={e => setBookingData({
-                      ...bookingData,
-                      phone: e.target.value
-                    })} />
+                      <Input placeholder="Full Name *" value={bookingData.fullName} onChange={e => setBookingData({...bookingData, fullName: e.target.value})} />
+                      <Input type="email" placeholder="Email Address *" value={bookingData.email} onChange={e => setBookingData({...bookingData, email: e.target.value})} />
+                      <Input type="tel" placeholder="Phone Number *" value={bookingData.phone} onChange={e => setBookingData({...bookingData, phone: e.target.value})} />
                     </div>
                   </div>
 
@@ -747,15 +759,9 @@ const ExperienceDetail = () => {
                       <Calendar className="w-4 h-4" />
                       Tour Date & Duration
                     </h4>
-                    <Input type="date" value={bookingData.startDate} onChange={e => setBookingData({
-                    ...bookingData,
-                    startDate: e.target.value
-                  })} />
+                    <Input type="date" value={bookingData.startDate} onChange={e => setBookingData({...bookingData, startDate: e.target.value})} />
                     <div className="flex items-center gap-2">
-                      <input type="checkbox" id="flexible" checked={bookingData.flexibleDate} onChange={e => setBookingData({
-                      ...bookingData,
-                      flexibleDate: e.target.checked
-                    })} />
+                      <input type="checkbox" id="flexible" checked={bookingData.flexibleDate} onChange={e => setBookingData({...bookingData, flexibleDate: e.target.checked})} />
                       <Label htmlFor="flexible" className="text-sm">Flexible dates</Label>
                     </div>
                   </div>
@@ -770,17 +776,11 @@ const ExperienceDetail = () => {
                       <div className="flex items-center justify-between">
                         <Label>Adults</Label>
                         <div className="flex items-center gap-2">
-                          <Button size="sm" variant="outline" onClick={() => setBookingData({
-                          ...bookingData,
-                          adults: Math.max(1, bookingData.adults - 1)
-                        })}>
+                          <Button size="sm" variant="outline" onClick={() => setBookingData({...bookingData, adults: Math.max(1, bookingData.adults - 1)})}>
                             -
                           </Button>
                           <span className="w-8 text-center">{bookingData.adults}</span>
-                          <Button size="sm" variant="outline" onClick={() => setBookingData({
-                          ...bookingData,
-                          adults: bookingData.adults + 1
-                        })}>
+                          <Button size="sm" variant="outline" onClick={() => setBookingData({...bookingData, adults: bookingData.adults + 1})}>
                             +
                           </Button>
                         </div>
@@ -788,17 +788,11 @@ const ExperienceDetail = () => {
                       <div className="flex items-center justify-between">
                         <Label>Children</Label>
                         <div className="flex items-center gap-2">
-                          <Button size="sm" variant="outline" onClick={() => setBookingData({
-                          ...bookingData,
-                          children: Math.max(0, bookingData.children - 1)
-                        })}>
+                          <Button size="sm" variant="outline" onClick={() => setBookingData({...bookingData, children: Math.max(0, bookingData.children - 1)})}>
                             -
                           </Button>
                           <span className="w-8 text-center">{bookingData.children}</span>
-                          <Button size="sm" variant="outline" onClick={() => setBookingData({
-                          ...bookingData,
-                          children: bookingData.children + 1
-                        })}>
+                          <Button size="sm" variant="outline" onClick={() => setBookingData({...bookingData, children: bookingData.children + 1})}>
                             +
                           </Button>
                         </div>
@@ -806,17 +800,11 @@ const ExperienceDetail = () => {
                       <div className="flex items-center justify-between">
                         <Label>Infants</Label>
                         <div className="flex items-center gap-2">
-                          <Button size="sm" variant="outline" onClick={() => setBookingData({
-                          ...bookingData,
-                          infants: Math.max(0, bookingData.infants - 1)
-                        })}>
+                          <Button size="sm" variant="outline" onClick={() => setBookingData({...bookingData, infants: Math.max(0, bookingData.infants - 1)})}>
                             -
                           </Button>
                           <span className="w-8 text-center">{bookingData.infants}</span>
-                          <Button size="sm" variant="outline" onClick={() => setBookingData({
-                          ...bookingData,
-                          infants: bookingData.infants + 1
-                        })}>
+                          <Button size="sm" variant="outline" onClick={() => setBookingData({...bookingData, infants: bookingData.infants + 1})}>
                             +
                           </Button>
                         </div>
@@ -871,26 +859,17 @@ const ExperienceDetail = () => {
             </div>
             
             <div className="space-y-4">
-              <Input placeholder="Select Date" type="date" value={bookingData.startDate} onChange={e => setBookingData({
-            ...bookingData,
-            startDate: e.target.value
-          })} />
+              <Input placeholder="Select Date" type="date" value={bookingData.startDate} onChange={e => setBookingData({...bookingData, startDate: e.target.value})} />
               
               <div className="grid grid-cols-3 gap-2">
                 <div className="text-center">
                   <Label className="text-xs">Adults</Label>
                   <div className="flex items-center justify-center gap-1 mt-1">
-                    <Button size="sm" variant="outline" onClick={() => setBookingData({
-                  ...bookingData,
-                  adults: Math.max(1, bookingData.adults - 1)
-                })}>
+                    <Button size="sm" variant="outline" onClick={() => setBookingData({...bookingData, adults: Math.max(1, bookingData.adults - 1)})}>
                       -
                     </Button>
                     <span className="text-sm w-6 text-center">{bookingData.adults}</span>
-                    <Button size="sm" variant="outline" onClick={() => setBookingData({
-                  ...bookingData,
-                  adults: bookingData.adults + 1
-                })}>
+                    <Button size="sm" variant="outline" onClick={() => setBookingData({...bookingData, adults: bookingData.adults + 1})}>
                       +
                     </Button>
                   </div>
@@ -898,17 +877,11 @@ const ExperienceDetail = () => {
                 <div className="text-center">
                   <Label className="text-xs">Children</Label>
                   <div className="flex items-center justify-center gap-1 mt-1">
-                    <Button size="sm" variant="outline" onClick={() => setBookingData({
-                  ...bookingData,
-                  children: Math.max(0, bookingData.children - 1)
-                })}>
+                    <Button size="sm" variant="outline" onClick={() => setBookingData({...bookingData, children: Math.max(0, bookingData.children - 1)})}>
                       -
                     </Button>
                     <span className="text-sm w-6 text-center">{bookingData.children}</span>
-                    <Button size="sm" variant="outline" onClick={() => setBookingData({
-                  ...bookingData,
-                  children: bookingData.children + 1
-                })}>
+                    <Button size="sm" variant="outline" onClick={() => setBookingData({...bookingData, children: bookingData.children + 1})}>
                       +
                     </Button>
                   </div>
@@ -916,17 +889,11 @@ const ExperienceDetail = () => {
                 <div className="text-center">
                   <Label className="text-xs">Infants</Label>
                   <div className="flex items-center justify-center gap-1 mt-1">
-                    <Button size="sm" variant="outline" onClick={() => setBookingData({
-                  ...bookingData,
-                  infants: Math.max(0, bookingData.infants - 1)
-                })}>
+                    <Button size="sm" variant="outline" onClick={() => setBookingData({...bookingData, infants: Math.max(0, bookingData.infants - 1)})}>
                       -
                     </Button>
                     <span className="text-sm w-6 text-center">{bookingData.infants}</span>
-                    <Button size="sm" variant="outline" onClick={() => setBookingData({
-                  ...bookingData,
-                  infants: bookingData.infants + 1
-                })}>
+                    <Button size="sm" variant="outline" onClick={() => setBookingData({...bookingData, infants: bookingData.infants + 1})}>
                       +
                     </Button>
                   </div>
@@ -969,6 +936,8 @@ const ExperienceDetail = () => {
       <div className="lg:hidden h-20"></div>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default ExperienceDetail;
