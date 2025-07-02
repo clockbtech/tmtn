@@ -142,7 +142,7 @@ const BlogDetailSidebar = ({ currentBlog }: BlogDetailSidebarProps) => {
               <img
                 src={destination.image}
                 alt={destination.title}
-                className="w-12 h-12 rounded-lg object-cover"
+                className="w-20 h-16 rounded-lg object-cover"
               />
               <h4 className="text-sm font-medium text-gray-900 group-hover:text-nepal-primary transition-colors">
                 {destination.title}
