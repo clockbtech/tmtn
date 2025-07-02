@@ -27,9 +27,10 @@ const mockBlogDetail = {
     This trek is suitable for trekkers with moderate to good fitness levels and is often undertaken by those seeking the ultimate trekking experience in Nepal. While the trek offers incredible natural beauty and the thrill of being at the foot of Everest, it also challenges trekkers with the altitude and long, strenuous days. The Everest Base Camp Trek takes you through the Sagarmatha National Park, a UNESCO World Heritage Site, and provides incredible views of Mount Everest, as well as surrounding peaks such as Lhotse, Makalu, and Cho Oyu. The trek starts in Lukla, following a well-trodden path through picturesque villages, green forests, and alpine meadows, all while being surrounded by snow-capped peaks.Along the way, trekkers will pass through famous Sherpa villages like Namche Bazaar, Tengboche, and Dingboche, all of which offer unique cultural experiences and panoramic views.</p>
     
     <blockquote>"The mountains are calling and I must go." - John Muir</blockquote>
+    <br/>
     
     <img src="https://images.unsplash.com/photo-1597666864156-2e7ae49fca5a?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mountain vista during trek" />
-   
+   <br/>
     <p>The Everest region is part of the Mahalangur mountain range in the central Himalayas and is often characterized by dramatic landscapes, including glaciers, alpine meadows, rocky ridges, and steep mountain valleys. Mount Everest is a tectonic collision of the Indian and Eurasian plates, which has given rise to the Himalayan mountain range. The trek takes trekkers through glaciers like the Khumbu Glacier, deep valleys, and rugged ridgelines. The geological history of the region is evidenced by the varied rock formations and rugged terrain that surround Everest and its neighboring peaks. The Everest Base Camp Trek passes through diverse ecosystems, each supporting different species of flora and fauna. The flora changes as you ascend through the different altitudes, with lower regions covered in lush forests of pine, rhododendron, and oak, while higher altitudes feature alpine meadows and sparse vegetation.</p>
     
     <blockquote>"It is not the mountain we conquer, but ourselves." - Sir Edmund Hillary</blockquote>
