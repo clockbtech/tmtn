@@ -14,15 +14,19 @@ const VideoCarousel = () => {
   const [fullscreenVideo, setFullscreenVideo] = useState<Video | null>(null);
   const [fullscreenIndex, setFullscreenIndex] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [translateX, setTranslateX] = useState(0);
 
-  // Create enough copies for smooth infinite scrolling
-  const extendedVideos = [...videos, ...videos, ...videos, ...videos];
-  const startIndex = videos.length; // Start from the middle set
+  // Create a large array for seamless infinite scrolling
+  const getExtendedVideos = () => {
+    const copies = 20; // Create many copies for smooth infinite scroll
+    const extended = [];
+    for (let i = 0; i < copies; i++) {
+      extended.push(...videos);
+    }
+    return extended;
+  };
 
-  // Initialize at the middle set for infinite loop
-  useEffect(() => {
-    setCurrentIndex(startIndex);
-  }, []);
+  const extendedVideos = getExtendedVideos();
 
   // Auto-advance carousel continuously
   useEffect(() => {
@@ -39,20 +43,11 @@ const VideoCarousel = () => {
     };
   }, [isPlaying, fullscreenVideo]);
 
-  // Handle infinite loop reset without animation
+  // Calculate translateX based on currentIndex
   useEffect(() => {
-    // When we reach the end of the third set, jump back to the second set
-    if (currentIndex >= videos.length * 3) {
-      setTimeout(() => {
-        setCurrentIndex(videos.length);
-      }, 50); // Very short delay to complete current animation
-    }
-    // When we go before the first set, jump to the second set
-    else if (currentIndex < 0) {
-      setTimeout(() => {
-        setCurrentIndex(videos.length * 2 - 1);
-      }, 50);
-    }
+    const itemWidth = 280 + 16; // width + gap
+    const newTranslateX = -currentIndex * itemWidth;
+    setTranslateX(newTranslateX);
   }, [currentIndex]);
 
   const openFullscreen = (video: Video, index: number) => {
@@ -106,17 +101,17 @@ const VideoCarousel = () => {
             <div className="overflow-hidden">
               <motion.div
                 className="flex gap-4"
-                animate={{
-                  x: `${-currentIndex * (280 + 16)}px`
+                style={{
+                  transform: `translateX(${translateX}px)`
                 }}
                 transition={{
-                  duration: currentIndex >= videos.length * 3 || currentIndex < 0 ? 0 : 0.8,
+                  duration: 0.8,
                   ease: "easeInOut"
                 }}
               >
                 {extendedVideos.map((video, index) => (
                   <VideoItem
-                    key={`${video.id}-${Math.floor(index / videos.length)}-${index % videos.length}`}
+                    key={`${video.id}-${index}`}
                     video={video}
                     index={index}
                     onVideoClick={openFullscreen}
@@ -128,7 +123,7 @@ const VideoCarousel = () => {
 
           <ProgressIndicator 
             totalItems={videos.length}
-            currentIndex={currentIndex - startIndex}
+            currentIndex={currentIndex % videos.length}
           />
         </div>
       </section>
