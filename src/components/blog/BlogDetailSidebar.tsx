@@ -35,19 +35,19 @@ const relatedExperiences = [
   {
     title: "Helicopter Tour to Everest Base Camp",
     slug: "helicopter-everest-tour",
-    image: "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=300&h=200&fit=crop",
+    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=300&h=200&fit=crop",
     price: "NPR 125,000"
   },
   {
     title: "15-Day Everest Base Camp Trek",
     slug: "everest-base-camp-trek",
-    image: "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=300&h=200&fit=crop",
+    image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=300&h=200&fit=crop",
     price: "NPR 45,000"
   },
   {
     title: "Sherpa Culture Experience",
     slug: "sherpa-culture-experience",
-    image: "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=300&h=200&fit=crop",
+    image: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=300&h=200&fit=crop",
     price: "NPR 12,000"
   }
 ];
@@ -101,21 +101,28 @@ const BlogDetailSidebar = ({ currentBlog }: BlogDetailSidebarProps) => {
         </div>
       </div>
 
-      {/* Related Experiences */}
+      {/* Related Experiences - Now with images */}
       <div className="bg-white rounded-lg shadow-md p-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Related Experiences</h3>
-        <div className="space-y-3">
+        <div className="space-y-4">
           {relatedExperiences.map((experience) => (
             <Link
               key={experience.slug}
               to={`/experiences/${experience.slug}`}
               className="block group"
             >
-              <div>
-                <h4 className="text-sm font-medium text-gray-900 group-hover:text-nepal-primary transition-colors mb-1">
-                  {experience.title}
-                </h4>
-                <p className="text-sm text-nepal-primary font-semibold">{experience.price}</p>
+              <div className="flex space-x-3">
+                <img
+                  src={experience.image}
+                  alt={experience.title}
+                  className="w-20 h-16 rounded-lg object-cover flex-shrink-0"
+                />
+                <div className="flex-1">
+                  <h4 className="text-sm font-medium text-gray-900 group-hover:text-nepal-primary transition-colors mb-1">
+                    {experience.title}
+                  </h4>
+                  <p className="text-sm text-nepal-primary font-semibold">{experience.price}</p>
+                </div>
               </div>
             </Link>
           ))}

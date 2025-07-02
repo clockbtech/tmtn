@@ -26,11 +26,25 @@ const SocialShareBar = ({ blog }: SocialShareBarProps) => {
     whatsapp: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`
   };
 
-  // Scroll detection effect
+  // Scroll detection effect with footer detection
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      const threshold = 200; // Show after scrolling 200px
+      const threshold = 200;
+      
+      // Get footer element
+      const footer = document.querySelector('footer');
+      if (footer) {
+        const footerRect = footer.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        // Hide if footer is visible
+        if (footerRect.top <= windowHeight) {
+          setShowStickyBar(false);
+          return;
+        }
+      }
+      
       setShowStickyBar(scrollPosition > threshold);
     };
 
@@ -51,8 +65,8 @@ const SocialShareBar = ({ blog }: SocialShareBarProps) => {
 
   return (
     <>
-      {/* Desktop - Floating Left Sidebar - Only show after scroll */}
-      <div className={`hidden lg:block fixed left-6 top-1/2 transform -translate-y-1/2 z-50 transition-all duration-300 ${
+      {/* Desktop - Floating Left Sidebar - Positioned further left */}
+      <div className={`hidden lg:block fixed left-2 top-1/2 transform -translate-y-1/2 z-40 transition-all duration-300 ${
         showStickyBar ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-full'
       }`}>
         <div className="bg-white shadow-lg p-3 border rounded-full">
