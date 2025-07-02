@@ -28,27 +28,8 @@ const mockBlogDetail = {
     
     <blockquote>"The mountains are calling and I must go." - John Muir</blockquote>
     
-    <h3>Best Time to Trek</h3>
-    <ul>
-      <li>Pre-monsoon: March to May</li>
-      <li>Post-monsoon: September to November</li>
-      <li>Clear mountain views and stable weather</li>
-    </ul>
-    
-    <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&h=400&fit=crop" alt="Mountain vista during trek" />
-    
-    <h3>Essential Gear</h3>
-    <p>Having the right gear can make or break your trek. Here's what you'll need:</p>
-    
-    <ol>
-      <li>High-quality trekking boots</li>
-      <li>Layered clothing system</li>
-      <li>Sleeping bag rated for -15°C</li>
-      <li>Trekking poles</li>
-      <li>Headlamp and extra batteries</li>
-    </ol>
-    
-    <h2>The Trek Experience</h2>
+    <img src="https://images.unsplash.com/photo-1597666864156-2e7ae49fca5a?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mountain vista during trek" />
+   
     <p>The Everest region is part of the Mahalangur mountain range in the central Himalayas and is often characterized by dramatic landscapes, including glaciers, alpine meadows, rocky ridges, and steep mountain valleys. Mount Everest is a tectonic collision of the Indian and Eurasian plates, which has given rise to the Himalayan mountain range. The trek takes trekkers through glaciers like the Khumbu Glacier, deep valleys, and rugged ridgelines. The geological history of the region is evidenced by the varied rock formations and rugged terrain that surround Everest and its neighboring peaks. The Everest Base Camp Trek passes through diverse ecosystems, each supporting different species of flora and fauna. The flora changes as you ascend through the different altitudes, with lower regions covered in lush forests of pine, rhododendron, and oak, while higher altitudes feature alpine meadows and sparse vegetation.</p>
     
     <blockquote>"It is not the mountain we conquer, but ourselves." - Sir Edmund Hillary</blockquote>
