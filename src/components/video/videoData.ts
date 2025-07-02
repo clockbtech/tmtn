@@ -5,7 +5,7 @@ export const videos: Video[] = [
   {
     id: '1',
     title: 'Mount Everest - World\'s Highest Peak',
-    url: 'https://www.tiktok.com/@abackpackerboyfromnepal/video/7432872776232455432',
+    url: '/Videos/Video1.mp4',
     thumbnail: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=800&fit=crop'
   },
   {
