@@ -51,7 +51,7 @@ const ExperienceDetail = () => {
     subtitle: 'The Ultimate Himalayan Adventure to the Base of the World\'s Highest Peak',
     rating: 4.5,
     reviewCount: 127,
-    heroImage: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+    heroImage: 'https://images.prismic.io/elite-exped/b6a9c98d-e381-49a2-bfef-b685b78508af_Nimsdai-Elite-Exped-Everest-Edits-Guy-Bolton003.jpg?auto=compress,format&rect=0,0,2048,1273&w=2400&h=1492',
     description: `The Everest Base Camp Trek is one of the most iconic and challenging adventures in the world. This legendary journey takes you through the heart of the Khumbu region, following in the footsteps of famous mountaineers to reach the base camp of Mount Everest at 5,364 meters.
 
     The trek offers an incredible combination of natural beauty, cultural immersion, and personal achievement. You'll traverse through traditional Sherpa villages, ancient Buddhist monasteries, and dramatic mountain landscapes while acclimatizing to the high altitude.`,
@@ -110,7 +110,7 @@ const ExperienceDetail = () => {
       rating: 5,
       date: '2024-05-15',
       comment: 'Absolutely incredible experience! The views were breathtaking and our guide was fantastic.',
-      avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDZ8fEdpcmx8ZW58MHx8MHx8fDA%3D',
       photos: ['https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80']
     }, {
       id: 2,
