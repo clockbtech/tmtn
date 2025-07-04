@@ -325,7 +325,7 @@ const ExperienceDetail = () => {
               <h1 className="text-5xl font-bebas uppercase text-white mb-4 lg:text-6xl font-extrabold">
                 {experience.name}
               </h1>
-              <p className="text-xl lg:text-2xl text-white/90 max-w-3xl">
+              <p className="text-xl text-white/90 max-w-3xl lg:text-xl">
                 {experience.subtitle}
               </p>
             </motion.div>
