@@ -2,7 +2,6 @@
 import React, { useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useSmoothScroll } from '../hooks/useSmoothScroll';
 import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
 import PopularDestinations from '../components/PopularDestinations';
@@ -18,9 +17,6 @@ import Footer from '../components/Footer';
 gsap.registerPlugin(ScrollTrigger);
 
 const Index = () => {
-  // Enable smooth scrolling
-  useSmoothScroll();
-
   useEffect(() => {
     // Global GSAP ScrollTrigger refresh on load
     ScrollTrigger.refresh();

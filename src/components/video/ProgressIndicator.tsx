@@ -1,6 +1,5 @@
 
 import React from 'react';
-import ProgressIndicatorUI from '../ui/progress-indicator';
 
 interface ProgressIndicatorProps {
   totalItems: number;
@@ -10,11 +9,18 @@ interface ProgressIndicatorProps {
 const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({ totalItems, currentIndex }) => {
   return (
     <div className="flex justify-center mt-8">
-      <ProgressIndicatorUI
-        totalItems={totalItems}
-        currentIndex={currentIndex}
-        className="space-x-2"
-      />
+      <div className="flex space-x-2">
+        {Array.from({ length: totalItems }).map((_, index) => (
+          <div
+            key={index}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              index === (currentIndex % totalItems)
+                ? 'bg-nepal-orange w-8'
+                : 'bg-gray-300 w-2'
+            }`}
+          />
+        ))}
+      </div>
     </div>
   );
 };

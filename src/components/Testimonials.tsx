@@ -2,8 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
-import { Star, Quote } from 'lucide-react';
-import ProgressIndicator from './ui/progress-indicator';
+import { Star, Quote, Mountain, Plane, Church } from 'lucide-react';
 
 const Testimonials = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -69,10 +68,6 @@ const Testimonials = () => {
     });
   }, [currentIndex]);
 
-  const handleIndicatorClick = (index: number) => {
-    setCurrentIndex(index);
-  };
-
   // Prayer Flag Dots Animation
   const PrayerFlagDots = () => (
     <div className="absolute top-4 right-4 hidden lg:flex space-x-1 opacity-[0.08]">
@@ -107,6 +102,9 @@ const Testimonials = () => {
         {/* Overlay for better text readability */}
         {/* <div className="absolute inset-0 bg-white/85"></div> */}
       </div>
+
+      {/* Scattered Travel Icons */}
+     
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
@@ -210,13 +208,21 @@ const Testimonials = () => {
             </motion.div>
           </AnimatePresence>
 
-          {/* Progress Indicator */}
-          <div className="mt-8">
-            <ProgressIndicator
-              totalItems={testimonials.length}
-              currentIndex={currentIndex}
-              onIndicatorClick={handleIndicatorClick}
-            />
+          {/* Navigation Dots */}
+          <div className="flex justify-center mt-8 space-x-2">
+            {testimonials.map((_, index) => (
+              <motion.button
+                key={index}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setCurrentIndex(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === currentIndex 
+                    ? 'bg-nepal-orange scale-125 shadow-lg' 
+                    : 'bg-gray-300 hover:bg-gray-400'
+                }`}
+              />
+            ))}
           </div>
         </div>
       </div>
