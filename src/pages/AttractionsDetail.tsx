@@ -140,10 +140,10 @@ const AttractionsDetail = () => {
                 <ArrowLeft className="w-5 h-5 mr-2" />
                 Back to Attractions
               </Link>
-              <h1 className="text-5xl font-bebas uppercase text-white mb-4 lg:text-6xl font-extrabold">
+              <h1 className="text-5xl font-bebas uppercase text-white mb-4 lg:text-6xl font-bold">
                 {attraction.name}
               </h1>
-              <p className="text-xl lg:text-2xl text-white/90 max-w-3xl">
+              <p className="text-xl text-white/90 max-w-3xl lg:text-xl">
                 {attraction.subtitle}
               </p>
             </motion.div>
