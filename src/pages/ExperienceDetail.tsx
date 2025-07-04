@@ -322,7 +322,7 @@ const ExperienceDetail = () => {
                 </div>
               </div>
               
-              <h1 className="text-5xl font-bebas uppercase text-white mb-4 lg:text-6xl font-extrabold">
+              <h1 className="text-5xl font-bebas uppercase text-white mb-4 lg:text-6xl font-bold">
                 {experience.name}
               </h1>
               <p className="text-xl text-white/90 max-w-3xl lg:text-xl">
