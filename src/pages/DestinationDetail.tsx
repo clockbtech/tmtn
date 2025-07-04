@@ -122,7 +122,7 @@ const DestinationDetail = () => {
                 <ArrowLeft className="w-5 h-5 mr-2" />
                 Back to Destinations
               </Link>
-              <h1 className="text-5xl lg:text-7xl font-bebas uppercase font-bold text-white mb-4">
+              <h1 className="text-5xl font-bebas uppercase text-white mb-4 lg:text-6xl font-extrabold">
                 {destination.name}
               </h1>
               <p className="text-xl lg:text-2xl text-white/90 max-w-3xl">
