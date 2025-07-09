@@ -35,7 +35,7 @@ const CollapsibleSearch = ({ textColor }: CollapsibleSearchProps) => {
             animate={{ width: 'auto', opacity: 1 }}
             exit={{ width: 0, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="overflow-hidden"
+            className="mr-2" // Changed from overflow-hidden to mr-2
           >
             <input
               ref={inputRef}
@@ -43,7 +43,7 @@ const CollapsibleSearch = ({ textColor }: CollapsibleSearchProps) => {
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
               placeholder={t('search.placeholder')}
-              className="w-64 px-4 py-2 mr-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-nepal-orange focus:border-transparent"
+              className="w-64 px-4 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-nepal-orange focus:border-transparent"
               onBlur={() => {
                 if (!searchValue) {
                   setIsOpen(false);
