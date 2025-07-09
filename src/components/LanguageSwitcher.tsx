@@ -21,14 +21,16 @@ const LanguageSwitcher = () => {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors duration-200 bg-white/90 backdrop-blur-sm border border-gray-200"
+        className="flex items-center space-x-2 p-2 rounded-full hover:bg-white/10 transition-colors duration-200 text-white"
+        aria-label="Change language"
+        aria-expanded={isOpen}
       >
-        <Globe className="w-4 h-4 text-gray-600" />
-        <span className="text-sm font-medium text-gray-700 font-inter whitespace-nowrap">
-          {currentLanguage.flag} {currentLanguage.name}
+        <span className="text-lg">{currentLanguage.flag}</span>
+        <span className="text-sm font-medium hidden lg:inline">
+          {currentLanguage.code}
         </span>
         <ChevronDown 
-          className={`w-4 h-4 text-gray-600 transition-transform duration-200 ${
+          className={`w-4 h-4 transition-transform duration-200 ${
             isOpen ? 'rotate-180' : ''
           }`} 
         />

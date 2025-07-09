@@ -1,8 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Facebook, Instagram, ArrowUp } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useTranslation } from '../contexts/TranslationContext';
 
 const Footer = () => {
+  const { t } = useTranslation();
+  
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -10,10 +14,17 @@ const Footer = () => {
     });
   };
 
+  // Secondary navigation items moved from header
+  const secondaryNavItems = [
+    { name: t('nav.about'), href: '#about' },
+    { name: t('nav.blog'), href: '/blog' },
+    { name: t('nav.contact'), href: '/contact' }
+  ];
+
   const footerLinks = {
     destinations: ['Everest Base Camp', 'Annapurna Circuit', 'Pokhara Valley', 'Kathmandu Valley', 'Chitwan National Park', 'Langtang Valley'],
     experiences: ['Trekking Tours', 'Cultural Tours', 'Wildlife Safari', 'Helicopter Tours', 'Photography Tours', 'Spiritual Retreats'],
-    company: ['About Us', 'Our Team', 'Careers', 'Contact', 'Travel Insurance', 'Terms & Conditions'],
+    company: ['About Us', 'Our Team', 'Careers', 'Travel Insurance', 'Terms & Conditions'],
     support: ['Help Center', 'Safety Guidelines', 'Packing Lists', 'Travel Tips', 'FAQs', 'Customer Reviews']
   };
 
@@ -168,13 +179,38 @@ const Footer = () => {
               Company
             </h4>
             <ul className="space-y-2">
-              {footerLinks.company.map((link, index) => <li key={index}>
-                  <motion.a href="#" whileHover={{
-                x: 5
-              }} className="text-gray-300 hover:text-nepal-orange transition-colors duration-200 text-sm">
+              {/* Secondary Navigation Items */}
+              {secondaryNavItems.map((item, index) => (
+                <li key={`nav-${index}`}>
+                  {item.href.startsWith('#') ? (
+                    <motion.a 
+                      href={item.href} 
+                      whileHover={{ x: 5 }} 
+                      className="text-gray-300 hover:text-nepal-orange transition-colors duration-200 text-sm"
+                    >
+                      {item.name}
+                    </motion.a>
+                  ) : (
+                    <motion.div whileHover={{ x: 5 }}>
+                      <Link 
+                        to={item.href} 
+                        className="text-gray-300 hover:text-nepal-orange transition-colors duration-200 text-sm"
+                      >
+                        {item.name}
+                      </Link>
+                    </motion.div>
+                  )}
+                </li>
+              ))}
+              
+              {/* Regular Company Links */}
+              {footerLinks.company.map((link, index) => (
+                <li key={`company-${index}`}>
+                  <motion.a href="#" whileHover={{ x: 5 }} className="text-gray-300 hover:text-nepal-orange transition-colors duration-200 text-sm">
                     {link}
                   </motion.a>
-                </li>)}
+                </li>
+              ))}
             </ul>
           </motion.div>
 

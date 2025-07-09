@@ -1,9 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
-import { Search, Menu, X } from 'lucide-react';
+import { Menu, X, Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import LanguageSwitcher from './LanguageSwitcher';
+import CollapsibleSearch from './CollapsibleSearch';
+import LoginButton from './LoginButton';
 import { useTranslation } from '../contexts/TranslationContext';
 
 const Header = () => {
@@ -20,13 +22,11 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems = [
+  // Primary navigation items only
+  const primaryNavItems = [
     { name: t('nav.destinations'), href: '/destinations' },
     { name: t('nav.attractions'), href: '/attractions' },
-    { name: t('nav.experiences'), href: '/experiences' },
-    { name: t('nav.about'), href: '#about' },
-    { name: t('nav.blog'), href: '/blog' },
-    { name: t('nav.contact'), href: '/contact' }
+    { name: t('nav.experiences'), href: '/experiences' }
   ];
 
   // Dynamic text color based on background
@@ -55,49 +55,29 @@ const Header = () => {
             </Link>
           </motion.div>
 
-          {/* Desktop Search Bar - Increased width */}
-          <div className="hidden lg:flex flex-1 max-w-2xl mx-8">
-            <div className="relative w-full">
-              <motion.div 
-                animate={{ scale: isSearchFocused ? 1.02 : 1 }} 
-                className="relative"
-              >
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input
-                  type="text"
-                  placeholder={t('search.placeholder')}
-                  onFocus={() => setIsSearchFocused(true)}
-                  onBlur={() => setIsSearchFocused(false)}
-                  className="w-full pl-12 pr-6 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-nepal-orange focus:border-transparent text-gray-700 placeholder-gray-500"
-                />
-              </motion.div>
-            </div>
-          </div>
-
-          {/* Desktop Navigation - Adjusted text sizes */}
-          <nav className="hidden lg:flex items-center space-x-2">
-            {navItems.map((item) => (
+          {/* Right-aligned Navigation */}
+          <nav className="hidden lg:flex items-center space-x-4 ml-auto">
+            {/* Primary Navigation Items */}
+            {primaryNavItems.map((item) => (
               <motion.div key={item.name} whileHover={{ y: -2 }}>
-                {item.href.startsWith('#') ? (
-                  <a 
-                    href={item.href}
-                    className={`${textColor} font-tm-sans uppercase font-medium transition-colors duration-200 px-3 py-2 text-lg hover:text-nepal-orange`}
-                  >
-                    {item.name}
-                  </a>
-                ) : (
-                  <Link 
-                    to={item.href}
-                    className={`${textColor} font-tm-sans uppercase font-medium transition-colors duration-200 px-3 py-2 text-lg hover:text-nepal-orange`}
-                  >
-                    {item.name}
-                  </Link>
-                )}
+                <Link 
+                  to={item.href}
+                  className={`${textColor} font-tm-sans uppercase font-medium transition-colors duration-200 px-4 py-2 text-sm hover:text-nepal-orange relative group`}
+                >
+                  {item.name}
+                  <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-nepal-orange scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
+                </Link>
               </motion.div>
             ))}
-            <div className="ml-4 flex-shrink-0">
-              <LanguageSwitcher />
-            </div>
+            
+            {/* Collapsible Search */}
+            <CollapsibleSearch textColor={textColor} />
+            
+            {/* Login Button */}
+            <LoginButton textColor={textColor} />
+            
+            {/* Language Switcher */}
+            <LanguageSwitcher />
           </nav>
 
           {/* Mobile Menu Button */}
@@ -133,27 +113,22 @@ const Header = () => {
                 </div>
                 
                 {/* Mobile Navigation */}
-                {navItems.map((item) => (
+                {primaryNavItems.map((item) => (
                   <motion.div key={item.name} whileHover={{ x: 5 }}>
-                    {item.href.startsWith('#') ? (
-                      <a 
-                        href={item.href}
-                        className="block text-lg font-tm-sans text-gray-700 hover:text-nepal-orange font-medium py-3 px-4 uppercase transition-colors"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        {item.name}
-                      </a>
-                    ) : (
-                      <Link 
-                        to={item.href}
-                        className="block text-lg font-tm-sans text-gray-700 hover:text-nepal-orange font-medium py-3 px-4 uppercase transition-colors"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        {item.name}
-                      </Link>
-                    )}
+                    <Link 
+                      to={item.href}
+                      className="block text-sm font-tm-sans text-gray-700 hover:text-nepal-orange font-medium py-3 px-4 uppercase transition-colors"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
                   </motion.div>
                 ))}
+                
+                {/* Mobile Login */}
+                <div className="pt-4 border-t border-gray-200">
+                  <LoginButton textColor="text-gray-700" />
+                </div>
                 
                 <div className="pt-4 border-t border-gray-200">
                   <LanguageSwitcher />
