@@ -50,7 +50,6 @@ const Header = () => {
                 src="/lovable-uploads/dbe53354-4e12-429d-96e9-f53b18d9b259.png" 
                 alt="tmtn logo" 
                 className="h-8 lg:h-10 w-auto" 
-                {/* style={{ filter: logoFilter }}  */}
               />
             </Link>
           </motion.div>
