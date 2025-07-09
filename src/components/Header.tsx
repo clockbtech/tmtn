@@ -38,7 +38,7 @@ const Header = () => {
       initial={{ y: -100 }} 
       animate={{ y: 0 }} 
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-[#126894] text-white backdrop-blur-md shadow-lg' : 'bg-transparent'
+        isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -62,7 +62,7 @@ const Header = () => {
               <motion.div key={item.name} whileHover={{ y: -2 }}>
                 <Link 
                   to={item.href}
-                  className={`${textColor} font-tm-sans uppercase font-medium transition-colors duration-200 px-4 py-2 text-sm hover:text-nepal-orange relative group`}
+                  className={`${textColor} font-tm-sans uppercase font-medium transition-colors duration-200 px-4 py-2 text-base hover:text-nepal-orange relative group`}
                 >
                   {item.name}
                   <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-nepal-orange scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
