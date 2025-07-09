@@ -31,7 +31,7 @@ const Header = () => {
 
   // Dynamic text color based on background
   const textColor = isScrolled ? 'text-black' : 'text-white';
-const logoFilter = isScrolled ? 'brightness(0) invert(1)' : 'brightness(0)';
+  // const logoFilter = isScrolled ? 'brightness(0)' : 'brightness(0)';
 
   return (
     <motion.header 
@@ -50,7 +50,7 @@ const logoFilter = isScrolled ? 'brightness(0) invert(1)' : 'brightness(0)';
                 src="/lovable-uploads/dbe53354-4e12-429d-96e9-f53b18d9b259.png" 
                 alt="tmtn logo" 
                 className="h-8 lg:h-10 w-auto" 
-                style={{ filter: logoFilter }} 
+                {/* style={{ filter: logoFilter }}  */}
               />
             </Link>
           </motion.div>
