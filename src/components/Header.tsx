@@ -31,7 +31,7 @@ const Header = () => {
 
   // Dynamic text color based on background
   const textColor = isScrolled ? 'text-black' : 'text-white';
-  const logoFilter = isScrolled ? 'brightness(0)' : 'brightness(0)';
+const logoFilter = isScrolled ? 'brightness(0) invert(1)' : 'brightness(0)';
 
   return (
     <motion.header 
@@ -62,7 +62,7 @@ const Header = () => {
               <motion.div key={item.name} whileHover={{ y: -2 }}>
                 <Link 
                   to={item.href}
-                  className={`${textColor} font-tm-sans uppercase font-medium transition-colors duration-200 px-4 py-2 text-base hover:text-nepal-orange relative group`}
+                  className={`${textColor} font-tm-sans uppercase font-medium transition-colors duration-200 px-4 py-2 text-sm hover:text-nepal-orange relative group`}
                 >
                   {item.name}
                   <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-nepal-orange scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
