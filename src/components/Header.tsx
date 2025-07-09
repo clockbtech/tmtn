@@ -31,14 +31,14 @@ const Header = () => {
 
   // Dynamic text color based on background
   const textColor = isScrolled ? 'text-black' : 'text-white';
-  // const logoFilter = isScrolled ? 'brightness(0)' : 'brightness(0)';
+  const logoFilter = isScrolled ? 'brightness(0)' : 'brightness(0)';
 
   return (
     <motion.header 
       initial={{ y: -100 }} 
       animate={{ y: 0 }} 
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+        isScrolled ? 'bg-[#126894] backdrop-blur-md shadow-lg' : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,6 +50,7 @@ const Header = () => {
                 src="/lovable-uploads/dbe53354-4e12-429d-96e9-f53b18d9b259.png" 
                 alt="tmtn logo" 
                 className="h-8 lg:h-10 w-auto" 
+                style={{ filter: logoFilter }} 
               />
             </Link>
           </motion.div>
