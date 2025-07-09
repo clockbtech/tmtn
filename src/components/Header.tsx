@@ -30,7 +30,7 @@ const Header = () => {
   ];
 
   // Dynamic text color based on background
-  const textColor = isScrolled ? 'text-black' : 'text-white';
+  const textColor = isScrolled ? 'text-white' : 'text-white';
 
 
   return (
