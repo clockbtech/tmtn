@@ -5,7 +5,6 @@ import Footer from '../components/Footer';
 import ContactHero from '../components/contact/ContactHero';
 import ContactMap from '../components/contact/ContactMap';
 import ContactForm from '../components/contact/ContactForm';
-import ContactFAQ from '../components/contact/ContactFAQ';
 import EmergencyContact from '../components/contact/EmergencyContact';
 
 const Contact = () => {
@@ -27,11 +26,6 @@ const Contact = () => {
             <div>
               <ContactForm />
             </div>
-          </div>
-          
-          {/* FAQ Section */}
-          <div className="mb-12">
-            <ContactFAQ />
           </div>
           
           {/* Emergency Contact CTA */}

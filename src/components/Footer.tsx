@@ -229,13 +229,24 @@ const Footer = () => {
               Support
             </h4>
             <ul className="space-y-2">
-              {footerLinks.support.map((link, index) => <li key={index}>
-                  <motion.a href="#" whileHover={{
-                x: 5
-              }} className="text-gray-300 hover:text-nepal-orange transition-colors duration-200 text-sm">
-                    {link}
-                  </motion.a>
-                </li>)}
+              {footerLinks.support.map((link, index) => (
+                <li key={index}>
+                  {link === 'FAQs' ? (
+                    <motion.div whileHover={{ x: 5 }}>
+                      <Link 
+                        to="/faq" 
+                        className="text-gray-300 hover:text-nepal-orange transition-colors duration-200 text-sm"
+                      >
+                        {link}
+                      </Link>
+                    </motion.div>
+                  ) : (
+                    <motion.a href="#" whileHover={{ x: 5 }} className="text-gray-300 hover:text-nepal-orange transition-colors duration-200 text-sm">
+                      {link}
+                    </motion.a>
+                  )}
+                </li>
+              ))}
             </ul>
           </motion.div>
         </div>

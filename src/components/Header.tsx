@@ -73,11 +73,11 @@ const Header = () => {
             {/* Collapsible Search */}
             <CollapsibleSearch textColor={textColor} />
             
-            {/* Login Button */}
-            <LoginButton textColor={textColor} />
-            
             {/* Language Switcher */}
             <LanguageSwitcher />
+            
+            {/* Login Button - Moved to far right */}
+            <LoginButton textColor={textColor} />
           </nav>
 
           {/* Mobile Menu Button */}
