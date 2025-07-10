@@ -262,7 +262,7 @@ const Destinations = () => {
           {currentDestinations.length === 0 ? <div className="text-center py-20">
               <p className="text-xl text-gray-600 font-inter">No destinations found matching your criteria.</p>
             </div> : <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
                 {currentDestinations.map((destination, index) => <motion.div key={destination.id} initial={{
               opacity: 0,
               y: 60

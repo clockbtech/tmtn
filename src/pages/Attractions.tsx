@@ -293,7 +293,7 @@ const Attractions = () => {
           {currentAttractions.length === 0 ? <div className="text-center py-20">
               <p className="text-xl text-gray-600">No attractions found matching your criteria.</p>
             </div> : <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
                 {currentAttractions.map((attraction, index) => <motion.div key={attraction.id} initial={{
               opacity: 0,
               y: 60

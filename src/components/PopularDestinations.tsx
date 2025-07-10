@@ -106,7 +106,7 @@ const PopularDestinations = () => {
                 scale: 1.05
               }} whileTap={{
                 scale: 0.95
-              }} className="text-nepal-orange hover:text-orange-400 font-plus-jakarta font-semibold transition-colors duration-200 flex items-center drop-shadow-lg">
+              }} className="text-nepal-orange hover:text-orange-400 font-tm-sans font-semibold transition-colors duration-200 flex items-center drop-shadow-lg">
                     {t('destinations.viewMore')}
                     <motion.span animate={{
                   x: [0, 5, 0]
