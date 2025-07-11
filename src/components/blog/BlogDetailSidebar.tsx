@@ -121,7 +121,7 @@ const BlogDetailSidebar = ({ currentBlog }: BlogDetailSidebarProps) => {
                   <h4 className="text-sm font-medium text-gray-900 group-hover:text-nepal-primary transition-colors mb-1">
                     {experience.title}
                   </h4>
-                  <p className="text-sm text-nepal-primary font-semibold">{experience.price}</p>
+                  <p className="text-sm text-nepal-orange font-semibold">{experience.price}</p>
                 </div>
               </div>
             </Link>
