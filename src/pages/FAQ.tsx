@@ -44,12 +44,12 @@ const FAQ = () => {
       <Header />
       
       {/* Hero Section with Background Image */}
-      <section className="relative bg-gradient-to-r from-nepal-primary to-nepal-orange text-white pt-24 pb-16" style={{
+      <section style={{
       backgroundImage: `linear-gradient(rgba(18, 104, 148, 0.8), rgba(255, 125, 51, 0.6)), url(${faqHeroBg})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat'
-    }}>
+    }} className="relative bg-gradient-to-r from-nepal-primary to-nepal-orange text-white pt-24 pb-16 py-[150px]">
         <div className="container mx-auto px-4">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 font-tm-sans">
