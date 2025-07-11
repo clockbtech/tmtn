@@ -44,12 +44,12 @@ const FAQ = () => {
       <Header />
       
       {/* Hero Section with Background Image */}
-      <section style={{
+      <section className="relative bg-gradient-to-r from-nepal-primary to-nepal-orange text-white pt-24 pb-16" style={{
       backgroundImage: `linear-gradient(rgba(18, 104, 148, 0.8), rgba(255, 125, 51, 0.6)), url(${faqHeroBg})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat'
-    }} className="relative bg-gradient-to-r from-nepal-primary to-nepal-orange text-white pt-24 pb-16 py-[150px]">
+    }}>
         <div className="container mx-auto px-4">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 font-tm-sans">
@@ -93,13 +93,13 @@ const FAQ = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-muted/30">
+      <section className="py-16 bg-blue-700">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center">
-            <h3 className="text-2xl md:text-3xl font-bold text-foreground font-tm-sans mb-4">
+            <h3 className="text-2xl md:text-3xl font-bold font-tm-sans mb-4 text-slate-50">
               Still have a questions?
             </h3>
-            <p className="text-muted-foreground mb-8">
+            <p className="mb-8 text-blue-100">
               Can't find the answer you're looking for? Please chat to our 
               friendly team and we'll help you out.
             </p>
