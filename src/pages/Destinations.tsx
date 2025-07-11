@@ -11,7 +11,9 @@ import { Pagination, PaginationContent, PaginationItem, PaginationLink, Paginati
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuCheckboxItem, DropdownMenuTrigger } from '../components/ui/dropdown-menu';
 import { Input } from '../components/ui/input';
+
 gsap.registerPlugin(ScrollTrigger);
+
 interface Destination {
   id: number;
   nameKey: string;
@@ -24,6 +26,7 @@ interface Destination {
   popularity: number;
   price: number;
 }
+
 const Destinations = () => {
   const {
     t
@@ -34,9 +37,11 @@ const Destinations = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const itemsPerPage = 12;
+
   useEffect(() => {
     ScrollTrigger.refresh();
   }, []);
+
   const destinations: Destination[] = [{
     id: 1,
     nameKey: 'destinations.everest',
@@ -70,7 +75,7 @@ const Destinations = () => {
     region: 'Hills',
     popularity: 85,
     price: 300
-  },{
+  }, {
     id: 4,
     nameKey: 'destinations.pokhara',
     descKey: 'destinations.pokhara.desc',
@@ -114,7 +119,7 @@ const Destinations = () => {
     region: 'Himalayan Region',
     popularity: 95,
     price: 2500
-  },{
+  }, {
     id: 8,
     nameKey: 'destinations.langtang',
     descKey: 'destinations.langtang.desc',
@@ -126,7 +131,9 @@ const Destinations = () => {
     popularity: 70,
     price: 1800
   }];
+
   const regions = ['Himalayan Region', 'Hills', 'Kathmandu Valley', 'Terai'];
+
   const filteredAndSortedDestinations = useMemo(() => {
     let filtered = destinations.filter(destination => {
       const matchesSearch = t(destination.nameKey).toLowerCase().includes(searchTerm.toLowerCase()) || t(destination.descKey).toLowerCase().includes(searchTerm.toLowerCase());
@@ -149,8 +156,10 @@ const Destinations = () => {
     });
     return filtered;
   }, [destinations, searchTerm, selectedRegions, sortBy, t]);
+
   const totalPages = Math.ceil(filteredAndSortedDestinations.length / itemsPerPage);
   const currentDestinations = filteredAndSortedDestinations.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
   const handleRegionChange = (region: string, checked: boolean) => {
     if (checked) {
       setSelectedRegions([...selectedRegions, region]);
@@ -159,6 +168,7 @@ const Destinations = () => {
     }
     setCurrentPage(1);
   };
+
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     window.scrollTo({
@@ -166,12 +176,13 @@ const Destinations = () => {
       behavior: 'smooth'
     });
   };
+
   return <div className="min-h-screen bg-white font-inter">
       <Header />
       
       {/* Enhanced Hero Section with Background Image */}
       <section className="relative bg-cover bg-center bg-no-repeat py-[150px]" style={{
-      backgroundImage: 'https://images.unsplash.com/photo-1740066361389-90bb4444c43e?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      backgroundImage: 'url(https://images.unsplash.com/photo-1740066361389-90bb4444c43e?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)',
     }}>
         <div className="absolute inset-0 bg-gradient-to-r from-nepal-primary/80 to-blue-600/80 my-0"></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -185,7 +196,7 @@ const Destinations = () => {
           duration: 0.8
         }} className="text-center text-white">
             <h1 className="text-5xl font-tm-sans uppercase mb-6 lg:text-6xl font-extrabold">
-              {t('destinations.title')}
+              Destinations
             </h1>
             <p className="text-xl max-w-4xl mx-auto lg:text-xl">
               {t('destinations.subtitle')}
@@ -349,4 +360,5 @@ const Destinations = () => {
       <Footer />
     </div>;
 };
+
 export default Destinations;
