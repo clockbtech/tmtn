@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../components/ui/accordion';
+import { Plus, Minus } from 'lucide-react';
+import { Button } from '../components/ui/button';
+import faqHeroBg from '../assets/faq-hero-bg.jpg';
 
 const faqData = [
   {
@@ -47,42 +49,111 @@ const faqData = [
 ];
 
 const FAQ = () => {
+  const [openItem, setOpenItem] = useState<number | null>(null);
+
+  const toggleItem = (index: number) => {
+    setOpenItem(openItem === index ? null : index);
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <Header />
       
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-nepal-primary to-nepal-secondary text-white pt-24 pb-16">
+      {/* Hero Section with Background Image */}
+      <section 
+        className="relative bg-gradient-to-r from-nepal-primary to-nepal-orange text-white pt-24 pb-16"
+        style={{
+          backgroundImage: `linear-gradient(rgba(18, 104, 148, 0.8), rgba(255, 125, 51, 0.6)), url(${faqHeroBg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
         <div className="container mx-auto px-4">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 font-tm-sans">
               Frequently Asked Questions
             </h1>
-            <p className="text-xl text-white/90 max-w-2xl mx-auto">
+            <p className="text-xl text-white/90 max-w-2xl mx-auto font-inter">
               Find answers to common questions about traveling to Nepal
             </p>
           </div>
         </div>
       </section>
       
-      {/* FAQ Grid */}
-      <section className="py-16">
+      {/* FAQ Section */}
+      <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {faqData.map((faq, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-lg p-6">
-                <Accordion type="single" collapsible className="w-full">
-                  <AccordionItem value={`item-${index}`} className="border-none">
-                    <AccordionTrigger className="text-left hover:text-nepal-primary text-lg font-semibold pb-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <p className="text-muted-foreground text-sm font-medium uppercase tracking-wider mb-4">
+                FAQ
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground font-tm-sans mb-4">
+                Frequently asked questions
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Everything you need to know about traveling to Nepal
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              {faqData.map((faq, index) => (
+                <div 
+                  key={index} 
+                  className="border border-border rounded-lg bg-card overflow-hidden transition-all duration-200 hover:shadow-md"
+                >
+                  <button
+                    onClick={() => toggleItem(index)}
+                    className="w-full px-6 py-5 text-left flex justify-between items-center hover:bg-muted/50 transition-colors duration-200"
+                  >
+                    <span className="text-lg font-medium text-foreground font-tm-sans pr-4">
                       {faq.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-gray-600 leading-relaxed">
-                      {faq.answer}
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              </div>
-            ))}
+                    </span>
+                    <div className="flex-shrink-0">
+                      {openItem === index ? (
+                        <Minus className="h-5 w-5 text-muted-foreground" />
+                      ) : (
+                        <Plus className="h-5 w-5 text-muted-foreground" />
+                      )}
+                    </div>
+                  </button>
+                  
+                  <div 
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      openItem === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                    }`}
+                  >
+                    <div className="px-6 pb-5 pt-2">
+                      <p className="text-muted-foreground leading-relaxed">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl mx-auto text-center">
+            <h3 className="text-2xl md:text-3xl font-bold text-foreground font-tm-sans mb-4">
+              Still have a questions?
+            </h3>
+            <p className="text-muted-foreground mb-8">
+              Can't find the answer you're looking for? Please chat to our 
+              friendly team and we'll help you out.
+            </p>
+            <Button 
+              size="lg" 
+              className="bg-nepal-primary hover:bg-nepal-primary/90 text-white px-8 py-3 font-medium"
+            >
+              Contact Us
+            </Button>
           </div>
         </div>
       </section>
