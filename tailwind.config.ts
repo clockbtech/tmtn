@@ -37,7 +37,6 @@ export default {
 				'nepal-primary': '#126894',
 				'nepal-orange': '#FF7D33',
 				'nepal-secondary': '#FFFFFF',
-				'hero-bg': 'hsl(var(--hero-bg))',
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',

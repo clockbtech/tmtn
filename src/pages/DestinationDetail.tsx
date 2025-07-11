@@ -103,9 +103,8 @@ const DestinationDetail = () => {
       <Header />
 
       {/* Hero Banner */}
-      <section className="relative py-[150px] bg-cover bg-center bg-no-repeat" style={{
-      backgroundImage: `linear-gradient(135deg, rgba(18, 104, 148, 0.8) 0%, rgba(255, 125, 51, 0.6) 100%), url(${destination.heroImage})`,
-      backgroundColor: '#19202f'
+      <section className="relative h-[70vh] bg-cover bg-center bg-no-repeat" style={{
+      backgroundImage: `url(${destination.heroImage})`
     }}>
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
         <div className="absolute inset-0 flex items-end">
