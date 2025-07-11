@@ -1,8 +1,9 @@
 import React from 'react';
 const BlogHero = () => {
   return <div style={{
-    backgroundImage: `linear-gradient(135deg, rgba(18, 104, 148, 0.8) 0%, rgba(255, 125, 51, 0.6) 100%), url('https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=1600&h=800&fit=crop')`
-  }} className="relative h-150 bg-cover bg-center flex items-center justify-center py-[150px]">
+    backgroundImage: `linear-gradient(135deg, rgba(18, 104, 148, 0.8) 0%, rgba(255, 125, 51, 0.6) 100%), url('https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=1600&h=800&fit=crop')`,
+    backgroundColor: '#19202f'
+  }} className="relative bg-cover bg-center flex items-center justify-center py-[150px]">
       <div className="text-center text-white">
         <h1 className="text-5xl md:text-6xl font-tm-sans uppercase font-extrabold mb-4">
           Blog

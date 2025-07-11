@@ -171,7 +171,8 @@ const Destinations = () => {
       
       {/* Enhanced Hero Section with Background Image */}
       <section className="relative bg-cover bg-center bg-no-repeat py-[150px]" style={{
-      backgroundImage: 'https://images.unsplash.com/photo-1740066361389-90bb4444c43e?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      backgroundImage: `linear-gradient(135deg, rgba(18, 104, 148, 0.8) 0%, rgba(255, 125, 51, 0.6) 100%), url('https://images.unsplash.com/photo-1740066361389-90bb4444c43e?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
+      backgroundColor: '#19202f'
     }}>
         <div className="absolute inset-0 bg-gradient-to-r from-nepal-primary/80 to-blue-600/80 my-0"></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
