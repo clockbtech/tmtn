@@ -1,8 +1,10 @@
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import AboutHero from '../components/about/AboutHero';
+import AboutCTA from '../components/about/AboutCTA';
 import TrendingExperiences from '../components/TrendingExperiences';
 import Testimonials from '../components/Testimonials';
 import FullscreenModal from '../components/video/FullscreenModal';
@@ -144,6 +146,9 @@ const About = () => {
 
         {/* Trending Experiences Section */}
         <TrendingExperiences />
+
+        {/* CTA Section */}
+        <AboutCTA />
 
         {/* Testimonials Section */}
         <Testimonials />
