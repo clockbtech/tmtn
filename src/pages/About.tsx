@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from '../components/Header';
@@ -152,39 +151,38 @@ const About = () => {
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black/30 flex items-center justify-center hover:bg-black/40 transition-colors duration-300">
+                  {/* Continuous Ripple Effects - Outside the button */}
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    {[0, 1, 2, 3].map((index) => (
+                      <div
+                        key={index}
+                        className="absolute w-24 h-24 border-2 border-white/30 rounded-full"
+                        style={{
+                          animation: `ping 3s cubic-bezier(0, 0, 0.2, 1) infinite`,
+                          animationDelay: `${index * 0.75}s`,
+                        }}
+                      />
+                    ))}
+                    
+                    {/* Additional larger outer ripples */}
+                    {[0, 1].map((index) => (
+                      <div
+                        key={`outer-${index}`}
+                        className="absolute w-32 h-32 border border-white/15 rounded-full"
+                        style={{
+                          animation: `ping 4s cubic-bezier(0, 0, 0.2, 1) infinite`,
+                          animationDelay: `${index * 2}s`,
+                        }}
+                      />
+                    ))}
+                  </div>
+                  
+                  {/* Play Button */}
                   <div 
-                    className="relative w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300 overflow-hidden"
+                    className="relative w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300 overflow-hidden z-10"
                     onClick={handlePlayButtonClick}
                   >
                     <div className="w-0 h-0 border-l-[16px] border-l-white border-y-[12px] border-y-transparent ml-1 relative z-10"></div>
-                    
-                    {/* Continuous Ripple Effects - Enhanced for visibility */}
-                    <div className="absolute inset-0 rounded-full">
-                      {[0, 1, 2, 3].map((index) => (
-                        <div
-                          key={index}
-                          className="absolute inset-0 border-2 border-white/40 rounded-full"
-                          style={{
-                            animation: `ping 3s cubic-bezier(0, 0, 0.2, 1) infinite`,
-                            animationDelay: `${index * 0.75}s`,
-                          }}
-                        />
-                      ))}
-                    </div>
-                    
-                    {/* Additional subtle outer ripples */}
-                    <div className="absolute -inset-4 rounded-full">
-                      {[0, 1].map((index) => (
-                        <div
-                          key={`outer-${index}`}
-                          className="absolute inset-0 border border-white/20 rounded-full"
-                          style={{
-                            animation: `ping 4s cubic-bezier(0, 0, 0.2, 1) infinite`,
-                            animationDelay: `${index * 2}s`,
-                          }}
-                        />
-                      ))}
-                    </div>
                     
                     {/* Click Ripple Effects */}
                     {ripples.map((ripple) => (
