@@ -16,7 +16,7 @@ const Footer = () => {
 
   // Secondary navigation items moved from header
   const secondaryNavItems = [
-    { name: t('nav.about'), href: '#about' },
+    { name: t('nav.about'), href: '/about' },
     { name: t('nav.blog'), href: '/blog' },
     { name: t('nav.contact'), href: '/contact' }
   ];

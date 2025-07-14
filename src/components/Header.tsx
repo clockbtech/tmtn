@@ -26,7 +26,8 @@ const Header = () => {
   const primaryNavItems = [
     { name: t('nav.destinations'), href: '/destinations' },
     { name: t('nav.attractions'), href: '/attractions' },
-    { name: t('nav.experiences'), href: '/experiences' }
+    { name: t('nav.experiences'), href: '/experiences' },
+    { name: t('nav.about'), href: '/about' }
   ];
 
   // Dynamic text color based on background
