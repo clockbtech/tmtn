@@ -75,7 +75,7 @@ const About = () => {
                 <p className="text-lg text-gray-700 mb-8 leading-relaxed">
                   we believe in the transformative power of travel. 
                   Our journey began with a passion for exploration and a vision to share the wonders of the world with fellow adventurers.
-                  Established in 2017, we’ve since dedicated ourselves to curating exceptional travel experiences that go beyond the ordinary..
+                  Established in 2017, we've since dedicated ourselves to curating exceptional travel experiences that go beyond the ordinary..
                 </p>
 
                 {/* Statistics */}
@@ -158,7 +158,21 @@ const About = () => {
                   >
                     <div className="w-0 h-0 border-l-[16px] border-l-white border-y-[12px] border-y-transparent ml-1 relative z-10"></div>
                     
-                    {/* Ripple Effects */}
+                    {/* Continuous Ripple Effects */}
+                    <div className="absolute inset-0 rounded-full">
+                      {[0, 1, 2].map((index) => (
+                        <div
+                          key={index}
+                          className="absolute inset-0 border-2 border-white/30 rounded-full animate-ping"
+                          style={{
+                            animationDelay: `${index * 0.8}s`,
+                            animationDuration: '2.4s'
+                          }}
+                        />
+                      ))}
+                    </div>
+                    
+                    {/* Click Ripple Effects */}
                     {ripples.map((ripple) => (
                       <motion.div
                         key={ripple.id}
