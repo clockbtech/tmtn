@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Calendar, MapPin, Clock, Users, Camera, X, ChevronLeft, ChevronRight, Play, Pause, Shield, Zap, Lightbulb, Star, Phone, Mail, User, Check, Minus, MessageCircle, ThumbsUp, ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowLeft, Calendar, MapPin, Clock, Users, Camera, X, ChevronLeft, ChevronRight, Play, Pause, Shield, Zap, Lightbulb, Star, Phone, Mail, User, Check, Minus, MessageCircle, ThumbsUp, ChevronDown, ChevronUp, Coffee, Utensils } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useTranslation } from '../contexts/TranslationContext';
@@ -510,11 +510,11 @@ const ExperienceDetail = () => {
                                 <span>{day.distance}</span>
                               </div>
                               <div className="flex items-center gap-2">
-                                <Users className="w-4 h-4 text-gray-500" />
+                                <Coffee className="w-4 h-4 text-gray-500" />
                                 <span>{day.accommodation}</span>
                               </div>
                               <div className="flex items-center gap-2">
-                                <Calendar className="w-4 h-4 text-gray-500" />
+                                <Utensils className="w-4 h-4 text-gray-500" />
                                 <span>{day.meals}</span>
                               </div>
                             </div>
