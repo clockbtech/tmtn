@@ -2,10 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { Star, ArrowLeft, ArrowRight } from 'lucide-react';
+
 const TrendingExperiences = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [currency, setCurrency] = useState('USD');
   const [exchangeRate, setExchangeRate] = useState(1);
+
   const experiences = [{
     id: 1,
     title: 'Everest Base Camp Trek',
@@ -98,7 +100,6 @@ const TrendingExperiences = () => {
     duration: '1 day'
   }];
 
-  // Simulate currency detection
   useEffect(() => {
     const detectCurrency = async () => {
       try {
@@ -120,6 +121,7 @@ const TrendingExperiences = () => {
     };
     detectCurrency();
   }, []);
+
   const formatPrice = (price: number) => {
     const convertedPrice = Math.round(price * exchangeRate);
     const symbols = {
@@ -130,6 +132,7 @@ const TrendingExperiences = () => {
     };
     return `${symbols[currency as keyof typeof symbols]}${convertedPrice}`;
   };
+
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
       const scrollAmount = 320;
@@ -139,17 +142,16 @@ const TrendingExperiences = () => {
       });
     }
   };
-  return <section className="py-20 bg-white" id="experiences">
+
+  return (
+    <section className="py-20 bg-white" id="experiences">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div initial={{
-        opacity: 0,
-        y: 30
-      }} whileInView={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.8
-      }} className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
           <h2 className="text-4xl lg:text-4xl font-bebas uppercase font-extrabold text-nepal-primary mb-4">
             Trending Experiences
           </h2>
@@ -159,95 +161,110 @@ const TrendingExperiences = () => {
         </motion.div>
 
         <div className="relative">
-          {/* Navigation Buttons */}
-          <div className="flex justify-between items-center mb-8">
-            <div className="flex space-x-4">
-              <motion.button whileHover={{
-              scale: 1.1
-            }} whileTap={{
-              scale: 0.9
-            }} onClick={() => scroll('left')} className="p-3 bg-nepal-primary text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200">
-                <ArrowLeft className="w-5 h-5" />
-              </motion.button>
-              <motion.button whileHover={{
-              scale: 1.1
-            }} whileTap={{
-              scale: 0.9
-            }} onClick={() => scroll('right')} className="p-3 bg-nepal-primary text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200">
-                <ArrowRight className="w-5 h-5" />
-              </motion.button>
-            </div>
+          {/* Currency Info */}
+          <div className="flex justify-end items-center mb-8">
             <div className="text-sm text-gray-500">
               Prices in {currency}
             </div>
           </div>
 
-          {/* Scrollable Container */}
-          <div ref={scrollRef} className="flex space-x-6 overflow-x-auto scrollbar-hide pb-4" style={{
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none'
-        }}>
-            {experiences.map((experience, index) => <motion.div key={experience.id} initial={{
-            opacity: 0,
-            x: 50
-          }} whileInView={{
-            opacity: 1,
-            x: 0
-          }} transition={{
-            duration: 0.6,
-            delay: index * 0.1
-          }} whileHover={{
-            y: -5
-          }} className="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer">
-                <div className="relative overflow-hidden rounded-t-2xl">
-                  <img src={experience.image} alt={experience.title} className="w-full h-48 object-cover hover:scale-110 transition-transform duration-500" />
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
-                    <span className="text-sm font-semibold text-nepal-primary">
-                      {experience.duration}
-                    </span>
-                  </div>
-                </div>
+          {/* Scrollable Container with Floating Navigation */}
+          <div className="relative">
+            {/* Left Navigation Button */}
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => scroll('left')}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-nepal-primary text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200 -ml-6"
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </motion.button>
 
-                <div className="p-6">
-                  <h3 className="text-xl font-normal font-semibold text-nepal-primary mb-2">
-                    {experience.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                    {experience.description}
-                  </p>
+            {/* Right Navigation Button */}
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => scroll('right')}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-nepal-primary text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200 -mr-6"
+            >
+              <ArrowRight className="w-5 h-5" />
+            </motion.button>
 
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center space-x-1">
-                      <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                      <span className="text-sm font-semibold text-gray-700">
-                        {experience.rating}
-                      </span>
-                      <span className="text-sm text-gray-500">
-                        ({experience.reviews})
+            {/* Scrollable Content */}
+            <div
+              ref={scrollRef}
+              className="flex space-x-6 overflow-x-auto scrollbar-hide pb-4"
+              style={{
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none'
+              }}
+            >
+              {experiences.map((experience, index) => (
+                <motion.div
+                  key={experience.id}
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  whileHover={{ y: -5 }}
+                  className="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
+                >
+                  <div className="relative overflow-hidden rounded-t-2xl">
+                    <img
+                      src={experience.image}
+                      alt={experience.title}
+                      className="w-full h-48 object-cover hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
+                      <span className="text-sm font-semibold text-nepal-primary">
+                        {experience.duration}
                       </span>
                     </div>
+                  </div>
+
+                  <div className="p-6">
+                    <h3 className="text-xl font-normal font-semibold text-nepal-primary mb-2">
+                      {experience.title}
+                    </h3>
                     
-                    <div className="text-right">
-                      <div className="text-2xl font-bold text-nepal-orange">
-                        {formatPrice(experience.basePrice)}
-                      </div>
-                      <div className="text-sm text-gray-500">per person</div>
-                    </div>
-                  </div>
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                      {experience.description}
+                    </p>
 
-                  <motion.button whileHover={{
-                scale: 1.02
-              }} whileTap={{
-                scale: 0.98
-              }} className="w-full bg-nepal-orange hover:bg-orange-600 text-white py-3 rounded-full font-semibold transition-colors duration-200">
-                    Book Now
-                  </motion.button>
-                </div>
-              </motion.div>)}
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center space-x-1">
+                        <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                        <span className="text-sm font-semibold text-gray-700">
+                          {experience.rating}
+                        </span>
+                        <span className="text-sm text-gray-500">
+                          ({experience.reviews})
+                        </span>
+                      </div>
+                      
+                      <div className="text-right">
+                        <div className="text-2xl font-bold text-nepal-orange">
+                          {formatPrice(experience.basePrice)}
+                        </div>
+                        <div className="text-sm text-gray-500">per person</div>
+                      </div>
+                    </div>
+
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="w-full bg-nepal-orange hover:bg-orange-600 text-white py-3 rounded-full font-semibold transition-colors duration-200"
+                    >
+                      Book Now
+                    </motion.button>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default TrendingExperiences;
