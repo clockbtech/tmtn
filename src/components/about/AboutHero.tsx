@@ -21,7 +21,7 @@ const AboutHero = () => {
       <section className="relative py-[150px] overflow-hidden">
             {/* Background Image */}
             <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-            backgroundImage: 'url(lovable-uploads/091d2c82-75c2-41de-baab-57d959b9cdb4.png)'
+            backgroundImage: 'url(https://images.pexels.com/photos/5192552/pexels-photo-5192552.jpeg)'
           }}></div>
             
             {/* Semi-transparent gradient overlay using current blue color scheme */}

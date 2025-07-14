@@ -63,13 +63,12 @@ const About = () => {
                 className="lg:pr-8"
               >
                 {/* Decorative line */}
-                <div className="flex items-center mb-6">
+                {/* <div className="flex items-center mb-6">
                   <div className="w-12 h-1 bg-gradient-to-r from-nepal-primary to-nepal-secondary rounded-full mr-4"></div>
-                </div>
+                </div> */}
                 
-                <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-nepal-dark mb-6 leading-tight">
+                <h1 className="text-4xl uppercase lg:text-5xl xl:text-6xl font-bold text-nepal-dark mb-6 leading-tight">
                   Our journey began with a
-                  <br />
                   <span className="text-nepal-primary">passion</span>
                 </h1>
                 
