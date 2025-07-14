@@ -16,7 +16,7 @@ const AboutCTA = () => {
           className="relative bg-gradient-to-r from-green-600 to-green-500 rounded-2xl p-8 lg:p-12 overflow-hidden"
         >
           {/* Background decorative elements */}
-          <div className="absolute top-4 right-4 opacity-20">
+          {/* <div className="absolute top-4 right-4 opacity-20">
             <motion.div
               animate={{
                 rotate: [0, 360],
@@ -31,14 +31,14 @@ const AboutCTA = () => {
             >
               <Plane className="w-12 h-12 text-white" />
             </motion.div>
-          </div>
+          </div> */}
           
           {/* Dotted path decoration */}
-          <div className="absolute top-8 right-16 hidden lg:block">
+          {/* <div className="absolute top-8 right-16 hidden lg:block">
             <svg width="100" height="60" viewBox="0 0 100 60" className="opacity-30">
               <path d="M10 50 Q30 10 50 30 T90 20" stroke="white" strokeWidth="2" fill="none" strokeDasharray="4,4" />
             </svg>
-          </div>
+          </div> */}
 
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8 relative z-10">
             {/* Left content */}

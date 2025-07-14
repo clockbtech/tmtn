@@ -186,7 +186,8 @@ const About = () => {
                     ))}
                   </div>
                 </div>
-                <div className="absolute bottom-8 left-0 right-0 mx-auto text-white w-max">
+           <div className="absolute bottom-8 left-0 right-0 mx-auto text-white text-center w-max">
+
                   <h3 className="text-3xl font-bold">Watch Our Story</h3>
                   <p className="text-lg mt-2 opacity-90">Discover Our Journey</p>
                 </div>
