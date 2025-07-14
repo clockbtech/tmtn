@@ -6,7 +6,7 @@ import { Button } from '../ui/button';
 
 const AboutCTA = () => {
   return (
-    <section className="pb-16 pt-8 px-4">
+    <section className="pb-16 px-4">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
