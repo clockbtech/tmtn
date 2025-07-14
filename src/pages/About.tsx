@@ -44,16 +44,15 @@ const About = () => {
                 </div>
                 
                 <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-nepal-dark mb-6 leading-tight">
-                  Some Incredible Facts
+                  Our journey began with a
                   <br />
-                  <span className="text-nepal-primary">About Our Company</span>
+                  <span className="text-nepal-primary">passion</span>
                 </h1>
                 
                 <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-                  The 3 hour beginner group lesson starts in our classroom located in the centre. 
-                  We chose to have a maximum ratio of 6 students to 1 instructor, this means 
-                  we're able to offer you plenty of personalised tips. Our theory session starts in 
-                  our Surf Shed. Here you'll learn the basics of surfing.
+                  we believe in the transformative power of travel. 
+                  Our journey began with a passion for exploration and a vision to share the wonders of the world with fellow adventurers.
+                  Established in 2017, we’ve since dedicated ourselves to curating exceptional travel experiences that go beyond the ordinary..
                 </p>
 
                 {/* Statistics */}
@@ -64,8 +63,8 @@ const About = () => {
                     transition={{ duration: 0.8, delay: 0.2 }}
                     className="text-center"
                   >
-                    <div className="text-4xl lg:text-5xl font-bold text-orange-500 mb-2">120</div>
-                    <div className="text-sm lg:text-base font-semibold text-nepal-dark">Happy Clients</div>
+                    <div className="text-4xl lg:text-5xl font-bold text-orange-500 mb-2">10,000+</div>
+                    <div className="text-sm lg:text-base font-semibold text-nepal-dark">Happy Travellers</div>
                   </motion.div>
                   
                   <motion.div
@@ -74,8 +73,8 @@ const About = () => {
                     transition={{ duration: 0.8, delay: 0.4 }}
                     className="text-center"
                   >
-                    <div className="text-4xl lg:text-5xl font-bold text-orange-500 mb-2">35+</div>
-                    <div className="text-sm lg:text-base font-semibold text-nepal-dark">Awards Winning</div>
+                    <div className="text-4xl lg:text-5xl font-bold text-orange-500 mb-2">500+</div>
+                    <div className="text-sm lg:text-base font-semibold text-nepal-dark">Tours Completed</div>
                   </motion.div>
                   
                   <motion.div
@@ -84,8 +83,8 @@ const About = () => {
                     transition={{ duration: 0.8, delay: 0.6 }}
                     className="text-center"
                   >
-                    <div className="text-4xl lg:text-5xl font-bold text-orange-500 mb-2">75+</div>
-                    <div className="text-sm lg:text-base font-semibold text-nepal-dark">Skilled Instructors</div>
+                    <div className="text-4xl lg:text-5xl font-bold text-orange-500 mb-2">15+</div>
+                    <div className="text-sm lg:text-base font-semibold text-nepal-dark">Years Experience</div>
                   </motion.div>
                 </div>
               </motion.div>
@@ -99,7 +98,7 @@ const About = () => {
               >
                 <div className="relative overflow-hidden rounded-2xl">
                   <img
-                    src="/lovable-uploads/091d2c82-75c2-41de-baab-57d959b9cdb4.png"
+                    src="https://images.pexels.com/photos/6871191/pexels-photo-6871191.jpeg"
                     alt="Adventure Sports"
                     className="w-full h-[400px] lg:h-[500px] object-cover"
                   />
@@ -125,7 +124,7 @@ const About = () => {
                 onClick={openFullscreen}
               >
                 <img
-                  src="/lovable-uploads/ddc3747c-a8f5-4c25-a089-0b698516a18a.png"
+                  src="https://images.pexels.com/photos/1371360/pexels-photo-1371360.jpeg"
                   alt="Watch Video"
                   className="w-full h-full object-cover"
                 />
@@ -134,7 +133,7 @@ const About = () => {
                     <div className="w-0 h-0 border-l-[16px] border-l-white border-y-[12px] border-y-transparent ml-1"></div>
                   </div>
                 </div>
-                <div className="absolute bottom-8 left-8 text-white">
+                <div className="absolute bottom-8 center text-white">
                   <h3 className="text-3xl font-bold">Watch Our Story</h3>
                   <p className="text-lg mt-2 opacity-90">Discover Our Journey</p>
                 </div>
