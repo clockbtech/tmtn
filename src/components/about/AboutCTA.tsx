@@ -66,9 +66,7 @@ const AboutCTA = () => {
               }} transition={{
                 duration: 0.6,
                 delay: 0.3
-              }} className="text-2xl lg:text-3xl xl:text-4xl font-bold text-white mb-3">
-                  Ready To Adventure And Enjoy Natural
-                </motion.h2>
+              }} className="text-2xl lg:text-3xl xl:text-4xl font-bold text-white mb-3">Ready to Escape and Explore?</motion.h2>
                 <motion.p initial={{
                 opacity: 0,
                 x: -20
@@ -95,7 +93,7 @@ const AboutCTA = () => {
             duration: 0.6,
             delay: 0.5
           }} className="flex-shrink-0 object-cover">
-              <Button size="lg" className="bg-white text-green-600 hover:bg-white/90 font-semibold px-8 py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <Button size="lg" className="bg-white text-green-600 hover:bg-white/90 font-semibold px-8 py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 rounded-full">
                 LET'S GET STARTED
               </Button>
             </motion.div>
