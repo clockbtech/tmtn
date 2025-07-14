@@ -13,7 +13,7 @@ const AboutCTA = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="relative bg-gradient-to-r from-green-600 to-green-500 rounded-2xl p-8 lg:p-12 overflow-hidden"
+          className="relative bg-gradient-to-r from-green-600 to-green-500 rounded-2xl px-8 py-4 lg:py-6 lg:px-12 overflow-hidden"
         >
           {/* Background decorative elements */}
           {/* <div className="absolute top-4 right-4 opacity-20">

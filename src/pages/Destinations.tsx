@@ -290,11 +290,11 @@ const Destinations = () => {
                       <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100">
                         <div className="relative overflow-hidden">
                           <img src={destination.image} alt={t(destination.nameKey)} className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" />
-                          <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
+                          {/* <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
                             <span className="text-sm font-semibold text-nepal-primary font-plus-jakarta">
                               {destination.difficulty}
                             </span>
-                          </div>
+                          </div> */}
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </div>
                         
