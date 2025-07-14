@@ -162,11 +162,11 @@ const TrendingExperiences = () => {
 
         <div className="relative">
           {/* Currency Info */}
-          <div className="flex justify-end items-center mb-8">
+          {/* <div className="flex justify-end items-center mb-8">
             <div className="text-sm text-gray-500">
               Prices in {currency}
             </div>
-          </div>
+          </div> */}
 
           {/* Scrollable Container with Floating Navigation */}
           <div className="relative">

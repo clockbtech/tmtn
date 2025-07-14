@@ -121,7 +121,7 @@ const About = () => {
               >
                 <div className="relative overflow-hidden rounded-2xl">
                   <img
-                    src="https://images.pexels.com/photos/6871191/pexels-photo-6871191.jpeg"
+                    src="https://themegavias.com/wp/travivu/wp-content/uploads/2024/12/image-19.png"
                     alt="Adventure Sports"
                     className="w-full h-[400px] lg:h-[500px] object-cover"
                   />
