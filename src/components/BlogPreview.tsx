@@ -95,7 +95,7 @@ const BlogPreview = () => {
               <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
                 {/* Image */}
                 <div className="relative overflow-hidden">
-                  <img src={post.image} alt={post.title} className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
+                  <img src={post.image} alt={post.title} className="w-full h-52 object-cover group-hover:scale-110 transition-transform duration-500" />
                   <div className="absolute top-4 left-4 bg-nepal-orange text-white px-3 py-1 rounded-full text-sm font-semibold">
                     {post.category}
                   </div>
