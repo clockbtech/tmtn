@@ -162,31 +162,37 @@ const TrendingExperiences = () => {
           {/* Navigation Buttons */}
           <div className="flex justify-between items-center mb-8">
             <div className="flex space-x-4">
-              <motion.button whileHover={{
-              scale: 1.1
-            }} whileTap={{
-              scale: 0.9
-            }} onClick={() => scroll('left')} className="p-3 bg-nepal-primary text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200">
-                <ArrowLeft className="w-5 h-5" />
-              </motion.button>
-              <motion.button whileHover={{
-              scale: 1.1
-            }} whileTap={{
-              scale: 0.9
-            }} onClick={() => scroll('right')} className="p-3 bg-nepal-primary text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200">
-                <ArrowRight className="w-5 h-5" />
-              </motion.button>
+              <motion.button 
+    whileHover={{ scale: 1.1 }}
+    whileTap={{ scale: 0.9 }}
+    onClick={() => scroll('left')}
+    className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-nepal-primary text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200"
+  >
+    <ArrowLeft className="w-5 h-5" />
+  </motion.button>
+             <motion.button 
+    whileHover={{ scale: 1.1 }}
+    whileTap={{ scale: 0.9 }}
+    onClick={() => scroll('right')}
+    className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-nepal-primary text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200"
+  >
+    <ArrowRight className="w-5 h-5" />
+  </motion.button>
             </div>
-            <div className="text-sm text-gray-500">
+            {/* <div className="text-sm text-gray-500">
               Prices in {currency}
-            </div>
+            </div> */}
           </div>
 
           {/* Scrollable Container */}
-          <div ref={scrollRef} className="flex space-x-6 overflow-x-auto scrollbar-hide pb-4" style={{
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none'
-        }}>
+        <div 
+    ref={scrollRef} 
+    className="flex space-x-6 overflow-x-auto scrollbar-hide pb-4" 
+    style={{
+      scrollbarWidth: 'none',
+      msOverflowStyle: 'none'
+    }}
+  >
             {experiences.map((experience, index) => <motion.div key={experience.id} initial={{
             opacity: 0,
             x: 50
