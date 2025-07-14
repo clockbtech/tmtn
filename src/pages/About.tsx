@@ -112,7 +112,7 @@ const About = () => {
         </section>
 
         {/* Video Section */}
-        <section className="py-16 bg-gray-50">
+        <section className=" bg-gray-50">
           <div className="w-full px-0">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -122,7 +122,7 @@ const About = () => {
               className="w-full"
             >
               <div 
-                className="relative overflow-hidden cursor-pointer w-full h-[400px] lg:h-[500px]"
+                className="relative overflow-hidden cursor-pointer w-full h-[500px] lg:h-[600px]"
                 onClick={openFullscreen}
               >
                 <img
@@ -135,7 +135,7 @@ const About = () => {
                     <div className="w-0 h-0 border-l-[16px] border-l-white border-y-[12px] border-y-transparent ml-1"></div>
                   </div>
                 </div>
-                <div className="absolute bottom-8 center text-white">
+           <div className="absolute bottom-8 left-0 right-0 mx-auto text-white w-max">
                   <h3 className="text-3xl font-bold">Watch Our Story</h3>
                   <p className="text-lg mt-2 opacity-90">Discover Our Journey</p>
                 </div>
