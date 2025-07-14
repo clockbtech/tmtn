@@ -86,7 +86,7 @@ const AboutCTA = () => {
               <motion.img
                 src="/lovable-uploads/b8be241b-a5f1-405b-850a-283612b2441f.png"
                 alt="Adventure Illustration"
-                className="w-32 h-32 lg:w-40 lg:h-40 object-contain"
+                className="w-24 h-24 lg:w-32 lg:h-32 object-contain"
                 animate={{
                   y: [0, -8, 0],
                   rotate: [0, 2, 0, -2, 0]
