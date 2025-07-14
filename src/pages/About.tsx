@@ -158,15 +158,29 @@ const About = () => {
                   >
                     <div className="w-0 h-0 border-l-[16px] border-l-white border-y-[12px] border-y-transparent ml-1 relative z-10"></div>
                     
-                    {/* Continuous Ripple Effects */}
+                    {/* Continuous Ripple Effects - Enhanced for visibility */}
                     <div className="absolute inset-0 rounded-full">
-                      {[0, 1, 2].map((index) => (
+                      {[0, 1, 2, 3].map((index) => (
                         <div
                           key={index}
-                          className="absolute inset-0 border-2 border-white/30 rounded-full animate-ping"
+                          className="absolute inset-0 border-2 border-white/40 rounded-full"
                           style={{
-                            animationDelay: `${index * 0.8}s`,
-                            animationDuration: '2.4s'
+                            animation: `ping 3s cubic-bezier(0, 0, 0.2, 1) infinite`,
+                            animationDelay: `${index * 0.75}s`,
+                          }}
+                        />
+                      ))}
+                    </div>
+                    
+                    {/* Additional subtle outer ripples */}
+                    <div className="absolute -inset-4 rounded-full">
+                      {[0, 1].map((index) => (
+                        <div
+                          key={`outer-${index}`}
+                          className="absolute inset-0 border border-white/20 rounded-full"
+                          style={{
+                            animation: `ping 4s cubic-bezier(0, 0, 0.2, 1) infinite`,
+                            animationDelay: `${index * 2}s`,
                           }}
                         />
                       ))}
