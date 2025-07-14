@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Button } from '../ui/button';
+import { Facebook, Instagram, Twitter } from 'lucide-react';
 
 interface AuthorBioProps {
   author: {
@@ -39,8 +40,9 @@ const AuthorBio = ({ author }: AuthorBioProps) => {
                 href={author.socialLinks.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-700"
+                className="text-blue-600 hover:text-blue-700 flex items-center gap-2"
               >
+                <Facebook size={16} />
                 Facebook
               </a>
             </Button>
@@ -53,8 +55,9 @@ const AuthorBio = ({ author }: AuthorBioProps) => {
                 href={author.socialLinks.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-pink-600 hover:text-pink-700"
+                className="text-pink-600 hover:text-pink-700 flex items-center gap-2"
               >
+                <Instagram size={16} />
                 Instagram
               </a>
             </Button>
@@ -67,8 +70,9 @@ const AuthorBio = ({ author }: AuthorBioProps) => {
                 href={author.socialLinks.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-400 hover:text-blue-500"
+                className="text-blue-400 hover:text-blue-500 flex items-center gap-2"
               >
+                <Twitter size={16} />
                 Twitter
               </a>
             </Button>
