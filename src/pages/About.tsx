@@ -11,6 +11,7 @@ import FullscreenModal from '../components/video/FullscreenModal';
 
 const About = () => {
   const [fullscreenVideo, setFullscreenVideo] = useState<{ url: string; title: string } | null>(null);
+  const [ripples, setRipples] = useState<Array<{ id: number; x: number; y: number }>>([]);
 
   const openFullscreen = () => {
     const videoData = {
@@ -22,6 +23,27 @@ const About = () => {
 
   const closeFullscreen = () => {
     setFullscreenVideo(null);
+  };
+
+  const handlePlayButtonClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    
+    const newRipple = {
+      id: Date.now(),
+      x,
+      y
+    };
+    
+    setRipples(prev => [...prev, newRipple]);
+    
+    // Remove ripple after animation
+    setTimeout(() => {
+      setRipples(prev => prev.filter(ripple => ripple.id !== newRipple.id));
+    }, 600);
+    
+    openFullscreen();
   };
 
   return (
@@ -131,11 +153,40 @@ const About = () => {
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black/30 flex items-center justify-center hover:bg-black/40 transition-colors duration-300">
-                  <div className="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300">
-                    <div className="w-0 h-0 border-l-[16px] border-l-white border-y-[12px] border-y-transparent ml-1"></div>
+                  <div 
+                    className="relative w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300 overflow-hidden"
+                    onClick={handlePlayButtonClick}
+                  >
+                    <div className="w-0 h-0 border-l-[16px] border-l-white border-y-[12px] border-y-transparent ml-1 relative z-10"></div>
+                    
+                    {/* Ripple Effects */}
+                    {ripples.map((ripple) => (
+                      <motion.div
+                        key={ripple.id}
+                        className="absolute rounded-full bg-white/30"
+                        style={{
+                          left: ripple.x - 50,
+                          top: ripple.y - 50,
+                          width: 100,
+                          height: 100,
+                        }}
+                        initial={{
+                          scale: 0,
+                          opacity: 0.6,
+                        }}
+                        animate={{
+                          scale: 4,
+                          opacity: 0,
+                        }}
+                        transition={{
+                          duration: 0.6,
+                          ease: "easeOut",
+                        }}
+                      />
+                    ))}
                   </div>
                 </div>
-           <div className="absolute bottom-8 left-0 right-0 mx-auto text-white w-max">
+                <div className="absolute bottom-8 left-0 right-0 mx-auto text-white w-max">
                   <h3 className="text-3xl font-bold">Watch Our Story</h3>
                   <p className="text-lg mt-2 opacity-90">Discover Our Journey</p>
                 </div>
