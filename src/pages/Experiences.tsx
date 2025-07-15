@@ -180,7 +180,7 @@ const Experiences = () => {
             <h1 className="text-5xl font-tm-sans uppercase mb-6 lg:text-6xl font-extrabold">
               {t('nav.experiences')}
             </h1>
-            <p className="text-xl lg:text-2xl max-w-4xl mx-auto">
+            <p className="text-xl max-w-4xl mx-auto lg:text-xl">
               Unforgettable adventures and cultural experiences in the heart of the Himalayas
             </p>
           </motion.div>
