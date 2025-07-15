@@ -37,7 +37,7 @@ const AboutStory = () => {
               duration: 0.8,
               delay: 0.2
             }} className="text-center">
-                <div className="text-4xl lg:text-5xl font-bold text-orange-500 mb-2">10,000+</div>
+                <div className="text-4xl lg:text-4xl font-bold text-orange-500 mb-2">10,000+</div>
                 <div className="text-sm lg:text-base font-semibold text-nepal-dark">Happy Travellers</div>
               </motion.div>
               
@@ -51,7 +51,7 @@ const AboutStory = () => {
               duration: 0.8,
               delay: 0.4
             }} className="text-center">
-                <div className="text-4xl lg:text-5xl font-bold text-orange-500 mb-2">500+</div>
+                <div className="text-4xl lg:text-4xl font-bold text-orange-500 mb-2">500+</div>
                 <div className="text-sm lg:text-base font-semibold text-nepal-dark">Tours Completed</div>
               </motion.div>
               
