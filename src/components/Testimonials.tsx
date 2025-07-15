@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
@@ -47,7 +46,6 @@ const Testimonials = () => {
     }
   ];
 
-  // Auto-slide functionality
   useEffect(() => {
     if (!isHovered) {
       const interval = setInterval(() => {
@@ -57,7 +55,6 @@ const Testimonials = () => {
     }
   }, [isHovered, testimonials.length]);
 
-  // GSAP animation for cards
   useEffect(() => {
     gsap.fromTo('.testimonial-card', 
       {
@@ -79,7 +76,7 @@ const Testimonials = () => {
       {/* Background Image Layer */}
       <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
            style={{
-             backgroundImage: 'url(/lovable-uploads/cd69aa7a-1ff4-42aa-b8fa-d8ee8cdf17c4.png)'
+             backgroundImage: 'url(/lovable-uploads/e2239eb8-7874-4ac6-909f-2c174a8eef6d.png)'
            }}>
         {/* Overlay for better readability */}
         <div className="absolute inset-0 bg-white/90"></div>
