@@ -75,12 +75,13 @@ const Testimonials = () => {
   return (
     <section className="py-20 overflow-hidden relative">
       {/* Background Image Layer */}
-      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
-           style={{
-             backgroundImage: 'url(/lovable-uploads/e2239eb8-7874-4ac6-909f-2c174a8eef6d.png)'
-           }}>
+     <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
+     style={{
+       backgroundImage: 'url(/images/e2239eb8-7874-4ac6-909f-2c174a8eef6d.png)',
+       zIndex: -1 // Ensure it stays behind content
+     }}>
         {/* Overlay for better readability */}
-        <div className="absolute inset-0 bg-white/90"></div>
+        <div className="absolute inset-0 bg-white/70"></div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
