@@ -28,42 +28,31 @@ const AboutVideoSection: React.FC<AboutVideoSectionProps> = ({ onVideoClick, rip
             />
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center hover:bg-black/40 transition-colors duration-300">
               
-              {/* Continuous Ripple Effects - Positioned at center */}
-              <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                  {/* Inner ripples */}
-                  {[0, 1, 2, 3].map((index) => (
-                    <div
-                      key={index}
-                      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 border-2 border-white/40 rounded-full animate-ping"
-                      style={{
-                        animationDuration: '3s',
-                        animationDelay: `${index * 0.75}s`,
-                      }}
-                    />
-                  ))}
-                  
-                  {/* Outer ripples */}
-                  {[0, 1].map((index) => (
-                    <div
-                      key={`outer-${index}`}
-                      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-40 sm:h-40 border border-white/25 rounded-full animate-ping"
-                      style={{
-                        animationDuration: '4s',
-                        animationDelay: `${index * 2}s`,
-                      }}
-                    />
-                  ))}
-                  
-                  {/* Extra large outer ripples for better visibility */}
+              {/* Continuous Ripple Effects - Centered */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                {/* Inner ripples */}
+                {[0, 1, 2].map((index) => (
                   <div
-                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 sm:w-56 sm:h-56 border border-white/15 rounded-full animate-ping"
+                    key={`inner-${index}`}
+                    className="absolute w-20 h-20 sm:w-24 sm:h-24 border-2 border-white/40 rounded-full animate-ping"
                     style={{
-                      animationDuration: '5s',
-                      animationDelay: '1s',
+                      animationDuration: '2.5s',
+                      animationDelay: `${index * 0.8}s`,
                     }}
                   />
-                </div>
+                ))}
+                
+                {/* Outer ripples */}
+                {[0, 1].map((index) => (
+                  <div
+                    key={`outer-${index}`}
+                    className="absolute w-32 h-32 sm:w-40 sm:h-40 border border-white/25 rounded-full animate-ping"
+                    style={{
+                      animationDuration: '3.5s',
+                      animationDelay: `${index * 1.5}s`,
+                    }}
+                  />
+                ))}
               </div>
               
               {/* Play Button */}
