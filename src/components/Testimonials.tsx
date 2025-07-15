@@ -108,7 +108,7 @@ const Testimonials = () => {
           {/* Carousel Track */}
           <div className="overflow-hidden">
             <motion.div 
-              className="flex gap-6 transition-transform duration-500 ease-in-out pb-10 mb-10"
+              className="flex gap-6 transition-transform duration-500 ease-in-out pb-10"
               style={{
                 transform: `translateX(-${currentIndex * (100 / 3)}%)`
               }}
