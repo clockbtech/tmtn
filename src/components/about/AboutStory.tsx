@@ -15,7 +15,7 @@ const AboutStory = () => {
           duration: 0.8
         }} className="lg:pr-8">
             <h1 className="text-4xl uppercase lg:text-5xl text-nepal-primary mb-6 leading-tight font-extrabold xl:text-4xl">
-              Our journey began with a 
+              Our journey began with a passion 
               {/* <span className="text-nepal-primary">passion</span> */}
             </h1>
             
