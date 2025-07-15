@@ -47,11 +47,11 @@ const Testimonials = () => {
     }
   ];
 
-  // Auto-slide functionality - now cycles through all testimonials
+  // Auto-slide functionality
   useEffect(() => {
     if (!isHovered) {
       const interval = setInterval(() => {
-        setCurrentIndex(prev => (prev + 1) % testimonials.length);
+        setCurrentIndex(prev => (prev + 1) % Math.max(1, testimonials.length - 2));
       }, 4000);
       return () => clearInterval(interval);
     }
@@ -79,7 +79,7 @@ const Testimonials = () => {
       {/* Background Image Layer */}
       <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
            style={{
-             backgroundImage: 'url(/lovable-uploads/d9b32b0b-1d3d-4644-bcb7-a8bd6f88b4e4.png)'
+             backgroundImage: 'url(/lovable-uploads/cd69aa7a-1ff4-42aa-b8fa-d8ee8cdf17c4.png)'
            }}>
         {/* Overlay for better readability */}
         <div className="absolute inset-0 bg-white/90"></div>
@@ -103,22 +103,22 @@ const Testimonials = () => {
         {/* Carousel Container */}
         <div 
           ref={carouselRef}
-          className="relative max-w-2xl mx-auto"
+          className="relative max-w-7xl mx-auto"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          {/* Carousel Track - Single Card Display */}
+          {/* Carousel Track */}
           <div className="overflow-hidden">
             <motion.div 
-              className="flex transition-transform duration-500 ease-in-out"
+              className="flex gap-6 transition-transform duration-500 ease-in-out"
               style={{
-                transform: `translateX(-${currentIndex * 100}%)`
+                transform: `translateX(-${currentIndex * (100 / 3)}%)`
               }}
             >
               {testimonials.map((testimonial, index) => (
                 <motion.div
                   key={index}
-                  className="testimonial-card flex-shrink-0 w-full bg-white rounded-2xl p-8 shadow-lg border border-gray-100 relative"
+                  className="testimonial-card flex-shrink-0 w-full lg:w-1/3 bg-white rounded-2xl p-8 shadow-lg border border-gray-100 relative"
                   whileHover={{ y: -5 }}
                   transition={{ duration: 0.3 }}
                 >
@@ -144,19 +144,19 @@ const Testimonials = () => {
                   </div>
 
                   {/* Testimonial Text */}
-                  <p className="text-gray-700 mb-6 leading-relaxed italic text-center">
+                  <p className="text-gray-700 mb-6 leading-relaxed italic">
                     "{testimonial.text}"
                   </p>
 
                   {/* Author Info */}
-                  <div className="flex items-center justify-center gap-4">
+                  <div className="flex items-center gap-4">
                     <motion.img
                       whileHover={{ scale: 1.1 }}
                       src={testimonial.image}
                       alt={testimonial.name}
                       className="w-12 h-12 rounded-full object-cover ring-2 ring-nepal-orange/20"
                     />
-                    <div className="text-center">
+                    <div>
                       <div className="font-semibold text-nepal-primary text-lg">
                         {testimonial.name}
                       </div>
@@ -172,7 +172,7 @@ const Testimonials = () => {
 
           {/* Navigation Dots */}
           <div className="flex justify-center mt-8 space-x-2">
-            {testimonials.map((_, index) => (
+            {Array.from({ length: Math.max(1, testimonials.length - 2) }).map((_, index) => (
               <motion.button
                 key={index}
                 whileHover={{ scale: 1.2 }}
