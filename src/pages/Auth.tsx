@@ -40,7 +40,7 @@ const Auth = () => {
         <div 
           className="w-full bg-cover bg-center relative"
           style={{
-            backgroundImage: "url('/lovable-uploads/56628e38-93c6-4daf-bc37-68b2e759d39e.png')"
+            backgroundImage: "url('https://images.pexels.com/photos/14663616/pexels-photo-14663616.jpeg')"
           }}
         >
           <div className="absolute inset-0 bg-black/20" />
