@@ -64,29 +64,30 @@ const AboutVideoSection: React.FC<AboutVideoSectionProps> = ({ onVideoClick, rip
                 
                 {/* Click Ripple Effects */}
                 {ripples.map((ripple) => (
-                  <motion.div
-                    key={ripple.id}
-                    className="absolute rounded-full bg-white/30"
-                    style={{
-                      left: ripple.x - 50,
-                      top: ripple.y - 50,
-                      width: 100,
-                      height: 100,
-                    }}
-                    initial={{
-                      scale: 0,
-                      opacity: 0.6,
-                    }}
-                    animate={{
-                      scale: 4,
-                      opacity: 0,
-                    }}
-                    transition={{
-                      duration: 0.6,
-                      ease: "easeOut",
-                    }}
-                  />
-                ))}
+                <motion.div
+                  key={ripple.id}
+                  className="absolute rounded-full bg-white/30 pointer-events-none"
+                  style={{
+                    left: ripple.x - 50,
+                    top: ripple.y - 50,
+                    width: 100,
+                    height: 100,
+                  }}
+                  initial={{
+                    scale: 0,
+                    opacity: 0.8,
+                  }}
+                  animate={{
+                    scale: 3,  // Reduced from 4 to make it less aggressive
+                    opacity: 0,
+                  }}
+                  transition={{
+                    duration: 1,  // Increased from 0.6 to make it slower
+                    ease: [0.22, 1, 0.36, 1],  // Smoother easing function
+                  }}
+                  exit={{ opacity: 0 }}  // For clean removal if using AnimatePresence
+                />
+              ))}
               </div>
             </div>
             <div className="absolute bottom-8 left-0 right-0 mx-auto text-white text-center w-max">
