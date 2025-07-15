@@ -27,38 +27,51 @@ const AboutVideoSection: React.FC<AboutVideoSectionProps> = ({ onVideoClick, rip
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center hover:bg-black/40 transition-colors duration-300">
-              {/* Continuous Ripple Effects - Outside the button */}
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                {[0, 1, 2, 3].map((index) => (
+              
+              {/* Continuous Ripple Effects - Positioned at center */}
+              <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  {/* Inner ripples */}
+                  {[0, 1, 2, 3].map((index) => (
+                    <div
+                      key={index}
+                      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 border-2 border-white/40 rounded-full animate-ping"
+                      style={{
+                        animationDuration: '3s',
+                        animationDelay: `${index * 0.75}s`,
+                      }}
+                    />
+                  ))}
+                  
+                  {/* Outer ripples */}
+                  {[0, 1].map((index) => (
+                    <div
+                      key={`outer-${index}`}
+                      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-40 sm:h-40 border border-white/25 rounded-full animate-ping"
+                      style={{
+                        animationDuration: '4s',
+                        animationDelay: `${index * 2}s`,
+                      }}
+                    />
+                  ))}
+                  
+                  {/* Extra large outer ripples for better visibility */}
                   <div
-                    key={index}
-                    className="absolute w-24 h-24 border-2 border-white/30 rounded-full"
+                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 sm:w-56 sm:h-56 border border-white/15 rounded-full animate-ping"
                     style={{
-                      animation: `ping 3s cubic-bezier(0, 0, 0.2, 1) infinite`,
-                      animationDelay: `${index * 0.75}s`,
+                      animationDuration: '5s',
+                      animationDelay: '1s',
                     }}
                   />
-                ))}
-                
-                {/* Additional larger outer ripples */}
-                {[0, 1].map((index) => (
-                  <div
-                    key={`outer-${index}`}
-                    className="absolute w-32 h-32 border border-white/15 rounded-full"
-                    style={{
-                      animation: `ping 4s cubic-bezier(0, 0, 0.2, 1) infinite`,
-                      animationDelay: `${index * 2}s`,
-                    }}
-                  />
-                ))}
+                </div>
               </div>
               
               {/* Play Button */}
               <div 
-                className="relative w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300 overflow-hidden z-10"
+                className="relative w-20 h-20 sm:w-24 sm:h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300 overflow-hidden z-10"
                 onClick={onVideoClick}
               >
-                <div className="w-0 h-0 border-l-[16px] border-l-white border-y-[12px] border-y-transparent ml-1 relative z-10"></div>
+                <div className="w-0 h-0 border-l-[14px] sm:border-l-[16px] border-l-white border-y-[10px] sm:border-y-[12px] border-y-transparent ml-1 relative z-10"></div>
                 
                 {/* Click Ripple Effects */}
                 {ripples.map((ripple) => (
