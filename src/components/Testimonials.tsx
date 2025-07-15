@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
@@ -125,51 +126,6 @@ const Testimonials = () => {
                       <Quote className="w-4 h-4 text-nepal-orange" />
                     </div>
                   </div>
-
-
-          <AnimatePresence mode="wait">
-            <motion.div key={currentIndex} initial={{
-            opacity: 0,
-            x: 50
-          }} animate={{
-            opacity: 1,
-            x: 0
-          }} exit={{
-            opacity: 0,
-            x: -50
-          }} transition={{
-            duration: 0.5
-          }} className="testimonial-content bg-white/95 backdrop-blur-sm rounded-3xl p-8 lg:p-12 shadow-xl border border-white/50 relative overflow-hidden mb-10">
-              {/* Subtle Pattern Overlay on Card */}
-              <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
-                <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                  <defs>
-                    <pattern id="card-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                      <circle cx="10" cy="10" r="1" fill="currentColor" opacity="0.3" />
-                      <circle cx="5" cy="5" r="0.5" fill="currentColor" opacity="0.2" />
-                      <circle cx="15" cy="15" r="0.5" fill="currentColor" opacity="0.2" />
-                    </pattern>
-                  </defs>
-                  <rect width="100%" height="100%" fill="url(#card-pattern)" className="text-nepal-primary" />
-                </svg>
-              </div>
-
-              <div className="flex flex-col lg:flex-row items-center gap-8 relative z-10">
-                {/* Quote Icon */}
-                <div className="flex-shrink-0">
-                  <motion.div animate={{
-                  rotate: [0, 5, -5, 0]
-                }} transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  repeatDelay: 3
-                }} className="w-16 h-16 bg-nepal-orange rounded-full flex items-center justify-center shadow-lg">
-                    <Quote className="w-8 h-8 text-white" />
-                  </motion.div>
-                </div>
-
-                {/* Content */}
-                <div className="flex-1 text-center lg:text-left">
 
                   {/* Stars */}
                   <div className="flex mb-4">
