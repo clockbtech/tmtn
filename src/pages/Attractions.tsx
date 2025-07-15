@@ -218,7 +218,7 @@ const Attractions = () => {
             <h1 className="text-5xl font-tm-sans uppercase mb-6 lg:text-6xl font-extrabold">
               {t('nav.attractions')}
             </h1>
-            <p className="text-xl lg:text-2xl max-w-4xl mx-auto">
+            <p className="text-xl max-w-4xl mx-auto lg:text-xl">
               Discover Nepal's most captivating temples, viewpoints, and cultural landmarks
             </p>
           </motion.div>
