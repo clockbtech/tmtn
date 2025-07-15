@@ -72,7 +72,7 @@ const Testimonials = () => {
   return <section className="py-20 overflow-hidden relative">
       {/* Background Image Layer */}
       <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-      backgroundImage: 'url(/lovable-uploads/cd69aa7a-1ff4-42aa-b8fa-d8ee8cdf17c4.png)'
+      backgroundImage: 'url(/lovable-uploads/bg_map.png)'
     }}>
         {/* Overlay for better text readability */}
         {/* <div className="absolute inset-0 bg-white/85"></div> */}
