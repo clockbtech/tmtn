@@ -14,9 +14,9 @@ const AboutStory = () => {
         }} transition={{
           duration: 0.8
         }} className="lg:pr-8">
-            <h1 className="text-4xl uppercase lg:text-5xl text-nepal-dark mb-6 leading-tight font-extrabold xl:text-4xl">
+            <h1 className="text-4xl uppercase lg:text-5xl text-nepal-primary mb-6 leading-tight font-extrabold xl:text-4xl">
               Our journey began with a 
-              <span className="text-nepal-primary">passion</span>
+              {/* <span className="text-nepal-primary">passion</span> */}
             </h1>
             
             <p className="text-lg text-gray-700 mb-8 leading-relaxed">
@@ -65,7 +65,7 @@ const AboutStory = () => {
               duration: 0.8,
               delay: 0.6
             }} className="text-center">
-                <div className="text-4xl lg:text-5xl font-bold text-orange-500 mb-2">15+</div>
+                <div className="text-4xl lg:text-4xl font-bold text-orange-500 mb-2">15+</div>
                 <div className="text-sm lg:text-base font-semibold text-nepal-dark">Years Experience</div>
               </motion.div>
             </div>
