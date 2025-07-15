@@ -82,7 +82,7 @@ const Testimonials = () => {
       className="w-full h-full object-cover"
     />
         {/* Overlay for better readability */}
-          <div className="absolute inset-0 bg-white/50"></div>
+          {/* <div className="absolute inset-0 bg-white/50"></div> */}
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
