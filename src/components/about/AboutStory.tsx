@@ -14,7 +14,7 @@ const AboutStory = () => {
         }} transition={{
           duration: 0.8
         }} className="lg:pr-8">
-            <h1 className="text-4xl uppercase lg:text-5xl xl:text-6xl text-nepal-dark mb-6 leading-tight font-extrabold">
+            <h1 className="text-4xl uppercase lg:text-5xl text-nepal-dark mb-6 leading-tight font-extrabold xl:text-4xl">
               Our journey began with a 
               <span className="text-nepal-primary">passion</span>
             </h1>
