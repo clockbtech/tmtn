@@ -20,7 +20,7 @@ const AboutStory = () => {
             </h1>
             
             <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-              we believe in the transformative power of travel. 
+              We believe in the transformative power of travel. 
               Our journey began with a passion for exploration and a vision to share the wonders of the world with fellow adventurers.
               Established in 2017, we've since dedicated ourselves to curating exceptional travel experiences that go beyond the ordinary..
             </p>
