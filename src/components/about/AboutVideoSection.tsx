@@ -27,29 +27,27 @@ const AboutVideoSection: React.FC<AboutVideoSectionProps> = ({ onVideoClick, rip
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center hover:bg-black/40 transition-colors duration-300">
-              
-              {/* Continuous Ripple Effects - Centered */}
+              {/* Continuous Ripple Effects - Outside the button */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                {/* Inner ripples */}
-                {[0, 1, 2].map((index) => (
+                {[0, 1, 2, 3].map((index) => (
                   <div
-                    key={`inner-${index}`}
-                    className="absolute w-20 h-20 sm:w-24 sm:h-24 border-2 border-white/40 rounded-full animate-ping"
+                    key={index}
+                    className="absolute w-24 h-24 border-2 border-white/30 rounded-full"
                     style={{
-                      animationDuration: '2.5s',
-                      animationDelay: `${index * 0.8}s`,
+                      animation: `ping 3s cubic-bezier(0, 0, 0.2, 1) infinite`,
+                      animationDelay: `${index * 0.75}s`,
                     }}
                   />
                 ))}
                 
-                {/* Outer ripples */}
+                {/* Additional larger outer ripples */}
                 {[0, 1].map((index) => (
                   <div
                     key={`outer-${index}`}
-                    className="absolute w-32 h-32 sm:w-40 sm:h-40 border border-white/25 rounded-full animate-ping"
+                    className="absolute w-32 h-32 border border-white/15 rounded-full"
                     style={{
-                      animationDuration: '3.5s',
-                      animationDelay: `${index * 1.5}s`,
+                      animation: `ping 4s cubic-bezier(0, 0, 0.2, 1) infinite`,
+                      animationDelay: `${index * 2}s`,
                     }}
                   />
                 ))}
@@ -57,16 +55,16 @@ const AboutVideoSection: React.FC<AboutVideoSectionProps> = ({ onVideoClick, rip
               
               {/* Play Button */}
               <div 
-                className="relative w-20 h-20 sm:w-24 sm:h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300 overflow-hidden z-10"
+                className="relative w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300 overflow-hidden z-10"
                 onClick={onVideoClick}
               >
-                <div className="w-0 h-0 border-l-[14px] sm:border-l-[16px] border-l-white border-y-[10px] sm:border-y-[12px] border-y-transparent ml-1 relative z-10"></div>
+                <div className="w-0 h-0 border-l-[16px] border-l-white border-y-[12px] border-y-transparent ml-1 relative z-10"></div>
                 
                 {/* Click Ripple Effects */}
                 {ripples.map((ripple) => (
                 <motion.div
                   key={ripple.id}
-                  className="absolute rounded-full bg-white/30 pointer-events-none"
+                    className="absolute rounded-full bg-white/30"
                   style={{
                     left: ripple.x - 50,
                     top: ripple.y - 50,
@@ -75,17 +73,16 @@ const AboutVideoSection: React.FC<AboutVideoSectionProps> = ({ onVideoClick, rip
                   }}
                   initial={{
                     scale: 0,
-                    opacity: 0.8,
+                      opacity: 0.6,
                   }}
                   animate={{
-                    scale: 3,  // Reduced from 4 to make it less aggressive
+                      scale: 4,
                     opacity: 0,
                   }}
                   transition={{
-                    duration: 1,  // Increased from 0.6 to make it slower
-                    ease: [0.22, 1, 0.36, 1],  // Smoother easing function
+                      duration: 0.6,
+                      ease: "easeOut",
                   }}
-                  exit={{ opacity: 0 }}  // For clean removal if using AnimatePresence
                 />
               ))}
               </div>
