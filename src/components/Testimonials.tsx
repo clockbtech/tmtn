@@ -77,7 +77,9 @@ const Testimonials = () => {
       {/* Background Image Layer */}
      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
      style={{
-       backgroundImage: 'url(/images/e2239eb8-7874-4ac6-909f-2c174a8eef6d.png)',
+      //  backgroundImage: 'url(/images/e2239eb8-7874-4ac6-909f-2c174a8eef6d.png)',
+       backgroundImage: 'url(/images/a26300b1-f01d-4f86-880d-99c4fc88d181.png)',
+
        zIndex: -1 // Ensure it stays behind content
      }}>
         {/* Overlay for better readability */}
