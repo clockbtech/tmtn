@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs'
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
+
 const ExperienceDetail = () => {
   const {
     id
@@ -280,6 +281,7 @@ const ExperienceDetail = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   return <div className="min-h-screen bg-white">
       <Header />
 
@@ -706,9 +708,10 @@ const ExperienceDetail = () => {
             </motion.section>
           </div>
 
-          {/* Static Booking Panel (Desktop) - Removed sticky positioning */}
+          {/* Sidebar with Booking Panel and Confidence Card */}
           <div className="lg:col-span-1 hidden lg:block">
-            <div className="sticky top-6">
+            <div className="sticky top-6 space-y-6">
+              {/* Booking Panel */}
               <Card className="shadow-xl border-2">
                 <CardHeader className="pb-4">
                   <CardTitle className="flex items-center justify-between">
@@ -719,28 +722,6 @@ const ExperienceDetail = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {/* Traveler Details */}
-                  {/* <div className="space-y-3">
-                    <h4 className="font-semibold flex items-center gap-2">
-                      <User className="w-4 h-4" />
-                      Traveler Details
-                    </h4>
-                    <div className="space-y-2">
-                      <Input placeholder="Full Name *" value={bookingData.fullName} onChange={e => setBookingData({
-                      ...bookingData,
-                      fullName: e.target.value
-                    })} />
-                      <Input type="email" placeholder="Email Address *" value={bookingData.email} onChange={e => setBookingData({
-                      ...bookingData,
-                      email: e.target.value
-                    })} />
-                      <Input type="tel" placeholder="Phone Number *" value={bookingData.phone} onChange={e => setBookingData({
-                      ...bookingData,
-                      phone: e.target.value
-                    })} />
-                    </div>
-                  </div> */}
-
                   {/* Tour Date */}
                   <div className="space-y-3">
                     <h4 className="font-semibold flex items-center gap-2">
@@ -849,6 +830,52 @@ const ExperienceDetail = () => {
                   <Button className="w-full bg-nepal-orange hover:bg-orange-600 text-white text-lg py-3">
                     Book Now - {formatPrice(calculateTotal())}
                   </Button>
+                </CardContent>
+              </Card>
+
+              {/* Book With Confidence Card */}
+              <Card className="shadow-lg border border-gray-200">
+                <CardHeader className="pb-4">
+                  <CardTitle className="text-xl text-nepal-primary font-bold">
+                    Book With Confidence
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <ThumbsUp className="w-4 h-4 text-blue-600" />
+                    </div>
+                    <div>
+                      <p className="text-gray-700 font-medium">No-hassle best price guarantee</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Phone className="w-4 h-4 text-blue-600" />
+                    </div>
+                    <div>
+                      <p className="text-gray-700 font-medium">Customer care available 24/7</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Star className="w-4 h-4 text-blue-600" />
+                    </div>
+                    <div>
+                      <p className="text-gray-700 font-medium">Hand-picked Tours & Activities</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Shield className="w-4 h-4 text-blue-600" />
+                    </div>
+                    <div>
+                      <p className="text-gray-700 font-medium">Free Travel Insurance</p>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             </div>
@@ -971,4 +998,5 @@ const ExperienceDetail = () => {
       <Footer />
     </div>;
 };
+
 export default ExperienceDetail;
