@@ -720,7 +720,7 @@ const ExperienceDetail = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {/* Traveler Details */}
-                  <div className="space-y-3">
+                  {/* <div className="space-y-3">
                     <h4 className="font-semibold flex items-center gap-2">
                       <User className="w-4 h-4" />
                       Traveler Details
@@ -739,7 +739,7 @@ const ExperienceDetail = () => {
                       phone: e.target.value
                     })} />
                     </div>
-                  </div>
+                  </div> */}
 
                   {/* Tour Date */}
                   <div className="space-y-3">
