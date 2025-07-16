@@ -11,7 +11,7 @@ export interface Language {
 export const languages: Language[] = [
   { code: 'en', name: 'English', flag: '🇺🇸', currency: 'USD', currencySymbol: '$' },
   { code: 'es', name: 'Spanish', flag: '🇪🇸', currency: 'EUR', currencySymbol: '€' },
-  { code: 'de', name: 'German', flag: '🇩🇪', currency: 'EUR', currencySymbol: '€' },
+  { code: 'de', name:'German', flag: '🇩🇪', currency: 'EUR', currencySymbol: '€' },
   { code: 'fr', name: 'French', flag: '🇫🇷', currency: 'EUR', currencySymbol: '€' },
   { code: 'ar', name: 'Arabic', flag: '🇸🇦', currency: 'SAR', currencySymbol: 'ر.س' },
   { code: 'zh', name: 'Mandarin', flag: '🇨🇳', currency: 'CNY', currencySymbol: '¥' },
@@ -26,6 +26,7 @@ interface TranslationContextType {
 
 const TranslationContext = createContext<TranslationContextType | undefined>(undefined);
 
+// Move translations to a separate constant to avoid any potential circular reference issues
 const translations: Record<string, Record<string, string>> = {
   en: {
     // Navigation
@@ -318,14 +319,17 @@ const translations: Record<string, Record<string, string>> = {
 };
 
 export const TranslationProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [currentLanguage, setCurrentLanguage] = useState<Language>(languages[0]); // Default to English
+  console.log('TranslationProvider: Rendering with React:', !!React, 'useState:', !!useState);
+  
+  // Initialize state with explicit React.useState to ensure proper context
+  const [currentLanguage, setCurrentLanguage] = React.useState<Language>(languages[0]);
 
-  const t = (key: string): string => {
+  const t = React.useCallback((key: string): string => {
     const translation = translations[currentLanguage.code]?.[key];
     return translation || key;
-  };
+  }, [currentLanguage.code]);
 
-  const formatPrice = (price: number): string => {
+  const formatPrice = React.useCallback((price: number): string => {
     // Simple conversion rates (in a real app, you'd fetch these from an API)
     const conversionRates: Record<string, number> = {
       USD: 1,
@@ -336,10 +340,17 @@ export const TranslationProvider: React.FC<{ children: ReactNode }> = ({ childre
 
     const convertedPrice = price * (conversionRates[currentLanguage.currency] || 1);
     return `${currentLanguage.currencySymbol}${convertedPrice.toFixed(0)}`;
-  };
+  }, [currentLanguage.currency, currentLanguage.currencySymbol]);
+
+  const contextValue = React.useMemo(() => ({
+    currentLanguage,
+    setCurrentLanguage,
+    t,
+    formatPrice
+  }), [currentLanguage, setCurrentLanguage, t, formatPrice]);
 
   return (
-    <TranslationContext.Provider value={{ currentLanguage, setCurrentLanguage, t, formatPrice }}>
+    <TranslationContext.Provider value={contextValue}>
       {children}
     </TranslationContext.Provider>
   );
