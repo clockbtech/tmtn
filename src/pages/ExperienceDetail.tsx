@@ -844,7 +844,7 @@ const ExperienceDetail = () => {
                       <ThumbsUp className="w-4 h-4 text-blue-600" />
                     </div>
                     <div>
-                      <p className="text-gray-600 font-normal">No-hassle best price guarantee</p>
+                      <p className="text-gray-600 font-thin">No-hassle best price guarantee</p>
                     </div>
                   </div>
                   
@@ -853,7 +853,7 @@ const ExperienceDetail = () => {
                       <Phone className="w-4 h-4 text-blue-600" />
                     </div>
                     <div>
-                      <p className="text-gray-600 font-normal">Customer care available 24/7</p>
+                      <p className="text-gray-600 font-thin">Customer care available 24/7</p>
                     </div>
                   </div>
                   
@@ -862,7 +862,7 @@ const ExperienceDetail = () => {
                       <Star className="w-4 h-4 text-blue-600" />
                     </div>
                     <div>
-                      <p className="text-gray-600 font-medium text-base">Hand-picked Tours & Activities</p>
+                      <p className="text-gray-600 font-medium text-thin">Hand-picked Tours & Activities</p>
                     </div>
                   </div>
                   
@@ -871,7 +871,7 @@ const ExperienceDetail = () => {
                       <Shield className="w-4 h-4 text-blue-600" />
                     </div>
                     <div>
-                      <p className="text-gray-600 font-normal">Free Travel Insurance</p>
+                      <p className="text-gray-600 font-thin">Free Travel Insurance</p>
                     </div>
                   </div>
                 </CardContent>

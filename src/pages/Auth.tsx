@@ -60,7 +60,7 @@ const Auth = () => {
             </h2>
             {!isLogin && (
               <div className="inline-flex items-center bg-nepal-orange text-white px-3 py-1 rounded-full text-sm font-medium mb-4">
-                <span className="text-orange-100">get 20% off for web signup</span>
+                <span className="text-orange-100">Get 20% off for web signup</span>
               </div>
             )}
           </motion.div>
