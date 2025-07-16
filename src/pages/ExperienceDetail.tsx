@@ -10,7 +10,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs'
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
-
 const ExperienceDetail = () => {
   const {
     id
@@ -281,7 +280,6 @@ const ExperienceDetail = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
   return <div className="min-h-screen bg-white">
       <Header />
 
@@ -846,7 +844,7 @@ const ExperienceDetail = () => {
                       <ThumbsUp className="w-4 h-4 text-blue-600" />
                     </div>
                     <div>
-                      <p className="text-gray-700 font-medium">No-hassle best price guarantee</p>
+                      <p className="text-gray-600 font-normal">No-hassle best price guarantee</p>
                     </div>
                   </div>
                   
@@ -855,7 +853,7 @@ const ExperienceDetail = () => {
                       <Phone className="w-4 h-4 text-blue-600" />
                     </div>
                     <div>
-                      <p className="text-gray-700 font-medium">Customer care available 24/7</p>
+                      <p className="text-gray-600 font-normal">Customer care available 24/7</p>
                     </div>
                   </div>
                   
@@ -864,7 +862,7 @@ const ExperienceDetail = () => {
                       <Star className="w-4 h-4 text-blue-600" />
                     </div>
                     <div>
-                      <p className="text-gray-700 font-medium">Hand-picked Tours & Activities</p>
+                      <p className="text-gray-600 font-medium text-base">Hand-picked Tours & Activities</p>
                     </div>
                   </div>
                   
@@ -873,7 +871,7 @@ const ExperienceDetail = () => {
                       <Shield className="w-4 h-4 text-blue-600" />
                     </div>
                     <div>
-                      <p className="text-gray-700 font-medium">Free Travel Insurance</p>
+                      <p className="text-gray-600 font-normal">Free Travel Insurance</p>
                     </div>
                   </div>
                 </CardContent>
@@ -998,5 +996,4 @@ const ExperienceDetail = () => {
       <Footer />
     </div>;
 };
-
 export default ExperienceDetail;
