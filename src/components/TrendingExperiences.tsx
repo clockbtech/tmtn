@@ -161,34 +161,23 @@ const TrendingExperiences = () => {
         </motion.div>
 
         <div className="relative">
-          {/* Currency Info */}
-          {/* <div className="flex justify-end items-center mb-8">
-            <div className="text-sm text-gray-500">
-              Prices in {currency}
-            </div>
-          </div> */}
-
-          {/* Scrollable Container with Floating Navigation */}
+          {/* Scrollable Container with Fixed Navigation */}
           <div className="relative">
-            {/* Left Navigation Button */}
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+            {/* Left Navigation Button - Fixed position */}
+            <button
               onClick={() => scroll('left')}
               className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-nepal-primary text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200 -ml-6"
             >
               <ArrowLeft className="w-5 h-5" />
-            </motion.button>
+            </button>
 
-            {/* Right Navigation Button */}
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+            {/* Right Navigation Button - Fixed position */}
+            <button
               onClick={() => scroll('right')}
               className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-nepal-primary text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200 -mr-6"
             >
               <ArrowRight className="w-5 h-5" />
-            </motion.button>
+            </button>
 
             {/* Scrollable Content */}
             <div
@@ -204,7 +193,7 @@ const TrendingExperiences = () => {
                   key={experience.id}
                   initial={{ opacity: 0, x: 50 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  transition={{ duration: 0.5 }}
                   whileHover={{ y: -5 }}
                   className="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
                 >
