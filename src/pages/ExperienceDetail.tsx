@@ -862,7 +862,7 @@ const ExperienceDetail = () => {
                       <Star className="w-4 h-4 text-blue-600" />
                     </div>
                     <div>
-                      <p className="text-gray-600 font-medium text-thin">Hand-picked Tours & Activities</p>
+                      <p className="text-gray-600 font-thin">Hand-picked Tours & Activities</p>
                     </div>
                   </div>
                   
