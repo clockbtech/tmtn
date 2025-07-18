@@ -11,10 +11,9 @@ import { Switch } from '@/components/ui/switch';
 import { Star, Calendar, Users } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+
 const Checkout = () => {
-  const {
-    id
-  } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
   const [sameAsBilling, setSameAsBilling] = useState(true);
   const [paymentMethod, setPaymentMethod] = useState('paypal');
@@ -29,11 +28,14 @@ const Checkout = () => {
     guide: "Jayvion Simon",
     price: 83.74
   };
+
   const handleCompleteBooking = () => {
     // Handle booking completion logic here
     console.log('Booking completed');
   };
-  return <div className="min-h-screen bg-background">
+
+  return (
+    <div className="min-h-screen bg-background">
       <Header />
       
       <div className="container mx-auto px-4 py-8">
@@ -90,8 +92,25 @@ const Checkout = () => {
                         </div>
                       </div>
                       <div className="md:col-span-2">
-                        <Label htmlFor="passportInfo">Passport Information (Number, Country, Issue Date, Expiry Date etc.)</Label>
-                        <Textarea id="passportInfo" placeholder="Passport Number, Country, Issue Date, Expiry Date etc." rows={3} />
+                        <h4 className="font-semibold mb-4">Passport Information</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <Label htmlFor="passportNumber">Number</Label>
+                            <Input id="passportNumber" placeholder="Passport Number" />
+                          </div>
+                          <div>
+                            <Label htmlFor="passportCountry">Country</Label>
+                            <Input id="passportCountry" placeholder="Country of Issue" />
+                          </div>
+                          <div>
+                            <Label htmlFor="passportIssueDate">Issue Date</Label>
+                            <Input id="passportIssueDate" type="date" />
+                          </div>
+                          <div>
+                            <Label htmlFor="passportExpiryDate">Expiry Date</Label>
+                            <Input id="passportExpiryDate" type="date" />
+                          </div>
+                        </div>
                       </div>
                       <div className="md:col-span-2">
                         <Label htmlFor="message">Message Box (for additional information or support)</Label>
@@ -248,6 +267,8 @@ const Checkout = () => {
       </div>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default Checkout;
