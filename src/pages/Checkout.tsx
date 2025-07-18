@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -12,9 +11,10 @@ import { Switch } from '@/components/ui/switch';
 import { Star, Calendar, Users } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-
 const Checkout = () => {
-  const { id } = useParams();
+  const {
+    id
+  } = useParams();
   const navigate = useNavigate();
   const [sameAsBilling, setSameAsBilling] = useState(true);
   const [paymentMethod, setPaymentMethod] = useState('paypal');
@@ -29,14 +29,11 @@ const Checkout = () => {
     guide: "Jayvion Simon",
     price: 83.74
   };
-
   const handleCompleteBooking = () => {
     // Handle booking completion logic here
     console.log('Booking completed');
   };
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Header />
       
       <div className="container mx-auto px-4 py-8">
@@ -50,7 +47,7 @@ const Checkout = () => {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <div className="w-6 h-6 bg-orange-500 text-white rounded-full flex items-center justify-center text-sm font-bold">1</div>
+                    <div className="w-6 h-6 text-white rounded-full flex items-center justify-center text-sm font-bold bg-orange-500">1</div>
                     Shipping information
                   </CardTitle>
                 </CardHeader>
@@ -94,19 +91,11 @@ const Checkout = () => {
                       </div>
                       <div className="md:col-span-2">
                         <Label htmlFor="passportInfo">Passport Information (Number, Country, Issue Date, Expiry Date etc.)</Label>
-                        <Textarea 
-                          id="passportInfo" 
-                          placeholder="Passport Number, Country, Issue Date, Expiry Date etc."
-                          rows={3}
-                        />
+                        <Textarea id="passportInfo" placeholder="Passport Number, Country, Issue Date, Expiry Date etc." rows={3} />
                       </div>
                       <div className="md:col-span-2">
                         <Label htmlFor="message">Message Box (for additional information or support)</Label>
-                        <Textarea 
-                          id="message" 
-                          placeholder="Additional information or support requests"
-                          rows={3}
-                        />
+                        <Textarea id="message" placeholder="Additional information or support requests" rows={3} />
                       </div>
                     </div>
                   </div>
@@ -114,16 +103,11 @@ const Checkout = () => {
                   <div>
                     <h3 className="font-semibold text-blue-600 mb-4">SHIPPING ADDRESS</h3>
                     <div className="flex items-center space-x-2 mb-4">
-                      <Switch 
-                        id="same-address" 
-                        checked={sameAsBilling}
-                        onCheckedChange={setSameAsBilling}
-                      />
+                      <Switch id="same-address" checked={sameAsBilling} onCheckedChange={setSameAsBilling} />
                       <Label htmlFor="same-address">Same as billing address</Label>
                     </div>
                     
-                    {!sameAsBilling && (
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {!sameAsBilling && <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <Input placeholder="First name" />
                         <Input placeholder="Last name" />
                         <div className="md:col-span-2">
@@ -132,8 +116,7 @@ const Checkout = () => {
                         <div className="md:col-span-2">
                           <Input placeholder="Full address 2 (optional)" />
                         </div>
-                      </div>
-                    )}
+                      </div>}
                   </div>
                 </CardContent>
               </Card>
@@ -142,7 +125,7 @@ const Checkout = () => {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <div className="w-6 h-6 bg-orange-500 text-white rounded-full flex items-center justify-center text-sm font-bold">2</div>
+                    <div className="w-6 h-6 text-white rounded-full flex items-center justify-center text-sm font-bold bg-orange-500">2</div>
                     Payment methods
                   </CardTitle>
                 </CardHeader>
@@ -212,11 +195,7 @@ const Checkout = () => {
               <Card className="sticky top-8">
                 <CardContent className="p-6">
                   <div className="flex gap-4 mb-6">
-                    <img 
-                      src={experience.image} 
-                      alt={experience.title}
-                      className="w-20 h-20 rounded-lg object-cover"
-                    />
+                    <img src={experience.image} alt={experience.title} className="w-20 h-20 rounded-lg object-cover" />
                     <div className="flex-1">
                       <h3 className="font-semibold text-lg mb-1">{experience.title}</h3>
                       <div className="flex items-center gap-1 mb-2">
@@ -260,10 +239,7 @@ const Checkout = () => {
                     </div>
                   </div>
 
-                  <Button 
-                    onClick={handleCompleteBooking}
-                    className="w-full bg-slate-800 hover:bg-slate-700 text-white py-3"
-                  >
+                  <Button onClick={handleCompleteBooking} className="w-full text-white py-3 bg-orange-500 hover:bg-orange-400">
                     Complete booking
                   </Button>
                 </CardContent>
@@ -274,8 +250,6 @@ const Checkout = () => {
       </div>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Checkout;
