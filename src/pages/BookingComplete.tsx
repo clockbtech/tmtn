@@ -55,12 +55,6 @@ const BookingComplete = () => {
 
             {/* Right Column - Booking Details */}
             <div className="space-y-6">
-              {/* Completed Header */}
-              <div className="flex items-center gap-3">
-                <h1 className="text-4xl font-bold text-gray-900">Completed</h1>
-                <span className="text-3xl">🎉</span>
-              </div>
-
               {/* Experience Title and Rating */}
               <div>
                 <h2 className="text-2xl font-semibold text-gray-900 mb-2">
