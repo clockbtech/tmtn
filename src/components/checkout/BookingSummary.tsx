@@ -2,13 +2,12 @@
 import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Star, Calendar as CalendarIcon, Users, ChevronDown, ChevronUp, Edit } from 'lucide-react';
+import { Star, Calendar as CalendarIcon, ChevronDown, ChevronUp, Edit } from 'lucide-react';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
+import GuestSelector from './GuestSelector';
 
 interface BookingSummaryProps {
   experience: {
@@ -22,13 +21,19 @@ interface BookingSummaryProps {
   onCompleteBooking: () => void;
 }
 
+interface GuestCount {
+  adults: number;
+  children: number;
+  infants: number;
+}
+
 const BookingSummary = ({ experience, onCompleteBooking }: BookingSummaryProps) => {
   const [departureDate, setDepartureDate] = useState<Date>();
-  const [guests, setGuests] = useState(3);
+  const [guests, setGuests] = useState<GuestCount>({ adults: 2, children: 1, infants: 0 });
   const [showPriceBreakdown, setShowPriceBreakdown] = useState(false);
   const [isEditingDate, setIsEditingDate] = useState(false);
-  const [isEditingGuests, setIsEditingGuests] = useState(false);
 
+  const totalGuests = guests.adults + guests.children + guests.infants;
   const serviceCharge = experience.price;
   const taxesAndFees = serviceCharge * 0.12; // 12% taxes
   const total = serviceCharge + taxesAndFees;
@@ -103,60 +108,14 @@ const BookingSummary = ({ experience, onCompleteBooking }: BookingSummaryProps) 
           </div>
 
           {/* Guests */}
-          <div className="flex items-center gap-3 text-sm">
-            <Users className="w-4 h-4" />
-            <span className="text-muted-foreground">Guests</span>
-            <div className="ml-auto flex items-center gap-2">
-              {!isEditingGuests ? (
-                <>
-                  <span>{guests} Guests</span>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setIsEditingGuests(true)}
-                    className="h-6 w-6 p-0"
-                  >
-                    <Edit className="w-3 h-3" />
-                  </Button>
-                </>
-              ) : (
-                <div className="flex items-center gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setGuests(Math.max(1, guests - 1))}
-                    className="h-6 w-6 p-0"
-                  >
-                    -
-                  </Button>
-                  <span className="w-8 text-center text-xs">{guests}</span>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setGuests(guests + 1)}
-                    className="h-6 w-6 p-0"
-                  >
-                    +
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setIsEditingGuests(false)}
-                    className="h-6 w-6 p-0 ml-1"
-                  >
-                    ✓
-                  </Button>
-                </div>
-              )}
-            </div>
-          </div>
+          <GuestSelector guests={guests} onGuestsChange={setGuests} />
         </div>
 
         {/* Price Summary */}
         <div className="space-y-3 mb-6">
           <div className="flex justify-between">
-            <span>Service charge ({guests} guests)</span>
-            <span>${(serviceCharge * guests).toFixed(2)}</span>
+            <span>Service charge ({totalGuests} guests)</span>
+            <span>${(serviceCharge * totalGuests).toFixed(2)}</span>
           </div>
           
           <Button
@@ -175,16 +134,24 @@ const BookingSummary = ({ experience, onCompleteBooking }: BookingSummaryProps) 
                 <span>${serviceCharge.toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Number of guests</span>
-                <span>×{guests}</span>
+                <span className="text-muted-foreground">Adults × {guests.adults}</span>
+                <span>${(serviceCharge * guests.adults).toFixed(2)}</span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Subtotal</span>
-                <span>${(serviceCharge * guests).toFixed(2)}</span>
-              </div>
+              {guests.children > 0 && (
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Children × {guests.children}</span>
+                  <span>${(serviceCharge * guests.children * 0.75).toFixed(2)}</span>
+                </div>
+              )}
+              {guests.infants > 0 && (
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Infants × {guests.infants}</span>
+                  <span>Free</span>
+                </div>
+              )}
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Taxes & fees</span>
-                <span>${(taxesAndFees * guests).toFixed(2)}</span>
+                <span>${(taxesAndFees * totalGuests).toFixed(2)}</span>
               </div>
             </div>
           )}
@@ -192,7 +159,7 @@ const BookingSummary = ({ experience, onCompleteBooking }: BookingSummaryProps) 
           <hr />
           <div className="flex justify-between font-semibold text-lg">
             <span>Total</span>
-            <span>${(total * guests).toFixed(2)}</span>
+            <span>${(total * totalGuests).toFixed(2)}</span>
           </div>
         </div>
 
