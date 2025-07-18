@@ -63,24 +63,16 @@ const Checkout = () => {
                         <Input id="fullName" placeholder="Full Legal Name" />
                       </div>
                       <div>
-                        <Label htmlFor="email">E-mail ID</Label>
-                        <Input id="email" type="email" placeholder="E-mail ID" />
-                      </div>
-                      <div className="md:col-span-2">
-                        <Label htmlFor="passportInfo">Passport Information</Label>
-                        <Textarea 
-                          id="passportInfo" 
-                          placeholder="Passport Number, Country, Issue Date, Expiry Date etc."
-                          rows={3}
-                        />
-                      </div>
-                      <div>
                         <Label htmlFor="departure">Planned Departure (Approx.)</Label>
                         <Input id="departure" type="date" />
                       </div>
                       <div>
                         <Label htmlFor="pax">Pax</Label>
                         <Input id="pax" type="number" placeholder="Number of passengers" min="1" />
+                      </div>
+                      <div>
+                        <Label htmlFor="email">E-mail ID</Label>
+                        <Input id="email" type="email" placeholder="E-mail ID" />
                       </div>
                       <div className="md:col-span-2">
                         <Label htmlFor="contact">Contact Number</Label>
@@ -101,7 +93,15 @@ const Checkout = () => {
                         </div>
                       </div>
                       <div className="md:col-span-2">
-                        <Label htmlFor="message">Message Box</Label>
+                        <Label htmlFor="passportInfo">Passport Information (Number, Country, Issue Date, Expiry Date etc.)</Label>
+                        <Textarea 
+                          id="passportInfo" 
+                          placeholder="Passport Number, Country, Issue Date, Expiry Date etc."
+                          rows={3}
+                        />
+                      </div>
+                      <div className="md:col-span-2">
+                        <Label htmlFor="message">Message Box (for additional information or support)</Label>
                         <Textarea 
                           id="message" 
                           placeholder="Additional information or support requests"
