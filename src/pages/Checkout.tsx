@@ -8,9 +8,10 @@ import { Textarea } from '@/components/ui/textarea';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
-import { Star, Calendar, Users } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import CheckoutHero from '@/components/checkout/CheckoutHero';
+import BookingSummary from '@/components/checkout/BookingSummary';
 
 const Checkout = () => {
   const { id } = useParams();
@@ -37,11 +38,10 @@ const Checkout = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      <CheckoutHero />
       
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8">Confirm and pay</h1>
-          
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Left Column - Form */}
             <div className="lg:col-span-2 space-y-8">
@@ -211,56 +211,10 @@ const Checkout = () => {
 
             {/* Right Column - Summary */}
             <div className="lg:col-span-1">
-              <Card className="sticky top-8">
-                <CardContent className="p-6">
-                  <div className="flex gap-4 mb-6">
-                    <img src={experience.image} alt={experience.title} className="w-20 h-20 rounded-lg object-cover" />
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-lg mb-1">{experience.title}</h3>
-                      <div className="flex items-center gap-1 mb-2">
-                        <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                        <span className="text-sm font-medium">{experience.rating}</span>
-                        <span className="text-sm text-muted-foreground">({experience.reviews})</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <div className="w-6 h-6 rounded-full bg-gray-200"></div>
-                        <span>Guide by {experience.guide}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4 mb-6">
-                    <div className="flex items-center gap-3 text-sm">
-                      <Calendar className="w-4 h-4" />
-                      <span className="text-muted-foreground">Departure day</span>
-                      <span className="ml-auto">MM/DD/YYYY</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm">
-                      <Users className="w-4 h-4" />
-                      <span className="text-muted-foreground">Guests</span>
-                      <span className="ml-auto">3 Guests</span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3 mb-6">
-                    <div className="flex justify-between">
-                      <span>Service charge</span>
-                      <span>${experience.price}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Discount</span>
-                      <span>—</span>
-                    </div>
-                    <hr />
-                    <div className="flex justify-between font-semibold text-lg">
-                      <span>Total</span>
-                      <span>${experience.price}</span>
-                    </div>
-                  </div>
-
-                  <Button onClick={handleCompleteBooking} className="w-full text-white py-3 bg-orange-500 hover:bg-orange-400">Complete Booking</Button>
-                </CardContent>
-              </Card>
+              <BookingSummary 
+                experience={experience}
+                onCompleteBooking={handleCompleteBooking}
+              />
             </div>
           </div>
         </div>
