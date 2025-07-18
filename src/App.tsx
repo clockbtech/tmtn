@@ -18,6 +18,7 @@ import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Auth from "./pages/Auth";
 import FAQ from "./pages/FAQ";
+import Checkout from "./pages/Checkout";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -37,6 +38,7 @@ const App = () => (
             <Route path="/attractions/:id" element={<AttractionsDetail />} />
             <Route path="/experiences" element={<Experiences />} />
             <Route path="/experiences/:id" element={<ExperienceDetail />} />
+            <Route path="/experiences/:id/checkout" element={<Checkout />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogDetail />} />
             <Route path="/contact" element={<Contact />} />
