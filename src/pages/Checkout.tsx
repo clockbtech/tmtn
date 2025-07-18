@@ -239,9 +239,7 @@ const Checkout = () => {
                     </div>
                   </div>
 
-                  <Button onClick={handleCompleteBooking} className="w-full text-white py-3 bg-orange-500 hover:bg-orange-400">
-                    Complete booking
-                  </Button>
+                  <Button onClick={handleCompleteBooking} className="w-full text-white py-3 bg-orange-500 hover:bg-orange-400">Complete Booking</Button>
                 </CardContent>
               </Card>
             </div>
