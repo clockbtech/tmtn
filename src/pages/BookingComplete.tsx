@@ -1,7 +1,9 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import BookingCompleteHero from '../components/checkout/BookingCompleteHero';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -64,6 +66,7 @@ const BookingComplete = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
+      <BookingCompleteHero />
       
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-6xl mx-auto">
@@ -74,6 +77,39 @@ const BookingComplete = () => {
               animate={{ opacity: 1, x: 0 }}
               className="space-y-8"
             >
+              {/* Experience Image and Details */}
+              <Card>
+                <CardContent className="p-6">
+                  <div className="aspect-video w-full mb-4 overflow-hidden rounded-lg">
+                    <img 
+                      src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
+                      alt="Everest Base Camp Helicopter Tour"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-semibold text-gray-900 mb-2">
+                      Everest Base Camp Helicopter Tour
+                    </h2>
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="flex items-center">
+                        {[...Array(5)].map((_, i) => (
+                          <Star 
+                            key={i} 
+                            className="w-4 h-4 fill-yellow-400 text-yellow-400" 
+                          />
+                        ))}
+                      </div>
+                      <span className="text-sm text-gray-600">(4.9) • 2,847 reviews</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-600">
+                      <MapPin className="w-4 h-4" />
+                      <span>Kathmandu, Nepal</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
               {/* Success Message */}
               <div className="text-center lg:text-left">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
@@ -143,28 +179,6 @@ const BookingComplete = () => {
 
             {/* Right Column - Booking Details */}
             <div className="space-y-6">
-              {/* Experience Title and Rating */}
-              <div>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-2">
-                  Everest Base Camp Helicopter Tour
-                </h2>
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="flex items-center">
-                    {[...Array(5)].map((_, i) => (
-                      <Star 
-                        key={i} 
-                        className="w-4 h-4 fill-yellow-400 text-yellow-400" 
-                      />
-                    ))}
-                  </div>
-                  <span className="text-sm text-gray-600">(4.9) • 2,847 reviews</span>
-                </div>
-                <div className="flex items-center gap-2 text-gray-600 mb-6">
-                  <MapPin className="w-4 h-4" />
-                  <span>Kathmandu, Nepal</span>
-                </div>
-              </div>
-
               {/* Booking Summary Card */}
               <Card>
                 <CardContent className="p-6 space-y-4">
