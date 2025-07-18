@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import Header from '../components/Header';
@@ -17,42 +16,49 @@ import {
   Plane
 } from 'lucide-react';
 import { generatePDFInvoice } from '../utils/pdfInvoiceGenerator';
+import { toast } from 'sonner';
 
 const BookingComplete = () => {
-  const handleDownloadInvoice = () => {
-    const invoiceData = {
-      bookingId: 'NPL-2024-001',
-      experienceTitle: 'Everest Base Camp Helicopter Tour',
-      experienceLocation: 'Kathmandu, Nepal',
-      bookingDate: new Date().toLocaleDateString(),
-      checkInDate: '2024-08-15',
-      checkOutDate: '2024-08-15',
-      guests: {
-        adults: 2,
-        children: 1,
-        infants: 0
-      },
-      pricing: {
-        basePrice: 1200,
-        serviceFee: 150,
-        tax: 138,
-        total: 1488
-      },
-      customerInfo: {
-        name: 'John Doe',
-        email: 'john.doe@email.com',
-        phone: '+1 (555) 123-4567',
-        address: '123 Main St, New York, NY 10001'
-      },
-      passportInfo: {
-        number: 'A12345678',
-        country: 'United States',
-        issueDate: '2020-01-15',
-        expiryDate: '2030-01-15'
-      }
-    };
+  const handleDownloadInvoice = async () => {
+    try {
+      const invoiceData = {
+        bookingId: 'NPL-2024-001',
+        experienceTitle: 'Everest Base Camp Helicopter Tour',
+        experienceLocation: 'Kathmandu, Nepal',
+        bookingDate: new Date().toLocaleDateString(),
+        checkInDate: '2024-08-15',
+        checkOutDate: '2024-08-15',
+        guests: {
+          adults: 2,
+          children: 1,
+          infants: 0
+        },
+        pricing: {
+          basePrice: 1200,
+          serviceFee: 150,
+          tax: 138,
+          total: 1488
+        },
+        customerInfo: {
+          name: 'John Doe',
+          email: 'john.doe@email.com',
+          phone: '+1 (555) 123-4567',
+          address: '123 Main St, New York, NY 10001'
+        },
+        passportInfo: {
+          number: 'A12345678',
+          country: 'United States',
+          issueDate: '2020-01-15',
+          expiryDate: '2030-01-15'
+        }
+      };
 
-    generatePDFInvoice(invoiceData);
+      await generatePDFInvoice(invoiceData);
+      toast.success('Invoice downloaded successfully!');
+    } catch (error) {
+      console.error('Error downloading invoice:', error);
+      toast.error('Failed to download invoice. Please try again.');
+    }
   };
 
   return (
@@ -124,7 +130,7 @@ const BookingComplete = () => {
                   className="flex items-center justify-center gap-2 bg-nepal-orange hover:bg-nepal-orange/90 text-white px-6 py-3"
                 >
                   <Download className="w-4 h-4" />
-                  Download Invoice
+                  Download PDF Invoice
                 </Button>
                 <Button 
                   variant="outline" 

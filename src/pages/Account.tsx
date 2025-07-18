@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { AccountHero } from '../components/account/AccountHero';
 import { AccountSidebar } from '../components/account/AccountSidebar';
 import { ProfileSection } from '../components/account/ProfileSection';
 import { BookingsSection } from '../components/account/BookingsSection';
@@ -38,6 +39,9 @@ const Account = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
+      
+      {/* Hero Section */}
+      <AccountHero />
       
       <div className="container mx-auto px-4 py-8">
         <div className="flex gap-8">
