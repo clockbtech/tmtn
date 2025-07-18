@@ -6,6 +6,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { ArrowLeft, Download, Star, Calendar, Users, CreditCard, Receipt, MapPin } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import BookingCompleteHero from '@/components/checkout/BookingCompleteHero';
+import { generateInvoice } from '@/utils/invoiceGenerator';
 
 const BookingComplete = () => {
   const navigate = useNavigate();
@@ -23,9 +25,14 @@ const BookingComplete = () => {
     paymentMethod: "Paypal"
   };
 
+  const handleDownloadInvoice = () => {
+    generateInvoice(bookingDetails);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      <BookingCompleteHero />
       
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
@@ -33,8 +40,8 @@ const BookingComplete = () => {
             {/* Left Column - Image */}
             <div className="relative">
               <img 
-                src="/lovable-uploads/e16030b5-50dc-4bac-99e4-41c8b6ecd34c.png"
-                alt="Mountain Adventure" 
+                src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                alt="Nepal Adventure" 
                 className="w-full h-[600px] object-cover rounded-2xl"
               />
               <Button
@@ -140,7 +147,8 @@ const BookingComplete = () => {
                   Back home
                 </Button>
                 <Button
-                  className="flex-1 py-3 bg-gray-900 hover:bg-gray-800 text-white"
+                  onClick={handleDownloadInvoice}
+                  className="flex-1 py-3 bg-nepal-orange hover:bg-orange-600 text-white"
                 >
                   <Download className="w-4 h-4 mr-2" />
                   Download invoice
