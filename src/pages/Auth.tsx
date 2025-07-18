@@ -1,13 +1,13 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Checkbox } from '../components/ui/checkbox';
 
 const Auth = () => {
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
@@ -26,11 +26,19 @@ const Auth = () => {
     e.preventDefault();
     // TODO: Implement authentication logic
     console.log('Form submitted:', formData);
+    
+    // Redirect to account page after successful sign in
+    if (isLogin) {
+      navigate('/account');
+    }
   };
 
   const handleSocialLogin = (provider: string) => {
     // TODO: Implement social login
     console.log(`Login with ${provider}`);
+    
+    // Redirect to account page after successful social login
+    navigate('/account');
   };
 
   return (
