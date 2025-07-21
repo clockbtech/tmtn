@@ -10,16 +10,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs'
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
+
 const ExperienceDetail = () => {
-  const {
-    id
-  } = useParams();
-  const {
-    t,
-    formatPrice
-  } = useTranslation();
+  const { id } = useParams();
+  const { t, formatPrice } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
+  
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [priceBreakdownOpen, setPriceBreakdownOpen] = useState(false);
@@ -196,6 +193,10 @@ const ExperienceDetail = () => {
       location: 'Manaslu Region',
       rating: 4.7
     }]
+  };
+
+  const handleBookNow = () => {
+    navigate(`/checkout/${id}`);
   };
 
   // Gallery auto-scroll effect
@@ -825,7 +826,10 @@ const ExperienceDetail = () => {
                       </div>}
                   </div>
 
-                  <Button className="w-full bg-nepal-orange hover:bg-orange-600 text-white text-lg py-3">
+                  <Button 
+                    onClick={handleBookNow}
+                    className="w-full bg-nepal-orange hover:bg-orange-600 text-white text-lg py-3"
+                  >
                     Book Now - {formatPrice(calculateTotal())}
                   </Button>
                 </CardContent>
@@ -883,11 +887,17 @@ const ExperienceDetail = () => {
 
       {/* Mobile Booking CTA */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t shadow-lg">
-        {!showMobileBooking ? <div className="p-4">
-            <Button onClick={() => setShowMobileBooking(true)} className="w-full bg-nepal-orange hover:bg-orange-600 text-white text-lg py-3">
+        {!showMobileBooking ? (
+          <div className="p-4">
+            <Button 
+              onClick={handleBookNow}
+              className="w-full bg-nepal-orange hover:bg-orange-600 text-white text-lg py-3"
+            >
               Book Now - {formatPrice(calculateTotal())}
             </Button>
-          </div> : <div className="p-4 max-h-96 overflow-y-auto">
+          </div>
+        ) : (
+          <div className="p-4 max-h-96 overflow-y-auto">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold">Book Experience</h3>
               <Button variant="ghost" size="sm" onClick={() => setShowMobileBooking(false)}>
@@ -958,11 +968,15 @@ const ExperienceDetail = () => {
                 </div>
               </div>
               
-              <Button className="w-full bg-nepal-orange hover:bg-orange-600 text-white">
+              <Button 
+                onClick={handleBookNow}
+                className="w-full bg-nepal-orange hover:bg-orange-600 text-white"
+              >
                 Confirm Booking - {formatPrice(calculateTotal())}
               </Button>
             </div>
-          </div>}
+          </div>
+        )}
       </div>
 
       {/* Gallery Modal */}
@@ -996,4 +1010,5 @@ const ExperienceDetail = () => {
       <Footer />
     </div>;
 };
+
 export default ExperienceDetail;
