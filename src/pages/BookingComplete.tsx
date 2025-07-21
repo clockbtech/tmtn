@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import Header from '../components/Header';
@@ -7,19 +6,9 @@ import BookingCompleteHero from '../components/checkout/BookingCompleteHero';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
-import { 
-  MapPin, 
-  Calendar, 
-  Users, 
-  Download, 
-  Star,
-  CheckCircle,
-  Clock,
-  Plane
-} from 'lucide-react';
+import { MapPin, Calendar, Users, Download, Star, CheckCircle, Clock, Plane } from 'lucide-react';
 import { generatePDFInvoice } from '../utils/pdfInvoiceGenerator';
 import { toast } from 'sonner';
-
 const BookingComplete = () => {
   const handleDownloadInvoice = async () => {
     try {
@@ -54,7 +43,6 @@ const BookingComplete = () => {
           expiryDate: '2030-01-15'
         }
       };
-
       await generatePDFInvoice(invoiceData);
       toast.success('Invoice downloaded successfully!');
     } catch (error) {
@@ -62,9 +50,7 @@ const BookingComplete = () => {
       toast.error('Failed to download invoice. Please try again.');
     }
   };
-
-  return (
-    <div className="min-h-screen bg-gray-50">
+  return <div className="min-h-screen bg-gray-50">
       <Header />
       <BookingCompleteHero />
       
@@ -72,20 +58,18 @@ const BookingComplete = () => {
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Left Column - Success Message and Next Steps */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="space-y-8"
-            >
+            <motion.div initial={{
+            opacity: 0,
+            x: -20
+          }} animate={{
+            opacity: 1,
+            x: 0
+          }} className="space-y-8">
               {/* Experience Image and Details */}
               <Card>
                 <CardContent className="p-6">
                   <div className="aspect-video w-full mb-4 overflow-hidden rounded-lg">
-                    <img 
-                      src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
-                      alt="Everest Base Camp Helicopter Tour"
-                      className="w-full h-full object-cover"
-                    />
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Everest Base Camp Helicopter Tour" className="w-full h-full object-cover" />
                   </div>
                   <div>
                     <h2 className="text-2xl font-semibold text-gray-900 mb-2">
@@ -93,12 +77,7 @@ const BookingComplete = () => {
                     </h2>
                     <div className="flex items-center gap-2 mb-4">
                       <div className="flex items-center">
-                        {[...Array(5)].map((_, i) => (
-                          <Star 
-                            key={i} 
-                            className="w-4 h-4 fill-yellow-400 text-yellow-400" 
-                          />
-                        ))}
+                        {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />)}
                       </div>
                       <span className="text-sm text-gray-600">(4.9) • 2,847 reviews</span>
                     </div>
@@ -111,17 +90,7 @@ const BookingComplete = () => {
               </Card>
 
               {/* Success Message */}
-              <div className="text-center lg:text-left">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
-                  <CheckCircle className="w-8 h-8 text-green-600" />
-                </div>
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">
-                  Booking Confirmed!
-                </h1>
-                <p className="text-xl text-gray-600 mb-8">
-                  Your adventure awaits! We've sent a confirmation email with all the details.
-                </p>
-              </div>
+              
 
               {/* Next Steps */}
               <Card>
@@ -161,17 +130,11 @@ const BookingComplete = () => {
 
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button 
-                  onClick={handleDownloadInvoice}
-                  className="flex items-center justify-center gap-2 bg-nepal-orange hover:bg-nepal-orange/90 text-white px-6 py-3"
-                >
+                <Button onClick={handleDownloadInvoice} className="flex items-center justify-center gap-2 bg-nepal-orange hover:bg-nepal-orange/90 text-white px-6 py-3">
                   <Download className="w-4 h-4" />
                   Download PDF Invoice
                 </Button>
-                <Button 
-                  variant="outline" 
-                  className="px-6 py-3"
-                >
+                <Button variant="outline" className="px-6 py-3">
                   View My Bookings
                 </Button>
               </div>
@@ -274,8 +237,6 @@ const BookingComplete = () => {
       </div>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default BookingComplete;
