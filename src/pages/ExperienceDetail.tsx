@@ -287,7 +287,7 @@ const ExperienceDetail = () => {
       <section className="relative h-[70vh] bg-cover bg-center bg-no-repeat" style={{
       backgroundImage: `url(${experience.heroImage})`
     }}>
-        <div className="absolute inset-0 bg-gradient-to-r from-green-600/80 to-green-800/80 my-0"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
         <div className="absolute inset-0 flex items-end">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-20">
             <motion.div initial={{
