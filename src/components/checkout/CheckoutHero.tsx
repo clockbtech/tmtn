@@ -8,7 +8,7 @@ const CheckoutHero = () => {
       style={{
         backgroundImage: 'url(https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80)'
       }}>
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/80 to-blue-800/80"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-green-600/80 to-green-800/80 my-0"></div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 30 }} 
@@ -20,7 +20,7 @@ const CheckoutHero = () => {
             Confirm and Pay
           </h1>
           <p className="text-xl max-w-4xl mx-auto lg:text-xl">
-            Complete your booking for an unforgettable Nepal adventure
+            Complete your booking for an unforgettable adventure in Nepal
           </p>
         </motion.div>
       </div>
