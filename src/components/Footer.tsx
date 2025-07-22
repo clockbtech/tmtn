@@ -77,8 +77,8 @@ const Footer = () => {
             }} transition={{
               duration: 0.6
             }}>
-                <h3 className="text-3xl font-bebas uppercase font-bold text-nepal-orange mb-4">
-                  Take Me To Nepal
+                <h3 className="text-4xl font-bold text-nepal-orange mb-4" style={{ fontFamily: 'Arial, sans-serif' }}>
+                  tmtn.
                 </h3>
                 <p className="text-gray-300 mb-6 max-w-md font-normal">
                   Your trusted gateway to exploring the wonders of Nepal. We create unforgettable experiences that connect you with the heart and soul of the Himalayas.
