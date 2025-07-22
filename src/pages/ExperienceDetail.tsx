@@ -825,7 +825,18 @@ const ExperienceDetail = () => {
                       </div>}
                   </div>
 
-                  <Button className="w-full bg-nepal-orange hover:bg-orange-600 text-white text-lg py-3">
+                  <Button 
+                    className="w-full bg-nepal-orange hover:bg-orange-600 text-white text-lg py-3"
+                    onClick={() => navigate(`/experiences/${experience.id}/checkout`, { 
+                      state: { 
+                        experience,
+                        booking: {
+                          ...bookingData,
+                          total: calculateTotal()
+                        }
+                      }
+                    })}
+                  >
                     Book Now - {formatPrice(calculateTotal())}
                   </Button>
                 </CardContent>
@@ -958,7 +969,21 @@ const ExperienceDetail = () => {
                 </div>
               </div>
               
-              <Button className="w-full bg-nepal-orange hover:bg-orange-600 text-white">
+              <Button 
+                className="w-full bg-nepal-orange hover:bg-orange-600 text-white"
+                onClick={() => {
+                  setShowMobileBooking(false);
+                  navigate(`/experiences/${experience.id}/checkout`, { 
+                    state: { 
+                      experience,
+                      booking: {
+                        ...bookingData,
+                        total: calculateTotal()
+                      }
+                    }
+                  });
+                }}
+              >
                 Confirm Booking - {formatPrice(calculateTotal())}
               </Button>
             </div>
