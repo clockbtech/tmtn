@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { videos } from './video/videoData';
 import { Video } from './video/types';
 import VideoItem from './video/VideoItem';
 import FullscreenModal from './video/FullscreenModal';
 import CarouselControls from './video/CarouselControls';
-import ProgressIndicator from './video/ProgressIndicator';
 
 const VideoCarousel = () => {
   const [fullscreenVideo, setFullscreenVideo] = useState<Video | null>(null);
   const [fullscreenIndex, setFullscreenIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [isDragging, setIsDragging] = useState(false);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
   const openFullscreen = (video: Video, index: number) => {
     setFullscreenVideo(video);
@@ -61,22 +63,24 @@ const VideoCarousel = () => {
           />
         </div>
 
-        {/* Gradient fades at edges
-        <div className="absolute left-0 top-20 h-full w-8 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-20 h-full w-8 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" /> */}
-
-        {/* Scrolling Video Carousel */}
+        {/* Draggable Scrolling Video Carousel */}
         <div className="relative w-full overflow-hidden">
           <motion.div
-            className="flex gap-4 px-8 py-6"
-            animate={{
+            ref={carouselRef}
+            className="flex gap-4 px-8 py-6 cursor-grab active:cursor-grabbing"
+            animate={isPlaying && !isDragging ? {
               x: ['0%', '-50%'],
-            }}
+            } : {}}
             transition={{
               duration: 20,
               ease: 'linear',
               repeat: Infinity,
             }}
+            drag="x"
+            dragConstraints={{ left: -1000, right: 0 }}
+            onDragStart={() => setIsDragging(true)}
+            onDragEnd={() => setIsDragging(false)}
+            dragElastic={0.2}
           >
             {extendedVideos.map((video, index) => (
               <VideoItem
@@ -88,25 +92,18 @@ const VideoCarousel = () => {
             ))}
           </motion.div>
         </div>
-
-        <div className="mt-6 px-4 sm:px-6 lg:px-8">
-          <ProgressIndicator
-            totalItems={videos.length}
-            currentIndex={fullscreenIndex}
-          />
-        </div>
       </section>
 
-      {/* Fullscreen Modal */}
+      {/* Fullscreen Modal with Zoom Effect */}
       <AnimatePresence>
         {fullscreenVideo && (
           <motion.div
             key="fullscreen"
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="fixed inset-0 z-50 bg-white"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center"
           >
             <FullscreenModal
               video={fullscreenVideo}

@@ -66,45 +66,59 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black z-50 flex items-center justify-center"
+      className="w-full h-full flex items-center justify-center"
     >
       {/* Close button */}
-      <button
+      <motion.button
         onClick={onClose}
         className="absolute top-4 right-4 z-60 text-white hover:text-gray-300 transition-colors"
         aria-label="Close video"
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ delay: 0.2 }}
       >
         <X className="w-8 h-8" />
-      </button>
+      </motion.button>
 
       {/* Navigation buttons */}
       {currentIndex > 0 && (
-        <button
+        <motion.button
           onClick={() => onNavigate('prev')}
           className="absolute left-4 top-1/2 transform -translate-y-1/2 z-60 text-white hover:text-gray-300 transition-colors"
           aria-label="Previous video"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.2 }}
         >
           <ChevronLeft className="w-8 h-8" />
-        </button>
+        </motion.button>
       )}
 
       {currentIndex < totalVideos - 1 && (
-        <button
+        <motion.button
           onClick={() => onNavigate('next')}
           className="absolute right-4 top-1/2 transform -translate-y-1/2 z-60 text-white hover:text-gray-300 transition-colors"
           aria-label="Next video"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.2 }}
         >
           <ChevronRight className="w-8 h-8" />
-        </button>
+        </motion.button>
       )}
 
       {/* Video container */}
-      <div className="relative w-full h-full max-w-md mx-auto">
+      <motion.div
+        className="relative w-full h-full max-w-md mx-auto"
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.3, ease: 'easeOut' }}
+      >
         {!hasError ? (
           <video
             ref={videoRef}
             key={video.id}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover rounded-lg"
             muted
             loop
             playsInline
@@ -128,7 +142,7 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
           <img
             src={video.thumbnail}
             alt={video.title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover rounded-lg"
             onError={(e) => {
               console.error(`Fullscreen thumbnail failed to load for video ${video.id}`);
               e.currentTarget.src = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=800&fit=crop';
@@ -138,18 +152,18 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
 
         {/* Loading state */}
         {!isLoaded && !hasError && (
-          <div className="absolute inset-0 bg-gray-900 flex items-center justify-center">
+          <div className="absolute inset-0 bg-gray-900 flex items-center justify-center rounded-lg">
             <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-white"></div>
           </div>
         )}
 
         {/* Title overlay */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent rounded-b-lg">
           <h3 className="text-white text-xl font-bold drop-shadow-lg">
             {video.title}
           </h3>
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 };
