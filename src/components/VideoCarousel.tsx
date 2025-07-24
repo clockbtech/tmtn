@@ -1,5 +1,4 @@
-
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { videos } from './video/videoData';
 import { Video } from './video/types';
@@ -9,62 +8,9 @@ import CarouselControls from './video/CarouselControls';
 import ProgressIndicator from './video/ProgressIndicator';
 
 const VideoCarousel = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
   const [fullscreenVideo, setFullscreenVideo] = useState<Video | null>(null);
   const [fullscreenIndex, setFullscreenIndex] = useState(0);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Create multiple copies for smooth infinite scrolling
-  const getExtendedVideos = () => {
-    const copies = 5; // Reduced copies for better performance
-    const extended = [];
-    for (let i = 0; i < copies; i++) {
-      extended.push(...videos);
-    }
-    return extended;
-  };
-
-  const extendedVideos = getExtendedVideos();
-  const startingIndex = videos.length * 2; // Start from middle section
-
-  // Initialize at middle section
-  useEffect(() => {
-    setCurrentIndex(startingIndex);
-  }, []);
-
-  // Auto-advance carousel continuously
-  useEffect(() => {
-    if (isPlaying && !fullscreenVideo) {
-      intervalRef.current = setInterval(() => {
-        setCurrentIndex((prev) => prev + 1);
-      }, 3000);
-    }
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, [isPlaying, fullscreenVideo]);
-
-  // Handle seamless infinite loop reset
-  useEffect(() => {
-    // Reset to middle section when we reach the end
-    if (currentIndex >= videos.length * 4) {
-      const timer = setTimeout(() => {
-        setCurrentIndex(videos.length * 2);
-      }, 800); // Wait for animation to complete
-      return () => clearTimeout(timer);
-    }
-    // Reset to middle section when we go too far back
-    if (currentIndex < videos.length) {
-      const timer = setTimeout(() => {
-        setCurrentIndex(videos.length * 3 - 1);
-      }, 800);
-      return () => clearTimeout(timer);
-    }
-  }, [currentIndex]);
+  const [isPlaying, setIsPlaying] = useState(true); // Optional, just kept for play/pause control UI
 
   const openFullscreen = (video: Video, index: number) => {
     setFullscreenVideo(video);
@@ -89,7 +35,8 @@ const VideoCarousel = () => {
     }
   };
 
-  const itemWidth = 280 + 16; // width + gap
+  // Repeat videos to create infinite scroll effect
+  const extendedVideos = [...videos, ...videos];
 
   return (
     <>
@@ -109,40 +56,38 @@ const VideoCarousel = () => {
             </p>
           </motion.div>
 
-          <CarouselControls 
+          <CarouselControls
             isPlaying={isPlaying}
             onTogglePlay={() => setIsPlaying(!isPlaying)}
           />
 
-          {/* Video Carousel Container */}
-          <div className="relative">
-            <div className="overflow-hidden">
-              <motion.div
-                className="flex gap-4"
-                animate={{
-                  x: -currentIndex * itemWidth
-                }}
-                transition={{
-                  duration: 0.8,
-                  ease: [0.25, 0.1, 0.25, 1], // Custom cubic-bezier for smoother animation
-                  type: "tween"
-                }}
-              >
-                {extendedVideos.map((video, index) => (
-                  <VideoItem
-                    key={`${video.id}-${Math.floor(index / videos.length)}-${index}`}
-                    video={video}
-                    index={index}
-                    onVideoClick={openFullscreen}
-                  />
-                ))}
-              </motion.div>
-            </div>
+          {/* Smooth Continuous Video Carousel */}
+          <div className="relative overflow-hidden">
+            <motion.div
+              className="flex gap-4"
+              animate={{
+                x: ['0%', '-50%'],
+              }}
+              transition={{
+                duration: 15, // longer = slower scroll
+                ease: 'linear',
+                repeat: Infinity,
+              }}
+            >
+              {extendedVideos.map((video, index) => (
+                <VideoItem
+                  key={`${video.id}-${index}`}
+                  video={video}
+                  index={index}
+                  onVideoClick={openFullscreen}
+                />
+              ))}
+            </motion.div>
           </div>
 
-          <ProgressIndicator 
+          <ProgressIndicator
             totalItems={videos.length}
-            currentIndex={(currentIndex - startingIndex) % videos.length}
+            currentIndex={fullscreenIndex}
           />
         </div>
       </section>
