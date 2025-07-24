@@ -70,7 +70,7 @@ const VideoCarousel = () => {
           <motion.div
             className="flex gap-4 px-8 py-6"
             animate={{
-              x: ['0%', '-50%'],
+              x: ['0%', '-30%'],
             }}
             transition={{
               duration: 25,
