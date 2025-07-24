@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { videos } from './video/videoData';
@@ -5,22 +6,19 @@ import { Video } from './video/types';
 import VideoItem from './video/VideoItem';
 import FullscreenModal from './video/FullscreenModal';
 import CarouselControls from './video/CarouselControls';
-import ProgressIndicator from './video/ProgressIndicator';
 
 const VideoCarousel = () => {
   const [fullscreenVideo, setFullscreenVideo] = useState<Video | null>(null);
   const [fullscreenIndex, setFullscreenIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true); // Optional, just kept for play/pause control UI
+  const [isPlaying, setIsPlaying] = useState(true);
 
   const openFullscreen = (video: Video, index: number) => {
     setFullscreenVideo(video);
     setFullscreenIndex(index % videos.length);
-    setIsPlaying(false);
   };
 
   const closeFullscreen = () => {
     setFullscreenVideo(null);
-    setIsPlaying(true);
   };
 
   const navigateFullscreen = (direction: 'prev' | 'next') => {
@@ -65,14 +63,14 @@ const VideoCarousel = () => {
           <div className="relative overflow-hidden">
             <motion.div
               className="flex gap-4"
-              animate={{
+              animate={isPlaying ? {
                 x: ['0%', '-50%'],
-              }}
-              transition={{
-                duration: 15, // longer = slower scroll
+              } : {}}
+              transition={isPlaying ? {
+                duration: 15,
                 ease: 'linear',
                 repeat: Infinity,
-              }}
+              } : {}}
             >
               {extendedVideos.map((video, index) => (
                 <VideoItem
@@ -84,11 +82,6 @@ const VideoCarousel = () => {
               ))}
             </motion.div>
           </div>
-
-          <ProgressIndicator
-            totalItems={videos.length}
-            currentIndex={fullscreenIndex}
-          />
         </div>
       </section>
 
