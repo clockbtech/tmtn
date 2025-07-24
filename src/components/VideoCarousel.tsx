@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { videos } from './video/videoData';
@@ -6,6 +5,7 @@ import { Video } from './video/types';
 import VideoItem from './video/VideoItem';
 import FullscreenModal from './video/FullscreenModal';
 import CarouselControls from './video/CarouselControls';
+import ProgressIndicator from './video/ProgressIndicator';
 
 const VideoCarousel = () => {
   const [fullscreenVideo, setFullscreenVideo] = useState<Video | null>(null);
@@ -15,10 +15,12 @@ const VideoCarousel = () => {
   const openFullscreen = (video: Video, index: number) => {
     setFullscreenVideo(video);
     setFullscreenIndex(index % videos.length);
+    setIsPlaying(false);
   };
 
   const closeFullscreen = () => {
     setFullscreenVideo(null);
+    setIsPlaying(true);
   };
 
   const navigateFullscreen = (direction: 'prev' | 'next') => {
@@ -33,12 +35,11 @@ const VideoCarousel = () => {
     }
   };
 
-  // Repeat videos to create infinite scroll effect
   const extendedVideos = [...videos, ...videos];
 
   return (
     <>
-      <section className="py-20 bg-white overflow-hidden">
+      <section className="py-20 bg-white overflow-hidden relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -58,43 +59,63 @@ const VideoCarousel = () => {
             isPlaying={isPlaying}
             onTogglePlay={() => setIsPlaying(!isPlaying)}
           />
+        </div>
 
-          {/* Smooth Continuous Video Carousel */}
-          <div className="relative overflow-hidden">
-            <motion.div
-              className="flex gap-4"
-              animate={isPlaying ? {
-                x: ['0%', '-50%'],
-              } : {}}
-              transition={isPlaying ? {
-                duration: 15,
-                ease: 'linear',
-                repeat: Infinity,
-              } : {}}
-            >
-              {extendedVideos.map((video, index) => (
-                <VideoItem
-                  key={`${video.id}-${index}`}
-                  video={video}
-                  index={index}
-                  onVideoClick={openFullscreen}
-                />
-              ))}
-            </motion.div>
-          </div>
+        {/* Gradient fades at edges
+        <div className="absolute left-0 top-20 h-full w-8 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-20 h-full w-8 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" /> */}
+
+        {/* Scrolling Video Carousel */}
+        <div className="relative w-full overflow-hidden">
+          <motion.div
+            className="flex gap-4 px-8 py-6"
+            animate={{
+              x: ['0%', '-50%'],
+            }}
+            transition={{
+              duration: 25,
+              ease: 'linear',
+              repeat: Infinity,
+            }}
+          >
+            {extendedVideos.map((video, index) => (
+              <VideoItem
+                key={`${video.id}-${index}`}
+                video={video}
+                index={index}
+                onVideoClick={openFullscreen}
+              />
+            ))}
+          </motion.div>
+        </div>
+
+        <div className="mt-6 px-4 sm:px-6 lg:px-8">
+          <ProgressIndicator
+            totalItems={videos.length}
+            currentIndex={fullscreenIndex}
+          />
         </div>
       </section>
 
       {/* Fullscreen Modal */}
       <AnimatePresence>
         {fullscreenVideo && (
-          <FullscreenModal
-            video={fullscreenVideo}
-            currentIndex={fullscreenIndex}
-            totalVideos={videos.length}
-            onClose={closeFullscreen}
-            onNavigate={navigateFullscreen}
-          />
+          <motion.div
+            key="fullscreen"
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
+            className="fixed inset-0 z-50 bg-white"
+          >
+            <FullscreenModal
+              video={fullscreenVideo}
+              currentIndex={fullscreenIndex}
+              totalVideos={videos.length}
+              onClose={closeFullscreen}
+              onNavigate={navigateFullscreen}
+            />
+          </motion.div>
         )}
       </AnimatePresence>
     </>
