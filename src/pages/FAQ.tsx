@@ -141,7 +141,11 @@ const FAQ = () => {
               Can't find the answer you're looking for? Please chat to our 
               friendly team and we'll help you out.
             </p>
-            <Button size="lg" className="bg-tmtn-red hover:bg-tmtn-red/90 text-white px-8 py-3 font-medium rounded-full">
+            <Button 
+              size="lg" 
+              variant="gradient"
+              className="px-8 py-3 font-medium rounded-full"
+            >
               Contact Us
             </Button>
           </div>

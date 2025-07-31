@@ -51,9 +51,8 @@ const BlogCard = ({ blog }: BlogCardProps) => {
         
         <Link to={`/blog/${blog.slug}`}>
           <Button 
-            variant="outline" 
-            // className="w-full border-tmtn-blue text-tmtn-blue hover:bg-tmtn-blue hover:text-white"
-            className="w-full bg-tmtn-red hover:bg-tmtn-red/90 text-white py-3 rounded-lg font-semibold transition-colors duration-200"
+            variant="gradient"
+            className="w-full py-3 rounded-lg font-semibold"
           >
             Read More
           </Button>
@@ -64,4 +63,3 @@ const BlogCard = ({ blog }: BlogCardProps) => {
 };
 
 export default BlogCard;
-

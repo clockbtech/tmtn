@@ -15,31 +15,6 @@ const AboutCTA = () => {
           viewport={{ once: true }}
           className="relative bg-gradient-to-r from-green-600 to-green-500 rounded-2xl px-8 py-4 lg:py-6 lg:px-12 overflow-hidden"
         >
-          {/* Background decorative elements */}
-          {/* <div className="absolute top-4 right-4 opacity-20">
-            <motion.div
-              animate={{
-                rotate: [0, 360],
-                x: [0, 20, 0],
-                y: [0, -10, 0]
-              }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-            >
-              <Plane className="w-12 h-12 text-white" />
-            </motion.div>
-          </div> */}
-          
-          {/* Dotted path decoration */}
-          {/* <div className="absolute top-8 right-16 hidden lg:block">
-            <svg width="100" height="60" viewBox="0 0 100 60" className="opacity-30">
-              <path d="M10 50 Q30 10 50 30 T90 20" stroke="white" strokeWidth="2" fill="none" strokeDasharray="4,4" />
-            </svg>
-          </div> */}
-
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8 relative z-10">
             {/* Left content */}
             <div className="flex items-center gap-6 flex-1">
@@ -107,8 +82,9 @@ const AboutCTA = () => {
               className="flex-shrink-0"
             >
               <Button
+                variant="gradient-orange"
                 size="lg"
-                className="bg-white text-green-600 hover:bg-white/90 font-semibold px-8 py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 rounded-full"
+                className="font-semibold px-8 py-4 text-lg rounded-full shadow-xl"
               >
                 LET'S GET STARTED
               </Button>

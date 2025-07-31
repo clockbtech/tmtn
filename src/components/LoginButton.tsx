@@ -16,7 +16,7 @@ const LoginButton = ({ textColor }: LoginButtonProps) => {
     >
       <Link
         to="/auth"
-        className={`${textColor} hover:text-white bg-tmtn-red hover:bg-tmtn-red/80 transition-all duration-200 px-4 py-2 rounded-full flex items-center space-x-2 font-medium text-sm`}
+        className="text-white bg-gradient-to-r from-tmtn-red to-red-600 hover:from-tmtn-red/90 hover:to-red-600/90 transition-all duration-300 px-4 py-2 rounded-full flex items-center space-x-2 font-medium text-sm shadow-lg hover:shadow-xl hover:scale-105 transform"
         aria-label="Login"
       >
         <User className="w-4 h-4" />
@@ -27,4 +27,3 @@ const LoginButton = ({ textColor }: LoginButtonProps) => {
 };
 
 export default LoginButton;
-
