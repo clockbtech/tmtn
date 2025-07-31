@@ -6,12 +6,15 @@ import { Link } from 'react-router-dom';
 import LanguageSwitcher from './LanguageSwitcher';
 import CollapsibleSearch from './CollapsibleSearch';
 import LoginButton from './LoginButton';
+import SearchSuggestions from './SearchSuggestions';
 import { useTranslation } from '../contexts/TranslationContext';
+import { searchContent, SearchResult } from '../utils/searchData';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileSearchValue, setMobileSearchValue] = useState('');
+  const [mobileSearchResults, setMobileSearchResults] = useState<SearchResult[]>([]);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -21,6 +24,20 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Handle mobile search
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (mobileSearchValue.length >= 2) {
+        const results = searchContent(mobileSearchValue);
+        setMobileSearchResults(results);
+      } else {
+        setMobileSearchResults([]);
+      }
+    }, 300);
+
+    return () => clearTimeout(timeoutId);
+  }, [mobileSearchValue]);
 
   // Primary navigation items only
   const primaryNavItems = [
@@ -33,6 +50,11 @@ const Header = () => {
   // Dynamic text color based on background
   const textColor = isScrolled ? 'text-white' : 'text-white';
 
+  const handleMobileSearchClick = () => {
+    setIsMenuOpen(false);
+    setMobileSearchValue('');
+    setMobileSearchResults([]);
+  };
 
   return (
     <motion.header 
@@ -51,7 +73,6 @@ const Header = () => {
                 src="/lovable-uploads/dbe53354-4e12-429d-96e9-f53b18d9b259.png" 
                 alt="tmtn logo"
                 className="h-8 lg:h-10 w-auto" 
-              
               />
             </Link>
           </motion.div>
@@ -108,9 +129,20 @@ const Header = () => {
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                   <input
                     type="text"
+                    value={mobileSearchValue}
+                    onChange={(e) => setMobileSearchValue(e.target.value)}
                     placeholder={t('search.mobile.placeholder')}
                     className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-tmtn-red text-gray-700"
                   />
+                  
+                  <AnimatePresence>
+                    {mobileSearchResults.length > 0 && (
+                      <SearchSuggestions 
+                        results={mobileSearchResults} 
+                        onItemClick={handleMobileSearchClick}
+                      />
+                    )}
+                  </AnimatePresence>
                 </div>
                 
                 {/* Mobile Navigation */}
@@ -144,4 +176,3 @@ const Header = () => {
 };
 
 export default Header;
-
