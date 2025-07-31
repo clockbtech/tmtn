@@ -165,8 +165,7 @@ const BookingSummary = ({ experience, onCompleteBooking }: BookingSummaryProps) 
 
         <Button 
           onClick={onCompleteBooking} 
-          variant="gradient-orange"
-          className="w-full text-white py-3 shadow-lg"
+          className="w-full text-white py-3 bg-orange-500 hover:bg-orange-400"
         >
           Complete Booking
         </Button>

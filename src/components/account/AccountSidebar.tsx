@@ -46,10 +46,10 @@ const AccountSidebar = ({ activeSection, onSectionChange }: AccountSidebarProps)
           return (
             <Button
               key={item.id}
-              variant={isActive ? "gradient" : "ghost"}
+              variant={isActive ? "default" : "ghost"}
               className={`w-full justify-start ${
                 isActive 
-                  ? "text-white shadow-lg" 
+                  ? "bg-tmtn-red text-white hover:bg-tmtn-red/90" 
                   : "text-gray-700 hover:bg-gray-100"
               }`}
               onClick={() => onSectionChange(item.id as any)}
@@ -75,3 +75,4 @@ const AccountSidebar = ({ activeSection, onSectionChange }: AccountSidebarProps)
 };
 
 export { AccountSidebar };
+
