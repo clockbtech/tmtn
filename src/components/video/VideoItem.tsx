@@ -96,7 +96,7 @@ const VideoItem: React.FC<VideoItemProps> = ({ video, index, onVideoClick }) => 
         {/* Loading state */}
         {!isLoaded && !hasError && (
           <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-nepal-orange"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-tmtn-red"></div>
           </div>
         )}
 
@@ -118,7 +118,7 @@ const VideoItem: React.FC<VideoItemProps> = ({ video, index, onVideoClick }) => 
         </div>
 
         {/* Top Brand Badge */}
-        <div className="absolute top-4 left-4 bg-nepal-orange text-white px-3 py-1 rounded-full text-sm font-bold">
+        <div className="absolute top-4 left-4 bg-tmtn-red text-white px-3 py-1 rounded-full text-sm font-bold">
           NEPAL
         </div>
       </motion.div>

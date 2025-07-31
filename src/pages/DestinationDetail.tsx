@@ -147,7 +147,7 @@ const DestinationDetail = () => {
           }} transition={{
             duration: 0.6
           }}>
-              <h2 className="font-bebas uppercase text-nepal-primary mb-6 text-2xl font-extrabold">
+              <h2 className="font-bebas uppercase text-tmtn-blue mb-6 text-2xl font-extrabold">
                 Overview
               </h2>
               <div className="prose prose-lg max-w-none text-gray-700 mb-8">
@@ -161,7 +161,7 @@ const DestinationDetail = () => {
                 <h3 className="text-xl font-bold text-gray-900 mb-4">Key Highlights</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {destination.highlights.map((highlight, index) => <div key={index} className="flex items-center text-gray-700">
-                      <div className="w-2 h-2 bg-nepal-orange rounded-full mr-3"></div>
+                      <div className="w-2 h-2 bg-tmtn-red rounded-full mr-3"></div>
                       {highlight}
                     </div>)}
                 </div>
@@ -174,7 +174,7 @@ const DestinationDetail = () => {
                   {destination.bestSeasons.map((season, index) => <div key={index} className="flex items-center p-4 bg-gray-50 rounded-lg">
                       <span className="text-3xl mr-4">{season.icon}</span>
                       <div>
-                        <div className="font-semibold text-nepal-primary">{season.months}</div>
+                        <div className="font-semibold text-tmtn-blue">{season.months}</div>
                         <div className="text-sm text-gray-600">{season.description}</div>
                       </div>
                     </div>)}
@@ -193,11 +193,11 @@ const DestinationDetail = () => {
             duration: 0.6
           }}>
               <div className="flex items-center justify-between mb-6">
-                <h2 className="font-bebas uppercase text-nepal-primary font-extrabold text-2xl">
+                <h2 className="font-bebas uppercase text-tmtn-blue font-extrabold text-2xl">
                   Photo Gallery
                 </h2>
                 <div className="flex items-center gap-4">
-                  <button onClick={() => setAutoPlay(!autoPlay)} className="flex items-center gap-2 text-sm text-gray-600 hover:text-nepal-primary">
+                  <button onClick={() => setAutoPlay(!autoPlay)} className="flex items-center gap-2 text-sm text-gray-600 hover:text-tmtn-blue">
                     {autoPlay ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
                     {autoPlay ? 'Pause' : 'Play'}
                   </button>
@@ -214,7 +214,7 @@ const DestinationDetail = () => {
 
               {/* Thumbnail Gallery */}
               <div className="grid grid-cols-6 gap-2">
-                {destination.gallery.map((image, index) => <img key={index} src={image} alt={`Thumbnail ${index + 1}`} className={`w-full h-20 object-cover rounded cursor-pointer transition-opacity ${selectedImageIndex === index ? 'opacity-100 ring-2 ring-nepal-primary' : 'opacity-70 hover:opacity-100'}`} onClick={() => setSelectedImageIndex(index)} />)}
+                {destination.gallery.map((image, index) => <img key={index} src={image} alt={`Thumbnail ${index + 1}`} className={`w-full h-20 object-cover rounded cursor-pointer transition-opacity ${selectedImageIndex === index ? 'opacity-100 ring-2 ring-tmtn-blue' : 'opacity-70 hover:opacity-100'}`} onClick={() => setSelectedImageIndex(index)} />)}
               </div>
             </motion.section>
 
@@ -228,7 +228,7 @@ const DestinationDetail = () => {
           }} transition={{
             duration: 0.6
           }}>
-              <h2 className="font-bebas uppercase text-nepal-primary mb-6 font-extrabold text-2xl">
+              <h2 className="font-bebas uppercase text-tmtn-blue mb-6 font-extrabold text-2xl">
                 Nearby Attractions
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -237,7 +237,7 @@ const DestinationDetail = () => {
                       <img src={attraction.image} alt={attraction.name} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
                     </div>
                     <CardContent className="p-4">
-                      <h3 className="font-bold text-nepal-primary mb-2">{attraction.name}</h3>
+                      <h3 className="font-bold text-tmtn-blue mb-2">{attraction.name}</h3>
                       <p className="text-sm text-gray-600 mb-2">{attraction.description}</p>
                       <div className="flex items-center text-xs text-gray-500">
                         <MapPin className="w-3 h-3 mr-1" />
@@ -258,7 +258,7 @@ const DestinationDetail = () => {
           }} transition={{
             duration: 0.6
           }}>
-              <h2 className="font-bebas uppercase text-nepal-primary mb-6 font-extrabold text-2xl">
+              <h2 className="font-bebas uppercase text-tmtn-blue mb-6 font-extrabold text-2xl">
                 Available Experiences
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -266,13 +266,13 @@ const DestinationDetail = () => {
                     <div className="relative overflow-hidden">
                       <img src={experience.image} alt={experience.name} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
                       <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
-                        <span className="text-sm font-semibold text-nepal-primary">
+                        <span className="text-sm font-semibold text-tmtn-blue">
                           {experience.difficulty}
                         </span>
                       </div>
                     </div>
                     <CardContent className="p-6">
-                      <h3 className="font-bold text-nepal-primary mb-2 text-xl">{experience.name}</h3>
+                      <h3 className="font-bold text-tmtn-blue mb-2 text-xl">{experience.name}</h3>
                       <p className="text-gray-600 mb-4">{experience.description}</p>
                       
                       <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
@@ -280,7 +280,7 @@ const DestinationDetail = () => {
                           <Clock className="w-4 h-4 mr-1" />
                           {experience.duration}
                         </div>
-                        <div className="text-2xl font-bold text-nepal-primary">
+                        <div className="text-2xl font-bold text-tmtn-blue">
                           {formatPrice(experience.price)}
                         </div>
                       </div>
@@ -294,7 +294,7 @@ const DestinationDetail = () => {
                         </div>
                       </div>
 
-                      <button className="w-full bg-nepal-orange hover:bg-orange-600 text-white py-3 rounded-lg font-semibold transition-colors duration-200">
+                      <button className="w-full bg-tmtn-red hover:bg-tmtn-red/90 text-white py-3 rounded-lg font-semibold transition-colors duration-200">
                         Book Now
                       </button>
                     </CardContent>
@@ -309,7 +309,7 @@ const DestinationDetail = () => {
               {/* Safety Notes */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center text-nepal-primary">
+                  <CardTitle className="flex items-center text-tmtn-blue">
                     <Shield className="w-5 h-5 mr-2" />
                     Safety Notes
                   </CardTitle>
@@ -325,7 +325,7 @@ const DestinationDetail = () => {
               {/* Quick Facts */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center text-nepal-primary">
+                  <CardTitle className="flex items-center text-tmtn-blue">
                     <Zap className="w-5 h-5 mr-2" />
                     Quick Facts
                   </CardTitle>
@@ -333,7 +333,7 @@ const DestinationDetail = () => {
                 <CardContent className="space-y-3">
                   {destination.travelTips.quickFacts.map((fact, index) => <div key={index} className="flex items-center justify-between">
                       <span className="text-sm text-gray-700">{fact.split(':')[0]}:</span>
-                      <span className="text-sm font-semibold text-nepal-primary">{fact.split(':')[1]}</span>
+                      <span className="text-sm font-semibold text-tmtn-blue">{fact.split(':')[1]}</span>
                     </div>)}
                 </CardContent>
               </Card>
@@ -341,7 +341,7 @@ const DestinationDetail = () => {
               {/* Pro Tips */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center text-nepal-primary">
+                  <CardTitle className="flex items-center text-tmtn-blue">
                     <Lightbulb className="w-5 h-5 mr-2" />
                     Pro Tips
                   </CardTitle>

@@ -250,10 +250,10 @@ const Destinations = () => {
           {/* Filter Summary */}
           {(selectedRegions.length > 0 || searchTerm) && <div className="mt-4 flex flex-wrap gap-2 items-center">
               <span className="text-sm text-gray-600">Active filters:</span>
-              {searchTerm && <span className="bg-nepal-orange text-white px-3 py-1 rounded-full text-sm">
+              {searchTerm && <span className="bg-tmtn-red text-white px-3 py-1 rounded-full text-sm">
                   Search: "{searchTerm}"
                 </span>}
-              {selectedRegions.map(region => <span key={region} className="bg-nepal-primary text-white px-3 py-1 rounded-full text-sm">
+              {selectedRegions.map(region => <span key={region} className="bg-tmtn-blue text-white px-3 py-1 rounded-full text-sm">
                   {region}
                 </span>)}
               <button onClick={() => {
@@ -291,7 +291,7 @@ const Destinations = () => {
                         <div className="relative overflow-hidden">
                           <img src={destination.image} alt={t(destination.nameKey)} className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" />
                           {/* <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
-                            <span className="text-sm font-semibold text-nepal-primary font-plus-jakarta">
+                            <span className="text-sm font-semibold text-tmtn-blue font-plus-jakarta">
                               {destination.difficulty}
                             </span>
                           </div> */}
@@ -299,7 +299,7 @@ const Destinations = () => {
                         </div>
                         
                         <div className="p-6">
-                          <h3 className="text-2xl font-plus-jakarta font-semibold text-nepal-primary mb-2">
+                          <h3 className="text-2xl font-plus-jakarta font-semibold text-tmtn-blue mb-2">
                             {t(destination.nameKey)}
                           </h3>
                           <p className="text-gray-600 font-inter mb-4">
@@ -315,7 +315,7 @@ const Destinations = () => {
                       scale: 1.05
                     }} whileTap={{
                       scale: 0.95
-                    }} className="w-full bg-nepal-orange hover:bg-orange-600 text-white py-3 rounded-lg font-plus-jakarta font-semibold transition-colors duration-200">
+                    }} className="w-full bg-tmtn-red hover:bg-tmtn-red/90 text-white py-3 rounded-lg font-plus-jakarta font-semibold transition-colors duration-200">
                             Explore
                           </motion.button>
                         </div>
@@ -362,3 +362,4 @@ const Destinations = () => {
 };
 
 export default Destinations;
+

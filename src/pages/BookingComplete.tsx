@@ -98,7 +98,7 @@ const BookingComplete = () => {
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">What's Next?</h3>
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
-                      <div className="flex-shrink-0 w-6 h-6 bg-nepal-orange rounded-full flex items-center justify-center text-white text-sm font-medium">
+                      <div className="flex-shrink-0 w-6 h-6 bg-tmtn-red rounded-full flex items-center justify-center text-white text-sm font-medium">
                         1
                       </div>
                       <div>
@@ -107,7 +107,7 @@ const BookingComplete = () => {
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="flex-shrink-0 w-6 h-6 bg-nepal-orange rounded-full flex items-center justify-center text-white text-sm font-medium">
+                      <div className="flex-shrink-0 w-6 h-6 bg-tmtn-red rounded-full flex items-center justify-center text-white text-sm font-medium">
                         2
                       </div>
                       <div>
@@ -116,7 +116,7 @@ const BookingComplete = () => {
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="flex-shrink-0 w-6 h-6 bg-nepal-orange rounded-full flex items-center justify-center text-white text-sm font-medium">
+                      <div className="flex-shrink-0 w-6 h-6 bg-tmtn-red rounded-full flex items-center justify-center text-white text-sm font-medium">
                         3
                       </div>
                       <div>
@@ -130,7 +130,7 @@ const BookingComplete = () => {
 
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button onClick={handleDownloadInvoice} className="flex items-center justify-center gap-2 bg-nepal-orange hover:bg-nepal-orange/90 text-white px-6 py-3">
+                <Button onClick={handleDownloadInvoice} className="flex items-center justify-center gap-2 bg-tmtn-red hover:bg-tmtn-red/90 text-white px-6 py-3">
                   <Download className="w-4 h-4" />
                   Download PDF Invoice
                 </Button>

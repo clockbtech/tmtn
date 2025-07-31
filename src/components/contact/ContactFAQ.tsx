@@ -37,7 +37,7 @@ const ContactFAQ = () => {
       
       <Accordion type="single" collapsible className="w-full">
         {faqData.map((faq, index) => <AccordionItem key={index} value={`item-${index}`}>
-            <AccordionTrigger className="text-left hover:text-nepal-primary">
+            <AccordionTrigger className="text-left hover:text-tmtn-blue">
               {faq.question}
             </AccordionTrigger>
             <AccordionContent className="text-gray-600 leading-relaxed">

@@ -49,7 +49,7 @@ const AccountSidebar = ({ activeSection, onSectionChange }: AccountSidebarProps)
               variant={isActive ? "default" : "ghost"}
               className={`w-full justify-start ${
                 isActive 
-                  ? "bg-nepal-orange text-white hover:bg-nepal-orange/90" 
+                  ? "bg-tmtn-red text-white hover:bg-tmtn-red/90" 
                   : "text-gray-700 hover:bg-gray-100"
               }`}
               onClick={() => onSectionChange(item.id as any)}
@@ -75,3 +75,4 @@ const AccountSidebar = ({ activeSection, onSectionChange }: AccountSidebarProps)
 };
 
 export { AccountSidebar };
+

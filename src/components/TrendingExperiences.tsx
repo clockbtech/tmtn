@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { Star, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const TrendingExperiences = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -152,7 +153,7 @@ const TrendingExperiences = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl lg:text-4xl font-bebas uppercase font-extrabold text-nepal-primary mb-4">
+          <h2 className="text-4xl lg:text-4xl font-bebas uppercase font-extrabold text-tmtn-blue mb-4">
             Trending Experiences
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -166,7 +167,7 @@ const TrendingExperiences = () => {
             {/* Left Navigation Button - Fixed position */}
             <button
               onClick={() => scroll('left')}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-nepal-primary text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200 -ml-6"
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-tmtn-blue text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200 -ml-6"
             >
               <ArrowLeft className="w-5 h-5" />
             </button>
@@ -174,7 +175,7 @@ const TrendingExperiences = () => {
             {/* Right Navigation Button - Fixed position */}
             <button
               onClick={() => scroll('right')}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-nepal-primary text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200 -mr-6"
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-tmtn-blue text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200 -mr-6"
             >
               <ArrowRight className="w-5 h-5" />
             </button>
@@ -204,14 +205,14 @@ const TrendingExperiences = () => {
                       className="w-full h-48 object-cover hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
-                      <span className="text-sm font-semibold text-nepal-primary">
+                      <span className="text-sm font-semibold text-tmtn-blue">
                         {experience.duration}
                       </span>
                     </div>
                   </div>
 
                   <div className="p-6">
-                    <h3 className="text-xl font-normal font-semibold text-nepal-primary mb-2">
+                    <h3 className="text-xl font-normal font-semibold text-tmtn-blue mb-2">
                       {experience.title}
                     </h3>
                     
@@ -231,20 +232,22 @@ const TrendingExperiences = () => {
                       </div>
                       
                       <div className="text-right">
-                        <div className="text-2xl font-bold text-nepal-orange">
+                        <div className="text-2xl font-bold text-tmtn-red">
                           {formatPrice(experience.basePrice)}
                         </div>
                         <div className="text-sm text-gray-500">per person</div>
                       </div>
                     </div>
 
-                    <motion.button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="w-full bg-nepal-orange hover:bg-orange-600 text-white py-3 rounded-full font-semibold transition-colors duration-200"
-                    >
-                      Book Now
-                    </motion.button>
+                    <Link to={`/experiences/${experience.id}`}>
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="w-full bg-tmtn-red hover:bg-tmtn-red/90 text-white py-3 rounded-full font-semibold transition-colors duration-200"
+                      >
+                        Book Now
+                      </motion.button>
+                    </Link>
                   </div>
                 </motion.div>
               ))}
@@ -257,3 +260,4 @@ const TrendingExperiences = () => {
 };
 
 export default TrendingExperiences;
+

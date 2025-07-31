@@ -22,7 +22,7 @@ const Newsletter = () => {
       }, 3000);
     }, 1000);
   };
-  return <section className="py-20 bg-gradient-to-r from-nepal-primary to-blue-700">
+  return <section className="py-20 bg-gradient-to-r from-tmtn-blue to-blue-700">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div initial={{
@@ -34,7 +34,7 @@ const Newsletter = () => {
         }} transition={{
           duration: 0.8
         }}>
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-nepal-orange rounded-full mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-tmtn-red rounded-full mb-6">
               <Mail className="w-8 h-8 text-white" />
             </div>
             
@@ -65,14 +65,14 @@ const Newsletter = () => {
               scale: 0.8
             }} onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
                   <div className="flex-1">
-                    <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter your email address" className="w-full px-6 py-4 rounded-full text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-nepal-orange/30 transition-all duration-200" required />
+                    <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter your email address" className="w-full px-6 py-4 rounded-full text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-tmtn-red/30 transition-all duration-200" required />
                   </div>
                   
                   <motion.button type="submit" disabled={isLoading} whileHover={{
                 scale: 1.05
               }} whileTap={{
                 scale: 0.95
-              }} className="bg-nepal-orange hover:bg-orange-600 text-white px-8 py-4 rounded-full font-semibold transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center">
+              }} className="bg-tmtn-red hover:bg-tmtn-red/90 text-white px-8 py-4 rounded-full font-semibold transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center">
                     {isLoading ? <motion.div animate={{
                   rotate: 360
                 }} transition={{
@@ -127,7 +127,7 @@ const Newsletter = () => {
             label: 'Happy Subscribers',
             value: '10K+'
           }].map((item, index) => <div key={index} className="text-center">
-                <div className="text-2xl font-bold text-nepal-orange mb-1">
+                <div className="text-2xl font-bold text-tmtn-red mb-1">
                   {item.value}
                 </div>
                 <div className="text-blue-200 text-sm">

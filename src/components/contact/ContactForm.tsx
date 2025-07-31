@@ -122,7 +122,7 @@ const ContactForm = () => {
           </div>
         </div>
         
-        <Button type="submit" className="w-full bg-nepal-primary hover:bg-nepal-primary/90">
+        <Button type="submit" className="w-full bg-tmtn-blue hover:bg-tmtn-blue/90">
           Send Message
         </Button>
       </form>

@@ -77,7 +77,7 @@ const Footer = () => {
             }} transition={{
               duration: 0.6
             }}>
-                <h3 className="text-4xl font-bold text-nepal-orange mb-4" style={{ fontFamily: 'Arial, sans-serif' }}>
+                <h3 className="text-4xl font-bold text-tmtn-red mb-4" style={{ fontFamily: 'Arial, sans-serif' }}>
                   tmtn.
                 </h3>
                 <p className="text-gray-300 mb-6 max-w-md font-normal">
@@ -87,15 +87,15 @@ const Footer = () => {
                 {/* Contact Info */}
                 <div className="space-y-3 mb-6">
                   <div className="flex items-center space-x-3">
-                    <MapPin className="w-5 h-5 text-nepal-orange flex-shrink-0" />
+                    <MapPin className="w-5 h-5 text-tmtn-red flex-shrink-0" />
                     <span className="text-gray-300">Thamel, Kathmandu, Nepal</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <Phone className="w-5 h-5 text-nepal-orange flex-shrink-0" />
+                    <Phone className="w-5 h-5 text-tmtn-red flex-shrink-0" />
                     <span className="text-gray-300">+977-1-4441234</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <Mail className="w-5 h-5 text-nepal-orange flex-shrink-0" />
+                    <Mail className="w-5 h-5 text-tmtn-red flex-shrink-0" />
                     <span className="text-gray-300">info@takemetonepal.com</span>
                   </div>
                 </div>
@@ -109,7 +109,7 @@ const Footer = () => {
                     y: -2
                   }} whileTap={{
                     scale: 0.95
-                  }} className="w-10 h-10 bg-nepal-primary hover:bg-nepal-orange rounded-full flex items-center justify-center transition-all duration-200" aria-label={social.label}>
+                  }} className="w-10 h-10 bg-tmtn-blue hover:bg-tmtn-red rounded-full flex items-center justify-center transition-all duration-200" aria-label={social.label}>
                         <IconComponent className="w-5 h-5" />
                       </motion.a>;
                 })}
@@ -135,7 +135,7 @@ const Footer = () => {
                 {footerLinks.destinations.map((link, index) => <li key={index}>
                     <motion.a href="#" whileHover={{
                   x: 5
-                }} className="text-gray-300 hover:text-nepal-orange transition-colors duration-200 text-sm">
+                }} className="text-gray-300 hover:text-tmtn-red transition-colors duration-200 text-sm">
                       {link}
                     </motion.a>
                   </li>)}
@@ -160,7 +160,7 @@ const Footer = () => {
                 {footerLinks.experiences.map((link, index) => <li key={index}>
                     <motion.a href="#" whileHover={{
                   x: 5
-                }} className="text-gray-300 hover:text-nepal-orange transition-colors duration-200 text-sm">
+                }} className="text-gray-300 hover:text-tmtn-red transition-colors duration-200 text-sm">
                       {link}
                     </motion.a>
                   </li>)}
@@ -189,7 +189,7 @@ const Footer = () => {
                       <motion.a 
                         href={item.href} 
                         whileHover={{ x: 5 }} 
-                        className="text-gray-300 hover:text-nepal-orange transition-colors duration-200 text-sm"
+                        className="text-gray-300 hover:text-tmtn-red transition-colors duration-200 text-sm"
                       >
                         {item.name}
                       </motion.a>
@@ -197,7 +197,7 @@ const Footer = () => {
                       <motion.div whileHover={{ x: 5 }}>
                         <Link 
                           to={item.href} 
-                          className="text-gray-300 hover:text-nepal-orange transition-colors duration-200 text-sm"
+                          className="text-gray-300 hover:text-tmtn-red transition-colors duration-200 text-sm"
                         >
                           {item.name}
                         </Link>
@@ -209,7 +209,7 @@ const Footer = () => {
                 {/* Regular Company Links */}
                 {footerLinks.company.map((link, index) => (
                   <li key={`company-${index}`}>
-                    <motion.a href="#" whileHover={{ x: 5 }} className="text-gray-300 hover:text-nepal-orange transition-colors duration-200 text-sm">
+                    <motion.a href="#" whileHover={{ x: 5 }} className="text-gray-300 hover:text-tmtn-red transition-colors duration-200 text-sm">
                       {link}
                     </motion.a>
                   </li>
@@ -238,13 +238,13 @@ const Footer = () => {
                       <motion.div whileHover={{ x: 5 }}>
                         <Link 
                           to="/faq" 
-                          className="text-gray-300 hover:text-nepal-orange transition-colors duration-200 text-sm"
+                          className="text-gray-300 hover:text-tmtn-red transition-colors duration-200 text-sm"
                         >
                           {link}
                         </Link>
                       </motion.div>
                     ) : (
-                      <motion.a href="#" whileHover={{ x: 5 }} className="text-gray-300 hover:text-nepal-orange transition-colors duration-200 text-sm">
+                      <motion.a href="#" whileHover={{ x: 5 }} className="text-gray-300 hover:text-tmtn-red transition-colors duration-200 text-sm">
                         {link}
                       </motion.a>
                     )}
@@ -307,3 +307,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

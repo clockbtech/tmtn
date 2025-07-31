@@ -44,7 +44,7 @@ const WhyChooseUs = () => {
       }
     });
   }, []);
-  return <section ref={sectionRef} className="py-20 bg-nepal-primary text-white" id="about">
+  return <section ref={sectionRef} className="py-20 bg-tmtn-blue text-white" id="about">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div initial={{
         opacity: 0,
@@ -75,7 +75,7 @@ const WhyChooseUs = () => {
                   <motion.div whileHover={{
                 scale: 1.1,
                 rotate: 5
-              }} className="inline-flex items-center justify-center w-16 h-16 bg-nepal-orange rounded-full mb-6">
+              }} className="inline-flex items-center justify-center w-16 h-16 bg-tmtn-red rounded-full mb-6">
                     <IconComponent className="w-8 h-8 text-white" />
                   </motion.div>
                   
@@ -117,7 +117,7 @@ const WhyChooseUs = () => {
         }].map((stat, index) => <motion.div key={index} whileHover={{
           scale: 1.05
         }} className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-              <div className="text-3xl lg:text-4xl font-tm-sans uppercase font-bold text-nepal-orange mb-2">
+              <div className="text-3xl lg:text-4xl font-tm-sans uppercase font-bold text-tmtn-red mb-2">
                 {stat.number}
               </div>
               <div className="text-blue-100">

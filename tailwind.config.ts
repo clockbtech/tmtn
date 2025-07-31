@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
 	darkMode: ["class"],
@@ -19,12 +20,8 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'roboto': ['Roboto Flex', 'sans-serif'],
-				'poppins': ['Poppins', 'sans-serif'],
-				'playfair': ['Playfair Display', 'serif'],
-				'plus-jakarta': ['Plus Jakarta Sans', 'sans-serif'],
-				'inter': ['Inter', 'sans-serif'],
-				'tm-sans': ['TM Sans', 'sans-serif'],
+				'lexend': ['Lexend', 'sans-serif'],
+				'sans': ['Lexend', 'sans-serif'], // Making Lexend the default sans-serif font
 			},
 			fontSize: {
 				'body': '26.86px',
@@ -34,8 +31,8 @@ export default {
 				'nav': '20.7px',
 			},
 			colors: {
-				'nepal-primary': '#126894',
-				'nepal-orange': '#FF7D33',
+				'tmtn-blue': '#126894',
+				'tmtn-red': '#D94141',
 				'nepal-secondary': '#FFFFFF',
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -82,7 +79,7 @@ export default {
 				}
 			},
 			backgroundImage: {
-				'hero-gradient': 'linear-gradient(135deg, rgba(18, 104, 148, 0.8) 0%, rgba(255, 125, 51, 0.6) 100%)',
+				'hero-gradient': 'linear-gradient(135deg, rgba(18, 104, 148, 0.8) 0%, rgba(217, 65, 65, 0.6) 100%)',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -146,5 +143,5 @@ export default {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [tailwindcssAnimate],
 } satisfies Config;

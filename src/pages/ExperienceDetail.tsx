@@ -310,7 +310,7 @@ const ExperienceDetail = () => {
                   <div className="flex items-center">
                     {renderStars(experience.rating, 'w-5 h-5')}
                   </div>
-                  <span className="text-lg font-bold text-nepal-primary">
+                  <span className="text-lg font-bold text-tmtn-blue">
                     {experience.rating}/5
                   </span>
                   <span className="text-sm text-gray-600">
@@ -360,7 +360,7 @@ const ExperienceDetail = () => {
                   duration: 0.6
                 }}>
                     <div className="flex items-center justify-between mb-6">
-                      <h2 className="font-tm-sans uppercase text-nepal-primary text-2xl font-extrabold">
+                      <h2 className="font-tm-sans uppercase text-tmtn-blue text-2xl font-extrabold">
                         Photo Gallery
                       </h2>
                       
@@ -399,7 +399,7 @@ const ExperienceDetail = () => {
                         {experience.gallery.map((image, index) => <button key={index} onClick={() => {
                         setSelectedImageIndex(index);
                         setIsGalleryPlaying(false); // Pause auto-scroll when manually selecting
-                      }} className={`relative h-20 rounded overflow-hidden ${selectedImageIndex === index ? 'ring-2 ring-nepal-orange' : ''}`}>
+                      }} className={`relative h-20 rounded overflow-hidden ${selectedImageIndex === index ? 'ring-2 ring-tmtn-red' : ''}`}>
                             <img src={image} alt={`Thumbnail ${index + 1}`} className="w-full h-full object-cover hover:opacity-80 transition-opacity" />
                           </button>)}
                       </div>
@@ -416,7 +416,7 @@ const ExperienceDetail = () => {
                 }} transition={{
                   duration: 0.6
                 }}>
-                    <h2 className="font-tm-sans uppercase text-nepal-primary mb-6 text-2xl font-extrabold ">
+                    <h2 className="font-tm-sans uppercase text-tmtn-blue mb-6 text-2xl font-extrabold ">
                       About This Experience
                     </h2>
                     <div className="prose prose-lg max-w-none text-gray-700 mb-8">
@@ -429,7 +429,7 @@ const ExperienceDetail = () => {
                       <h3 className="text-xl font-bold text-gray-900 mb-4">Key Highlights</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         {experience.highlights.map((highlight, index) => <div key={index} className="flex items-center text-gray-700">
-                            <div className="w-2 h-2 bg-nepal-orange rounded-full mr-3"></div>
+                            <div className="w-2 h-2 bg-tmtn-red rounded-full mr-3"></div>
                             {highlight}
                           </div>)}
                       </div>
@@ -446,13 +446,13 @@ const ExperienceDetail = () => {
                 }} transition={{
                   duration: 0.6
                 }}>
-                    <h2 className="font-tm-sans uppercase text-nepal-primary mb-6 text-2xl font-extrabold">
+                    <h2 className="font-tm-sans uppercase text-tmtn-blue mb-6 text-2xl font-extrabold">
                       Your Guide
                     </h2>
                     <div className="flex items-start gap-4 p-6 bg-gray-50 rounded-lg">
                       <img src={experience.guide.avatar} alt={experience.guide.name} className="w-16 h-16 rounded-full object-cover" />
                       <div className="flex-1">
-                        <h3 className="text-xl font-bold text-nepal-primary mb-1">
+                        <h3 className="text-xl font-bold text-tmtn-blue mb-1">
                           {experience.guide.name}
                         </h3>
                         <p className="text-sm text-gray-600 mb-2">
@@ -460,7 +460,7 @@ const ExperienceDetail = () => {
                         </p>
                         <p className="text-gray-700 mb-3">{experience.guide.bio}</p>
                         <div className="flex flex-wrap gap-2">
-                          {experience.guide.certifications.map((cert, index) => <span key={index} className="px-2 py-1 bg-nepal-primary/10 text-nepal-primary text-xs rounded-full">
+                          {experience.guide.certifications.map((cert, index) => <span key={index} className="px-2 py-1 bg-tmtn-blue/10 text-tmtn-blue text-xs rounded-full">
                               {cert}
                             </span>)}
                         </div>
@@ -480,14 +480,14 @@ const ExperienceDetail = () => {
                 }} transition={{
                   duration: 0.6
                 }}>
-                    <h2 className="font-tm-sans uppercase text-nepal-primary text-2xl font-extrabold mb-6">
+                    <h2 className="font-tm-sans uppercase text-tmtn-blue text-2xl font-extrabold mb-6">
                       Detailed Itinerary
                     </h2>
                     <div className="space-y-8">
                       {experience.itinerary.map((day, index) => <div key={day.day} className="flex gap-6">
                           {/* Timeline */}
                           <div className="flex flex-col items-center">
-                            <div className="w-8 h-8 bg-nepal-primary text-white rounded-full flex items-center justify-center text-sm font-bold">
+                            <div className="w-8 h-8 bg-tmtn-blue text-white rounded-full flex items-center justify-center text-sm font-bold">
                               {day.day}
                             </div>
                             {index < experience.itinerary.length - 1 && <div className="w-0.5 h-16 bg-gray-300 mt-2"></div>}
@@ -495,7 +495,7 @@ const ExperienceDetail = () => {
                           
                           {/* Content */}
                           <div className="flex-1 pb-8">
-                            <h3 className="text-xl font-bold text-nepal-primary mb-2">
+                            <h3 className="text-xl font-bold text-tmtn-blue mb-2">
                               Day {day.day}: {day.title}
                             </h3>
                             <p className="text-gray-700 mb-4">{day.description}</p>
@@ -536,7 +536,7 @@ const ExperienceDetail = () => {
                   duration: 0.6
                 }} className="space-y-8">
                     <div>
-                      <h2 className="font-tm-sans uppercase text-nepal-primary text-2xl font-extrabold mb-6">
+                      <h2 className="font-tm-sans uppercase text-tmtn-blue text-2xl font-extrabold mb-6">
                         What's Included
                       </h2>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -548,7 +548,7 @@ const ExperienceDetail = () => {
                     </div>
 
                     <div>
-                      <h2 className="font-tm-sans uppercase text-nepal-primary text-2xl font-extrabold mb-6">
+                      <h2 className="font-tm-sans uppercase text-tmtn-blue text-2xl font-extrabold mb-6">
                         What's Not Included
                       </h2>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -573,7 +573,7 @@ const ExperienceDetail = () => {
                   duration: 0.6
                 }}>
                     <div className="flex items-center justify-between mb-6">
-                      <h2 className="font-tm-sans uppercase text-nepal-primary text-2xl font-extrabold">
+                      <h2 className="font-tm-sans uppercase text-tmtn-blue text-2xl font-extrabold">
                         Traveler Reviews
                       </h2>
                       <div className="text-sm text-gray-600">
@@ -632,7 +632,7 @@ const ExperienceDetail = () => {
           }} transition={{
             duration: 0.6
           }} className="mt-16">
-              <h2 className="font-tm-sans uppercase text-nepal-primary mb-6 font-extrabold text-2xl">
+              <h2 className="font-tm-sans uppercase text-tmtn-blue mb-6 font-extrabold text-2xl">
                 Related Experiences
               </h2>
               
@@ -663,7 +663,7 @@ const ExperienceDetail = () => {
                                   {relatedExp.difficulty}
                                 </div>
                                 <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
-                                  <span className="text-lg font-bold text-nepal-primary">
+                                  <span className="text-lg font-bold text-tmtn-blue">
                                     {formatPrice(relatedExp.price)}
                                   </span>
                                 </div>
@@ -674,7 +674,7 @@ const ExperienceDetail = () => {
                                   {renderStars(relatedExp.rating)}
                                   <span className="text-sm text-gray-600">({relatedExp.rating})</span>
                                 </div>
-                                <h3 className="text-xl font-semibold text-nepal-primary mb-2">
+                                <h3 className="text-xl font-semibold text-tmtn-blue mb-2">
                                   {relatedExp.name}
                                 </h3>
                                 <p className="text-gray-600 mb-4">
@@ -692,7 +692,7 @@ const ExperienceDetail = () => {
                                   </div>
                                 </div>
                                 
-                                <Button className="w-full bg-nepal-orange hover:bg-orange-600 text-white">
+                                <Button className="w-full bg-tmtn-red hover:bg-tmtn-red/90 text-white">
                                   View Details
                                 </Button>
                               </div>
@@ -713,8 +713,8 @@ const ExperienceDetail = () => {
               <Card className="shadow-xl border-2">
                 <CardHeader className="pb-4">
                   <CardTitle className="flex items-center justify-between">
-                    <span className="text-xl text-nepal-primary">Book This Experience</span>
-                    <span className="text-2xl font-bold text-nepal-orange">
+                    <span className="text-xl text-tmtn-blue">Book This Experience</span>
+                    <span className="text-2xl font-bold text-tmtn-red">
                       {formatPrice(experience.price)}
                     </span>
                   </CardTitle>
@@ -826,7 +826,7 @@ const ExperienceDetail = () => {
                   </div>
 
                   <Button 
-                    className="w-full bg-nepal-orange hover:bg-orange-600 text-white text-lg py-3"
+                    className="w-full bg-tmtn-red hover:bg-tmtn-red/90 text-white text-lg py-3"
                     onClick={() => navigate(`/experiences/${experience.id}/checkout`, { 
                       state: { 
                         experience,
@@ -845,7 +845,7 @@ const ExperienceDetail = () => {
               {/* Book With Confidence Card */}
               <Card className="shadow-lg border border-gray-200">
                 <CardHeader className="pb-4">
-                  <CardTitle className="text-xl text-nepal-primary font-bold">
+                  <CardTitle className="text-xl text-tmtn-blue font-bold">
                     Book With Confidence
                   </CardTitle>
                 </CardHeader>
@@ -895,7 +895,7 @@ const ExperienceDetail = () => {
       {/* Mobile Booking CTA */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t shadow-lg">
         {!showMobileBooking ? <div className="p-4">
-            <Button onClick={() => setShowMobileBooking(true)} className="w-full bg-nepal-orange hover:bg-orange-600 text-white text-lg py-3">
+            <Button onClick={() => setShowMobileBooking(true)} className="w-full bg-tmtn-red hover:bg-tmtn-red/90 text-white text-lg py-3">
               Book Now - {formatPrice(calculateTotal())}
             </Button>
           </div> : <div className="p-4 max-h-96 overflow-y-auto">
@@ -970,7 +970,7 @@ const ExperienceDetail = () => {
               </div>
               
               <Button 
-                className="w-full bg-nepal-orange hover:bg-orange-600 text-white"
+                className="w-full bg-tmtn-red hover:bg-tmtn-red/90 text-white"
                 onClick={() => {
                   setShowMobileBooking(false);
                   navigate(`/experiences/${experience.id}/checkout`, { 

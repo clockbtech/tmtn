@@ -165,7 +165,7 @@ const AttractionsDetail = () => {
           }} transition={{
             duration: 0.6
           }}>
-              <h2 className="font-bebas uppercase text-nepal-primary mb-6 text-2xl font-extrabold">
+              <h2 className="font-bebas uppercase text-tmtn-blue mb-6 text-2xl font-extrabold">
                 Overview
               </h2>
               <div className="prose prose-lg max-w-none text-gray-700 mb-8">
@@ -179,7 +179,7 @@ const AttractionsDetail = () => {
                 <h3 className="text-xl font-bold text-gray-900 mb-4">Key Highlights</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {attraction.highlights.map((highlight, index) => <div key={index} className="flex items-center text-gray-700">
-                      <div className="w-2 h-2 bg-nepal-orange rounded-full mr-3"></div>
+                      <div className="w-2 h-2 bg-tmtn-red rounded-full mr-3"></div>
                       {highlight}
                     </div>)}
                 </div>
@@ -192,7 +192,7 @@ const AttractionsDetail = () => {
                   {attraction.bestSeasons.map((season, index) => <div key={index} className="flex items-center p-4 bg-gray-50 rounded-lg">
                       <span className="text-3xl mr-4">{season.icon}</span>
                       <div>
-                        <div className="font-semibold text-nepal-primary">{season.months}</div>
+                        <div className="font-semibold text-tmtn-blue">{season.months}</div>
                         <div className="text-sm text-gray-600">{season.description}</div>
                       </div>
                     </div>)}
@@ -211,11 +211,11 @@ const AttractionsDetail = () => {
             duration: 0.6
           }}>
               <div className="flex items-center justify-between mb-6">
-                <h2 className="font-tm-sans uppercase text-nepal-primary text-2xl font-extrabold">
+                <h2 className="font-tm-sans uppercase text-tmtn-blue text-2xl font-extrabold">
                   Photo Gallery
                 </h2>
                 <div className="flex items-center gap-4">
-                  <button onClick={() => setAutoPlay(!autoPlay)} className="flex items-center gap-2 text-sm text-gray-600 hover:text-nepal-primary">
+                  <button onClick={() => setAutoPlay(!autoPlay)} className="flex items-center gap-2 text-sm text-gray-600 hover:text-tmtn-blue">
                     {autoPlay ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
                     {autoPlay ? 'Pause' : 'Play'}
                   </button>
@@ -232,7 +232,7 @@ const AttractionsDetail = () => {
 
               {/* Thumbnail Gallery */}
               <div className="grid grid-cols-6 gap-2">
-                {attraction.gallery.map((image, index) => <img key={index} src={image} alt={`Thumbnail ${index + 1}`} className={`w-full h-20 object-cover rounded cursor-pointer transition-opacity ${selectedImageIndex === index ? 'opacity-100 ring-2 ring-nepal-primary' : 'opacity-70 hover:opacity-100'}`} onClick={() => setSelectedImageIndex(index)} />)}
+                {attraction.gallery.map((image, index) => <img key={index} src={image} alt={`Thumbnail ${index + 1}`} className={`w-full h-20 object-cover rounded cursor-pointer transition-opacity ${selectedImageIndex === index ? 'opacity-100 ring-2 ring-tmtn-blue' : 'opacity-70 hover:opacity-100'}`} onClick={() => setSelectedImageIndex(index)} />)}
               </div>
             </motion.section>
 
@@ -246,7 +246,7 @@ const AttractionsDetail = () => {
           }} transition={{
             duration: 0.6
           }}>
-              <h2 className="font-bebas uppercase text-nepal-primary mb-6 text-2xl font-extrabold">
+              <h2 className="font-bebas uppercase text-tmtn-blue mb-6 text-2xl font-extrabold">
                 Nearby Attractions
               </h2>
               <Carousel className="w-full" opts={{
@@ -262,7 +262,7 @@ const AttractionsDetail = () => {
                           <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100">
                             <div className="relative overflow-hidden">
                               <img src={linkedAttraction.image} alt={linkedAttraction.name} className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" />
-                              <div className="absolute top-4 left-4 bg-nepal-orange text-white px-3 py-1 rounded-full text-sm font-semibold">
+                              <div className="absolute top-4 left-4 bg-tmtn-red text-white px-3 py-1 rounded-full text-sm font-semibold">
                                 {linkedAttraction.type}
                               </div>
                               <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full flex items-center">
@@ -273,7 +273,7 @@ const AttractionsDetail = () => {
                             </div>
                             
                             <div className="p-6">
-                              <h3 className="text-xl font-normal font-semibold text-nepal-primary mb-2">
+                              <h3 className="text-xl font-normal font-semibold text-tmtn-blue mb-2">
                                 {linkedAttraction.name}
                               </h3>
                               <p className="text-gray-600 mb-4 text-base">
@@ -295,7 +295,7 @@ const AttractionsDetail = () => {
                             scale: 1.05
                           }} whileTap={{
                             scale: 0.95
-                          }} className="w-full bg-nepal-primary text-white py-3 rounded-lg font-semibold transition-colors duration-200 text-base bg-orange-600 hover:bg-orange-500">
+                          }} className="w-full bg-tmtn-blue text-white py-3 rounded-lg font-semibold transition-colors duration-200 text-base bg-orange-600 hover:bg-orange-500">
                                 Explore Attraction
                               </motion.button>
                             </div>
@@ -319,7 +319,7 @@ const AttractionsDetail = () => {
           }} transition={{
             duration: 0.6
           }}>
-              <h2 className="font-bebas uppercase text-nepal-primary mb-6 text-2xl font-extrabold">
+              <h2 className="font-bebas uppercase text-tmtn-blue mb-6 text-2xl font-extrabold">
                 Available Experiences
               </h2>
               <Carousel className="w-full" opts={{
@@ -338,7 +338,7 @@ const AttractionsDetail = () => {
                               {experience.difficulty}
                             </div>
                             <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
-                              <span className="text-lg font-bold text-nepal-primary">
+                              <span className="text-lg font-bold text-tmtn-blue">
                                 {formatPrice(experience.price)}
                               </span>
                             </div>
@@ -346,7 +346,7 @@ const AttractionsDetail = () => {
                           </div>
                           
                           <div className="p-6">
-                            <h3 className="text-xl font-normal font-semibold text-nepal-primary mb-2">
+                            <h3 className="text-xl font-normal font-semibold text-tmtn-blue mb-2">
                               {experience.name}
                             </h3>
                             <p className="text-gray-600 mb-4">
@@ -372,7 +372,7 @@ const AttractionsDetail = () => {
                           scale: 1.05
                         }} whileTap={{
                           scale: 0.95
-                        }} className="w-full bg-nepal-orange hover:bg-orange-600 text-white py-3 rounded-lg font-semibold transition-colors duration-200">
+                        }} className="w-full bg-tmtn-red hover:bg-tmtn-red/90 text-white py-3 rounded-lg font-semibold transition-colors duration-200">
                               Book Experience
                             </motion.button>
                           </div>
@@ -392,7 +392,7 @@ const AttractionsDetail = () => {
               {/* Safety Notes */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center text-nepal-primary">
+                  <CardTitle className="flex items-center text-tmtn-blue">
                     <Shield className="w-5 h-5 mr-2" />
                     Safety Notes
                   </CardTitle>
@@ -408,7 +408,7 @@ const AttractionsDetail = () => {
               {/* Quick Facts */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center text-nepal-primary">
+                  <CardTitle className="flex items-center text-tmtn-blue">
                     <Zap className="w-5 h-5 mr-2" />
                     Quick Facts
                   </CardTitle>
@@ -416,7 +416,7 @@ const AttractionsDetail = () => {
                 <CardContent className="space-y-3">
                   {attraction.travelTips.quickFacts.map((fact, index) => <div key={index} className="flex items-center justify-between">
                       <span className="text-sm text-gray-700">{fact.split(':')[0]}:</span>
-                      <span className="text-sm font-semibold text-nepal-primary">{fact.split(':')[1]}</span>
+                      <span className="text-sm font-semibold text-tmtn-blue">{fact.split(':')[1]}</span>
                     </div>)}
                 </CardContent>
               </Card>
@@ -424,7 +424,7 @@ const AttractionsDetail = () => {
               {/* Pro Tips */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center text-nepal-primary">
+                  <CardTitle className="flex items-center text-tmtn-blue">
                     <Lightbulb className="w-5 h-5 mr-2" />
                     Pro Tips
                   </CardTitle>

@@ -299,7 +299,7 @@ const Experiences = () => {
                             {experience.difficulty}
                           </div>
                           <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
-                            <span className="text-lg font-bold text-nepal-primary">
+                            <span className="text-lg font-bold text-tmtn-blue">
                               {formatPrice(experience.price)}
                             </span>
                           </div>
@@ -307,7 +307,7 @@ const Experiences = () => {
                         </div>
                         
                         <div className="p-6">
-                          <h3 className="text-xl font-normal font-semibold text-nepal-primary mb-2">
+                          <h3 className="text-xl font-normal font-semibold text-tmtn-blue mb-2">
                             {experience.name}
                           </h3>
                           <p className="text-gray-600 mb-4">
@@ -333,7 +333,7 @@ const Experiences = () => {
                       scale: 1.05
                     }} whileTap={{
                       scale: 0.95
-                    }} className="w-full bg-nepal-orange hover:bg-orange-600 text-white py-3 rounded-lg font-semibold transition-colors duration-200">
+                    }} className="w-full bg-tmtn-red hover:bg-tmtn-red/90 text-white py-3 rounded-lg font-semibold transition-colors duration-200">
                             View Details
                           </motion.button>
                         </div>

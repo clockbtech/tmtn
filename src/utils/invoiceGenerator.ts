@@ -9,8 +9,8 @@ export const generateInvoice = (bookingDetails: any) => {
       <style>
         body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
         .invoice-container { max-width: 800px; margin: 0 auto; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; border-bottom: 3px solid #ff7d33; padding-bottom: 20px; }
-        .logo { font-size: 28px; font-weight: bold; color: #ff7d33; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; border-bottom: 3px solid #D94141; padding-bottom: 20px; }
+        .logo { font-size: 28px; font-weight: bold; color: #126894; }
         .company-info { text-align: right; color: #666; }
         .invoice-title { text-align: center; font-size: 36px; color: #333; margin: 30px 0; }
         .booking-info { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; }
@@ -18,7 +18,7 @@ export const generateInvoice = (bookingDetails: any) => {
         .detail-item { padding: 10px 0; border-bottom: 1px solid #eee; }
         .detail-label { font-weight: bold; color: #666; }
         .detail-value { color: #333; }
-        .total-section { background: #ff7d33; color: white; padding: 20px; border-radius: 8px; text-align: center; margin: 30px 0; }
+        .total-section { background: #D94141; color: white; padding: 20px; border-radius: 8px; text-align: center; margin: 30px 0; }
         .thank-you { text-align: center; margin: 30px 0; padding: 20px; background: #e8f5e8; border-radius: 8px; }
         .footer { text-align: center; margin-top: 40px; color: #666; font-size: 14px; }
         @media print { body { background: white; } .invoice-container { box-shadow: none; } }

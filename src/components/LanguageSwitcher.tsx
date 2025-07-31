@@ -60,7 +60,7 @@ const LanguageSwitcher = () => {
                     {language.currency}
                   </span>
                   {currentLanguage.code === language.code && (
-                    <div className="w-2 h-2 bg-nepal-orange rounded-full" />
+                    <div className="w-2 h-2 bg-tmtn-red rounded-full" />
                   )}
                 </motion.button>
               ))}
@@ -73,3 +73,4 @@ const LanguageSwitcher = () => {
 };
 
 export default LanguageSwitcher;
+

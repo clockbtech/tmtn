@@ -59,7 +59,7 @@ const Testimonials = () => {
 
   // Prayer Flag Dots Animation
   const PrayerFlagDots = () => <div className="absolute top-4 right-4 hidden lg:flex space-x-1 opacity-[0.08]">
-      {[0, 1, 2, 3, 4].map(i => <motion.div key={i} className="w-2 h-2 rounded-full bg-nepal-orange" animate={{
+      {[0, 1, 2, 3, 4].map(i => <motion.div key={i} className="w-2 h-2 rounded-full bg-tmtn-red" animate={{
       scale: [1, 1.2, 1],
       opacity: [0.5, 0.8, 0.5]
     }} transition={{
@@ -91,7 +91,7 @@ const Testimonials = () => {
       }} transition={{
         duration: 0.8
       }} className="text-center mb-16">
-          <h2 className="text-4xl lg:text-4xl font-bebas uppercase font-extrabold text-nepal-primary mb-4">
+          <h2 className="text-4xl lg:text-4xl font-bebas uppercase font-extrabold text-tmtn-blue mb-4">
             What Our Travelers Say
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -126,7 +126,7 @@ const Testimonials = () => {
                       <circle cx="15" cy="15" r="0.5" fill="currentColor" opacity="0.2" />
                     </pattern>
                   </defs>
-                  <rect width="100%" height="100%" fill="url(#card-pattern)" className="text-nepal-primary" />
+                  <rect width="100%" height="100%" fill="url(#card-pattern)" className="text-tmtn-blue" />
                 </svg>
               </div>
 
@@ -139,7 +139,7 @@ const Testimonials = () => {
                   duration: 2,
                   repeat: Infinity,
                   repeatDelay: 3
-                }} className="w-16 h-16 bg-nepal-orange rounded-full flex items-center justify-center shadow-lg">
+                }} className="w-16 h-16 bg-tmtn-red rounded-full flex items-center justify-center shadow-lg">
                     <Quote className="w-8 h-8 text-white" />
                   </motion.div>
                 </div>
@@ -168,9 +168,9 @@ const Testimonials = () => {
                   <div className="flex items-center justify-center lg:justify-start gap-4">
                     <motion.img whileHover={{
                     scale: 1.1
-                  }} src={testimonials[currentIndex].image} alt={testimonials[currentIndex].name} className="w-12 h-12 rounded-full object-cover ring-2 ring-nepal-orange/20" />
+                  }} src={testimonials[currentIndex].image} alt={testimonials[currentIndex].name} className="w-12 h-12 rounded-full object-cover ring-2 ring-tmtn-red/20" />
                     <div>
-                      <div className="font-semibold text-nepal-primary">
+                      <div className="font-semibold text-tmtn-blue">
                         {testimonials[currentIndex].name}
                       </div>
                       <div className="text-gray-500 text-sm">
@@ -189,7 +189,7 @@ const Testimonials = () => {
             scale: 1.2
           }} whileTap={{
             scale: 0.9
-          }} onClick={() => setCurrentIndex(index)} className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentIndex ? 'bg-nepal-orange scale-125 shadow-lg' : 'bg-gray-300 hover:bg-gray-400'}`} />)}
+          }} onClick={() => setCurrentIndex(index)} className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentIndex ? 'bg-tmtn-red scale-125 shadow-lg' : 'bg-gray-300 hover:bg-gray-400'}`} />)}
           </div>
         </div>
       </div>

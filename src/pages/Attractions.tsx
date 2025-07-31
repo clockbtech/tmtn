@@ -270,10 +270,10 @@ const Attractions = () => {
           {/* Filter Summary */}
           {(selectedCategories.length > 0 || searchTerm) && <div className="mt-4 flex flex-wrap gap-2 items-center">
               <span className="text-sm text-gray-600">Active filters:</span>
-              {searchTerm && <span className="bg-nepal-orange text-white px-3 py-1 rounded-full text-sm">
+              {searchTerm && <span className="bg-tmtn-red text-white px-3 py-1 rounded-full text-sm">
                   Search: "{searchTerm}"
                 </span>}
-              {selectedCategories.map(category => <span key={category} className="bg-nepal-primary text-white px-3 py-1 rounded-full text-sm">
+              {selectedCategories.map(category => <span key={category} className="bg-tmtn-blue text-white px-3 py-1 rounded-full text-sm">
                   {category}
                 </span>)}
               <button onClick={() => {
@@ -310,7 +310,7 @@ const Attractions = () => {
                       <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100">
                         <div className="relative overflow-hidden">
                           <img src={attraction.image} alt={attraction.name} className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" />
-                          <div className="absolute top-4 left-4 bg-nepal-orange text-white px-3 py-1 rounded-full text-sm font-semibold">
+                          <div className="absolute top-4 left-4 bg-tmtn-red text-white px-3 py-1 rounded-full text-sm font-semibold">
                             {attraction.type}
                           </div>
                           <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full flex items-center">
@@ -321,7 +321,7 @@ const Attractions = () => {
                         </div>
                         
                         <div className="p-6">
-                          <h3 className="text-xl font-normal font-semibold text-nepal-primary mb-2">
+                          <h3 className="text-xl font-normal font-semibold text-tmtn-blue mb-2">
                             {attraction.name}
                           </h3>
                           <p className="text-gray-600 mb-4 text-base">
@@ -343,7 +343,7 @@ const Attractions = () => {
                       scale: 1.05
                     }} whileTap={{
                       scale: 0.95
-                    }} className="w-full bg-nepal-primary text-white py-3 rounded-lg font-semibold transition-colors duration-200 text-base bg-orange-600 hover:bg-orange-500">
+                    }} className="w-full bg-tmtn-blue text-white py-3 rounded-lg font-semibold transition-colors duration-200 text-base bg-orange-600 hover:bg-orange-500">
                             Explore Attraction
                           </motion.button>
                         </div>

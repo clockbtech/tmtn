@@ -90,7 +90,7 @@ const BlogDetailSidebar = ({ currentBlog }: BlogDetailSidebarProps) => {
                   className="w-20 h-16 rounded-lg object-cover flex-shrink-0"
                 />
                 <div>
-                  <h4 className="text-sm font-medium text-gray-900 group-hover:text-nepal-primary transition-colors line-clamp-2 mb-1">
+                  <h4 className="text-sm font-medium text-gray-900 group-hover:text-tmtn-blue transition-colors line-clamp-2 mb-1">
                     {article.title}
                   </h4>
                   <span className="text-xs text-gray-500">{article.category}</span>
@@ -118,10 +118,10 @@ const BlogDetailSidebar = ({ currentBlog }: BlogDetailSidebarProps) => {
                   className="w-20 h-16 rounded-lg object-cover flex-shrink-0"
                 />
                 <div className="flex-1">
-                  <h4 className="text-sm font-medium text-gray-900 group-hover:text-nepal-primary transition-colors mb-1">
+                  <h4 className="text-sm font-medium text-gray-900 group-hover:text-tmtn-blue transition-colors mb-1">
                     {experience.title}
                   </h4>
-                  <p className="text-sm text-nepal-orange font-semibold">{experience.price}</p>
+                  <p className="text-sm text-tmtn-red font-semibold">{experience.price}</p>
                 </div>
               </div>
             </Link>
@@ -144,7 +144,7 @@ const BlogDetailSidebar = ({ currentBlog }: BlogDetailSidebarProps) => {
                 alt={destination.title}
                 className="w-20 h-16 rounded-lg object-cover"
               />
-              <h4 className="text-sm font-medium text-gray-900 group-hover:text-nepal-primary transition-colors">
+              <h4 className="text-sm font-medium text-gray-900 group-hover:text-tmtn-blue transition-colors">
                 {destination.title}
               </h4>
             </Link>
@@ -160,7 +160,7 @@ const BlogDetailSidebar = ({ currentBlog }: BlogDetailSidebarProps) => {
             <Badge
               key={tag}
               variant="outline"
-              className="cursor-pointer hover:bg-nepal-primary hover:text-white transition-colors"
+              className="cursor-pointer hover:bg-tmtn-blue hover:text-white transition-colors"
             >
               {tag}
             </Badge>
@@ -172,3 +172,4 @@ const BlogDetailSidebar = ({ currentBlog }: BlogDetailSidebarProps) => {
 };
 
 export default BlogDetailSidebar;
+

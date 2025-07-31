@@ -80,8 +80,8 @@ const BlogSidebar = ({
           <li>
             <button
               onClick={() => onCategoryChange('')}
-              className={`text-left w-full hover:text-nepal-primary transition-colors ${
-                selectedCategory === '' ? 'text-nepal-primary font-medium' : 'text-gray-600'
+              className={`text-left w-full hover:text-tmtn-blue transition-colors ${
+                selectedCategory === '' ? 'text-tmtn-blue font-medium' : 'text-gray-600'
               }`}
             >
               All Posts
@@ -91,8 +91,8 @@ const BlogSidebar = ({
             <li key={category.name}>
               <button
                 onClick={() => onCategoryChange(category.name)}
-                className={`text-left w-full flex justify-between hover:text-nepal-primary transition-colors ${
-                  selectedCategory === category.name ? 'text-nepal-primary font-medium' : 'text-gray-600'
+                className={`text-left w-full flex justify-between hover:text-tmtn-blue transition-colors ${
+                  selectedCategory === category.name ? 'text-tmtn-blue font-medium' : 'text-gray-600'
                 }`}
               >
                 <span>{category.name}</span>
@@ -118,7 +118,7 @@ const BlogSidebar = ({
                 alt={post.title}
                 className="w-12 h-12 rounded-lg object-cover"
               />
-              <h4 className="text-sm font-medium text-gray-900 group-hover:text-nepal-primary transition-colors line-clamp-2">
+              <h4 className="text-sm font-medium text-gray-900 group-hover:text-tmtn-blue transition-colors line-clamp-2">
                 {post.title}
               </h4>
             </Link>
@@ -134,7 +134,7 @@ const BlogSidebar = ({
             <Badge
               key={tag}
               variant="outline"
-              className={`cursor-pointer hover:bg-nepal-primary hover:text-white transition-colors ${
+              className={`cursor-pointer hover:bg-tmtn-blue hover:text-white transition-colors ${
                 index % 3 === 0 ? 'text-base' : index % 2 === 0 ? 'text-sm' : 'text-xs'
               }`}
             >
@@ -148,3 +148,4 @@ const BlogSidebar = ({
 };
 
 export default BlogSidebar;
+

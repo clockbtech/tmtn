@@ -107,7 +107,7 @@ const HeroSection = () => {
                 boxShadow: '0 10px 30px rgba(255, 125, 51, 0.4)'
               }} whileTap={{
                 scale: 0.95
-              }} className="bg-nepal-orange hover:bg-orange-600 text-white px-8 py-3 rounded-full text-lg font-tm-sans tracking-wider transition-all duration-300 shadow-lg">
+              }} className="bg-tmtn-red hover:bg-tmtn-red/90 text-white px-8 py-3 rounded-full text-lg font-tm-sans tracking-wider transition-all duration-300 shadow-lg">
                 <Link to="/Destinations" className="block w-full h-full">
                 Discover Nepal
                 </Link>
@@ -122,7 +122,7 @@ const HeroSection = () => {
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
         {heroContent.map((_, index) => <motion.button key={index} whileHover={{
         scale: 1.2
-      }} onClick={() => setCurrentSlide(index)} className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentSlide ? 'bg-nepal-orange scale-125' : 'bg-white/50'}`} />)}
+      }} onClick={() => setCurrentSlide(index)} className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentSlide ? 'bg-tmtn-red scale-125' : 'bg-white/50'}`} />)}
       </div>
     </section>;
 };

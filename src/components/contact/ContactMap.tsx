@@ -15,7 +15,7 @@ const ContactMap = () => {
         
         <div className="space-y-4">
           <div className="flex items-start space-x-3">
-            <MapPin className="w-5 h-5 text-nepal-primary mt-1 flex-shrink-0" />
+            <MapPin className="w-5 h-5 text-tmtn-blue mt-1 flex-shrink-0" />
             <div>
               <h4 className="font-semibold text-gray-900">Office Address</h4>
               <p className="text-gray-600">
@@ -26,30 +26,30 @@ const ContactMap = () => {
           </div>
           
           <div className="flex items-start space-x-3">
-            <Phone className="w-5 h-5 text-nepal-primary mt-1 flex-shrink-0" />
+            <Phone className="w-5 h-5 text-tmtn-blue mt-1 flex-shrink-0" />
             <div>
               <h4 className="font-semibold text-gray-900">Phone Numbers</h4>
-              <a href="tel:+9779841234567" className="text-nepal-primary hover:underline block">
+              <a href="tel:+9779841234567" className="text-tmtn-blue hover:underline block">
                 +977 984-123-4567
               </a>
-              <a href="tel:+97714123456" className="text-nepal-primary hover:underline block">
+              <a href="tel:+97714123456" className="text-tmtn-blue hover:underline block">
                 +977 1-412-3456
               </a>
             </div>
           </div>
           
           <div className="flex items-start space-x-3">
-            <Mail className="w-5 h-5 text-nepal-primary mt-1 flex-shrink-0" />
+            <Mail className="w-5 h-5 text-tmtn-blue mt-1 flex-shrink-0" />
             <div>
               <h4 className="font-semibold text-gray-900">Email Address</h4>
-              <a href="mailto:info@takemetonepal.com" className="text-nepal-primary hover:underline">
+              <a href="mailto:info@takemetonepal.com" className="text-tmtn-blue hover:underline">
                 info@takemetonepal.com
               </a>
             </div>
           </div>
           
           <div className="flex items-start space-x-3">
-            <Clock className="w-5 h-5 text-nepal-primary mt-1 flex-shrink-0" />
+            <Clock className="w-5 h-5 text-tmtn-blue mt-1 flex-shrink-0" />
             <div>
               <h4 className="font-semibold text-gray-900">Office Hours</h4>
               <p className="text-gray-600">

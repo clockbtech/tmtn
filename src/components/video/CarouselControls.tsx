@@ -12,7 +12,7 @@ const CarouselControls: React.FC<CarouselControlsProps> = ({ isPlaying, onToggle
     <div className="flex justify-center mb-8">
       <button
         onClick={onTogglePlay}
-        className="flex items-center space-x-2 bg-nepal-primary text-white px-6 py-3 rounded-full hover:bg-nepal-primary/90 transition-colors shadow-lg"
+        className="flex items-center space-x-2 bg-tmtn-blue text-white px-6 py-3 rounded-full hover:bg-tmtn-blue/90 transition-colors shadow-lg"
         aria-label={isPlaying ? 'Pause carousel' : 'Play carousel'}
       >
         {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
@@ -23,3 +23,4 @@ const CarouselControls: React.FC<CarouselControlsProps> = ({ isPlaying, onToggle
 };
 
 export default CarouselControls;
+

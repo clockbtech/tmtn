@@ -67,7 +67,7 @@ const Auth = () => {
               {isLogin ? 'Welcome Back' : 'Create An Account To Get Started'}
             </h2>
             {!isLogin && (
-              <div className="inline-flex items-center bg-nepal-orange text-white px-3 py-1 rounded-full text-sm font-medium mb-4">
+              <div className="inline-flex items-center bg-tmtn-red text-white px-3 py-1 rounded-full text-sm font-medium mb-4">
                 <span className="text-orange-100">Get 20% off for web signup</span>
               </div>
             )}
@@ -126,7 +126,7 @@ const Auth = () => {
                     Your password
                   </Label>
                   {isLogin && (
-                    <Link to="#" className="text-sm text-nepal-primary hover:underline">
+                    <Link to="#" className="text-sm text-tmtn-blue hover:underline">
                       Forgot Password?
                     </Link>
                   )}
@@ -188,11 +188,11 @@ const Auth = () => {
                 <Checkbox id="terms" className="mt-0.5" />
                 <label htmlFor="terms" className="text-sm text-gray-600">
                   By signing up, you agree to{' '}
-                  <Link to="#" className="text-nepal-primary hover:underline">
+                  <Link to="#" className="text-tmtn-blue hover:underline">
                     Customer.ai's Terms Of Service
                   </Link>{' '}
                   and{' '}
-                  <Link to="#" className="text-nepal-primary hover:underline">
+                  <Link to="#" className="text-tmtn-blue hover:underline">
                     Privacy Policy
                   </Link>
                 </label>
@@ -220,3 +220,4 @@ const Auth = () => {
 };
 
 export default Auth;
+

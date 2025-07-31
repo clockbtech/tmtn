@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Calendar, User, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from '../contexts/TranslationContext';
 gsap.registerPlugin(ScrollTrigger);
 const BlogPreview = () => {
@@ -78,7 +79,7 @@ const BlogPreview = () => {
       }} transition={{
         duration: 0.8
       }} className="text-center mb-16">
-          <h2 className="text-4xl lg:text-4xl font-tm-sans uppercase font-extrabold text-nepal-primary mb-4">
+          <h2 className="text-4xl lg:text-4xl font-tm-sans uppercase font-extrabold text-tmtn-blue mb-4">
             {t('blog.title')}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -87,7 +88,7 @@ const BlogPreview = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {blogPosts.map((post, index) => <motion.article key={post.id} className="blog-card group cursor-pointer" whileHover={{
+          {blogPosts.map((post, index) => <Link to={`/blog/${post.id}`} key={post.id}><motion.article className="blog-card group cursor-pointer" whileHover={{
           y: -10
         }} transition={{
           duration: 0.3
@@ -96,7 +97,7 @@ const BlogPreview = () => {
                 {/* Image */}
                 <div className="relative overflow-hidden">
                   <img src={post.image} alt={post.title} className="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-500" />
-                  <div className="absolute top-4 left-4 bg-nepal-orange text-white px-3 py-1 rounded-full text-sm font-semibold">
+                  <div className="absolute top-4 left-4 bg-tmtn-red text-white px-3 py-1 rounded-full text-sm font-semibold">
                     {post.category}
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -116,11 +117,11 @@ const BlogPreview = () => {
                         <span>{formatDate(post.date)}</span>
                       </div>
                     </div>
-                    <span className="text-nepal-orange">{post.readTime}</span>
+                    <span className="text-tmtn-red">{post.readTime}</span>
                   </div>
 
                   {/* Title */}
-                  <h3 className="font-normal text-nepal-primary mb-3 group-hover:text-nepal-orange transition-colors duration-200 text-xl font-semibold px-0">
+                  <h3 className="font-normal text-tmtn-blue mb-3 group-hover:text-tmtn-red transition-colors duration-200 text-xl font-semibold px-0">
                     {post.title}
                   </h3>
 
@@ -132,13 +133,13 @@ const BlogPreview = () => {
                   {/* Read More Link */}
                   <motion.div whileHover={{
                 x: 5
-              }} className="flex items-center text-nepal-orange hover:text-orange-600 font-semibold transition-colors duration-200">
+              }} className="flex items-center text-tmtn-red hover:text-orange-600 font-semibold transition-colors duration-200">
                     <span>{t('blog.readMore')}</span>
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </motion.div>
                 </div>
               </div>
-            </motion.article>)}
+            </motion.article></Link>)}
         </div>
 
         {/* View All Button */}
@@ -152,13 +153,15 @@ const BlogPreview = () => {
         duration: 0.8,
         delay: 0.3
       }} className="text-center mt-12">
-          <motion.button whileHover={{
-          scale: 1.05
-        }} whileTap={{
-          scale: 0.95
-        }} className="bg-nepal-orange hover:bg-orange-600 text-white px-8 py-3 rounded-full text-lg font-tm-sans font-semibold transition-all duration-300 shadow-lg">
-            {t('blog.viewAll')}
-          </motion.button>
+          <Link to="/blog">
+            <motion.button whileHover={{
+              scale: 1.05
+            }} whileTap={{
+              scale: 0.95
+            }} className="bg-tmtn-red hover:bg-tmtn-red/90 text-white px-8 py-3 rounded-full text-lg font-tm-sans font-semibold transition-all duration-300 shadow-lg">
+              {t('blog.viewAll')}
+            </motion.button>
+          </Link>
         </motion.div>
       </div>
     </section>;

@@ -43,7 +43,7 @@ const CollapsibleSearch = ({ textColor }: CollapsibleSearchProps) => {
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
               placeholder={t('search.placeholder')}
-              className="w-64 px-4 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-nepal-orange focus:border-transparent"
+              className="w-64 px-4 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-tmtn-red focus:border-transparent"
               onBlur={() => {
                 if (!searchValue) {
                   setIsOpen(false);
@@ -59,7 +59,7 @@ const CollapsibleSearch = ({ textColor }: CollapsibleSearchProps) => {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={handleToggle}
-        className={`${textColor} hover:text-nepal-orange transition-colors p-2 rounded-full hover:bg-white/10`}
+        className={`${textColor} hover:text-tmtn-red transition-colors p-2 rounded-full hover:bg-white/10`}
         aria-label={isOpen ? "Close search" : "Open search"}
         aria-expanded={isOpen}
       >

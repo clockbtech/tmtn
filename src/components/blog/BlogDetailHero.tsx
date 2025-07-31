@@ -19,7 +19,7 @@ const BlogDetailHero = ({
       
       <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12">
         <div className="container mx-auto">
-          <Badge className="mb-4 bg-nepal-primary text-white">
+          <Badge className="mb-4 bg-tmtn-blue text-white">
             {blog.category}
           </Badge>
           

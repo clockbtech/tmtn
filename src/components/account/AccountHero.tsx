@@ -8,7 +8,7 @@ import { Calendar, MapPin, Star, Trophy } from 'lucide-react';
 
 const AccountHero = () => {
   return (
-    <section className="relative bg-gradient-to-r from-nepal-primary to-nepal-secondary text-white overflow-hidden">
+    <section className="relative bg-gradient-to-r from-tmtn-blue to-nepal-secondary text-white overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-[url('/lovable-uploads/a26300b1-f01d-4f86-880d-99c4fc88d181.png')] bg-cover bg-center"></div>
@@ -26,7 +26,7 @@ const AccountHero = () => {
             <div className="flex items-center gap-6 mb-6">
               <Avatar className="w-24 h-24 border-4 border-white/20">
                 <AvatarImage src="/placeholder-avatar.jpg" alt="Profile" />
-                <AvatarFallback className="text-2xl bg-nepal-orange text-white">JS</AvatarFallback>
+                <AvatarFallback className="text-2xl bg-tmtn-red text-white">JS</AvatarFallback>
               </Avatar>
               
               <div>
@@ -106,3 +106,4 @@ const AccountHero = () => {
 };
 
 export { AccountHero };
+

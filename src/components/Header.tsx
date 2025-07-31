@@ -63,10 +63,10 @@ const Header = () => {
               <motion.div key={item.name} whileHover={{ y: -2 }}>
                 <Link 
                   to={item.href}
-                  className={`${textColor} font-tm-sans uppercase font-semibold transition-colors duration-200 px-4 py-2 text-base hover:text-nepal-orange relative group`}
+                  className={`${textColor} font-tm-sans uppercase font-semibold transition-colors duration-200 px-4 py-2 text-base hover:text-tmtn-red relative group`}
                 >
                   {item.name}
-                  <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-nepal-orange scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
+                  <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-tmtn-red scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
                 </Link>
               </motion.div>
             ))}
@@ -86,7 +86,7 @@ const Header = () => {
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`${textColor} hover:text-nepal-orange transition-colors`}
+              className={`${textColor} hover:text-tmtn-red transition-colors`}
             >
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </motion.button>
@@ -109,7 +109,7 @@ const Header = () => {
                   <input
                     type="text"
                     placeholder={t('search.mobile.placeholder')}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-nepal-orange text-gray-700"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-tmtn-red text-gray-700"
                   />
                 </div>
                 
@@ -118,7 +118,7 @@ const Header = () => {
                   <motion.div key={item.name} whileHover={{ x: 5 }}>
                     <Link 
                       to={item.href}
-                      className="block text-sm font-tm-sans text-gray-700 hover:text-nepal-orange font-medium py-3 px-4 uppercase transition-colors"
+                      className="block text-sm font-tm-sans text-gray-700 hover:text-tmtn-red font-medium py-3 px-4 uppercase transition-colors"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.name}
@@ -144,3 +144,4 @@ const Header = () => {
 };
 
 export default Header;
+

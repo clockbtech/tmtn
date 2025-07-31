@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTranslation } from '../contexts/TranslationContext';
+import { Link } from 'react-router-dom';
 gsap.registerPlugin(ScrollTrigger);
 const PopularDestinations = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -72,7 +73,7 @@ const PopularDestinations = () => {
       }} transition={{
         duration: 0.8
       }} className="text-center mb-16">
-          <h2 className="text-4xl lg:text-4xl font-tm-sans uppercase font-extrabold text-nepal-primary mb-4">
+          <h2 className="text-4xl lg:text-4xl font-tm-sans uppercase font-extrabold text-tmtn-blue mb-4">
             {t('destinations.title')}
           </h2>
           <p className="text-xl font-inter text-gray-600 max-w-3xl mx-auto">
@@ -81,7 +82,7 @@ const PopularDestinations = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {destinations.map((destination, index) => <motion.div key={destination.id} className="destination-card group cursor-pointer" whileHover={{
+          {destinations.map((destination, index) => <Link to={`/destinations/${destination.id}`} key={destination.id}><motion.div className="destination-card group cursor-pointer" whileHover={{
           y: -10
         }} transition={{
           duration: 0.3
@@ -106,7 +107,7 @@ const PopularDestinations = () => {
                 scale: 1.05
               }} whileTap={{
                 scale: 0.95
-              }} className="text-nepal-orange hover:text-orange-400 font-tm-sans font-semibold transition-colors duration-200 flex items-center drop-shadow-lg">
+              }} className="text-tmtn-red hover:text-orange-400 font-tm-sans font-semibold transition-colors duration-200 flex items-center drop-shadow-lg">
                     {t('destinations.viewMore')}
                     <motion.span animate={{
                   x: [0, 5, 0]
@@ -119,7 +120,7 @@ const PopularDestinations = () => {
                   </motion.button>
                 </div>
               </div>
-            </motion.div>)}
+            </motion.div></Link>)}
         </div>
       </div>
     </section>;

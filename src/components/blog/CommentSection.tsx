@@ -66,7 +66,7 @@ const CommentSection = () => {
     isReply?: boolean;
   }) => <div className={`${isReply ? 'ml-8 border-l-2 border-gray-200 pl-4' : ''} mb-6`}>
       <div className="flex items-start space-x-3">
-        <div className="w-10 h-10 bg-nepal-primary rounded-full flex items-center justify-center text-white font-semibold">
+        <div className="w-10 h-10 bg-tmtn-blue rounded-full flex items-center justify-center text-white font-semibold">
           {comment.author.charAt(0)}
         </div>
         <div className="flex-1">
@@ -81,7 +81,7 @@ const CommentSection = () => {
             </span>
           </div>
           <p className="text-gray-700 mb-2">{comment.content}</p>
-          {!isReply && <Button variant="ghost" size="sm" className="text-nepal-primary hover:text-nepal-primary/80">
+          {!isReply && <Button variant="ghost" size="sm" className="text-tmtn-blue hover:text-tmtn-blue/80">
               Reply
             </Button>}
         </div>
@@ -102,7 +102,7 @@ const CommentSection = () => {
         
         {!isLoggedIn ? <div className="text-center py-8">
             <p className="text-gray-600 mb-4">Please log in to post a comment.</p>
-            <Button onClick={() => setIsLoggedIn(true)} className="bg-nepal-primary hover:bg-nepal-primary/90 rounded-full">
+            <Button onClick={() => setIsLoggedIn(true)} className="bg-tmtn-blue hover:bg-tmtn-blue/90 rounded-full">
               Log In
             </Button>
           </div> : <form onSubmit={handleSubmit} className="space-y-4">
@@ -124,12 +124,12 @@ const CommentSection = () => {
             </div>
             <div>
               <Label htmlFor="content">Comment *</Label>
-              <textarea id="content" required rows={4} className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-nepal-primary focus:border-transparent" value={newComment.content} onChange={e => setNewComment({
+              <textarea id="content" required rows={4} className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-tmtn-blue focus:border-transparent" value={newComment.content} onChange={e => setNewComment({
             ...newComment,
             content: e.target.value
           })} placeholder="Share your thoughts..." />
             </div>
-            <Button type="submit" className="bg-nepal-primary hover:bg-nepal-primary/90">
+            <Button type="submit" className="bg-tmtn-blue hover:bg-tmtn-blue/90">
               Post Comment
             </Button>
           </form>}

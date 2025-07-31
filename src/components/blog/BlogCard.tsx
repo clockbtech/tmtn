@@ -27,14 +27,14 @@ const BlogCard = ({ blog }: BlogCardProps) => {
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
         <div className="absolute top-4 left-4">
-          <span className="bg-nepal-primary text-white px-3 py-1 rounded-full text-sm font-medium">
+          <span className="bg-tmtn-blue text-white px-3 py-1 rounded-full text-sm font-medium">
             {blog.category}
           </span>
         </div>
       </div>
       
       <div className="p-6">
-        <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 hover:text-nepal-primary transition-colors">
+        <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 hover:text-tmtn-blue transition-colors">
           <Link to={`/blog/${blog.slug}`}>
             {blog.title}
           </Link>
@@ -52,8 +52,8 @@ const BlogCard = ({ blog }: BlogCardProps) => {
         <Link to={`/blog/${blog.slug}`}>
           <Button 
             variant="outline" 
-            // className="w-full border-nepal-primary text-nepal-primary hover:bg-nepal-primary hover:text-white"
-            className="w-full bg-nepal-orange hover:bg-orange-600 text-white py-3 rounded-lg font-semibold transition-colors duration-200"
+            // className="w-full border-tmtn-blue text-tmtn-blue hover:bg-tmtn-blue hover:text-white"
+            className="w-full bg-tmtn-red hover:bg-tmtn-red/90 text-white py-3 rounded-lg font-semibold transition-colors duration-200"
           >
             Read More
           </Button>
@@ -64,3 +64,4 @@ const BlogCard = ({ blog }: BlogCardProps) => {
 };
 
 export default BlogCard;
+

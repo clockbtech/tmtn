@@ -40,7 +40,7 @@ const BackToTopButton = () => {
         >
           <button
             onClick={scrollToTop}
-            className="relative w-14 h-14 bg-nepal-orange hover:bg-orange-600 text-white rounded-full shadow-lg transition-all duration-200 flex items-center justify-center group"
+            className="relative w-14 h-14 bg-tmtn-red hover:bg-tmtn-red/90 text-white rounded-full shadow-lg transition-all duration-200 flex items-center justify-center group"
             aria-label="Back to top"
           >
             {/* Progress Circle */}
@@ -80,3 +80,4 @@ const BackToTopButton = () => {
 };
 
 export default BackToTopButton;
+

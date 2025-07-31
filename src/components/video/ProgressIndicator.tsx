@@ -15,7 +15,7 @@ const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({ totalItems, curre
             key={index}
             className={`h-2 rounded-full transition-all duration-300 ${
               index === (currentIndex % totalItems)
-                ? 'bg-nepal-orange w-8'
+                ? 'bg-tmtn-red w-8'
                 : 'bg-gray-300 w-2'
             }`}
           />
@@ -26,3 +26,4 @@ const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({ totalItems, curre
 };
 
 export default ProgressIndicator;
+
