@@ -5,11 +5,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
 import PopularDestinations from '../components/PopularDestinations';
+import VideoCarousel from '../components/VideoCarousel';
 import TrendingExperiences from '../components/TrendingExperiences';
 import WhyChooseUs from '../components/WhyChooseUs';
 import Testimonials from '../components/Testimonials';
 import BlogPreview from '../components/BlogPreview';
-import VideoCarousel from '../components/VideoCarousel';
 import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
 
@@ -47,11 +47,11 @@ const Index = () => {
       <main>
         <HeroSection />
         <PopularDestinations />
+        <VideoCarousel />
         <TrendingExperiences />
         <WhyChooseUs />
         <Testimonials />
         <BlogPreview />
-        <VideoCarousel />
         <Newsletter />
       </main>
       <Footer />
