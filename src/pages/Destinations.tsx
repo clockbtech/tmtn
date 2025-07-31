@@ -315,7 +315,7 @@ const Destinations = () => {
                       scale: 1.05
                     }} whileTap={{
                       scale: 0.95
-                    }} className="w-full bg-tmtn-red hover:bg-tmtn-red/90 text-white py-3 rounded-lg font-plus-jakarta font-semibold transition-colors duration-200">
+                    }} className="w-full btn-gradient text-white py-3 rounded-lg font-plus-jakarta font-semibold">
                             Explore
                           </motion.button>
                         </div>

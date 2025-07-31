@@ -692,7 +692,7 @@ const ExperienceDetail = () => {
                                   </div>
                                 </div>
                                 
-                                <Button className="w-full bg-tmtn-red hover:bg-tmtn-red/90 text-white">
+                                <Button className="w-full btn-gradient text-white">
                                   View Details
                                 </Button>
                               </div>
@@ -826,7 +826,7 @@ const ExperienceDetail = () => {
                   </div>
 
                   <Button 
-                    className="w-full bg-tmtn-red hover:bg-tmtn-red/90 text-white text-lg py-3"
+                    className="w-full btn-gradient text-white text-lg py-3"
                     onClick={() => navigate(`/experiences/${experience.id}/checkout`, { 
                       state: { 
                         experience,

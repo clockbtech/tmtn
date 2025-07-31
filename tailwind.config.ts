@@ -20,8 +20,8 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'lexend': ['Lexend', 'sans-serif'],
-				'sans': ['Lexend', 'sans-serif'], // Making Lexend the default sans-serif font
+				'poppins': ['Poppins', 'sans-serif'],
+				'sans': ['Poppins', 'sans-serif'], // Making Poppins the default sans-serif font
 			},
 			fontSize: {
 				'body': '26.86px',

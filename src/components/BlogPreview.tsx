@@ -158,7 +158,7 @@ const BlogPreview = () => {
               scale: 1.05
             }} whileTap={{
               scale: 0.95
-            }} className="bg-tmtn-red hover:bg-tmtn-red/90 text-white px-8 py-3 rounded-full text-lg font-tm-sans font-semibold transition-all duration-300 shadow-lg">
+            }} className="btn-gradient text-white px-8 py-3 rounded-full text-lg font-tm-sans font-semibold">
               {t('blog.viewAll')}
             </motion.button>
           </Link>

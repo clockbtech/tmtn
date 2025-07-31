@@ -73,7 +73,7 @@ const PopularDestinations = () => {
       }} transition={{
         duration: 0.8
       }} className="text-center mb-16">
-          <h2 className="text-4xl lg:text-4xl font-tm-sans uppercase font-extrabold text-tmtn-blue mb-4">
+          <h2 className="text-4xl lg:text-4xl font-poppins uppercase font-extrabold text-tmtn-blue mb-4">
             {t('destinations.title')}
           </h2>
           <p className="text-xl font-inter text-gray-600 max-w-3xl mx-auto">
@@ -82,32 +82,24 @@ const PopularDestinations = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {destinations.map((destination, index) => <Link to={`/destinations/${destination.id}`} key={destination.id}><motion.div className="destination-card group cursor-pointer" whileHover={{
-          y: -10
-        }} transition={{
-          duration: 0.3
-        }}>
+          {destinations.map((destination, index) => <Link to={`/destinations/${destination.id}`} key={destination.id}><motion.div className="destination-card group cursor-pointer">
               <div className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 h-[32rem]">
                 {/* Full-bleed image */}
                 <img src={destination.image} alt={t(destination.nameKey)} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 
                 {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent group-hover:from-black/80 group-hover:via-black/40 transition-all duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 from-20% via-transparent to-transparent group-hover:from-black/80 group-hover:via-black/40 transition-all duration-300"></div>
                 
                 {/* Text overlay at bottom */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                  <h3 className="text-2xl font-tm-sans font-bold mb-2 drop-shadow-lg">
+                <div className="absolute bottom-0 left-0 right-0 px-6 pb-6 pt-16 text-white transition-transform duration-300 transform group-hover:translate-y-[-2rem]">
+                  <h3 className="text-2xl font-poppins font-bold mb-2 drop-shadow-lg">
                     {t(destination.nameKey)}
                   </h3>
-                  <p className="font-inter text-gray-200 mb-4 line-clamp-2 drop-shadow-md">
+                  <p className="font-poppins text-gray-200 mb-4 line-clamp-2 drop-shadow-md">
                     {t(destination.descKey)}
                   </p>
                   
-                  <motion.button whileHover={{
-                scale: 1.05
-              }} whileTap={{
-                scale: 0.95
-              }} className="text-tmtn-red hover:text-orange-400 font-tm-sans font-semibold transition-colors duration-200 flex items-center drop-shadow-lg">
+                  <motion.button className="btn-gradient text-white px-4 py-2 rounded-lg font-semibold flex items-center opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
                     {t('destinations.viewMore')}
                     <motion.span animate={{
                   x: [0, 5, 0]

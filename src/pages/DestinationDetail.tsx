@@ -294,7 +294,7 @@ const DestinationDetail = () => {
                         </div>
                       </div>
 
-                      <button className="w-full bg-tmtn-red hover:bg-tmtn-red/90 text-white py-3 rounded-lg font-semibold transition-colors duration-200">
+                      <button className="w-full btn-gradient text-white py-3 rounded-lg font-semibold">
                         Book Now
                       </button>
                     </CardContent>

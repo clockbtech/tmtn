@@ -343,7 +343,7 @@ const Attractions = () => {
                       scale: 1.05
                     }} whileTap={{
                       scale: 0.95
-                    }} className="w-full bg-tmtn-blue text-white py-3 rounded-lg font-semibold transition-colors duration-200 text-base bg-orange-600 hover:bg-orange-500">
+                    }} className="w-full btn-gradient text-white py-3 rounded-lg font-semibold text-base">
                             Explore Attraction
                           </motion.button>
                         </div>

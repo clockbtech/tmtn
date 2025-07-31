@@ -72,7 +72,7 @@ const Newsletter = () => {
                 scale: 1.05
               }} whileTap={{
                 scale: 0.95
-              }} className="bg-tmtn-red hover:bg-tmtn-red/90 text-white px-8 py-4 rounded-full font-semibold transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center">
+              }} className="btn-gradient text-white px-8 py-4 rounded-full font-semibold disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center">
                     {isLoading ? <motion.div animate={{
                   rotate: 360
                 }} transition={{

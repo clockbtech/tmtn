@@ -243,7 +243,7 @@ const TrendingExperiences = () => {
                       <motion.button
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        className="w-full bg-tmtn-red hover:bg-tmtn-red/90 text-white py-3 rounded-full font-semibold transition-colors duration-200"
+                        className="w-full btn-gradient text-white py-3 rounded-full font-semibold"
                       >
                         Book Now
                       </motion.button>
