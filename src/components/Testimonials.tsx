@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
@@ -15,64 +14,85 @@ const Testimonials = () => {
       location: 'United States',
       image: 'https://images.unsplash.com/photo-1512288094938-363287817259?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDV8fHxlbnwwfHx8fHw%3D',
       rating: 5,
-      text: 'The Everest Base Camp trek with Take Me To Nepal was absolutely incredible. Our guide was knowledgeable, the accommodations were perfect, and the views were breathtaking. This trip exceeded all my expectations!'
+      text: 'The Everest Base Camp trek with Take Me To Nepal was absolutely incredible. Our guide was knowledgeable, the accommodations were perfect, and the views were breathtaking. This trip exceeded all my expectations!',
+      imageCards: [
+        {
+          image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1000&auto=format&fit=crop',
+          alt: 'Everest Base Camp Trek'
+        },
+        {
+          image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1169&auto=format&fit=crop',
+          alt: 'Mountain Views'
+        }
+      ]
     },
     {
       name: 'Marcus Weber',
       location: 'Germany',
       image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
       rating: 5,
-      text: 'What an amazing cultural experience! The temple tours and traditional cooking classes gave us deep insights into Nepalese culture. The team was professional and made everything seamless.'
+      text: 'What an amazing cultural experience! The temple tours and traditional cooking classes gave us deep insights into Nepalese culture. The team was professional and made everything seamless.',
+      imageCards: [
+        {
+          image: 'https://images.unsplash.com/photo-1728145993747-e7b51192076d?q=80&w=1169&auto=format&fit=crop',
+          alt: 'Temple Tours'
+        },
+        {
+          image: 'https://images.unsplash.com/photo-1609660062508-1ac4a930232d?q=80&w=1074&auto=format&fit=crop',
+          alt: 'Cultural Experience'
+        }
+      ]
     },
     {
       name: 'Emma Thompson',
       location: 'United Kingdom',
       image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
       rating: 5,
-      text: 'The Annapurna circuit was the adventure of a lifetime. Every day brought new stunning landscapes and wonderful people. Take Me To Nepal made sure every detail was perfect.'
+      text: 'The Annapurna circuit was the adventure of a lifetime. Every day brought new stunning landscapes and wonderful people. Take Me To Nepal made sure every detail was perfect.',
+      imageCards: [
+        {
+          image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1000&auto=format&fit=crop',
+          alt: 'Annapurna Circuit'
+        },
+        {
+          image: 'https://images.unsplash.com/photo-1495554698253-681539e9ea84?q=80&w=1170&auto=format&fit=crop',
+          alt: 'Mountain Landscapes'
+        }
+      ]
     },
     {
       name: 'James Mitchell',
       location: 'Australia',
       image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
       rating: 5,
-      text: 'From the moment we landed to our departure, everything was perfectly organized. The wildlife safari in Chitwan was unforgettable, and our guide\'s passion for Nepal was infectious.'
+      text: 'From the moment we landed to our departure, everything was perfectly organized. The wildlife safari in Chitwan was unforgettable, and our guide\'s passion for Nepal was infectious.',
+      imageCards: [
+        {
+          image: 'https://images.unsplash.com/photo-1710077539513-6d0b9cf273e2?q=80&w=1074&auto=format&fit=crop',
+          alt: 'Wildlife Safari'
+        },
+        {
+          image: 'https://images.unsplash.com/photo-1566133852095-11fabe8b2735?q=80&w=1170&auto=format&fit=crop',
+          alt: 'Chitwan National Park'
+        }
+      ]
     },
     {
       name: 'Lisa Chen',
       location: 'Singapore',
       image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
       rating: 5,
-      text: 'The helicopter tour of the Himalayas was absolutely spectacular. Seeing Mount Everest up close was a dream come true. The team\'s attention to safety and comfort was impressive.'
-    }
-  ];
-
-  // Image cards data for the left side
-  const imageCards = [
-    {
-      id: 1,
-      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1000&auto=format&fit=crop',
-      alt: 'Nepal Mountains'
-    },
-    {
-      id: 2,
-      image: 'https://images.unsplash.com/photo-1609660062508-1ac4a930232d?q=80&w=1074&auto=format&fit=crop',
-      alt: 'Camping Adventure'
-    },
-    {
-      id: 3,
-      image: 'https://images.unsplash.com/photo-1495554698253-681539e9ea84?q=80&w=1170&auto=format&fit=crop',
-      alt: 'Helicopter Tour'
-    },
-    {
-      id: 4,
-      image: 'https://images.unsplash.com/photo-1728145993747-e7b51192076d?q=80&w=1169&auto=format&fit=crop',
-      alt: 'Cultural Sites'
-    },
-    {
-      id: 5,
-      image: 'https://images.unsplash.com/photo-1710077539513-6d0b9cf273e2?q=80&w=1074&auto=format&fit=crop',
-      alt: 'Wildlife Safari'
+      text: 'The helicopter tour of the Himalayas was absolutely spectacular. Seeing Mount Everest up close was a dream come true. The team\'s attention to safety and comfort was impressive.',
+      imageCards: [
+        {
+          image: 'https://images.unsplash.com/photo-1495554698253-681539e9ea84?q=80&w=1170&auto=format&fit=crop',
+          alt: 'Helicopter Tour'
+        },
+        {
+          image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1000&auto=format&fit=crop',
+          alt: 'Mount Everest View'
+        }
+      ]
     }
   ];
 
@@ -154,32 +174,36 @@ const Testimonials = () => {
 
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            {/* Left Side - Image Cards */}
+            {/* Left Side - Two Stacked Image Cards */}
             <div className="flex justify-center">
               <div className="relative">
-                {/* Main polaroid-style image cards stack */}
+                {/* Two polaroid-style image cards stack */}
                 <div className="relative w-80 h-96">
-                  {imageCards.slice(0, 3).map((card, index) => (
-                    <motion.div
-                      key={card.id}
-                      className={`absolute bg-white p-3 shadow-lg ${
-                        index === 0 ? 'rotate-12 top-0 left-0 z-30' :
-                        index === 1 ? '-rotate-6 top-8 left-8 z-20' :
-                        'rotate-3 top-16 left-4 z-10'
-                      }`}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: index * 0.2 }}
-                      whileHover={{ scale: 1.05, zIndex: 40 }}
-                    >
-                      <img
-                        src={card.image}
-                        alt={card.alt}
-                        className="w-64 h-48 object-cover"
-                      />
-                      <div className="h-12 bg-white"></div>
-                    </motion.div>
-                  ))}
+                  <AnimatePresence mode="wait">
+                    {testimonials[currentIndex].imageCards.map((card, index) => (
+                      <motion.div
+                        key={`${currentIndex}-${index}`}
+                        className={`absolute bg-white p-3 shadow-lg ${
+                          index === 0 ? 'rotate-12 top-0 left-0 z-30' : '-rotate-6 top-8 left-8 z-20'
+                        }`}
+                        initial={{ opacity: 0, scale: 0.8, rotate: index === 0 ? 12 : -6 }}
+                        animate={{ opacity: 1, scale: 1, rotate: index === 0 ? 12 : -6 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        transition={{ 
+                          duration: 0.5,
+                          delay: index * 0.1
+                        }}
+                        whileHover={{ scale: 1.05, zIndex: 40 }}
+                      >
+                        <img
+                          src={card.image}
+                          alt={card.alt}
+                          className="w-64 h-48 object-cover"
+                        />
+                        <div className="h-12 bg-white"></div>
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
                 </div>
               </div>
             </div>
