@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
@@ -143,7 +142,7 @@ const WhyChooseUs = () => {
                   whileHover={{ scale: 1.03 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="relative w-80 h-96 rounded-full overflow-hidden shadow-2xl">
+                  <div className="relative w-80 h-[500px] rounded-full overflow-hidden shadow-2xl border-4 border-white">
                     <img
                       src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1000&auto=format&fit=crop"
                       alt="Nepal Adventure"
@@ -192,7 +191,7 @@ const WhyChooseUs = () => {
               className="center-image flex justify-center mb-8"
               whileHover={{ scale: 1.02 }}
             >
-              <div className="relative w-72 h-80 rounded-full overflow-hidden shadow-xl">
+              <div className="relative w-72 h-[400px] rounded-full overflow-hidden shadow-xl border-4 border-white">
                 <img
                   src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1000&auto=format&fit=crop"
                   alt="Nepal Adventure"
