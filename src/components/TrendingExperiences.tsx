@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
-import { Star, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Star, ArrowLeft, ArrowRight, MapPin, Clock, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const TrendingExperiences = () => {
@@ -30,7 +30,7 @@ const TrendingExperiences = () => {
   }, {
     id: 3,
     title: 'Cultural Heritage Tour',
-    image: 'https://images.unsplash.com/photo-1728145993747-e7b51192076d?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: 'https://images.unsplash.com/photo-1728145993747-e7b51192076d?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx4fA%3D%3D',
     description: 'Explore ancient temples and traditions',
     rating: 4.7,
     reviews: 156,
@@ -48,7 +48,7 @@ const TrendingExperiences = () => {
   }, {
     id: 5,
     title: 'Wildlife Safari',
-    image: 'https://images.unsplash.com/photo-1710077539513-6d0b9cf273e2?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: 'https://images.unsplash.com/photo-1710077539513-6d0b9cf273e2?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx4fA%3D%3D',
     description: 'Chitwan National Park expedition',
     rating: 4.5,
     reviews: 128,
@@ -57,7 +57,7 @@ const TrendingExperiences = () => {
   }, {
     id: 6,
     title: 'Langtang Valley Trek',
-    image: 'https://images.unsplash.com/photo-1701012563262-5c0cfb7d1f1d?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: 'https://images.unsplash.com/photo-1701012563262-5c0cfb7d1f1d?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D',
     description: 'Trek through pristine mountain valleys',
     rating: 4.8,
     reviews: 165,
@@ -66,7 +66,7 @@ const TrendingExperiences = () => {
   }, {
     id: 7,
     title: 'Meditation Retreat',
-    image: 'https://images.unsplash.com/photo-1582053403072-ca114ba69a42?q=80&w=1305&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: 'https://images.unsplash.com/photo-1582053403072-ca114ba69a42?q=80&w=1305&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D',
     description: 'Spiritual journey in monastery settings',
     rating: 4.9,
     reviews: 89,
@@ -162,9 +162,7 @@ const TrendingExperiences = () => {
         </motion.div>
 
         <div className="relative">
-          {/* Scrollable Container with Fixed Navigation */}
           <div className="relative">
-            {/* Left Navigation Button - Fixed position */}
             <button
               onClick={() => scroll('left')}
               className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-tmtn-blue text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200 -ml-6"
@@ -172,7 +170,6 @@ const TrendingExperiences = () => {
               <ArrowLeft className="w-5 h-5" />
             </button>
 
-            {/* Right Navigation Button - Fixed position */}
             <button
               onClick={() => scroll('right')}
               className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-tmtn-blue text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200 -mr-6"
@@ -180,7 +177,6 @@ const TrendingExperiences = () => {
               <ArrowRight className="w-5 h-5" />
             </button>
 
-            {/* Scrollable Content */}
             <div
               ref={scrollRef}
               className="flex space-x-6 overflow-x-auto scrollbar-hide pb-4"
@@ -190,66 +186,85 @@ const TrendingExperiences = () => {
               }}
             >
               {experiences.map((experience, index) => (
-                <motion.div
+                <Link
                   key={experience.id}
-                  initial={{ opacity: 0, x: 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5 }}
-                  whileHover={{ y: -5 }}
-                  className="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
+                  to={`/experiences/${experience.id}`}
+                  className="flex-shrink-0 w-80 block"
                 >
-                  <div className="relative overflow-hidden rounded-t-2xl">
-                    <img
-                      src={experience.image}
-                      alt={experience.title}
-                      className="w-full h-48 object-cover hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
-                      <span className="text-sm font-semibold text-tmtn-blue">
-                        {experience.duration}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="p-6">
-                    <h3 className="text-xl font-normal font-semibold text-tmtn-blue mb-2">
-                      {experience.title}
-                    </h3>
-                    
-                    <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                      {experience.description}
-                    </p>
-
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center space-x-1">
-                        <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                        <span className="text-sm font-semibold text-gray-700">
-                          {experience.rating}
-                        </span>
-                        <span className="text-sm text-gray-500">
-                          ({experience.reviews})
+                  <motion.div
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5 }}
+                    whileHover={{ y: -5 }}
+                    className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden"
+                  >
+                    <div className="relative overflow-hidden">
+                      <img
+                        src={experience.image}
+                        alt={experience.title}
+                        className="w-full h-48 object-cover hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
+                        <span className="text-sm font-semibold text-tmtn-blue">
+                          {experience.duration}
                         </span>
                       </div>
-                      
-                      <div className="text-right">
-                        <div className="text-2xl font-bold text-tmtn-red">
-                          {formatPrice(experience.basePrice)}
+                    </div>
+
+                    <div className="p-4">
+                      <div className="flex items-center text-gray-500 text-sm mb-2">
+                        <MapPin className="w-4 h-4 mr-1" />
+                        <span>Nepal</span>
+                      </div>
+
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-1">
+                        {experience.title}
+                      </h3>
+
+                      <div className="flex items-center mb-3">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`w-4 h-4 ${
+                              i < Math.floor(experience.rating)
+                                ? 'fill-yellow-400 text-yellow-400'
+                                : 'text-gray-300'
+                            }`}
+                          />
+                        ))}
+                        <span className="text-sm text-gray-600 ml-2">
+                          ({experience.reviews} Review{experience.reviews !== 1 ? 's' : ''})
+                        </span>
+                      </div>
+
+                      <div className="flex items-center text-gray-600 text-sm mb-4 space-x-4">
+                        <div className="flex items-center">
+                          <Clock className="w-4 h-4 mr-1" />
+                          <span>{experience.duration}</span>
                         </div>
-                        <div className="text-sm text-gray-500">per person</div>
+                        <div className="flex items-center">
+                          <Users className="w-4 h-4 mr-1" />
+                          <span>12 Person</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <span className="text-sm text-gray-500">From </span>
+                          <span className="text-xl font-bold text-green-600">
+                            {formatPrice(experience.basePrice)}
+                          </span>
+                          <span className="text-sm text-gray-400 line-through ml-2">
+                            {formatPrice(Math.round(experience.basePrice * 1.2))}
+                          </span>
+                        </div>
+                        <div className="w-6 h-6 border-2 border-green-600 rounded flex items-center justify-center">
+                          <div className="w-2 h-2 bg-green-600 rounded-sm"></div>
+                        </div>
                       </div>
                     </div>
-
-                    <Link to={`/experiences/${experience.id}`}>
-                      <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="w-full btn-gradient text-white py-3 rounded-full font-semibold"
-                      >
-                        Book Now
-                      </motion.button>
-                    </Link>
-                  </div>
-                </motion.div>
+                  </motion.div>
+                </Link>
               ))}
             </div>
           </div>
@@ -260,4 +275,3 @@ const TrendingExperiences = () => {
 };
 
 export default TrendingExperiences;
-
