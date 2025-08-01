@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
@@ -17,7 +18,8 @@ const TrendingExperiences = () => {
     rating: 4.9,
     reviews: 234,
     basePrice: 1299,
-    duration: '14 days'
+    duration: '14 days',
+    difficulty: 'Extreme'
   }, {
     id: 2,
     title: 'Annapurna Helicopter Tour',
@@ -26,7 +28,8 @@ const TrendingExperiences = () => {
     rating: 4.8,
     reviews: 187,
     basePrice: 899,
-    duration: '4 hours'
+    duration: '4 hours',
+    difficulty: 'Easy'
   }, {
     id: 3,
     title: 'Cultural Heritage Tour',
@@ -35,7 +38,8 @@ const TrendingExperiences = () => {
     rating: 4.7,
     reviews: 156,
     basePrice: 299,
-    duration: '3 days'
+    duration: '3 days',
+    difficulty: 'Easy'
   }, {
     id: 4,
     title: 'Pokhara Lake Adventure',
@@ -44,7 +48,8 @@ const TrendingExperiences = () => {
     rating: 4.6,
     reviews: 203,
     basePrice: 199,
-    duration: '2 days'
+    duration: '2 days',
+    difficulty: 'Moderate'
   }, {
     id: 5,
     title: 'Wildlife Safari',
@@ -53,7 +58,8 @@ const TrendingExperiences = () => {
     rating: 4.5,
     reviews: 128,
     basePrice: 399,
-    duration: '3 days'
+    duration: '3 days',
+    difficulty: 'Easy'
   }, {
     id: 6,
     title: 'Langtang Valley Trek',
@@ -62,7 +68,8 @@ const TrendingExperiences = () => {
     rating: 4.8,
     reviews: 165,
     basePrice: 799,
-    duration: '8 days'
+    duration: '8 days',
+    difficulty: 'Moderate'
   }, {
     id: 7,
     title: 'Meditation Retreat',
@@ -71,7 +78,8 @@ const TrendingExperiences = () => {
     rating: 4.9,
     reviews: 89,
     basePrice: 499,
-    duration: '5 days'
+    duration: '5 days',
+    difficulty: 'Easy'
   }, {
     id: 8,
     title: 'Mountain Biking Adventure',
@@ -80,7 +88,8 @@ const TrendingExperiences = () => {
     rating: 4.4,
     reviews: 142,
     basePrice: 349,
-    duration: '4 days'
+    duration: '4 days',
+    difficulty: 'Moderate'
   }, {
     id: 9,
     title: 'Photography Workshop',
@@ -89,16 +98,18 @@ const TrendingExperiences = () => {
     rating: 4.7,
     reviews: 76,
     basePrice: 599,
-    duration: '6 days'
+    duration: '6 days',
+    difficulty: 'Easy'
   }, {
     id: 10,
     title: 'Cooking Experience',
-    image: 'https://plus.unsplash.com/premium_photo-1724260602450-a4e66a03ae06?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: 'https://plus.unsplash.com/premium_photo-1724260602450-a4e66a03ae06?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx4fA%3D%3D',
     description: 'Learn traditional Nepali cuisine',
     rating: 4.6,
     reviews: 95,
     basePrice: 99,
-    duration: '1 day'
+    duration: '1 day',
+    difficulty: 'Easy'
   }];
 
   useEffect(() => {
@@ -132,6 +143,19 @@ const TrendingExperiences = () => {
       AUD: 'A$'
     };
     return `${symbols[currency as keyof typeof symbols]}${convertedPrice}`;
+  };
+
+  const getDifficultyColor = (difficulty: string) => {
+    switch (difficulty) {
+      case 'Easy':
+        return 'bg-green-500/90';
+      case 'Moderate':
+        return 'bg-yellow-500/90';
+      case 'Extreme':
+        return 'bg-red-500/90';
+      default:
+        return 'bg-gray-500/90';
+    }
   };
 
   const scroll = (direction: 'left' | 'right') => {
@@ -204,9 +228,9 @@ const TrendingExperiences = () => {
                         alt={experience.title}
                         className="w-full h-48 object-cover hover:scale-110 transition-transform duration-500"
                       />
-                      <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
-                        <span className="text-sm font-semibold text-tmtn-blue">
-                          {experience.duration}
+                      <div className={`absolute top-4 right-4 ${getDifficultyColor(experience.difficulty)} backdrop-blur-sm rounded-full px-3 py-1`}>
+                        <span className="text-sm font-semibold text-white">
+                          {experience.difficulty}
                         </span>
                       </div>
                     </div>
