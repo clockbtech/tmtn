@@ -249,12 +249,12 @@ const RecommendedExperiences: React.FC<RecommendedExperiencesProps> = ({ current
 
   return (
     <div className="h-full overflow-y-auto">
-      <div className="mb-6">
+      <div className="mb-8">
         <h3 className="text-2xl font-bold text-white mb-2">Recommended Experiences</h3>
         <p className="text-gray-300">Discover more adventures in Nepal</p>
       </div>
       
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-6">
         {experiences.map((experience, index) => (
           <Link
             key={experience.id}
@@ -265,33 +265,33 @@ const RecommendedExperiences: React.FC<RecommendedExperiencesProps> = ({ current
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.02, y: -5 }}
               className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden"
             >
-              <div className="relative overflow-hidden h-24">
+              <div className="relative overflow-hidden h-32">
                 <img
                   src={experience.image}
                   alt={experience.title}
                   className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
                 />
-                <div className={`absolute top-1 right-1 ${getDifficultyColor(experience.difficulty)} backdrop-blur-sm rounded-full px-2 py-0.5`}>
+                <div className={`absolute top-2 right-2 ${getDifficultyColor(experience.difficulty)} backdrop-blur-sm rounded-full px-3 py-1`}>
                   <span className="text-xs font-semibold text-white">
                     {experience.difficulty}
                   </span>
                 </div>
               </div>
 
-              <div className="p-3">
-                <div className="flex items-center text-gray-500 text-xs mb-1">
+              <div className="p-4">
+                <div className="flex items-center text-gray-500 text-xs mb-2">
                   <MapPin className="w-3 h-3 mr-1" />
                   <span>Nepal</span>
                 </div>
 
-                <h4 className="text-sm font-semibold text-gray-900 mb-2 line-clamp-2 leading-tight">
+                <h4 className="text-base font-semibold text-gray-900 mb-2 line-clamp-2 leading-tight">
                   {experience.title}
                 </h4>
 
-                <div className="flex items-center mb-2">
+                <div className="flex items-center mb-3">
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
@@ -307,7 +307,7 @@ const RecommendedExperiences: React.FC<RecommendedExperiencesProps> = ({ current
                   </span>
                 </div>
 
-                <div className="flex items-center text-gray-600 text-xs mb-3 space-x-2">
+                <div className="flex items-center text-gray-600 text-xs mb-4 space-x-3">
                   <div className="flex items-center">
                     <Clock className="w-3 h-3 mr-1" />
                     <span>{experience.duration}</span>
@@ -321,12 +321,15 @@ const RecommendedExperiences: React.FC<RecommendedExperiencesProps> = ({ current
                 <div className="flex items-center justify-between">
                   <div>
                     <span className="text-xs text-gray-500">From </span>
-                    <span className="text-sm font-bold text-green-600">
+                    <span className="text-base font-bold text-green-600">
                       {formatPrice(experience.basePrice)}
                     </span>
+                    <span className="text-xs text-gray-400 line-through ml-2">
+                      {formatPrice(Math.round(experience.basePrice * 1.2))}
+                    </span>
                   </div>
-                  <div className="w-4 h-4 border-2 border-green-600 rounded flex items-center justify-center">
-                    <div className="w-1.5 h-1.5 bg-green-600 rounded-sm"></div>
+                  <div className="w-5 h-5 border-2 border-green-600 rounded flex items-center justify-center">
+                    <div className="w-2 h-2 bg-green-600 rounded-sm"></div>
                   </div>
                 </div>
               </div>

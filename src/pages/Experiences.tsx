@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useMemo } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -6,18 +7,16 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useTranslation } from '../contexts/TranslationContext';
 import { motion } from 'framer-motion';
-import { Users, Calendar, MapPin, Search } from 'lucide-react';
+import { Users, Calendar, MapPin, Search, Star, Clock } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Badge } from '../components/ui/badge';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '../components/ui/pagination';
 gsap.registerPlugin(ScrollTrigger);
+
 const Experiences = () => {
-  const {
-    t,
-    formatPrice
-  } = useTranslation();
+  const { t, formatPrice } = useTranslation();
 
   // State for filtering and search
   const [searchTerm, setSearchTerm] = useState('');
@@ -27,6 +26,7 @@ const Experiences = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
   const itemsPerPage = 6;
+
   useEffect(() => {
     ScrollTrigger.refresh();
 
@@ -38,6 +38,7 @@ const Experiences = () => {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
   const experiences = [{
     id: 1,
     name: 'Everest Base Camp Trek',
@@ -47,7 +48,9 @@ const Experiences = () => {
     groupSize: '8-12 people',
     difficulty: 'Extreme',
     price: 1299,
-    location: 'Khumbu Region'
+    location: 'Khumbu Region',
+    rating: 4.9,
+    reviews: 234
   }, {
     id: 2,
     name: 'Annapurna Circuit Trek',
@@ -57,7 +60,9 @@ const Experiences = () => {
     groupSize: '6-10 people',
     difficulty: 'Moderate',
     price: 899,
-    location: 'Annapurna Region'
+    location: 'Annapurna Region',
+    rating: 4.8,
+    reviews: 187
   }, {
     id: 3,
     name: 'Chitwan Safari Experience',
@@ -67,7 +72,9 @@ const Experiences = () => {
     groupSize: '4-8 people',
     difficulty: 'Easy',
     price: 299,
-    location: 'Chitwan National Park'
+    location: 'Chitwan National Park',
+    rating: 4.7,
+    reviews: 156
   }, {
     id: 4,
     name: 'Kathmandu Cultural Tour',
@@ -77,7 +84,9 @@ const Experiences = () => {
     groupSize: '2-15 people',
     difficulty: 'Easy',
     price: 399,
-    location: 'Kathmandu Valley'
+    location: 'Kathmandu Valley',
+    rating: 4.6,
+    reviews: 203
   }, {
     id: 5,
     name: 'Pokhara Adventure Package',
@@ -87,7 +96,9 @@ const Experiences = () => {
     groupSize: '2-6 people',
     difficulty: 'Moderate',
     price: 499,
-    location: 'Pokhara'
+    location: 'Pokhara',
+    rating: 4.5,
+    reviews: 128
   }, {
     id: 6,
     name: 'Langtang Valley Trek',
@@ -97,7 +108,9 @@ const Experiences = () => {
     groupSize: '6-10 people',
     difficulty: 'Moderate',
     price: 699,
-    location: 'Langtang Region'
+    location: 'Langtang Region',
+    rating: 4.8,
+    reviews: 165
   }];
 
   // Filter and sort experiences
@@ -129,23 +142,26 @@ const Experiences = () => {
   // Pagination logic
   const totalPages = Math.ceil(filteredAndSortedExperiences.length / itemsPerPage);
   const paginatedExperiences = isMobile ? filteredAndSortedExperiences.slice(0, currentPage * itemsPerPage) : filteredAndSortedExperiences.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
   const loadMore = () => {
     if (currentPage * itemsPerPage < filteredAndSortedExperiences.length) {
       setCurrentPage(prev => prev + 1);
     }
   };
+
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case 'Easy':
-        return 'bg-green-500';
+        return 'bg-green-500/90';
       case 'Moderate':
-        return 'bg-yellow-500';
+        return 'bg-yellow-500/90';
       case 'Extreme':
-        return 'bg-red-500';
+        return 'bg-red-500/90';
       default:
-        return 'bg-gray-500';
+        return 'bg-gray-500/90';
     }
   };
+
   const clearFilters = () => {
     setSearchTerm('');
     setSelectedDifficulty('all');
@@ -153,6 +169,7 @@ const Experiences = () => {
     setSortBy('name');
     setCurrentPage(1);
   };
+
   return <div className="min-h-screen bg-white font-poppins">
       <Header />
       
@@ -271,7 +288,7 @@ const Experiences = () => {
         </div>
       </section>
 
-      {/* Experiences Grid */}
+      {/* Experiences Grid with TrendingExperiences style */}
       <section className="pb-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {filteredAndSortedExperiences.length === 0 ? <div className="text-center py-12">
@@ -289,53 +306,71 @@ const Experiences = () => {
               duration: 0.6,
               delay: index * 0.1
             }} whileHover={{
-              y: -10
+              y: -5
             }} className="group cursor-pointer">
                     <Link to={`/experiences/${experience.id}`}>
-                      <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100">
+                      <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
                         <div className="relative overflow-hidden">
-                          <img src={experience.image} alt={experience.name} className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" />
-                          <div className={`absolute top-4 left-4 text-white px-3 py-1 rounded-full text-sm font-semibold ${getDifficultyColor(experience.difficulty)}`}>
-                            {experience.difficulty}
-                          </div>
-                          <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
-                            <span className="text-lg font-bold text-tmtn-blue">
-                              {formatPrice(experience.price)}
+                          <img src={experience.image} alt={experience.name} className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
+                          <div className={`absolute top-4 right-4 ${getDifficultyColor(experience.difficulty)} backdrop-blur-sm rounded-full px-3 py-1`}>
+                            <span className="text-sm font-semibold text-white">
+                              {experience.difficulty}
                             </span>
                           </div>
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </div>
                         
-                        <div className="p-6">
-                          <h3 className="text-xl font-normal font-semibold text-tmtn-blue mb-2">
+                        <div className="p-4">
+                          <div className="flex items-center text-gray-500 text-sm mb-2">
+                            <MapPin className="w-4 h-4 mr-1" />
+                            <span>Nepal</span>
+                          </div>
+
+                          <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-1">
                             {experience.name}
                           </h3>
-                          <p className="text-gray-600 mb-4">
-                            {experience.description}
-                          </p>
-                          
-                          <div className="space-y-2 mb-4">
-                            <div className="flex items-center text-sm text-gray-500">
-                              <Calendar className="w-4 h-4 mr-2" />
+
+                          <div className="flex items-center mb-3">
+                            {[...Array(5)].map((_, i) => (
+                              <Star
+                                key={i}
+                                className={`w-4 h-4 ${
+                                  i < Math.floor(experience.rating)
+                                    ? 'fill-yellow-400 text-yellow-400'
+                                    : 'text-gray-300'
+                                }`}
+                              />
+                            ))}
+                            <span className="text-sm text-gray-600 ml-2">
+                              ({experience.reviews} Review{experience.reviews !== 1 ? 's' : ''})
+                            </span>
+                          </div>
+
+                          <div className="flex items-center text-gray-600 text-sm mb-4 space-x-4">
+                            <div className="flex items-center">
+                              <Clock className="w-4 h-4 mr-1" />
                               <span>{experience.duration}</span>
                             </div>
-                            <div className="flex items-center text-sm text-gray-500">
-                              <Users className="w-4 h-4 mr-2" />
-                              <span>{experience.groupSize}</span>
-                            </div>
-                            <div className="flex items-center text-sm text-gray-500">
-                              <MapPin className="w-4 h-4 mr-2" />
-                              <span>{experience.location}</span>
+                            <div className="flex items-center">
+                              <Users className="w-4 h-4 mr-1" />
+                              <span>12 Person</span>
                             </div>
                           </div>
-                          
-                          <motion.button whileHover={{
-                      scale: 1.05
-                    }} whileTap={{
-                      scale: 0.95
-                    }} className="w-full btn-gradient text-white py-3 rounded-lg font-semibold">
-                            View Details
-                          </motion.button>
+
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <span className="text-sm text-gray-500">From </span>
+                              <span className="text-xl font-bold text-green-600">
+                                {formatPrice(experience.price)}
+                              </span>
+                              <span className="text-sm text-gray-400 line-through ml-2">
+                                {formatPrice(Math.round(experience.price * 1.2))}
+                              </span>
+                            </div>
+                            <div className="w-6 h-6 border-2 border-green-600 rounded flex items-center justify-center">
+                              <div className="w-2 h-2 bg-green-600 rounded-sm"></div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </Link>
