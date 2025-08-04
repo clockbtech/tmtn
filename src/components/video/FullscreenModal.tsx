@@ -67,12 +67,12 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="w-full h-full flex items-center justify-center p-4"
+      className="w-full h-full flex items-center justify-center p-6"
     >
       {/* Close button */}
       <motion.button
         onClick={onClose}
-        className="absolute top-4 right-4 z-60 text-white hover:text-gray-300 transition-colors"
+        className="absolute top-6 right-6 z-60 text-white hover:text-gray-300 transition-colors"
         aria-label="Close video"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
@@ -85,7 +85,7 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
       {currentIndex > 0 && (
         <motion.button
           onClick={() => onNavigate('prev')}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 z-60 text-white hover:text-gray-300 transition-colors"
+          className="absolute left-6 top-1/2 transform -translate-y-1/2 z-60 text-white hover:text-gray-300 transition-colors"
           aria-label="Previous video"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -98,7 +98,7 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
       {currentIndex < totalVideos - 1 && (
         <motion.button
           onClick={() => onNavigate('next')}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 z-60 text-white hover:text-gray-300 transition-colors"
+          className="absolute right-6 top-1/2 transform -translate-y-1/2 z-60 text-white hover:text-gray-300 transition-colors"
           aria-label="Next video"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -110,19 +110,19 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
 
       {/* Main content container */}
       <motion.div
-        className="flex w-full h-full max-w-7xl mx-auto gap-6"
+        className="flex w-full h-full max-w-7xl mx-auto gap-8"
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.3, ease: 'easeOut' }}
       >
-        {/* Video section - Left side */}
-        <div className="flex-1 flex items-center justify-center">
-          <div className="relative w-full max-w-md mx-auto" style={{ aspectRatio: '9/16' }}>
+        {/* Video section - Left side (60% width) */}
+        <div className="flex-1 flex items-center justify-center max-w-2xl">
+          <div className="relative w-full max-w-lg mx-auto" style={{ aspectRatio: '9/16' }}>
             {!hasError ? (
               <video
                 ref={videoRef}
                 key={video.id}
-                className="w-full h-full object-cover rounded-lg"
+                className="w-full h-full object-cover rounded-xl shadow-2xl"
                 muted
                 loop
                 playsInline
@@ -146,7 +146,7 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
               <img
                 src={video.thumbnail}
                 alt={video.title}
-                className="w-full h-full object-cover rounded-lg"
+                className="w-full h-full object-cover rounded-xl shadow-2xl"
                 onError={(e) => {
                   console.error(`Fullscreen thumbnail failed to load for video ${video.id}`);
                   e.currentTarget.src = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=800&fit=crop';
@@ -156,13 +156,13 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
 
             {/* Loading state */}
             {!isLoaded && !hasError && (
-              <div className="absolute inset-0 bg-gray-900 flex items-center justify-center rounded-lg">
+              <div className="absolute inset-0 bg-gray-900 flex items-center justify-center rounded-xl">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-white"></div>
               </div>
             )}
 
             {/* Title overlay */}
-            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent rounded-b-lg">
+            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent rounded-b-xl">
               <h3 className="text-white text-xl font-bold drop-shadow-lg">
                 {video.title}
               </h3>
@@ -170,8 +170,8 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
           </div>
         </div>
 
-        {/* Recommended experiences section - Right side */}
-        <div className="w-80 flex-shrink-0">
+        {/* Recommended experiences section - Right side (40% width) */}
+        <div className="w-96 flex-shrink-0">
           <RecommendedExperiences currentVideoId={video.id} />
         </div>
       </motion.div>
