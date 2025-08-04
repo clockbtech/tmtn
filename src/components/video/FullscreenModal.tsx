@@ -3,6 +3,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Video } from './types';
+import RecommendedExperiences from './RecommendedExperiences';
 
 interface FullscreenModalProps {
   video: Video | null;
@@ -66,7 +67,7 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="w-full h-full flex items-center justify-center"
+      className="w-full h-full flex items-center justify-center p-4"
     >
       {/* Close button */}
       <motion.button
@@ -107,61 +108,71 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
         </motion.button>
       )}
 
-      {/* Video container */}
+      {/* Main content container */}
       <motion.div
-        className="relative w-full h-full max-w-md mx-auto"
+        className="flex w-full h-full max-w-7xl mx-auto gap-6"
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.3, ease: 'easeOut' }}
       >
-        {!hasError ? (
-          <video
-            ref={videoRef}
-            key={video.id}
-            className="w-full h-full object-cover rounded-lg"
-            muted
-            loop
-            playsInline
-            controls={false}
-            aria-label={`Video: ${video.title}`}
-            onLoadedData={handleLoadedData}
-            onError={handleError}
-            onCanPlay={() => {
-              if (videoRef.current && isLoaded) {
-                videoRef.current.play().catch(err => 
-                  console.log(`Delayed fullscreen play failed for video ${video.id}:`, err)
-                );
-              }
-            }}
-          >
-            <source src={video.url} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        ) : (
-          // Fallback to thumbnail if video fails to load
-          <img
-            src={video.thumbnail}
-            alt={video.title}
-            className="w-full h-full object-cover rounded-lg"
-            onError={(e) => {
-              console.error(`Fullscreen thumbnail failed to load for video ${video.id}`);
-              e.currentTarget.src = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=800&fit=crop';
-            }}
-          />
-        )}
+        {/* Video section - Left side */}
+        <div className="flex-1 flex items-center justify-center">
+          <div className="relative w-full max-w-md mx-auto" style={{ aspectRatio: '9/16' }}>
+            {!hasError ? (
+              <video
+                ref={videoRef}
+                key={video.id}
+                className="w-full h-full object-cover rounded-lg"
+                muted
+                loop
+                playsInline
+                controls={false}
+                aria-label={`Video: ${video.title}`}
+                onLoadedData={handleLoadedData}
+                onError={handleError}
+                onCanPlay={() => {
+                  if (videoRef.current && isLoaded) {
+                    videoRef.current.play().catch(err => 
+                      console.log(`Delayed fullscreen play failed for video ${video.id}:`, err)
+                    );
+                  }
+                }}
+              >
+                <source src={video.url} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            ) : (
+              // Fallback to thumbnail if video fails to load
+              <img
+                src={video.thumbnail}
+                alt={video.title}
+                className="w-full h-full object-cover rounded-lg"
+                onError={(e) => {
+                  console.error(`Fullscreen thumbnail failed to load for video ${video.id}`);
+                  e.currentTarget.src = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=800&fit=crop';
+                }}
+              />
+            )}
 
-        {/* Loading state */}
-        {!isLoaded && !hasError && (
-          <div className="absolute inset-0 bg-gray-900 flex items-center justify-center rounded-lg">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-white"></div>
+            {/* Loading state */}
+            {!isLoaded && !hasError && (
+              <div className="absolute inset-0 bg-gray-900 flex items-center justify-center rounded-lg">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-white"></div>
+              </div>
+            )}
+
+            {/* Title overlay */}
+            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent rounded-b-lg">
+              <h3 className="text-white text-xl font-bold drop-shadow-lg">
+                {video.title}
+              </h3>
+            </div>
           </div>
-        )}
+        </div>
 
-        {/* Title overlay */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent rounded-b-lg">
-          <h3 className="text-white text-xl font-bold drop-shadow-lg">
-            {video.title}
-          </h3>
+        {/* Recommended experiences section - Right side */}
+        <div className="w-80 flex-shrink-0">
+          <RecommendedExperiences currentVideoId={video.id} />
         </div>
       </motion.div>
     </motion.div>
