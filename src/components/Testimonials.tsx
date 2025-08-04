@@ -125,7 +125,7 @@ const Testimonials = () => {
         backgroundImage: 'url(/lovable-uploads/bg_map.png)'
       }}>
         {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-white/90"></div>
+        <div className="absolute inset-0 bg-white/60"></div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -261,22 +261,37 @@ const Testimonials = () => {
 
                   {/* Rating and Author Info Row */}
                   <div className="flex items-center justify-between">
-                    {/* Author thumbnails */}
-                    <div className="flex items-center space-x-3">
-                      {testimonials.slice(0, 3).map((testimonial, index) => (
-                        <motion.div
+                    {/* Traveler Image Indicators */}
+                    <div className="flex items-center space-x-4">
+                      {testimonials.map((testimonial, index) => (
+                        <motion.button
                           key={index}
                           className={`relative ${
-                            index === currentIndex ? 'ring-2 ring-green-500' : ''
-                          }`}
+                            index === currentIndex 
+                              ? 'ring-4 ring-tmtn-red ring-opacity-80 shadow-lg' 
+                              : 'hover:ring-2 hover:ring-gray-300'
+                          } rounded-full transition-all duration-300`}
                           whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => setCurrentIndex(index)}
                         >
                           <img
                             src={testimonial.image}
                             alt={testimonial.name}
-                            className="w-12 h-12 rounded-full object-cover"
+                            className={`w-14 h-14 rounded-full object-cover transition-all duration-300 ${
+                              index === currentIndex 
+                                ? 'brightness-110 contrast-110' 
+                                : 'brightness-90 hover:brightness-100'
+                            }`}
                           />
-                        </motion.div>
+                          {index === currentIndex && (
+                            <motion.div
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                              className="absolute -inset-1 rounded-full bg-tmtn-red opacity-20"
+                            />
+                          )}
+                        </motion.button>
                       ))}
                     </div>
 
@@ -287,27 +302,6 @@ const Testimonials = () => {
                   </div>
                 </motion.div>
               </AnimatePresence>
-
-              {/* Navigation Dots */}
-              <div className="flex justify-center mt-12 space-x-3">
-                {testimonials.map((_, index) => (
-                  <motion.button
-                    key={index}
-                    whileHover={{
-                      scale: 1.2
-                    }}
-                    whileTap={{
-                      scale: 0.9
-                    }}
-                    onClick={() => setCurrentIndex(index)}
-                    className={`w-4 h-4 rounded-full transition-all duration-300 ${
-                      index === currentIndex 
-                        ? 'bg-tmtn-red scale-125 shadow-lg' 
-                        : 'bg-gray-300 hover:bg-gray-400'
-                    }`}
-                  />
-                ))}
-              </div>
             </div>
           </div>
         </div>
