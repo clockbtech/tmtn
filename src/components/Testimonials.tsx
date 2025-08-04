@@ -119,13 +119,17 @@ const Testimonials = () => {
   }, [currentIndex]);
 
   return (
-    <section className="py-20 overflow-hidden relative">
-      {/* Background Image Layer */}
-      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-        backgroundImage: 'url(/lovable-uploads/bg_map.png)'
-      }}>
-        {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-white/60"></div>
+    <section className="py-20 overflow-hidden relative min-h-screen">
+      {/* Background Image Layer with increased size and full visibility */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat transform scale-110" 
+        style={{
+          backgroundImage: 'url(/lovable-uploads/bg_map.png)',
+          backgroundSize: '120% 120%'
+        }}
+      >
+        {/* Reduced overlay opacity for better image visibility */}
+        <div className="absolute inset-0 bg-white/20"></div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -146,7 +150,7 @@ const Testimonials = () => {
           <h2 className="text-4xl lg:text-5xl font-bebas uppercase font-extrabold text-tmtn-blue mb-4">
             What Our Travelers Say
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto font-medium">
             Real experiences from real people who've discovered the magic of Nepal with us
           </p>
         </motion.div>
@@ -215,7 +219,7 @@ const Testimonials = () => {
             {/* Right Side - Testimonial Content */}
             <div 
               ref={carouselRef} 
-              className="relative"
+              className="relative bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-2xl"
               onMouseEnter={() => setIsHovered(true)} 
               onMouseLeave={() => setIsHovered(false)}
             >
@@ -240,13 +244,54 @@ const Testimonials = () => {
                   className="testimonial-content"
                 >
                   {/* Author Header */}
-                  <div className="mb-8">
+                  <div className="mb-6">
                     <h3 className="text-3xl font-bold text-gray-900 mb-2">
                       {testimonials[currentIndex].name}
                     </h3>
                     <p className="text-lg text-gray-600 font-medium">
                       {testimonials[currentIndex].location}
                     </p>
+                  </div>
+
+                  {/* Animated Rating Stars */}
+                  <div className="flex items-center mb-6">
+                    {[...Array(5)].map((_, starIndex) => (
+                      <motion.div
+                        key={`${currentIndex}-star-${starIndex}`}
+                        initial={{ 
+                          scale: 0,
+                          opacity: 0,
+                          rotate: -180
+                        }}
+                        animate={{ 
+                          scale: starIndex < testimonials[currentIndex].rating ? 1 : 0.3,
+                          opacity: 1,
+                          rotate: 0
+                        }}
+                        transition={{
+                          duration: 0.4,
+                          delay: starIndex * 0.1,
+                          ease: "easeOut"
+                        }}
+                      >
+                        <Star
+                          className={`w-6 h-6 ${
+                            starIndex < testimonials[currentIndex].rating
+                              ? 'text-yellow-400 fill-yellow-400'
+                              : 'text-gray-300'
+                          }`}
+                        />
+                      </motion.div>
+                    ))}
+                    <motion.span 
+                      key={`${currentIndex}-rating-text`}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.6, duration: 0.3 }}
+                      className="ml-3 text-sm text-gray-600 font-medium"
+                    >
+                      ({testimonials[currentIndex].rating}/5)
+                    </motion.span>
                   </div>
 
                   {/* Quote and Text */}
@@ -256,7 +301,12 @@ const Testimonials = () => {
                     </p>
                     
                     {/* Green accent line */}
-                    <div className="w-16 h-1 bg-green-500 mb-8"></div>
+                    <motion.div 
+                      initial={{ width: 0 }}
+                      animate={{ width: 64 }}
+                      transition={{ delay: 0.3, duration: 0.6 }}
+                      className="h-1 bg-green-500 mb-8"
+                    ></motion.div>
                   </div>
 
                   {/* Rating and Author Info Row */}
@@ -296,9 +346,15 @@ const Testimonials = () => {
                     </div>
 
                     {/* Large Quote Icon */}
-                    <div className="text-8xl text-green-500 font-bold leading-none">
+                    <motion.div 
+                      key={`${currentIndex}-quote`}
+                      initial={{ scale: 0, rotate: -90 }}
+                      animate={{ scale: 1, rotate: 0 }}
+                      transition={{ delay: 0.4, duration: 0.5 }}
+                      className="text-8xl text-green-500 font-bold leading-none opacity-30"
+                    >
                       "
-                    </div>
+                    </motion.div>
                   </div>
                 </motion.div>
               </AnimatePresence>
