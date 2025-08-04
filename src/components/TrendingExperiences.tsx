@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
-import { Star, ArrowLeft, ArrowRight, MapPin, Clock, Users } from 'lucide-react';
+import { Star, ArrowLeft, ArrowRight, MapPin, Clock, Users, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const TrendingExperiences = () => {
@@ -282,9 +282,9 @@ const TrendingExperiences = () => {
                             {formatPrice(Math.round(experience.basePrice * 1.2))}
                           </span>
                         </div>
-                        <div className="w-6 h-6 border-2 border-green-600 rounded flex items-center justify-center">
-                          <div className="w-2 h-2 bg-green-600 rounded-sm"></div>
-                        </div>
+                        <button className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-colors duration-200">
+                          <Heart className="w-4 h-4" />
+                        </button>
                       </div>
                     </div>
                   </motion.div>
