@@ -288,7 +288,7 @@ const Footer = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Enter Email Address"
-                        className="w-full px-4 py-3 pr-12 rounded-full bg-white text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-tmtn-red/50 transition-all duration-200 text-sm"
+                        className="w-full px-4 py-3 pr-12 rounded-full bg-white text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-tmtn-red/50 transition-all duration-200 text-xs"
                         required
                       />
                       <motion.button
@@ -296,7 +296,7 @@ const Footer = () => {
                         disabled={isLoading || !agreedToTerms}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="absolute right-1 top-1 bottom-1 bg-tmtn-red hover:bg-red-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-full px-4 flex items-center justify-center transition-colors duration-200"
+                        className="absolute right-1 top-1 bottom-1 bg-tmtn-red hover:bg-red-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-full px-3 flex items-center justify-center transition-colors duration-200"
                       >
                         {isLoading ? (
                           <motion.div
@@ -306,10 +306,10 @@ const Footer = () => {
                               repeat: Infinity,
                               ease: "linear"
                             }}
-                            className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"
+                            className="w-3 h-3 border-2 border-white border-t-transparent rounded-full"
                           />
                         ) : (
-                          <Send className="w-4 h-4" />
+                          <Send className="w-3 h-3" />
                         )}
                       </motion.button>
                     </div>

@@ -1,7 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Star, MapPin, Clock, Users } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 interface Experience {
   id: number;
@@ -20,7 +18,7 @@ interface RecommendedExperiencesProps {
   currentVideoId: string;
 }
 
-const RecommendedExperiences: React.FC<RecommendedExperiencesProps> = ({ currentVideoId }) => {
+const RecommendedExperiences: React.FC<RecommendedExperiencesProps> = ({ currentVideoId = '4' }) => {
   // All experiences data organized by category
   const allExperiences: Experience[] = [
     // Mountain/Trekking experiences
@@ -76,7 +74,7 @@ const RecommendedExperiences: React.FC<RecommendedExperiencesProps> = ({ current
     {
       id: 5,
       title: 'Cultural Heritage Tour',
-      image: 'https://images.unsplash.com/photo-1728145993747-e7b51192076d?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx4fA%3D%3D',
+      image: 'https://images.unsplash.com/photo-1728145993747-e7b51192076d?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHX8fGVufDB8fHx4fA%3D%3D',
       description: 'Explore ancient temples and traditions',
       rating: 4.7,
       reviews: 156,
@@ -248,93 +246,84 @@ const RecommendedExperiences: React.FC<RecommendedExperiencesProps> = ({ current
   };
 
   return (
-    <div className="h-full overflow-y-auto">
-      <div className="mb-8">
+    <div className="h-full overflow-y-auto w-full max-w-[500px]">
+      <div className="mb-6">
         <h3 className="text-2xl font-bold text-white mb-2">Recommended Experiences</h3>
         <p className="text-gray-300">Discover more adventures in Nepal</p>
       </div>
       
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-2 gap-4">
         {experiences.map((experience, index) => (
-          <Link
+          <div
             key={experience.id}
-            to={`/experiences/${experience.id}`}
-            className="block"
+            className="bg-white rounded-xl  shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden transform hover:scale-102 hover:-translate-y-1 w-full"
           >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-              whileHover={{ scale: 1.02, y: -5 }}
-              className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden"
-            >
-              <div className="relative overflow-hidden h-32">
-                <img
-                  src={experience.image}
-                  alt={experience.title}
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-                />
-                <div className={`absolute top-2 right-2 ${getDifficultyColor(experience.difficulty)} backdrop-blur-sm rounded-full px-3 py-1`}>
-                  <span className="text-xs font-semibold text-white">
-                    {experience.difficulty}
-                  </span>
+            <div className="relative overflow-hidden h-32">
+              <img
+                src={experience.image}
+                alt={experience.title}
+                className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+              />
+              <div className={`absolute top-2 right-2 ${getDifficultyColor(experience.difficulty)} backdrop-blur-sm rounded-full px-2 py-1`}>
+                <span className="text-xs font-semibold text-white">
+                  {experience.difficulty}
+                </span>
+              </div>
+            </div>
+
+            <div className="p-4">
+              <div className="flex items-center text-gray-500 text-xs mb-2">
+                <MapPin className="w-3 h-3 mr-1" />
+                <span>Nepal</span>
+              </div>
+
+              <h4 className="text-sm font-semibold text-gray-900 mb-2 line-clamp-2 leading-tight">
+                {experience.title}
+              </h4>
+
+              <div className="flex items-center mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className={`w-3 h-3 ${
+                      i < Math.floor(experience.rating)
+                        ? 'fill-yellow-400 text-yellow-400'
+                        : 'text-gray-300'
+                    }`}
+                  />
+                ))}
+                <span className="text-xs text-gray-600 ml-1">
+                  ({experience.reviews})
+                </span>
+              </div>
+
+              <div className="flex items-center text-gray-600 text-xs mb-4 space-x-3">
+                <div className="flex items-center">
+                  <Clock className="w-3 h-3 mr-1" />
+                  <span>{experience.duration}</span>
+                </div>
+                <div className="flex items-center">
+                  <Users className="w-3 h-3 mr-1" />
+                  <span>12 Max</span>
                 </div>
               </div>
 
-              <div className="p-4">
-                <div className="flex items-center text-gray-500 text-xs mb-2">
-                  <MapPin className="w-3 h-3 mr-1" />
-                  <span>Nepal</span>
-                </div>
-
-                <h4 className="text-base font-semibold text-gray-900 mb-2 line-clamp-2 leading-tight">
-                  {experience.title}
-                </h4>
-
-                <div className="flex items-center mb-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-3 h-3 ${
-                        i < Math.floor(experience.rating)
-                          ? 'fill-yellow-400 text-yellow-400'
-                          : 'text-gray-300'
-                      }`}
-                    />
-                  ))}
-                  <span className="text-xs text-gray-600 ml-1">
-                    ({experience.reviews})
+              <div className="flex items-center justify-between">
+                <div>
+                  <span className="text-xs text-gray-500">From </span>
+                  <span className="text-base font-bold text-green-600">
+                    {formatPrice(experience.basePrice)}
+                  </span>
+                  <span className="text-xs text-gray-400 line-through ml-1">
+                    {formatPrice(Math.round(experience.basePrice * 1.2))}
                   </span>
                 </div>
-
-                <div className="flex items-center text-gray-600 text-xs mb-4 space-x-3">
-                  <div className="flex items-center">
-                    <Clock className="w-3 h-3 mr-1" />
-                    <span>{experience.duration}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <Users className="w-3 h-3 mr-1" />
-                    <span>12 Max</span>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div>
-                    <span className="text-xs text-gray-500">From </span>
-                    <span className="text-base font-bold text-green-600">
-                      {formatPrice(experience.basePrice)}
-                    </span>
-                    <span className="text-xs text-gray-400 line-through ml-2">
-                      {formatPrice(Math.round(experience.basePrice * 1.2))}
-                    </span>
-                  </div>
-                  <div className="w-5 h-5 border-2 border-green-600 rounded flex items-center justify-center">
-                    <div className="w-2 h-2 bg-green-600 rounded-sm"></div>
-                  </div>
+                <div className="w-5 h-5 border-2 border-green-600 rounded flex items-center justify-center">
+                  <div className="w-2 h-2 bg-green-600 rounded-sm"></div>
                 </div>
               </div>
-            </motion.div>
-          </Link>
+            </div>
+          </div>
         ))}
       </div>
     </div>

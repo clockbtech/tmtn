@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
@@ -158,7 +157,7 @@ const Testimonials = () => {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Left Side - Polaroid Images */}
-            <div className="flex justify-center lg:justify-start">
+            <div className="flex justify-center lg:justify-start w-[40%]">
               <div className="relative w-96 h-96">
                 <AnimatePresence mode="wait">
                   {testimonials[currentIndex].imageCards.map((card, index) => (
@@ -166,8 +165,8 @@ const Testimonials = () => {
                       key={`${currentIndex}-${index}`}
                       className={`absolute bg-white shadow-xl ${
                         index === 0 
-                          ? 'rotate-12 top-0 left-4 z-20 w-72 h-80' 
-                          : '-rotate-6 top-12 left-0 z-10 w-72 h-80'
+                          ? 'rotate-12 top-0 left-4 z-20 w-80 h-96' 
+                          : '-rotate-6 top-12 left-0 z-10 w-80 h-96'
                       }`}
                       initial={{ 
                         opacity: 0, 
@@ -202,7 +201,7 @@ const Testimonials = () => {
                         <img
                           src={card.image}
                           alt={card.alt}
-                          className="w-full h-52 object-cover rounded-sm"
+                          className="w-full h-72 object-cover rounded-sm"
                         />
                         <div className="h-16 bg-white flex items-center justify-center">
                           <p className="text-sm text-gray-600 font-medium text-center">
@@ -216,10 +215,10 @@ const Testimonials = () => {
               </div>
             </div>
 
-            {/* Right Side - Testimonial Content - Background removed */}
+            {/* Right Side - Testimonial Content - Now full width */}
             <div 
               ref={carouselRef} 
-              className="relative p-8"
+              className="relative p-8 w-full"  // Changed from w-[60%] to w-full
               onMouseEnter={() => setIsHovered(true)} 
               onMouseLeave={() => setIsHovered(false)}
             >
@@ -241,7 +240,7 @@ const Testimonials = () => {
                   transition={{
                     duration: 0.5
                   }}
-                  className="testimonial-content"
+                  className="testimonial-content w-full"
                 >
                   {/* Author Header */}
                   <div className="mb-6">

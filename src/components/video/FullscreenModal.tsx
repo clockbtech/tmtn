@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -116,7 +115,7 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
         transition={{ duration: 0.3, ease: 'easeOut' }}
       >
         {/* Video section - Left side (60% width) */}
-        <div className="flex-1 flex items-center justify-center max-w-2xl">
+        <div className="flex-1 flex items-center justify-center w-[50%]">
           <div className="relative w-full max-w-lg mx-auto" style={{ aspectRatio: '9/16' }}>
             {!hasError ? (
               <video
@@ -170,8 +169,8 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
           </div>
         </div>
 
-        {/* Recommended experiences section - Right side (40% width) */}
-        <div className="w-96 flex-shrink-0">
+        {/* Recommended experiences section - Right side (now wider) */}
+        <div className="w-[50%] flex-shrink-0">
           <RecommendedExperiences currentVideoId={video.id} />
         </div>
       </motion.div>
