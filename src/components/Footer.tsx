@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Phone, MapPin, Facebook, Instagram, ArrowUp, CreditCard, Check, Send } from 'lucide-react';
@@ -44,7 +45,6 @@ const Footer = () => {
 
   const footerLinks = {
     destinations: ['Everest Base Camp', 'Annapurna Circuit', 'Pokhara Valley', 'Kathmandu Valley', 'Chitwan National Park', 'Langtang Valley'],
-    experiences: ['Trekking Tours', 'Cultural Tours', 'Wildlife Safari', 'Helicopter Tours', 'Photography Tours', 'Spiritual Retreats'],
     company: ['About Us', 'Our Team', 'Careers', 'Travel Insurance', 'Terms & Conditions'],
     support: ['Help Center', 'Safety Guidelines', 'Packing Lists', 'Travel Tips', 'FAQs', 'Customer Reviews']
   };
@@ -91,7 +91,7 @@ const Footer = () => {
         {/* Main Footer Content */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
           {/* Main Footer Content */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
             {/* Company Info */}
             <div className="lg:col-span-2">
               <motion.div initial={{
@@ -168,31 +168,6 @@ const Footer = () => {
               </ul>
             </motion.div>
 
-            {/* Footer Links - Experiences */}
-            <motion.div initial={{
-            opacity: 0,
-            y: 20
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.6,
-            delay: 0.2
-          }}>
-              <h4 className="text-lg font-bebas uppercase font-semibold text-white mb-4">
-                Experiences
-              </h4>
-              <ul className="space-y-2">
-                {footerLinks.experiences.map((link, index) => <li key={index}>
-                    <motion.a href="#" whileHover={{
-                  x: 5
-                }} className="text-gray-300 hover:text-tmtn-red transition-colors duration-200 text-sm">
-                      {link}
-                    </motion.a>
-                  </li>)}
-              </ul>
-            </motion.div>
-
             {/* Footer Links - Company */}
             <motion.div initial={{
             opacity: 0,
@@ -202,7 +177,7 @@ const Footer = () => {
             y: 0
           }} transition={{
             duration: 0.6,
-            delay: 0.3
+            delay: 0.2
           }}>
               <h4 className="text-lg font-bebas uppercase font-semibold text-white mb-4">
                 Company
@@ -252,7 +227,7 @@ const Footer = () => {
             y: 0
           }} transition={{
             duration: 0.6,
-            delay: 0.4
+            delay: 0.3
           }}>
               <h4 className="text-lg font-bebas uppercase font-semibold text-white mb-4">
                 Support
@@ -291,9 +266,8 @@ const Footer = () => {
               }} 
               transition={{
                 duration: 0.6,
-                delay: 0.5
+                delay: 0.4
               }}
-              className="lg:col-span-2"
             >
               <h4 className="text-lg font-bebas uppercase font-semibold text-white mb-4">
                 Newsletter
