@@ -88,7 +88,7 @@ const PopularDestinations = () => {
                 <img src={destination.image} alt={t(destination.nameKey)} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 
                 {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 from-20% via-transparent to-transparent group-hover:from-black/80 group-hover:via-black/40 transition-all duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#111827e6]/70 via-[#111827e6]/30 from-20% via-transparent to-transparent group-hover:from-[#111827e6]/80 group-hover:via-[#111827e6]/40 transition-all duration-300"></div>
                 
                 {/* Text overlay at bottom */}
                 <div className="absolute bottom-0 left-0 right-0 px-6 pb-6 pt-16 text-white transition-transform duration-300 transform group-hover:translate-y-[-2rem]">

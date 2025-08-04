@@ -97,7 +97,7 @@ const HeroSection = () => {
       </div>
 
       {/* Full Left-Side Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#126894]/85 via-[#126894]/60 to-transparent"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-[#111827e6]/100 via-[#111827e6]/70 to-transparent"></div>
 
       {/* Content - Left Aligned */}
       <div className="relative z-10 h-full flex items-center">
