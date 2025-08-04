@@ -92,7 +92,7 @@ const WhyChooseUs = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl lg:text-5xl font-bold mb-4">
+          <h2 className="text-4xl lg:text-5xl font-bold mb-4 uppercase">
             Why Choose Take Me To Nepal?
           </h2>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto">
