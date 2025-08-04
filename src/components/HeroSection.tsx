@@ -96,14 +96,14 @@ const HeroSection = () => {
         ))}
       </div>
 
+      {/* Full Left-Side Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#126894]/85 via-[#126894]/60 to-transparent"></div>
+
       {/* Content - Left Aligned */}
       <div className="relative z-10 h-full flex items-center">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl">
             <div className="hero-content">
-              {/* Gradient Background Behind Text */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-[#126894]/90 via-[#126894]/70 to-transparent rounded-lg blur-sm"></div>
-              
               <motion.div
                 key={currentSlide}
                 initial={{ opacity: 0, y: 50 }}
