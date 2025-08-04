@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Phone, MapPin, Facebook, Instagram, ArrowUp, CreditCard, Check } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Instagram, ArrowUp, CreditCard, Check, Send } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from '../contexts/TranslationContext';
 import BackToTopButton from './BackToTopButton';
@@ -293,6 +293,7 @@ const Footer = () => {
                 duration: 0.6,
                 delay: 0.5
               }}
+              className="lg:col-span-2"
             >
               <h4 className="text-lg font-bebas uppercase font-semibold text-white mb-4">
                 Newsletter
@@ -334,7 +335,7 @@ const Footer = () => {
                             className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"
                           />
                         ) : (
-                          <Mail className="w-4 h-4" />
+                          <Send className="w-4 h-4" />
                         )}
                       </motion.button>
                     </div>
