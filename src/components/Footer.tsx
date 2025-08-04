@@ -268,7 +268,6 @@ const Footer = () => {
                 duration: 0.6,
                 delay: 0.4
               }}
-              className="min-w-0"
             >
               <h4 className="text-lg font-bebas uppercase font-semibold text-white mb-4">
                 Newsletter
@@ -289,7 +288,7 @@ const Footer = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Enter Email Address"
-                        className="w-full min-w-[280px] px-4 py-3 pr-12 rounded-full bg-white text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-tmtn-red/50 transition-all duration-200 text-sm"
+                        className="w-full px-4 py-3 pr-12 rounded-full bg-white text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-tmtn-red/50 transition-all duration-200 text-sm"
                         required
                       />
                       <motion.button
@@ -339,7 +338,7 @@ const Footer = () => {
                     key="success"
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="bg-green-500 text-white px-4 py-3 rounded-full flex items-center justify-center space-x-2 min-w-[280px]"
+                    className="bg-green-500 text-white px-4 py-3 rounded-full flex items-center justify-center space-x-2"
                   >
                     <motion.div
                       initial={{ scale: 0 }}
