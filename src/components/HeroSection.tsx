@@ -112,7 +112,7 @@ const HeroSection = () => {
                 className="relative z-10 text-left"
               >
                 <h1 className="text-5xl md:text-6xl font-tm-sans normal-case font-bold text-white mb-6 leading-tight lg:text-7xl">
-                  TAKEMETONEPAL.COM
+                  takemetonepal.com
                 </h1>
                 <p className="text-lg md:text-xl lg:text-2xl font-roboto text-white/90 mb-12 font-light max-w-2xl">
                   Your trusted gateway to exploring<br />
