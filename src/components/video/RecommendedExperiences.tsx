@@ -76,7 +76,7 @@ const RecommendedExperiences: React.FC<RecommendedExperiencesProps> = ({ current
     {
       id: 5,
       title: 'Cultural Heritage Tour',
-      image: 'https://images.unsplash.com/photo-1728145993747-e7b51192076d?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      image: 'https://images.unsplash.com/photo-1728145993747-e7b51192076d?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx4fA%3D%3D',
       description: 'Explore ancient temples and traditions',
       rating: 4.7,
       reviews: 156,
@@ -248,13 +248,13 @@ const RecommendedExperiences: React.FC<RecommendedExperiencesProps> = ({ current
   };
 
   return (
-    <div className="h-full max-h-[90vh] overflow-y-auto">
-      <div className="mb-6 lg:mb-8">
-        <h3 className="text-xl lg:text-2xl font-bold text-white mb-2">Recommended Experiences</h3>
-        <p className="text-sm lg:text-base text-gray-300">Discover more adventures in Nepal</p>
+    <div className="h-full overflow-y-auto">
+      <div className="mb-8">
+        <h3 className="text-2xl font-bold text-white mb-2">Recommended Experiences</h3>
+        <p className="text-gray-300">Discover more adventures in Nepal</p>
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 pb-4">
+      <div className="grid grid-cols-2 gap-6">
         {experiences.map((experience, index) => (
           <Link
             key={experience.id}
@@ -266,9 +266,9 @@ const RecommendedExperiences: React.FC<RecommendedExperiencesProps> = ({ current
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
               whileHover={{ scale: 1.02, y: -5 }}
-              className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden w-full sm:w-80 lg:w-[22rem] mx-auto"
+              className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden"
             >
-              <div className="relative overflow-hidden h-36 lg:h-40">
+              <div className="relative overflow-hidden h-32">
                 <img
                   src={experience.image}
                   alt={experience.title}
@@ -281,13 +281,13 @@ const RecommendedExperiences: React.FC<RecommendedExperiencesProps> = ({ current
                 </div>
               </div>
 
-              <div className="p-4 lg:p-5">
+              <div className="p-4">
                 <div className="flex items-center text-gray-500 text-xs mb-2">
                   <MapPin className="w-3 h-3 mr-1" />
                   <span>Nepal</span>
                 </div>
 
-                <h4 className="text-base lg:text-lg font-semibold text-gray-900 mb-2 line-clamp-2 leading-tight">
+                <h4 className="text-base font-semibold text-gray-900 mb-2 line-clamp-2 leading-tight">
                   {experience.title}
                 </h4>
 
@@ -321,7 +321,7 @@ const RecommendedExperiences: React.FC<RecommendedExperiencesProps> = ({ current
                 <div className="flex items-center justify-between">
                   <div>
                     <span className="text-xs text-gray-500">From </span>
-                    <span className="text-base lg:text-lg font-bold text-green-600">
+                    <span className="text-base font-bold text-green-600">
                       {formatPrice(experience.basePrice)}
                     </span>
                     <span className="text-xs text-gray-400 line-through ml-2">
