@@ -3,7 +3,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Video } from './types';
-import RecommendedExperiences from './RecommendedExperiences';
+import RelatedExperience from './RelatedExperience';
 
 interface FullscreenModalProps {
   video: Video | null;
@@ -135,7 +135,7 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.3, ease: 'easeOut' }}
       >
-        {/* Video section - Left side (60% width) */}
+        {/* Video section - Left side (50% width) */}
         <div className="flex-1 flex items-center justify-center w-[50%]">
           <div className="relative w-full max-w-lg mx-auto" style={{ aspectRatio: '9/16' }}>
             {!hasError ? (
@@ -190,9 +190,9 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
           </div>
         </div>
 
-        {/* Recommended experiences section - Right side (now wider) */}
+        {/* Related experience section - Right side (50% width) */}
         <div className="w-[50%] flex-shrink-0">
-          <RecommendedExperiences currentVideoId={video.id} />
+          <RelatedExperience currentVideoId={video.id} />
         </div>
       </motion.div>
     </motion.div>
