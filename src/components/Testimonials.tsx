@@ -216,10 +216,10 @@ const Testimonials = () => {
               </div>
             </div>
 
-            {/* Right Side - Testimonial Content */}
+            {/* Right Side - Testimonial Content - Background removed */}
             <div 
               ref={carouselRef} 
-              className="relative bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-2xl"
+              className="relative p-8"
               onMouseEnter={() => setIsHovered(true)} 
               onMouseLeave={() => setIsHovered(false)}
             >
@@ -311,11 +311,11 @@ const Testimonials = () => {
 
                   {/* Rating and Author Info Row */}
                   <div className="flex items-center justify-between">
-                    {/* Traveler Image Indicators */}
+                    {/* Fixed Traveler Image Indicators - No AnimatePresence */}
                     <div className="flex items-center space-x-4">
                       {testimonials.map((testimonial, index) => (
                         <motion.button
-                          key={index}
+                          key={`fixed-${index}`} // Fixed key to prevent re-rendering
                           className={`relative ${
                             index === currentIndex 
                               ? 'ring-4 ring-tmtn-red ring-opacity-80 shadow-lg' 
