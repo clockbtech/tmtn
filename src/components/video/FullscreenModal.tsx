@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -22,6 +23,22 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
+
+  // Prevent background scroll when modal is open
+  useEffect(() => {
+    if (video) {
+      // Store original overflow style
+      const originalStyle = window.getComputedStyle(document.body).overflow;
+      
+      // Prevent scrolling
+      document.body.style.overflow = 'hidden';
+      
+      // Cleanup function to restore scrolling
+      return () => {
+        document.body.style.overflow = originalStyle;
+      };
+    }
+  }, [video]);
 
   useEffect(() => {
     if (video) {
@@ -67,6 +84,10 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="w-full h-full flex items-center justify-center p-6"
+      onWheel={(e) => {
+        // Prevent wheel events from propagating to background
+        e.stopPropagation();
+      }}
     >
       {/* Close button */}
       <motion.button
