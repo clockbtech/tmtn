@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from '../components/Header';
@@ -9,7 +8,6 @@ import AboutVideoSection from '../components/about/AboutVideoSection';
 import AboutCTA from '../components/about/AboutCTA';
 import TrendingExperiences from '../components/TrendingExperiences';
 import Testimonials from '../components/Testimonials';
-import Newsletter from '../components/Newsletter';
 import FullscreenModal from '../components/video/FullscreenModal';
 
 const About = () => {
@@ -72,9 +70,6 @@ const About = () => {
 
         {/* Testimonials Section */}
         <Testimonials />
-
-        {/* Newsletter Section */}
-        <Newsletter />
       </main>
       <Footer />
 

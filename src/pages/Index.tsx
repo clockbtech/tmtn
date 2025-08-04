@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -10,7 +9,6 @@ import TrendingExperiences from '../components/TrendingExperiences';
 import WhyChooseUs from '../components/WhyChooseUs';
 import Testimonials from '../components/Testimonials';
 import BlogPreview from '../components/BlogPreview';
-import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
 
 // Register GSAP plugins
@@ -52,7 +50,6 @@ const Index = () => {
         <WhyChooseUs />
         <Testimonials />
         <BlogPreview />
-        <Newsletter />
       </main>
       <Footer />
     </div>

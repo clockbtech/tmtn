@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Facebook, Instagram, ArrowUp, CreditCard } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Mail, Phone, MapPin, Facebook, Instagram, ArrowUp, CreditCard, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from '../contexts/TranslationContext';
 import BackToTopButton from './BackToTopButton';
@@ -8,6 +8,32 @@ import BackToTopButton from './BackToTopButton';
 const Footer = () => {
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
+
+  // Newsletter state
+  const [email, setEmail] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !agreedToTerms) return;
+    
+    setIsLoading(true);
+
+    // Simulate API call
+    setTimeout(() => {
+      setIsLoading(false);
+      setIsSubmitted(true);
+      setEmail('');
+      setAgreedToTerms(false);
+
+      // Reset after 3 seconds
+      setTimeout(() => {
+        setIsSubmitted(false);
+      }, 3000);
+    }, 1000);
+  };
 
   // Secondary navigation items moved from header
   const secondaryNavItems = [
@@ -65,7 +91,7 @@ const Footer = () => {
         {/* Main Footer Content */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
           {/* Main Footer Content */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-8">
             {/* Company Info */}
             <div className="lg:col-span-2">
               <motion.div initial={{
@@ -252,6 +278,105 @@ const Footer = () => {
                 ))}
               </ul>
             </motion.div>
+
+            {/* Newsletter Section */}
+            <motion.div 
+              initial={{
+                opacity: 0,
+                y: 20
+              }} 
+              whileInView={{
+                opacity: 1,
+                y: 0
+              }} 
+              transition={{
+                duration: 0.6,
+                delay: 0.5
+              }}
+            >
+              <h4 className="text-lg font-bebas uppercase font-semibold text-white mb-4">
+                Newsletter
+              </h4>
+              
+              <AnimatePresence mode="wait">
+                {!isSubmitted ? (
+                  <motion.form 
+                    key="form"
+                    initial={{ opacity: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    onSubmit={handleNewsletterSubmit}
+                    className="space-y-3"
+                  >
+                    <div className="relative">
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter Email Address"
+                        className="w-full px-4 py-3 pr-12 rounded-full bg-white text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-tmtn-red/50 transition-all duration-200 text-sm"
+                        required
+                      />
+                      <motion.button
+                        type="submit"
+                        disabled={isLoading || !agreedToTerms}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="absolute right-1 top-1 bottom-1 bg-tmtn-red hover:bg-red-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-full px-4 flex items-center justify-center transition-colors duration-200"
+                      >
+                        {isLoading ? (
+                          <motion.div
+                            animate={{ rotate: 360 }}
+                            transition={{
+                              duration: 1,
+                              repeat: Infinity,
+                              ease: "linear"
+                            }}
+                            className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"
+                          />
+                        ) : (
+                          <Mail className="w-4 h-4" />
+                        )}
+                      </motion.button>
+                    </div>
+                    
+                    <div className="flex items-start space-x-2">
+                      <motion.button
+                        type="button"
+                        onClick={() => setAgreedToTerms(!agreedToTerms)}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className={`flex-shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center transition-colors duration-200 ${
+                          agreedToTerms 
+                            ? 'bg-tmtn-red border-tmtn-red' 
+                            : 'border-gray-400 hover:border-tmtn-red'
+                        }`}
+                      >
+                        {agreedToTerms && <Check className="w-3 h-3 text-white" />}
+                      </motion.button>
+                      <span className="text-gray-300 text-xs leading-tight">
+                        I agree to all your terms and policies
+                      </span>
+                    </div>
+                  </motion.form>
+                ) : (
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="bg-green-500 text-white px-4 py-3 rounded-full flex items-center justify-center space-x-2"
+                  >
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      <Check className="w-4 h-4" />
+                    </motion.div>
+                    <span className="text-sm font-semibold">Subscribed!</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
           </div>
         </div>
 
@@ -307,4 +432,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
