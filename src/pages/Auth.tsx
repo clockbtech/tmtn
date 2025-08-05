@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
@@ -68,7 +67,7 @@ const Auth = () => {
             <img 
               src="/lovable-uploads/dbe53354-4e12-429d-96e9-f53b18d9b259.png" 
               alt="tmtn logo"
-              className="h-12 w-auto mx-auto" 
+              className="h-12 w-auto mx-auto brightness-0" 
             />
           </motion.div>
 
