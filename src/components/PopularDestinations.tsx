@@ -91,7 +91,7 @@ const PopularDestinations = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#111827e6]/70 via-[#111827e6]/30 from-20% via-transparent to-transparent group-hover:from-[#111827e6]/80 group-hover:via-[#111827e6]/40 transition-all duration-300"></div>
                 
                 {/* Text overlay at bottom */}
-                <div className="absolute bottom-0 left-0 right-0 px-6 pb-6 pt-16 text-white transition-transform duration-300 transform group-hover:translate-y-[-2rem]">
+                <div className="absolute bottom-0 left-0 right-0 px-6 pb-0 pt-16 text-white transition-transform duration-300 transform group-hover:translate-y-[-2rem]">
                   <h3 className="text-2xl font-poppins font-bold mb-2 drop-shadow-lg">
                     {t(destination.nameKey)}
                   </h3>

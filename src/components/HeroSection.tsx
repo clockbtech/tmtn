@@ -138,18 +138,27 @@ const HeroSection = () => {
       </div>
 
       {/* Slide Indicators - Centered */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
-        {heroContent.map((_, index) => (
-          <motion.button
-            key={index}
-            whileHover={{ scale: 1.2 }}
-            onClick={() => setCurrentSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              index === currentSlide ? 'bg-tmtn-red scale-125' : 'bg-white/50'
-            }`}
-          />
-        ))}
-      </div>
+   <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+  <div className="flex space-x-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full">
+    {heroContent.map((_, index) => {
+      const isActive = index === currentSlide;
+      return (
+        <motion.button
+          key={index}
+          whileHover={{ scale: 1.1 }}
+          onClick={() => setCurrentSlide(index)}
+          className={`
+            h-2
+            ${isActive ? 'w-6 bg-tmtn-red' : 'w-2 bg-white/50'}
+            rounded-full
+            transition-all duration-500 ease-in-out
+          `}
+        />
+      );
+    })}
+  </div>
+</div>
+
     </section>
   );
 };

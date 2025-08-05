@@ -155,7 +155,7 @@ const Testimonials = () => {
         </motion.div>
 
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="flex flex-col lg:flex-row gap-20 items-center">
             {/* Left Side - Polaroid Images */}
             <div className="flex justify-center lg:justify-start w-[40%]">
               <div className="relative w-96 h-96">
@@ -244,10 +244,10 @@ const Testimonials = () => {
                 >
                   {/* Author Header */}
                   <div className="mb-6">
-                    <h3 className="text-3xl font-bold text-gray-900 mb-2">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
                       {testimonials[currentIndex].name}
                     </h3>
-                    <p className="text-lg text-gray-600 font-medium">
+                    <p className="text-base text-gray-600 font-medium">
                       {testimonials[currentIndex].location}
                     </p>
                   </div>
@@ -295,7 +295,7 @@ const Testimonials = () => {
 
                   {/* Quote and Text */}
                   <div className="mb-8">
-                    <p className="text-xl lg:text-2xl text-gray-800 leading-relaxed font-medium mb-6">
+                    <p className="text-xl italic lg:text-xl text-gray-800 leading-relaxed font-medium mb-6">
                       {testimonials[currentIndex].text}
                     </p>
                     
