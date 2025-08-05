@@ -103,9 +103,13 @@ const Footer = () => {
             }} transition={{
               duration: 0.6
             }}>
-                <h3 className="text-4xl font-bold text-tmtn-red mb-4" style={{ fontFamily: 'Arial, sans-serif' }}>
-                  tmtn.
-                </h3>
+                <Link to="/" className="inline-block mb-4">
+                  <img 
+                    src="/lovable-uploads/dbe53354-4e12-429d-96e9-f53b18d9b259.png" 
+                    alt="tmtn logo"
+                    className="h-10 lg:h-12 w-auto" 
+                  />
+                </Link>
                 <p className="text-gray-300 mb-6 max-w-md font-normal">
                   Your trusted gateway to exploring the wonders of Nepal. We create unforgettable experiences that connect you with the heart and soul of the Himalayas.
                 </p>
