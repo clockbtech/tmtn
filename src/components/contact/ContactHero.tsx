@@ -1,3 +1,4 @@
+
 import { motion } from 'framer-motion';
 import React from 'react';
 const ContactHero = () => {
@@ -15,7 +16,7 @@ const ContactHero = () => {
       }} transition={{
         duration: 0.8
       }} className="text-center text-white">
-              <h1 className="text-5xl font-tm-sans uppercase mb-6 lg:text-6xl font-extrabold">
+              <h1 className="text-5xl font-tm-sans mb-6 lg:text-6xl font-extrabold">
                Contact Us
               </h1>
               <p className="text-xl max-w-4xl mx-auto lg:text-xl">
