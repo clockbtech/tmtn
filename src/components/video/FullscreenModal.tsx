@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -27,13 +26,8 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
   // Prevent background scroll when modal is open
   useEffect(() => {
     if (video) {
-      // Store original overflow style
       const originalStyle = window.getComputedStyle(document.body).overflow;
-      
-      // Prevent scrolling
       document.body.style.overflow = 'hidden';
-      
-      // Cleanup function to restore scrolling
       return () => {
         document.body.style.overflow = originalStyle;
       };
@@ -85,7 +79,6 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
       exit={{ opacity: 0 }}
       className="w-full h-full flex items-center justify-center p-6"
       onWheel={(e) => {
-        // Prevent wheel events from propagating to background
         e.stopPropagation();
       }}
     >
@@ -102,31 +95,43 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
       </motion.button>
 
       {/* Navigation buttons */}
-      {currentIndex > 0 && (
-        <motion.button
-          onClick={() => onNavigate('prev')}
-          className="absolute left-6 top-1/2 transform -translate-y-1/2 z-60 text-white hover:text-gray-300 transition-colors"
-          aria-label="Previous video"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 0.2 }}
-        >
-          <ChevronLeft className="w-8 h-8" />
-        </motion.button>
-      )}
+      {/* Navigation buttons */}
+{currentIndex > 0 && (
+  <motion.button
+    onClick={() => onNavigate('prev')}
+    className="
+      absolute left-6 top-1/2 transform -translate-y-1/2 z-60
+      text-white hover:text-orange-600 transition-colors
+      bg-gray-200 bg-opacity-30 backdrop-blur-md
+      rounded-full p-2 flex items-center justify-center shadow-md
+    "
+    aria-label="Previous video"
+    initial={{ scale: 0 }}
+    animate={{ scale: 1 }}
+    transition={{ delay: 0.2 }}
+  >
+    <ChevronLeft className="w-8 h-8" />
+  </motion.button>
+)}
 
-      {currentIndex < totalVideos - 1 && (
-        <motion.button
-          onClick={() => onNavigate('next')}
-          className="absolute right-6 top-1/2 transform -translate-y-1/2 z-60 text-white hover:text-gray-300 transition-colors"
-          aria-label="Next video"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 0.2 }}
-        >
-          <ChevronRight className="w-8 h-8" />
-        </motion.button>
-      )}
+{currentIndex < totalVideos - 1 && (
+  <motion.button
+    onClick={() => onNavigate('next')}
+    className="
+      absolute right-6 top-1/2 transform -translate-y-1/2 z-60
+      text-white hover:text-orange-600 transition-colors
+      bg-gray-200 bg-opacity-30 backdrop-blur-md
+      rounded-full p-2 flex items-center justify-center shadow-md
+    "
+    aria-label="Next video"
+    initial={{ scale: 0 }}
+    animate={{ scale: 1 }}
+    transition={{ delay: 0.2 }}
+  >
+    <ChevronRight className="w-8 h-8" />
+  </motion.button>
+)}
+
 
       {/* Main content container */}
       <motion.div
@@ -162,7 +167,6 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
                 Your browser does not support the video tag.
               </video>
             ) : (
-              // Fallback to thumbnail if video fails to load
               <img
                 src={video.thumbnail}
                 alt={video.title}
@@ -174,14 +178,12 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
               />
             )}
 
-            {/* Loading state */}
             {!isLoaded && !hasError && (
               <div className="absolute inset-0 bg-gray-900 flex items-center justify-center rounded-xl">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-white"></div>
               </div>
             )}
 
-            {/* Title overlay */}
             <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent rounded-b-xl">
               <h3 className="text-white text-xl font-bold drop-shadow-lg">
                 {video.title}

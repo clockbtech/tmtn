@@ -54,8 +54,8 @@ const RelatedExperience: React.FC<RelatedExperienceProps> = ({ currentVideoId })
   return (
     <div className="h-full overflow-y-auto w-full max-w-[500px]">
       <div className="mb-6">
-        <h3 className="text-2xl font-bold text-white mb-2">Related Experience</h3>
-        <p className="text-gray-300">Perfect adventure based on your interests</p>
+        <h3 className="text-2xl font-bold text-white mb-2">Perfect Experience Tailored for You</h3>
+        <p className="text-gray-300">Book now and start your journey!</p>
       </div>
       
       <div className="bg-white rounded-xl shadow-lg overflow-hidden">
