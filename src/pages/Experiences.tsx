@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useTranslation } from '../contexts/TranslationContext';
 import { motion } from 'framer-motion';
-import { Users, Calendar, MapPin, Search, Star, Clock, Heart } from 'lucide-react';
+import { Users, Calendar, MapPin, Star, Clock, Heart } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
@@ -180,12 +180,10 @@ const Experiences = () => {
       
       {/* Enhanced Hero Section with Background Image and Gradient */}
       <section className="relative py-[150px] overflow-hidden">
-        {/* Background Image */}
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
           backgroundImage: 'url(https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80)'
         }}></div>
         
-        {/* Semi-transparent gradient overlay using current blue color scheme */}
         <div className="absolute inset-0 bg-gradient-to-r from-green-600/80 to-green-800/80 z-10"></div>
         <div className="absolute inset-0 bg-black/20 z-20"></div>
         
@@ -210,7 +208,7 @@ const Experiences = () => {
       <section className="py-8 -mt-16 relative z-40">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
-            <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 items-end">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 items-end">
               {/* Destination Filter */}
               <div className="lg:col-span-1">
                 <div className="flex items-center mb-2">
@@ -313,16 +311,22 @@ const Experiences = () => {
                   </SelectContent>
                 </Select>
               </div>
+            </div>
 
-              {/* Search Button */}
-              <div className="lg:col-span-1">
-                <Button 
-                  className="w-full h-12 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
-                  onClick={() => setCurrentPage(1)}
-                >
-                  <Search className="w-5 h-5 mr-2" />
-                  Search
-                </Button>
+            {/* Search Bar - Moved to separate row */}
+            <div className="mt-4 pt-4 border-t border-gray-100">
+              <div className="max-w-md">
+                <div className="flex items-center mb-2">
+                  <Calendar className="w-5 h-5 text-green-600 mr-2" />
+                  <label className="text-sm font-medium text-gray-700">Search</label>
+                </div>
+                <Input
+                  type="text"
+                  placeholder="Search experiences..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="h-12 border-gray-200 bg-gray-50/50 hover:bg-gray-50 transition-colors"
+                />
               </div>
             </div>
 

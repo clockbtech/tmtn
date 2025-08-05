@@ -1,195 +1,154 @@
+
 import React, { useEffect, useState, useMemo } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Search, Filter, ChevronDown } from 'lucide-react';
+import { MapPin, Star, Clock, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useTranslation } from '../contexts/TranslationContext';
 import { motion } from 'framer-motion';
-import { Clock, MapPin, Star } from 'lucide-react';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '../components/ui/pagination';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuCheckboxItem, DropdownMenuTrigger } from '../components/ui/dropdown-menu';
 import { Input } from '../components/ui/input';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+
 gsap.registerPlugin(ScrollTrigger);
+
 interface Attraction {
   id: number;
   name: string;
   description: string;
   image: string;
+  type: string;
   location: string;
-  duration: string;
   rating: number;
-  type: 'Cultural' | 'Adventure' | 'Nature' | 'UNESCO';
-  popularity: number;
+  reviews: number;
+  price: number;
+  duration: string;
 }
+
 const Attractions = () => {
-  const {
-    t
-  } = useTranslation();
+  const { t, formatPrice } = useTranslation();
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortBy, setSortBy] = useState('A-Z');
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [sortBy, setSortBy] = useState('name');
+  const [selectedType, setSelectedType] = useState('all');
+  const [selectedLocation, setSelectedLocation] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
+
   useEffect(() => {
     ScrollTrigger.refresh();
   }, []);
-  const attractions: Attraction[] = [{
-    id: 1,
-    name: 'Swayambhunath Stupa (Monkey Temple)',
-    description: 'Ancient religious complex atop a hill in the Kathmandu Valley',
-    image: 'https://images.unsplash.com/photo-1529733905113-027ed85d7e33?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8TmVwYWx8ZW58MHx8MHx8fDI%3D',
-    location: 'Kathmandu',
-    duration: '2-3 hours',
-    rating: 4.5,
-    type: 'Cultural',
-    popularity: 95
-  }, {
-    id: 2,
-    name: 'Pashupatinath Temple',
-    description: 'Sacred Hindu temple complex dedicated to Lord Shiva',
-    image: 'https://images.unsplash.com/photo-1648298470994-7065f521375c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDExfHx8ZW58MHx8fHx8',
-    location: 'Kathmandu',
-    duration: '2-4 hours',
-    rating: 4.7,
-    type: 'Cultural',
-    popularity: 90
-  }, {
-    id: 3,
-    name: 'Boudhanath Stupa',
-    description: 'One of the largest Buddhist stupas in the world',
-    image: 'https://images.unsplash.com/photo-1592285896110-8d88b5b3a5d8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fE5lcGFsfGVufDB8fDB8fHwy',
-    location: 'Kathmandu',
-    duration: '1-2 hours',
-    rating: 4.6,
-    type: 'UNESCO',
-    popularity: 88
-  }, {
-    id: 4,
-    name: 'Durbar Square',
-    description: 'Historic plaza facing old royal palaces',
-    image: 'https://images.unsplash.com/photo-1665476495098-8a30d98d2cc7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDl8fHxlbnwwfHx8fHw%3D',
-    location: 'Kathmandu',
-    duration: '3-4 hours',
-    rating: 4.4,
-    type: 'UNESCO',
-    popularity: 85
-  }, {
-    id: 5,
-    name: 'Sarangkot Viewpoint',
-    description: 'Famous viewpoint for sunrise over the Himalayas',
-    image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bmF0dXJlfGVufDB8fDB8fHwy',
-    location: 'Pokhara',
-    duration: 'Half day',
-    rating: 4.8,
-    type: 'Nature',
-    popularity: 92
-  }, {
-    id: 6,
-    name: 'Phewa Lake',
-    description: 'Serene lake with mountain reflections and boating',
-    image: 'https://images.unsplash.com/photo-1677683254220-e4160da157af?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fFBva2hhcmF8ZW58MHx8MHx8fDI%3D',
-    location: 'Pokhara',
-    duration: '2-3 hours',
-    rating: 4.5,
-    type: 'Nature',
-    popularity: 80
-  }, {
-    id: 7,
-    name: 'Annapurna Base Camp Trek',
-    description: 'Epic trekking adventure to the base of Annapurna mountain',
-    image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    location: 'Annapurna Region',
-    duration: '10-14 days',
-    rating: 4.9,
-    type: 'Adventure',
-    popularity: 95
-  }, {
-    id: 8,
-    name: 'Chitwan National Park',
-    description: 'Wildlife sanctuary with rare one-horned rhinoceros',
-    image: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    location: 'Chitwan',
-    duration: '2-4 days',
-    rating: 4.6,
-    type: 'Nature',
-    popularity: 75
-  }, {
-    id: 9,
-    name: 'Langtang Valley Trek',
-    description: 'Beautiful valley trek with Tamang culture experience',
-    image: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    location: 'Langtang Region',
-    duration: '7-12 days',
-    rating: 4.7,
-    type: 'Adventure',
-    popularity: 78
-  }, {
-    id: 10,
-    name: 'Bandipur Historic Town',
-    description: 'Preserved Newari town with stunning mountain views',
-    image: 'https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    location: 'Bandipur',
-    duration: '1-2 days',
-    rating: 4.3,
-    type: 'Cultural',
-    popularity: 65
-  }, {
-    id: 11,
-    name: 'Everest Base Camp Trek',
-    description: 'Ultimate trekking challenge to the base of Mount Everest',
-    image: 'https://images.unsplash.com/photo-1695901048826-842a3757856c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8RXZlcmVzdCUyMENhbXB8ZW58MHx8MHx8fDI%3D',
-    location: 'Everest Region',
-    duration: '14-16 days',
-    rating: 4.9,
-    type: 'Adventure',
-    popularity: 98
-  }, {
-    id: 12,
-    name: 'Lumbini - Birthplace of Buddha',
-    description: 'Sacred site where Lord Buddha was born',
-    image: 'https://images.unsplash.com/photo-1616166831462-48a3e9089c20?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8THVtYmluaXxlbnwwfHwwfHx8Mg%3D%3D',
-    location: 'Lumbini',
-    duration: '1-2 days',
-    rating: 4.4,
-    type: 'UNESCO',
-    popularity: 82
-  }];
-  const categories = ['Cultural', 'Adventure', 'Nature', 'UNESCO'];
+
+  const attractions: Attraction[] = [
+    {
+      id: 1,
+      name: 'Swayambhunath (Monkey Temple)',
+      description: 'Ancient Buddhist stupa with panoramic views of Kathmandu Valley',
+      image: 'https://images.unsplash.com/photo-1552353338-0944fa7abdcd?w=500&auto=format&fit=crop&q=60',
+      type: 'Temple',
+      location: 'Kathmandu',
+      rating: 4.7,
+      reviews: 324,
+      price: 25,
+      duration: '2-3 hours'
+    },
+    {
+      id: 2,
+      name: 'Boudhanath Stupa',
+      description: 'One of the largest Buddhist stupas in the world',
+      image: 'https://images.unsplash.com/photo-1558005530-a7958896e18c?w=500&auto=format&fit=crop&q=60',
+      type: 'Temple',
+      location: 'Kathmandu',
+      rating: 4.8,
+      reviews: 456,
+      price: 30,
+      duration: '2-4 hours'
+    },
+    {
+      id: 3,
+      name: 'Pashupatinath Temple',
+      description: 'Sacred Hindu temple dedicated to Lord Shiva',
+      image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=500&auto=format&fit=crop&q=60',
+      type: 'Temple',
+      location: 'Kathmandu',
+      rating: 4.6,
+      reviews: 389,
+      price: 35,
+      duration: '2-3 hours'
+    },
+    {
+      id: 4,
+      name: 'Durbar Square Kathmandu',
+      description: 'Historic palace complex with ancient architecture',
+      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&auto=format&fit=crop&q=60',
+      type: 'Historical Site',
+      location: 'Kathmandu',
+      rating: 4.5,
+      reviews: 278,
+      price: 40,
+      duration: '3-4 hours'
+    },
+    {
+      id: 5,
+      name: 'Phewa Lake',
+      description: 'Serene lake with mountain reflections and boating',
+      image: 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=500&auto=format&fit=crop&q=60',
+      type: 'Natural',
+      location: 'Pokhara',
+      rating: 4.9,
+      reviews: 512,
+      price: 20,
+      duration: 'Half day'
+    },
+    {
+      id: 6,
+      name: 'World Peace Pagoda',
+      description: 'Buddhist monument overlooking Pokhara valley',
+      image: 'https://images.unsplash.com/photo-1566552881560-0be862a7c445?w=500&auto=format&fit=crop&q=60',
+      type: 'Temple',
+      location: 'Pokhara',
+      rating: 4.7,
+      reviews: 298,
+      price: 15,
+      duration: '2-3 hours'
+    }
+  ];
+
+  const types = ['Temple', 'Historical Site', 'Natural', 'Museum', 'Adventure'];
+  const locations = ['Kathmandu', 'Pokhara', 'Bhaktapur', 'Lalitpur', 'Chitwan'];
+
   const filteredAndSortedAttractions = useMemo(() => {
     let filtered = attractions.filter(attraction => {
       const matchesSearch = attraction.name.toLowerCase().includes(searchTerm.toLowerCase()) || attraction.description.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(attraction.type);
-      return matchesSearch && matchesCategory;
+      const matchesType = selectedType === 'all' || attraction.type === selectedType;
+      const matchesLocation = selectedLocation === 'all' || attraction.location === selectedLocation;
+      return matchesSearch && matchesType && matchesLocation;
     });
 
     // Sort attractions
     filtered.sort((a, b) => {
       switch (sortBy) {
-        case 'A-Z':
+        case 'name':
           return a.name.localeCompare(b.name);
-        case 'Popularity':
-          return b.popularity - a.popularity;
-        case 'Newest':
-          return b.id - a.id;
+        case 'price-low':
+          return a.price - b.price;
+        case 'price-high':
+          return b.price - a.price;
+        case 'rating':
+          return b.rating - a.rating;
         default:
           return 0;
       }
     });
     return filtered;
-  }, [attractions, searchTerm, selectedCategories, sortBy]);
+  }, [attractions, searchTerm, selectedType, selectedLocation, sortBy]);
+
   const totalPages = Math.ceil(filteredAndSortedAttractions.length / itemsPerPage);
   const currentAttractions = filteredAndSortedAttractions.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-  const handleCategoryChange = (category: string, checked: boolean) => {
-    if (checked) {
-      setSelectedCategories([...selectedCategories, category]);
-    } else {
-      setSelectedCategories(selectedCategories.filter(c => c !== category));
-    }
-    setCurrentPage(1);
-  };
+
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     window.scrollTo({
@@ -197,195 +156,301 @@ const Attractions = () => {
       behavior: 'smooth'
     });
   };
-  return <div className="min-h-screen bg-white font-poppins">
+
+  const clearFilters = () => {
+    setSearchTerm('');
+    setSelectedType('all');
+    setSelectedLocation('all');
+    setSortBy('name');
+    setCurrentPage(1);
+  };
+
+  return (
+    <div className="min-h-screen bg-white font-inter">
       <Header />
       
       {/* Enhanced Hero Section with Background Image */}
       <section className="relative bg-cover bg-center bg-no-repeat py-[150px]" style={{
-      backgroundImage: 'url(https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80)'
-    }}>
+        backgroundImage: 'url(https://images.unsplash.com/photo-1552353338-0944fa7abdcd?w=1920&auto=format&fit=crop&q=80)',
+      }}>
         <div className="absolute inset-0 bg-gradient-to-r from-green-600/80 to-green-800/80"></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div initial={{
-          opacity: 0,
-          y: 30
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.8
-        }} className="text-center text-white">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.8 }} 
+            className="text-center text-white"
+          >
             <h1 className="text-5xl font-tm-sans uppercase mb-6 lg:text-6xl font-extrabold">
-              {t('nav.attractions')}
+              Attractions
             </h1>
             <p className="text-xl max-w-4xl mx-auto lg:text-xl">
-              Discover Nepal's most captivating temples, viewpoints, and cultural landmarks
+              Discover Nepal's most captivating temples, historic sites, and natural wonders
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Search & Filter Bar */}
-      <section className="py-8 bg-gray-50 border-b">
+      {/* Modern Filter Section */}
+      <section className="py-8 -mt-16 relative z-40">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
-            {/* Search Bar */}
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <Input type="text" placeholder="Search attractions..." value={searchTerm} onChange={e => {
-              setSearchTerm(e.target.value);
-              setCurrentPage(1);
-            }} className="pl-10 w-full" />
+          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 items-end">
+              {/* Type Filter */}
+              <div className="lg:col-span-1">
+                <div className="flex items-center mb-2">
+                  <Star className="w-5 h-5 text-green-600 mr-2" />
+                  <label className="text-sm font-medium text-gray-700">Type</label>
+                </div>
+                <Select value={selectedType} onValueChange={setSelectedType}>
+                  <SelectTrigger className="h-12 border-gray-200 bg-gray-50/50 hover:bg-gray-50 transition-colors">
+                    <SelectValue placeholder="Select type" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white border border-gray-200 shadow-lg z-50">
+                    <SelectItem value="all">All Types</SelectItem>
+                    {types.map(type => (
+                      <SelectItem key={type} value={type}>{type}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Location Filter */}
+              <div className="lg:col-span-1">
+                <div className="flex items-center mb-2">
+                  <MapPin className="w-5 h-5 text-green-600 mr-2" />
+                  <label className="text-sm font-medium text-gray-700">Location</label>
+                </div>
+                <Select value={selectedLocation} onValueChange={setSelectedLocation}>
+                  <SelectTrigger className="h-12 border-gray-200 bg-gray-50/50 hover:bg-gray-50 transition-colors">
+                    <SelectValue placeholder="Select location" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white border border-gray-200 shadow-lg z-50">
+                    <SelectItem value="all">All Locations</SelectItem>
+                    {locations.map(location => (
+                      <SelectItem key={location} value={location}>{location}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Sort Filter */}
+              <div className="lg:col-span-1">
+                <div className="flex items-center mb-2">
+                  <Clock className="w-5 h-5 text-green-600 mr-2" />
+                  <label className="text-sm font-medium text-gray-700">Sort By</label>
+                </div>
+                <Select value={sortBy} onValueChange={setSortBy}>
+                  <SelectTrigger className="h-12 border-gray-200 bg-gray-50/50 hover:bg-gray-50 transition-colors">
+                    <SelectValue placeholder="Sort by" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white border border-gray-200 shadow-lg z-50">
+                    <SelectItem value="name">Name</SelectItem>
+                    <SelectItem value="rating">Rating</SelectItem>
+                    <SelectItem value="price-low">Price: Low to High</SelectItem>
+                    <SelectItem value="price-high">Price: High to Low</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Search Field */}
+              <div className="lg:col-span-1">
+                <div className="flex items-center mb-2">
+                  <Users className="w-5 h-5 text-green-600 mr-2" />
+                  <label className="text-sm font-medium text-gray-700">Search</label>
+                </div>
+                <Input
+                  type="text"
+                  placeholder="Search attractions..."
+                  value={searchTerm}
+                  onChange={(e) => {
+                    setSearchTerm(e.target.value);
+                    setCurrentPage(1);
+                  }}
+                  className="h-12 border-gray-200 bg-gray-50/50 hover:bg-gray-50 transition-colors"
+                />
+              </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 items-center">
-              {/* Sort Dropdown */}
-              <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="w-48">
-                  <SelectValue placeholder="Sort by" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="A-Z">A-Z</SelectItem>
-                  <SelectItem value="Popularity">Popularity</SelectItem>
-                  <SelectItem value="Newest">Newest</SelectItem>
-                </SelectContent>
-              </Select>
-
-              {/* Category Filter */}
-              <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center gap-2 px-4 py-2 border rounded-md bg-white hover:bg-gray-50">
-                  <Filter className="w-4 h-4" />
-                  Category
-                  <ChevronDown className="w-4 h-4" />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56 bg-white">
-                  {categories.map(category => <DropdownMenuCheckboxItem key={category} checked={selectedCategories.includes(category)} onCheckedChange={checked => handleCategoryChange(category, checked)}>
-                      {category}
-                    </DropdownMenuCheckboxItem>)}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
+            {/* Active Filters */}
+            {(searchTerm || selectedType !== 'all' || selectedLocation !== 'all') && (
+              <div className="flex flex-wrap gap-2 mt-6 pt-4 border-t border-gray-100">
+                <span className="text-sm text-gray-600 font-medium">Active filters:</span>
+                {searchTerm && (
+                  <Badge variant="secondary" className="flex items-center gap-1">
+                    Search: {searchTerm}
+                    <button onClick={() => setSearchTerm('')} className="ml-1 text-gray-500 hover:text-gray-700">×</button>
+                  </Badge>
+                )}
+                {selectedType !== 'all' && (
+                  <Badge variant="secondary" className="flex items-center gap-1">
+                    {selectedType}
+                    <button onClick={() => setSelectedType('all')} className="ml-1 text-gray-500 hover:text-gray-700">×</button>
+                  </Badge>
+                )}
+                {selectedLocation !== 'all' && (
+                  <Badge variant="secondary" className="flex items-center gap-1">
+                    {selectedLocation}
+                    <button onClick={() => setSelectedLocation('all')} className="ml-1 text-gray-500 hover:text-gray-700">×</button>
+                  </Badge>
+                )}
+                <Button variant="ghost" onClick={clearFilters} className="text-sm text-gray-500 hover:text-gray-700 h-auto p-0">
+                  Clear all
+                </Button>
+              </div>
+            )}
           </div>
+        </div>
+      </section>
 
-          {/* Filter Summary */}
-          {(selectedCategories.length > 0 || searchTerm) && <div className="mt-4 flex flex-wrap gap-2 items-center">
-              <span className="text-sm text-gray-600">Active filters:</span>
-              {searchTerm && <span className="bg-tmtn-red text-white px-3 py-1 rounded-full text-sm">
-                  Search: "{searchTerm}"
-                </span>}
-              {selectedCategories.map(category => <span key={category} className="bg-tmtn-blue text-white px-3 py-1 rounded-full text-sm">
-                  {category}
-                </span>)}
-              <button onClick={() => {
-            setSearchTerm('');
-            setSelectedCategories([]);
-            setCurrentPage(1);
-          }} className="text-sm text-gray-500 hover:text-gray-700 underline">
-                Clear all
-              </button>
-            </div>}
+      {/* Results Count */}
+      <section className="py-4">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-gray-600">
+            Showing {currentAttractions.length} of {filteredAndSortedAttractions.length} attractions
+          </p>
         </div>
       </section>
 
       {/* Attractions Grid */}
       <section className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          {currentAttractions.length === 0 ? <div className="text-center py-20">
-              <p className="text-xl text-gray-600">No attractions found matching your criteria.</p>
-            </div> : <>
+          {currentAttractions.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="text-xl text-gray-600 font-inter">No attractions found matching your criteria.</p>
+              <Button onClick={clearFilters} className="mt-4">Clear Filters</Button>
+            </div>
+          ) : (
+            <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
-                {currentAttractions.map((attraction, index) => <motion.div key={attraction.id} initial={{
-              opacity: 0,
-              y: 60
-            }} whileInView={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              duration: 0.6,
-              delay: index * 0.1
-            }} whileHover={{
-              y: -10
-            }} className="group cursor-pointer">
+                {currentAttractions.map((attraction, index) => (
+                  <motion.div 
+                    key={attraction.id} 
+                    initial={{ opacity: 0, y: 60 }} 
+                    whileInView={{ opacity: 1, y: 0 }} 
+                    transition={{ duration: 0.6, delay: index * 0.1 }} 
+                    whileHover={{ y: -10 }} 
+                    className="group cursor-pointer"
+                  >
                     <Link to={`/attractions/${attraction.id}`}>
                       <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100">
                         <div className="relative overflow-hidden">
-                          <img src={attraction.image} alt={attraction.name} className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" />
-                          <div className="absolute top-4 left-4 bg-tmtn-red text-white px-3 py-1 rounded-full text-sm font-semibold">
-                            {attraction.type}
-                          </div>
-                          <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full flex items-center">
-                            <Star className="w-4 h-4 text-yellow-500 mr-1" />
-                            <span className="text-sm font-semibold">{attraction.rating}</span>
+                          <img 
+                            src={attraction.image} 
+                            alt={attraction.name} 
+                            className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" 
+                          />
+                          <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
+                            <span className="text-sm font-semibold text-green-600">
+                              {attraction.type}
+                            </span>
                           </div>
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </div>
                         
                         <div className="p-6">
-                          <h3 className="text-xl font-normal font-semibold text-tmtn-blue mb-2">
+                          <div className="flex items-center text-gray-500 text-sm mb-2">
+                            <MapPin className="w-4 h-4 mr-1" />
+                            <span>{attraction.location}</span>
+                          </div>
+
+                          <h3 className="text-xl font-semibold text-gray-900 mb-2">
                             {attraction.name}
                           </h3>
-                          <p className="text-gray-600 mb-4 text-base">
+
+                          <p className="text-gray-600 mb-3 line-clamp-2">
                             {attraction.description}
                           </p>
-                          
-                          <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                            <div className="flex items-center">
-                              <MapPin className="w-4 h-4 mr-1" />
-                              <span>{attraction.location}</span>
-                            </div>
-                            <div className="flex items-center">
+
+                          <div className="flex items-center mb-3">
+                            {[...Array(5)].map((_, i) => (
+                              <Star
+                                key={i}
+                                className={`w-4 h-4 ${
+                                  i < Math.floor(attraction.rating)
+                                    ? 'fill-yellow-400 text-yellow-400'
+                                    : 'text-gray-300'
+                                }`}
+                              />
+                            ))}
+                            <span className="text-sm text-gray-600 ml-2">
+                              ({attraction.reviews} reviews)
+                            </span>
+                          </div>
+
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center text-sm text-gray-500">
                               <Clock className="w-4 h-4 mr-1" />
                               <span>{attraction.duration}</span>
                             </div>
+                            <div>
+                              <span className="text-lg font-bold text-green-600">
+                                {formatPrice(attraction.price)}
+                              </span>
+                            </div>
                           </div>
-                          
-                          <motion.button whileHover={{
-                      scale: 1.05
-                    }} whileTap={{
-                      scale: 0.95
-                    }} className="w-full btn-gradient text-white py-3 rounded-lg font-semibold text-base">
-                            Explore Attraction
-                          </motion.button>
                         </div>
                       </div>
                     </Link>
-                  </motion.div>)}
+                  </motion.div>
+                ))}
               </div>
 
               {/* Pagination */}
-              {totalPages > 1 && <div className="mt-12 flex justify-center">
+              {totalPages > 1 && (
+                <div className="mt-12 flex justify-center">
                   <Pagination>
                     <PaginationContent>
-                      {currentPage > 1 && <PaginationItem>
-                          <PaginationPrevious href="#" onClick={e => {
-                    e.preventDefault();
-                    handlePageChange(currentPage - 1);
-                  }} />
-                        </PaginationItem>}
+                      {currentPage > 1 && (
+                        <PaginationItem>
+                          <PaginationPrevious 
+                            href="#" 
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handlePageChange(currentPage - 1);
+                            }} 
+                          />
+                        </PaginationItem>
+                      )}
                       
-                      {[...Array(totalPages)].map((_, i) => <PaginationItem key={i + 1}>
-                          <PaginationLink href="#" isActive={currentPage === i + 1} onClick={e => {
-                    e.preventDefault();
-                    handlePageChange(i + 1);
-                  }}>
+                      {[...Array(totalPages)].map((_, i) => (
+                        <PaginationItem key={i + 1}>
+                          <PaginationLink 
+                            href="#" 
+                            isActive={currentPage === i + 1} 
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handlePageChange(i + 1);
+                            }}
+                          >
                             {i + 1}
                           </PaginationLink>
-                        </PaginationItem>)}
+                        </PaginationItem>
+                      ))}
                       
-                      {currentPage < totalPages && <PaginationItem>
-                          <PaginationNext href="#" onClick={e => {
-                    e.preventDefault();
-                    handlePageChange(currentPage + 1);
-                  }} />
-                        </PaginationItem>}
+                      {currentPage < totalPages && (
+                        <PaginationItem>
+                          <PaginationNext 
+                            href="#" 
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handlePageChange(currentPage + 1);
+                            }} 
+                          />
+                        </PaginationItem>
+                      )}
                     </PaginationContent>
                   </Pagination>
-                </div>}
-            </>}
+                </div>
+              )}
+            </>
+          )}
         </div>
       </section>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default Attractions;
