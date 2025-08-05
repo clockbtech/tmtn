@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -6,8 +6,48 @@ import { Award, Shield, Users, MapPin, Star, Camera } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Counter animation hook
+const useCounter = (end: number, duration: number = 2) => {
+  const [count, setCount] = useState(0);
+  const countRef = useRef(0);
+  
+  const animate = () => {
+    const startTime = performance.now();
+    
+    const updateCount = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / (duration * 1000), 1);
+      
+      // Easing function for smooth animation
+      const easeOutQuad = 1 - (1 - progress) * (1 - progress);
+      const currentCount = Math.floor(easeOutQuad * end);
+      
+      setCount(currentCount);
+      countRef.current = currentCount;
+      
+      if (progress < 1) {
+        requestAnimationFrame(updateCount);
+      } else {
+        setCount(end);
+      }
+    };
+    
+    requestAnimationFrame(updateCount);
+  };
+  
+  return { count, animate };
+};
+
 const WhyChooseUs = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  
+  // Counter hooks for each statistic
+  const happyTravelers = useCounter(10000, 2);
+  const toursCompleted = useCounter(500, 1.8);
+  const yearsExperience = useCounter(15, 1.5);
+  const satisfactionRate = useCounter(98, 1.6);
   
   const features = [
     {
@@ -81,7 +121,23 @@ const WhyChooseUs = () => {
         toggleActions: 'play none none reverse'
       }
     });
-  }, []);
+
+    // Counter animation trigger
+    ScrollTrigger.create({
+      trigger: statsRef.current,
+      start: 'top 85%',
+      onEnter: () => {
+        if (!hasAnimated) {
+          setHasAnimated(true);
+          // Start all counters with slight delays
+          setTimeout(() => happyTravelers.animate(), 100);
+          setTimeout(() => toursCompleted.animate(), 200);
+          setTimeout(() => yearsExperience.animate(), 300);
+          setTimeout(() => satisfactionRate.animate(), 400);
+        }
+      }
+    });
+  }, [hasAnimated]);
 
   return (
     <section ref={sectionRef} className="py-20 bg-tmtn-blue text-white overflow-hidden" id="about">
@@ -231,33 +287,65 @@ const WhyChooseUs = () => {
           </div>
         </div>
 
-        {/* Stats Section - Text Only */}
+        {/* Stats Section - Text Only with Counter Animation */}
         <motion.div
+          ref={statsRef}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-6 text-center"
         >
-          {[
-            { number: '10,000+', label: 'Happy Travelers' },
-            { number: '500+', label: 'Tours Completed' },
-            { number: '15+', label: 'Years Experience' },
-            { number: '98%', label: 'Satisfaction Rate' }
-          ].map((stat, index) => (
-            <motion.div
-              key={index}
-              whileHover={{ scale: 1.03 }}
-              transition={{ duration: 0.2 }}
-              className="p-5"
-            >
-              <div className="text-2xl lg:text-3xl font-bold text-tmtn-red mb-1">
-                {stat.number}
-              </div>
-              <div className="text-blue-100 text-sm">
-                {stat.label}
-              </div>
-            </motion.div>
-          ))}
+          <motion.div
+            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.2 }}
+            className="p-5"
+          >
+            <div className="text-2xl lg:text-3xl font-bold text-tmtn-red mb-1">
+              {happyTravelers.count.toLocaleString()}+
+            </div>
+            <div className="text-blue-100 text-sm">
+              Happy Travelers
+            </div>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.2 }}
+            className="p-5"
+          >
+            <div className="text-2xl lg:text-3xl font-bold text-tmtn-red mb-1">
+              {toursCompleted.count}+
+            </div>
+            <div className="text-blue-100 text-sm">
+              Tours Completed
+            </div>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.2 }}
+            className="p-5"
+          >
+            <div className="text-2xl lg:text-3xl font-bold text-tmtn-red mb-1">
+              {yearsExperience.count}+
+            </div>
+            <div className="text-blue-100 text-sm">
+              Years Experience
+            </div>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.2 }}
+            className="p-5"
+          >
+            <div className="text-2xl lg:text-3xl font-bold text-tmtn-red mb-1">
+              {satisfactionRate.count}%
+            </div>
+            <div className="text-blue-100 text-sm">
+              Satisfaction Rate
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
