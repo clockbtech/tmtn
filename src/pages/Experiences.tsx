@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useMemo } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -22,6 +21,8 @@ const Experiences = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDifficulty, setSelectedDifficulty] = useState('all');
   const [selectedLocation, setSelectedLocation] = useState('all');
+  const [selectedDuration, setSelectedDuration] = useState('all');
+  const [guestCount, setGuestCount] = useState(1);
   const [sortBy, setSortBy] = useState('name');
   const [currentPage, setCurrentPage] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
@@ -119,7 +120,8 @@ const Experiences = () => {
       const matchesSearch = experience.name.toLowerCase().includes(searchTerm.toLowerCase()) || experience.description.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesDifficulty = selectedDifficulty === 'all' || experience.difficulty === selectedDifficulty;
       const matchesLocation = selectedLocation === 'all' || experience.location.includes(selectedLocation);
-      return matchesSearch && matchesDifficulty && matchesLocation;
+      const matchesDuration = selectedDuration === 'all' || experience.duration.includes(selectedDuration);
+      return matchesSearch && matchesDifficulty && matchesLocation && matchesDuration;
     });
 
     // Sort experiences
@@ -137,7 +139,7 @@ const Experiences = () => {
       }
     });
     return filtered;
-  }, [experiences, searchTerm, selectedDifficulty, selectedLocation, sortBy]);
+  }, [experiences, searchTerm, selectedDifficulty, selectedLocation, selectedDuration, sortBy]);
 
   // Pagination logic
   const totalPages = Math.ceil(filteredAndSortedExperiences.length / itemsPerPage);
@@ -166,34 +168,34 @@ const Experiences = () => {
     setSearchTerm('');
     setSelectedDifficulty('all');
     setSelectedLocation('all');
+    setSelectedDuration('all');
+    setGuestCount(1);
     setSortBy('name');
     setCurrentPage(1);
   };
 
-  return <div className="min-h-screen bg-white font-poppins">
+  return (
+    <div className="min-h-screen bg-white font-poppins">
       <Header />
       
       {/* Enhanced Hero Section with Background Image and Gradient */}
       <section className="relative py-[150px] overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-        backgroundImage: 'url(https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80)'
-      }}></div>
+          backgroundImage: 'url(https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80)'
+        }}></div>
         
         {/* Semi-transparent gradient overlay using current blue color scheme */}
         <div className="absolute inset-0 bg-gradient-to-r from-green-600/80 to-green-800/80 z-10"></div>
         <div className="absolute inset-0 bg-black/20 z-20"></div>
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-30">
-          <motion.div initial={{
-          opacity: 0,
-          y: 30
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.8
-        }} className="text-center text-white">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.8 }} 
+            className="text-center text-white"
+          >
             <h1 className="text-5xl font-tm-sans uppercase mb-6 lg:text-6xl font-extrabold">
               {t('nav.experiences')}
             </h1>
@@ -204,78 +206,166 @@ const Experiences = () => {
         </div>
       </section>
 
-      {/* Search and Filter Section */}
-      <section className="py-8 bg-gray-50">
+      {/* Modern Filter Section */}
+      <section className="py-8 -mt-16 relative z-40">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
-            {/* Search Bar */}
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-              <Input type="text" placeholder="Search experiences..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-10" />
+          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+            <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 items-end">
+              {/* Destination Filter */}
+              <div className="lg:col-span-1">
+                <div className="flex items-center mb-2">
+                  <MapPin className="w-5 h-5 text-green-600 mr-2" />
+                  <label className="text-sm font-medium text-gray-700">Destination</label>
+                </div>
+                <Select value={selectedLocation} onValueChange={setSelectedLocation}>
+                  <SelectTrigger className="h-12 border-gray-200 bg-gray-50/50 hover:bg-gray-50 transition-colors">
+                    <SelectValue placeholder="Select destination" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white border border-gray-200 shadow-lg z-50">
+                    <SelectItem value="all">All Locations</SelectItem>
+                    <SelectItem value="Khumbu">Khumbu Region</SelectItem>
+                    <SelectItem value="Annapurna">Annapurna Region</SelectItem>
+                    <SelectItem value="Chitwan">Chitwan</SelectItem>
+                    <SelectItem value="Kathmandu">Kathmandu</SelectItem>
+                    <SelectItem value="Pokhara">Pokhara</SelectItem>
+                    <SelectItem value="Langtang">Langtang</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Type Filter */}
+              <div className="lg:col-span-1">
+                <div className="flex items-center mb-2">
+                  <Star className="w-5 h-5 text-green-600 mr-2" />
+                  <label className="text-sm font-medium text-gray-700">Type</label>
+                </div>
+                <Select value={selectedDifficulty} onValueChange={setSelectedDifficulty}>
+                  <SelectTrigger className="h-12 border-gray-200 bg-gray-50/50 hover:bg-gray-50 transition-colors">
+                    <SelectValue placeholder="Difficulty level" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white border border-gray-200 shadow-lg z-50">
+                    <SelectItem value="all">All Levels</SelectItem>
+                    <SelectItem value="Easy">Easy</SelectItem>
+                    <SelectItem value="Moderate">Moderate</SelectItem>
+                    <SelectItem value="Extreme">Extreme</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Duration Filter */}
+              <div className="lg:col-span-1">
+                <div className="flex items-center mb-2">
+                  <Clock className="w-5 h-5 text-green-600 mr-2" />
+                  <label className="text-sm font-medium text-gray-700">Duration</label>
+                </div>
+                <Select value={selectedDuration} onValueChange={setSelectedDuration}>
+                  <SelectTrigger className="h-12 border-gray-200 bg-gray-50/50 hover:bg-gray-50 transition-colors">
+                    <SelectValue placeholder="Trip duration" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white border border-gray-200 shadow-lg z-50">
+                    <SelectItem value="all">Any Duration</SelectItem>
+                    <SelectItem value="3">1-3 days</SelectItem>
+                    <SelectItem value="7">4-7 days</SelectItem>
+                    <SelectItem value="14">8-14 days</SelectItem>
+                    <SelectItem value="16">15+ days</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Guests Counter */}
+              <div className="lg:col-span-1">
+                <div className="flex items-center mb-2">
+                  <Users className="w-5 h-5 text-green-600 mr-2" />
+                  <label className="text-sm font-medium text-gray-700">Guests</label>
+                </div>
+                <div className="flex items-center border border-gray-200 rounded-lg h-12 bg-gray-50/50 hover:bg-gray-50 transition-colors">
+                  <button
+                    onClick={() => setGuestCount(Math.max(1, guestCount - 1))}
+                    className="px-3 h-full text-gray-600 hover:text-gray-800 transition-colors"
+                  >
+                    -
+                  </button>
+                  <span className="flex-1 text-center font-medium">{guestCount}</span>
+                  <button
+                    onClick={() => setGuestCount(guestCount + 1)}
+                    className="px-3 h-full text-gray-600 hover:text-gray-800 transition-colors"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              {/* Sort Filter */}
+              <div className="lg:col-span-1">
+                <div className="flex items-center mb-2">
+                  <Calendar className="w-5 h-5 text-green-600 mr-2" />
+                  <label className="text-sm font-medium text-gray-700">Sort By</label>
+                </div>
+                <Select value={sortBy} onValueChange={setSortBy}>
+                  <SelectTrigger className="h-12 border-gray-200 bg-gray-50/50 hover:bg-gray-50 transition-colors">
+                    <SelectValue placeholder="Sort by" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white border border-gray-200 shadow-lg z-50">
+                    <SelectItem value="name">Name</SelectItem>
+                    <SelectItem value="price-low">Price: Low to High</SelectItem>
+                    <SelectItem value="price-high">Price: High to Low</SelectItem>
+                    <SelectItem value="duration">Duration</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Search Button */}
+              <div className="lg:col-span-1">
+                <Button 
+                  className="w-full h-12 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
+                  onClick={() => setCurrentPage(1)}
+                >
+                  <Search className="w-5 h-5 mr-2" />
+                  Search
+                </Button>
+              </div>
             </div>
 
-            {/* Filters */}
-            <div className="flex flex-wrap gap-4 items-center">
-              <Select value={selectedDifficulty} onValueChange={setSelectedDifficulty}>
-                <SelectTrigger className="w-40">
-                  <SelectValue placeholder="Difficulty" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Levels</SelectItem>
-                  <SelectItem value="Easy">Easy</SelectItem>
-                  <SelectItem value="Moderate">Moderate</SelectItem>
-                  <SelectItem value="Extreme">Extreme</SelectItem>
-                </SelectContent>
-              </Select>
-
-              <Select value={selectedLocation} onValueChange={setSelectedLocation}>
-                <SelectTrigger className="w-40">
-                  <SelectValue placeholder="Location" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Locations</SelectItem>
-                  <SelectItem value="Khumbu">Khumbu Region</SelectItem>
-                  <SelectItem value="Annapurna">Annapurna Region</SelectItem>
-                  <SelectItem value="Chitwan">Chitwan</SelectItem>
-                  <SelectItem value="Kathmandu">Kathmandu</SelectItem>
-                  <SelectItem value="Pokhara">Pokhara</SelectItem>
-                  <SelectItem value="Langtang">Langtang</SelectItem>
-                </SelectContent>
-              </Select>
-
-              <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="w-40">
-                  <SelectValue placeholder="Sort by" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="name">Name</SelectItem>
-                  <SelectItem value="price-low">Price: Low to High</SelectItem>
-                  <SelectItem value="price-high">Price: High to Low</SelectItem>
-                  <SelectItem value="duration">Duration</SelectItem>
-                </SelectContent>
-              </Select>
-
-              <Button variant="outline" onClick={clearFilters}>
-                Clear Filters
-              </Button>
-            </div>
+            {/* Active Filters */}
+            {(searchTerm || selectedDifficulty !== 'all' || selectedLocation !== 'all' || selectedDuration !== 'all' || guestCount > 1) && (
+              <div className="flex flex-wrap gap-2 mt-6 pt-4 border-t border-gray-100">
+                <span className="text-sm text-gray-600 font-medium">Active filters:</span>
+                {searchTerm && (
+                  <Badge variant="secondary" className="flex items-center gap-1">
+                    Search: {searchTerm}
+                    <button onClick={() => setSearchTerm('')} className="ml-1 text-gray-500 hover:text-gray-700">×</button>
+                  </Badge>
+                )}
+                {selectedDifficulty !== 'all' && (
+                  <Badge variant="secondary" className="flex items-center gap-1">
+                    {selectedDifficulty}
+                    <button onClick={() => setSelectedDifficulty('all')} className="ml-1 text-gray-500 hover:text-gray-700">×</button>
+                  </Badge>
+                )}
+                {selectedLocation !== 'all' && (
+                  <Badge variant="secondary" className="flex items-center gap-1">
+                    {selectedLocation}
+                    <button onClick={() => setSelectedLocation('all')} className="ml-1 text-gray-500 hover:text-gray-700">×</button>
+                  </Badge>
+                )}
+                {selectedDuration !== 'all' && (
+                  <Badge variant="secondary" className="flex items-center gap-1">
+                    Duration: {selectedDuration} days
+                    <button onClick={() => setSelectedDuration('all')} className="ml-1 text-gray-500 hover:text-gray-700">×</button>
+                  </Badge>
+                )}
+                {guestCount > 1 && (
+                  <Badge variant="secondary" className="flex items-center gap-1">
+                    {guestCount} guests
+                    <button onClick={() => setGuestCount(1)} className="ml-1 text-gray-500 hover:text-gray-700">×</button>
+                  </Badge>
+                )}
+                <Button variant="ghost" onClick={clearFilters} className="text-sm text-gray-500 hover:text-gray-700 h-auto p-0">
+                  Clear all
+                </Button>
+              </div>
+            )}
           </div>
-
-          {/* Active Filters */}
-          {(searchTerm || selectedDifficulty !== 'all' || selectedLocation !== 'all') && <div className="flex flex-wrap gap-2 mt-4">
-              {searchTerm && <Badge variant="secondary" className="flex items-center gap-1">
-                  Search: {searchTerm}
-                  <button onClick={() => setSearchTerm('')} className="ml-1 text-gray-500 hover:text-gray-700">×</button>
-                </Badge>}
-              {selectedDifficulty !== 'all' && <Badge variant="secondary" className="flex items-center gap-1">
-                  {selectedDifficulty}
-                  <button onClick={() => setSelectedDifficulty('all')} className="ml-1 text-gray-500 hover:text-gray-700">×</button>
-                </Badge>}
-              {selectedLocation !== 'all' && <Badge variant="secondary" className="flex items-center gap-1">
-                  {selectedLocation}
-                  <button onClick={() => setSelectedLocation('all')} className="ml-1 text-gray-500 hover:text-gray-700">×</button>
-                </Badge>}
-            </div>}
         </div>
       </section>
 
@@ -291,27 +381,31 @@ const Experiences = () => {
       {/* Experiences Grid with TrendingExperiences style */}
       <section className="pb-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          {filteredAndSortedExperiences.length === 0 ? <div className="text-center py-12">
+          {filteredAndSortedExperiences.length === 0 ? (
+            <div className="text-center py-12">
               <p className="text-gray-500 text-lg">No experiences found matching your criteria.</p>
               <Button onClick={clearFilters} className="mt-4">Clear Filters</Button>
-            </div> : <>
+            </div>
+          ) : (
+            <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {paginatedExperiences.map((experience, index) => <motion.div key={experience.id} initial={{
-              opacity: 0,
-              y: 60
-            }} whileInView={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              duration: 0.6,
-              delay: index * 0.1
-            }} whileHover={{
-              y: -5
-            }} className="group cursor-pointer">
+                {paginatedExperiences.map((experience, index) => (
+                  <motion.div 
+                    key={experience.id}
+                    initial={{ opacity: 0, y: 60 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    whileHover={{ y: -5 }}
+                    className="group cursor-pointer"
+                  >
                     <Link to={`/experiences/${experience.id}`}>
                       <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
                         <div className="relative overflow-hidden">
-                          <img src={experience.image} alt={experience.name} className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
+                          <img 
+                            src={experience.image} 
+                            alt={experience.name} 
+                            className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" 
+                          />
                           <div className={`absolute top-4 right-4 ${getDifficultyColor(experience.difficulty)} backdrop-blur-sm rounded-full px-3 py-1`}>
                             <span className="text-sm font-semibold text-white">
                               {experience.difficulty}
@@ -374,49 +468,73 @@ const Experiences = () => {
                         </div>
                       </div>
                     </Link>
-                  </motion.div>)}
+                  </motion.div>
+                ))}
               </div>
 
               {/* Pagination (Desktop) / Load More (Mobile) */}
-              {!isMobile ? totalPages > 1 && <div className="flex justify-center mt-12">
+              {!isMobile ? (
+                totalPages > 1 && (
+                  <div className="flex justify-center mt-12">
                     <Pagination>
                       <PaginationContent>
                         <PaginationItem>
-                          <PaginationPrevious href="#" onClick={e => {
-                    e.preventDefault();
-                    if (currentPage > 1) setCurrentPage(currentPage - 1);
-                  }} className={currentPage === 1 ? 'pointer-events-none opacity-50' : ''} />
+                          <PaginationPrevious 
+                            href="#" 
+                            onClick={(e) => {
+                              e.preventDefault();
+                              if (currentPage > 1) setCurrentPage(currentPage - 1);
+                            }}
+                            className={currentPage === 1 ? 'pointer-events-none opacity-50' : ''}
+                          />
                         </PaginationItem>
                         
-                        {Array.from({
-                  length: totalPages
-                }, (_, i) => i + 1).map(page => <PaginationItem key={page}>
-                            <PaginationLink href="#" onClick={e => {
-                    e.preventDefault();
-                    setCurrentPage(page);
-                  }} isActive={page === currentPage}>
+                        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                          <PaginationItem key={page}>
+                            <PaginationLink 
+                              href="#" 
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setCurrentPage(page);
+                              }}
+                              isActive={page === currentPage}
+                            >
                               {page}
                             </PaginationLink>
-                          </PaginationItem>)}
+                          </PaginationItem>
+                        ))}
                         
                         <PaginationItem>
-                          <PaginationNext href="#" onClick={e => {
-                    e.preventDefault();
-                    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
-                  }} className={currentPage === totalPages ? 'pointer-events-none opacity-50' : ''} />
+                          <PaginationNext 
+                            href="#" 
+                            onClick={(e) => {
+                              e.preventDefault();
+                              if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+                            }}
+                            className={currentPage === totalPages ? 'pointer-events-none opacity-50' : ''}
+                          />
                         </PaginationItem>
                       </PaginationContent>
                     </Pagination>
-                  </div> : currentPage * itemsPerPage < filteredAndSortedExperiences.length && <div className="flex justify-center mt-8">
+                  </div>
+                )
+              ) : (
+                currentPage * itemsPerPage < filteredAndSortedExperiences.length && (
+                  <div className="flex justify-center mt-8">
                     <Button onClick={loadMore} variant="outline" size="lg">
                       Load More Experiences
                     </Button>
-                  </div>}
-            </>}
+                  </div>
+                )
+              )}
+            </>
+          )}
         </div>
       </section>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default Experiences;
