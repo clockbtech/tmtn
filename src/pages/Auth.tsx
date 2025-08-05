@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
@@ -58,6 +59,19 @@ const Auth = () => {
       {/* Right side - Form */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-gray-50">
         <div className="w-full max-w-md space-y-8">
+          {/* Company Logo */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mb-8"
+          >
+            <img 
+              src="/lovable-uploads/dbe53354-4e12-429d-96e9-f53b18d9b259.png" 
+              alt="tmtn logo"
+              className="h-12 w-auto mx-auto" 
+            />
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -220,4 +234,3 @@ const Auth = () => {
 };
 
 export default Auth;
-
