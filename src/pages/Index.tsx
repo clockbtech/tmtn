@@ -9,7 +9,9 @@ import TrendingExperiences from '../components/TrendingExperiences';
 import WhyChooseUs from '../components/WhyChooseUs';
 import Testimonials from '../components/Testimonials';
 import BlogPreview from '../components/BlogPreview';
+import AboutCTA from '@/components/about/AboutCTA';
 import Footer from '../components/Footer';
+
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -50,6 +52,7 @@ const Index = () => {
         <WhyChooseUs />
         <Testimonials />
         <BlogPreview />
+        <AboutCTA />
       </main>
       <Footer />
     </div>
