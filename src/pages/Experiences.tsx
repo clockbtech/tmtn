@@ -8,7 +8,6 @@ import { useTranslation } from '../contexts/TranslationContext';
 import { motion } from 'framer-motion';
 import { Users, Calendar, MapPin, Star, Clock, Heart } from 'lucide-react';
 import { Button } from '../components/ui/button';
-import { Input } from '../components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Badge } from '../components/ui/badge';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '../components/ui/pagination';
@@ -18,7 +17,6 @@ const Experiences = () => {
   const { t, formatPrice } = useTranslation();
 
   // State for filtering and search
-  const [searchTerm, setSearchTerm] = useState('');
   const [selectedDifficulty, setSelectedDifficulty] = useState('all');
   const [selectedLocation, setSelectedLocation] = useState('all');
   const [selectedDuration, setSelectedDuration] = useState('all');
@@ -117,11 +115,10 @@ const Experiences = () => {
   // Filter and sort experiences
   const filteredAndSortedExperiences = useMemo(() => {
     let filtered = experiences.filter(experience => {
-      const matchesSearch = experience.name.toLowerCase().includes(searchTerm.toLowerCase()) || experience.description.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesDifficulty = selectedDifficulty === 'all' || experience.difficulty === selectedDifficulty;
       const matchesLocation = selectedLocation === 'all' || experience.location.includes(selectedLocation);
       const matchesDuration = selectedDuration === 'all' || experience.duration.includes(selectedDuration);
-      return matchesSearch && matchesDifficulty && matchesLocation && matchesDuration;
+      return matchesDifficulty && matchesLocation && matchesDuration;
     });
 
     // Sort experiences
@@ -139,7 +136,7 @@ const Experiences = () => {
       }
     });
     return filtered;
-  }, [experiences, searchTerm, selectedDifficulty, selectedLocation, selectedDuration, sortBy]);
+  }, [experiences, selectedDifficulty, selectedLocation, selectedDuration, sortBy]);
 
   // Pagination logic
   const totalPages = Math.ceil(filteredAndSortedExperiences.length / itemsPerPage);
@@ -165,7 +162,6 @@ const Experiences = () => {
   };
 
   const clearFilters = () => {
-    setSearchTerm('');
     setSelectedDifficulty('all');
     setSelectedLocation('all');
     setSelectedDuration('all');
@@ -313,33 +309,10 @@ const Experiences = () => {
               </div>
             </div>
 
-            {/* Search Bar - Moved to separate row */}
-            <div className="mt-4 pt-4 border-t border-gray-100">
-              <div className="max-w-md">
-                <div className="flex items-center mb-2">
-                  <Calendar className="w-5 h-5 text-green-600 mr-2" />
-                  <label className="text-sm font-medium text-gray-700">Search</label>
-                </div>
-                <Input
-                  type="text"
-                  placeholder="Search experiences..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="h-12 border-gray-200 bg-gray-50/50 hover:bg-gray-50 transition-colors"
-                />
-              </div>
-            </div>
-
             {/* Active Filters */}
-            {(searchTerm || selectedDifficulty !== 'all' || selectedLocation !== 'all' || selectedDuration !== 'all' || guestCount > 1) && (
+            {(selectedDifficulty !== 'all' || selectedLocation !== 'all' || selectedDuration !== 'all' || guestCount > 1) && (
               <div className="flex flex-wrap gap-2 mt-6 pt-4 border-t border-gray-100">
                 <span className="text-sm text-gray-600 font-medium">Active filters:</span>
-                {searchTerm && (
-                  <Badge variant="secondary" className="flex items-center gap-1">
-                    Search: {searchTerm}
-                    <button onClick={() => setSearchTerm('')} className="ml-1 text-gray-500 hover:text-gray-700">×</button>
-                  </Badge>
-                )}
                 {selectedDifficulty !== 'all' && (
                   <Badge variant="secondary" className="flex items-center gap-1">
                     {selectedDifficulty}
