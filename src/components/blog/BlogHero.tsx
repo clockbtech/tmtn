@@ -1,4 +1,3 @@
-
 import { motion } from 'framer-motion';
 const BlogHero = () => {
   return <section className="relative bg-cover bg-center bg-no-repeat py-[150px]" style={{
@@ -15,7 +14,7 @@ const BlogHero = () => {
       }} transition={{
         duration: 0.8
       }} className="text-center text-white">
-              <h1 className="text-5xl font-tm-sans mb-6 lg:text-6xl font-extrabold">
+              <h1 className="text-5xl font-tm-sans uppercase mb-6 lg:text-6xl font-extrabold">
                Blog
               </h1>
               <p className="text-xl max-w-4xl mx-auto lg:text-xl">
