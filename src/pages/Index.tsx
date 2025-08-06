@@ -54,7 +54,7 @@ const Index = () => {
           src="src/assets/Airplane_Lottie_Animation.lottie" // Update this path to your actual lottie file
           loop
           autoplay
-          style={{ width: '200px', height: '200px' }}
+          style={{ width: '800px', height: '800px' }}
         />
       </div>
     );
