@@ -1,4 +1,4 @@
-
+import React, { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -23,39 +23,62 @@ import Checkout from "./pages/Checkout";
 import BookingComplete from "./pages/BookingComplete";
 import NotFound from "./pages/NotFound";
 
+import Lenis from "@studio-freight/lenis";
+
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TranslationProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/destinations" element={<Destinations />} />
-            <Route path="/destinations/:id" element={<DestinationDetail />} />
-            <Route path="/attractions" element={<Attractions />} />
-            <Route path="/attractions/:id" element={<AttractionsDetail />} />
-            <Route path="/experiences" element={<Experiences />} />
-            <Route path="/experiences/:id" element={<ExperienceDetail />} />
-            <Route path="/experiences/:id/checkout" element={<Checkout />} />
-            <Route path="/booking-complete" element={<BookingComplete />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogDetail />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/account" element={<Account />} />
-            <Route path="/faq" element={<FAQ />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </TranslationProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  // Initialize Lenis smooth scroll
+  useEffect(() => {
+  const lenis = new Lenis({
+    duration: 0.9,
+    easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  });
+
+  function raf(time: number) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
+
+  return () => {
+    lenis.destroy();
+  };
+}, []);
+
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TranslationProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/destinations" element={<Destinations />} />
+              <Route path="/destinations/:id" element={<DestinationDetail />} />
+              <Route path="/attractions" element={<Attractions />} />
+              <Route path="/attractions/:id" element={<AttractionsDetail />} />
+              <Route path="/experiences" element={<Experiences />} />
+              <Route path="/experiences/:id" element={<ExperienceDetail />} />
+              <Route path="/experiences/:id/checkout" element={<Checkout />} />
+              <Route path="/booking-complete" element={<BookingComplete />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogDetail />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/account" element={<Account />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </TranslationProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
