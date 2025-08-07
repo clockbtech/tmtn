@@ -40,7 +40,7 @@ const Auth = () => {
       <div 
         className="hidden lg:flex lg:w-1/2 relative bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: 'url(/lovable-uploads/3909d361-7017-4536-b256-c31d70c7e5b0.png)'
+          backgroundImage: 'url(/lovable-uploads/a26300b1-f01d-4f86-880d-99c4fc88d181.png)'
         }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-20"></div>
