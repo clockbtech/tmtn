@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
@@ -35,7 +34,7 @@ interface SuperAdminLayoutProps {
   children: React.ReactNode;
 }
 
-export const SuperAdminLayout = ({ children }: SuperAdminLayoutProps) => {
+export const SuperAdminLayout: React.FC<SuperAdminLayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const location = useLocation();
