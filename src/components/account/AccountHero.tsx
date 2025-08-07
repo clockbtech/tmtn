@@ -50,7 +50,7 @@ const AccountHero = () => {
             </div>
             
             {/* Status Badges */}
-            <div className="flex flex-wrap gap-3 px-0 mx-[149px]">
+            <div className="flex flex-wrap gap-3 px-0 mx-[130px]">
               <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
                 <Trophy className="w-3 h-3 mr-1" />
                 Explorer Level
