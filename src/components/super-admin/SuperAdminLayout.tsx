@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   BarChart3,
   MapPin,
@@ -31,7 +31,11 @@ const sidebarItems = [
   { id: 'settings', label: 'Settings', icon: Settings, path: '/super-admin/settings' },
 ];
 
-export const SuperAdminLayout = () => {
+interface SuperAdminLayoutProps {
+  children: React.ReactNode;
+}
+
+export const SuperAdminLayout = ({ children }: SuperAdminLayoutProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const location = useLocation();
@@ -42,6 +46,11 @@ export const SuperAdminLayout = () => {
   const handleNavigation = (path: string) => {
     navigate(path);
     setSidebarOpen(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('isAdmin');
+    navigate('/');
   };
 
   return (
@@ -125,6 +134,7 @@ export const SuperAdminLayout = () => {
             <Button
               variant="ghost"
               size="sm"
+              onClick={handleLogout}
               className="w-full justify-start text-destructive hover:text-destructive"
             >
               <LogOut className="h-4 w-4 mr-2" />
@@ -162,7 +172,7 @@ export const SuperAdminLayout = () => {
 
         {/* Page content */}
         <main className="p-6">
-          <Outlet />
+          {children}
         </main>
       </div>
     </div>
