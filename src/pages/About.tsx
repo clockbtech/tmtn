@@ -8,7 +8,6 @@ import AboutVideoSection from '../components/about/AboutVideoSection';
 import AboutCTA from '../components/about/AboutCTA';
 import TrendingExperiences from '../components/TrendingExperiences';
 import Testimonials from '../components/Testimonials';
-import FullscreenModal from '../components/video/FullscreenModal';
 
 const About = () => {
   const [fullscreenVideo, setFullscreenVideo] = useState<{ url: string; title: string } | null>(null);
@@ -73,23 +72,6 @@ const About = () => {
       </main>
       <Footer />
 
-      {/* Fullscreen Video Modal */}
-      <AnimatePresence>
-        {fullscreenVideo && (
-          <FullscreenModal
-            video={{
-              id: 'about-video',
-              title: fullscreenVideo.title,
-              url: fullscreenVideo.url,
-              thumbnail: fullscreenVideo.url
-            }}
-            currentIndex={0}
-            totalVideos={1}
-            onClose={closeFullscreen}
-            onNavigate={() => {}}
-          />
-        )}
-      </AnimatePresence>
     </div>
   );
 };
