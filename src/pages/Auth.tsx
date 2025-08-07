@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -51,7 +50,12 @@ const Auth = () => {
         <div className="w-full max-w-md space-y-6">
           {/* Logo */}
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-black">tmtn.</h1>
+            <img 
+              src="/lovable-uploads/dbe53354-4e12-429d-96e9-f53b18d9b259.png" 
+              alt="tmtn logo"
+              className="h-12 w-auto mx-auto brightness-0" 
+              style={{ filter: 'brightness(0)' }}
+            />
           </div>
 
           {/* Title */}
