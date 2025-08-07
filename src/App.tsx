@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -5,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { TranslationProvider } from "./contexts/TranslationContext";
+import { AdminGuard } from "./components/super-admin/AdminGuard";
 import Index from "./pages/Index";
 import Destinations from "./pages/Destinations";
 import DestinationDetail from "./pages/DestinationDetail";
@@ -22,6 +24,16 @@ import FAQ from "./pages/FAQ";
 import Checkout from "./pages/Checkout";
 import BookingComplete from "./pages/BookingComplete";
 import NotFound from "./pages/NotFound";
+
+// Super Admin Pages
+import SuperAdmin from "./pages/SuperAdmin";
+import SuperAdminBookings from "./pages/super-admin/SuperAdminBookings";
+import SuperAdminUsers from "./pages/super-admin/SuperAdminUsers";
+import SuperAdminDestinations from "./pages/super-admin/SuperAdminDestinations";
+import SuperAdminExperiences from "./pages/super-admin/SuperAdminExperiences";
+import SuperAdminBlogs from "./pages/super-admin/SuperAdminBlogs";
+import SuperAdminFAQs from "./pages/super-admin/SuperAdminFAQs";
+import SuperAdminSettings from "./pages/super-admin/SuperAdminSettings";
 
 import Lenis from "@studio-freight/lenis";
 
@@ -72,6 +84,49 @@ const App = () => {
               <Route path="/auth" element={<Auth />} />
               <Route path="/account" element={<Account />} />
               <Route path="/faq" element={<FAQ />} />
+              
+              {/* Super Admin Routes - Protected */}
+              <Route path="/super-admin" element={
+                <AdminGuard>
+                  <SuperAdmin />
+                </AdminGuard>
+              } />
+              <Route path="/super-admin/bookings" element={
+                <AdminGuard>
+                  <SuperAdminBookings />
+                </AdminGuard>
+              } />
+              <Route path="/super-admin/users" element={
+                <AdminGuard>
+                  <SuperAdminUsers />
+                </AdminGuard>
+              } />
+              <Route path="/super-admin/destinations" element={
+                <AdminGuard>
+                  <SuperAdminDestinations />
+                </AdminGuard>
+              } />
+              <Route path="/super-admin/experiences" element={
+                <AdminGuard>
+                  <SuperAdminExperiences />
+                </AdminGuard>
+              } />
+              <Route path="/super-admin/blogs" element={
+                <AdminGuard>
+                  <SuperAdminBlogs />
+                </AdminGuard>
+              } />
+              <Route path="/super-admin/faqs" element={
+                <AdminGuard>
+                  <SuperAdminFAQs />
+                </AdminGuard>
+              } />
+              <Route path="/super-admin/settings" element={
+                <AdminGuard>
+                  <SuperAdminSettings />
+                </AdminGuard>
+              } />
+              
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
