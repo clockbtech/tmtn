@@ -11,7 +11,7 @@ const AccountHero = () => {
         <div className="absolute inset-0 bg-[url('/lovable-uploads/a26300b1-f01d-4f86-880d-99c4fc88d181.png')] bg-cover bg-center"></div>
       </div>
       
-      <div className="container mx-auto px-4 py-16 relative z-10">
+      <div className="container mx-auto px-4 relative z-10 py-[130px]">
         <div className="grid lg:grid-cols-3 gap-8 items-center">
           {/* Left Column - User Profile */}
           <motion.div initial={{
@@ -50,7 +50,7 @@ const AccountHero = () => {
             </div>
             
             {/* Status Badges */}
-            <div className="flex flex-wrap gap-3 px-0 mx-[130px]">
+            <div className="flex flex-wrap gap-3">
               <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
                 <Trophy className="w-3 h-3 mr-1" />
                 Explorer Level
