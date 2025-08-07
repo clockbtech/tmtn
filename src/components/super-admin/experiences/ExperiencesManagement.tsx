@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import {
   Card,
@@ -120,7 +119,7 @@ export const ExperiencesManagement = () => {
   const [selectedStatus, setSelectedStatus] = useState('All');
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
 
-  const ExperienceForm = ({ experience, onClose }) => {
+  const ExperienceForm = ({ experience, onClose }: { experience?: any; onClose: () => void }) => {
     const [currentTab, setCurrentTab] = useState('basic');
     const [formData, setFormData] = useState({
       name: experience?.name || '',
@@ -148,14 +147,14 @@ export const ExperiencesManagement = () => {
       }));
     };
 
-    const removeItineraryItem = (index) => {
+    const removeItineraryItem = (index: number) => {
       setFormData(prev => ({
         ...prev,
         itinerary: prev.itinerary.filter((_, i) => i !== index)
       }));
     };
 
-    const updateItineraryItem = (index, field, value) => {
+    const updateItineraryItem = (index: number, field: string, value: string) => {
       setFormData(prev => ({
         ...prev,
         itinerary: prev.itinerary.map((item, i) => 
@@ -164,7 +163,7 @@ export const ExperiencesManagement = () => {
       }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
       console.log('Experience form submitted:', formData);
       onClose();

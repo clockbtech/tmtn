@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import {
   Card,
@@ -120,7 +119,7 @@ export const DestinationsManagement = () => {
     return matchesSearch && matchesCategory && matchesStatus;
   });
 
-  const DestinationForm = ({ destination, onClose }) => {
+  const DestinationForm = ({ destination, onClose }: { destination?: any; onClose: () => void }) => {
     const [formData, setFormData] = useState({
       name: destination?.name || '',
       description: destination?.description || '',
@@ -130,7 +129,7 @@ export const DestinationsManagement = () => {
       status: destination?.status || 'Active',
     });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
       // Handle form submission
       console.log('Form submitted:', formData);
