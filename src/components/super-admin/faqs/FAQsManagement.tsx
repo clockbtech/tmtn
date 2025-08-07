@@ -407,7 +407,7 @@ export const FAQsManagement = () => {
           <CardTitle>FAQs ({filteredFAQs.length})</CardTitle>
           <CardDescription>
             Manage frequently asked questions and help content
-          </DialogDescription>
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <Table>
