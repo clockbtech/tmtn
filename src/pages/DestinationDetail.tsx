@@ -7,17 +7,90 @@ import Footer from '../components/Footer';
 import { useTranslation } from '../contexts/TranslationContext';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../components/ui/carousel';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import AttractionCard from '../components/shared/AttractionCard';
+
 const DestinationDetail = () => {
-  const {
-    id
-  } = useParams();
-  const {
-    t,
-    formatPrice
-  } = useTranslation();
+  const { id } = useParams();
+  const { t, formatPrice } = useTranslation();
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [autoPlay, setAutoPlay] = useState(true);
+
+  // Shared attractions data (same as from Attractions page)
+  const allAttractions = [
+    {
+      id: 1,
+      name: 'Swayambhunath (Monkey Temple)',
+      description: 'Ancient Buddhist stupa with panoramic views of Kathmandu Valley',
+      image: 'https://images.unsplash.com/photo-1552353338-0944fa7abdcd?w=500&auto=format&fit=crop&q=60',
+      type: 'Temple',
+      location: 'Kathmandu',
+      rating: 4.7,
+      reviews: 324,
+      price: 25,
+      duration: '2-3 hours'
+    },
+    {
+      id: 2,
+      name: 'Boudhanath Stupa',
+      description: 'One of the largest Buddhist stupas in the world',
+      image: 'https://images.unsplash.com/photo-1558005530-a7958896e18c?w=500&auto=format&fit=crop&q=60',
+      type: 'Temple',
+      location: 'Kathmandu',
+      rating: 4.8,
+      reviews: 456,
+      price: 30,
+      duration: '2-4 hours'
+    },
+    {
+      id: 3,
+      name: 'Pashupatinath Temple',
+      description: 'Sacred Hindu temple dedicated to Lord Shiva',
+      image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=500&auto=format&fit=crop&q=60',
+      type: 'Temple',
+      location: 'Kathmandu',
+      rating: 4.6,
+      reviews: 389,
+      price: 35,
+      duration: '2-3 hours'
+    },
+    {
+      id: 4,
+      name: 'Durbar Square Kathmandu',
+      description: 'Historic palace complex with ancient architecture',
+      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&auto=format&fit=crop&q=60',
+      type: 'Historical Site',
+      location: 'Kathmandu',
+      rating: 4.5,
+      reviews: 278,
+      price: 40,
+      duration: '3-4 hours'
+    },
+    {
+      id: 5,
+      name: 'Phewa Lake',
+      description: 'Serene lake with mountain reflections and boating',
+      image: 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=500&auto=format&fit=crop&q=60',
+      type: 'Natural',
+      location: 'Pokhara',
+      rating: 4.9,
+      reviews: 512,
+      price: 20,
+      duration: 'Half day'
+    },
+    {
+      id: 6,
+      name: 'World Peace Pagoda',
+      description: 'Buddhist monument overlooking Pokhara valley',
+      image: 'https://images.unsplash.com/photo-1566552881560-0be862a7c445?w=500&auto=format&fit=crop&q=60',
+      type: 'Temple',
+      location: 'Pokhara',
+      rating: 4.7,
+      reviews: 298,
+      price: 15,
+      duration: '2-3 hours'
+    }
+  ];
 
   // Mock data - in real app this would come from API
   const destination = {
@@ -41,25 +114,6 @@ const DestinationDetail = () => {
       description: 'Clear mountain views and stable weather'
     }],
     gallery: ['https://images.unsplash.com/photo-1513614835783-51537729c8ba?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'https://images.unsplash.com/photo-1529556253689-cf147e0fb3d9?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'https://images.unsplash.com/photo-1571401835393-8c5f35328320?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'https://images.unsplash.com/photo-1571330177234-54304dac2beb?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'https://images.unsplash.com/photo-1745059177820-ddca8ef74f41?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'https://images.unsplash.com/photo-1551932733-09ad7c5b2bc5?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'],
-    attractions: [{
-      id: 1,
-      name: 'Tengboche Monastery',
-      description: 'Ancient Buddhist monastery with stunning mountain views',
-      image: 'https://images.unsplash.com/photo-1693039201083-2bf80bfe200c?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      location: 'Tengboche, Khumbu'
-    }, {
-      id: 2,
-      name: 'Namche Bazaar',
-      description: 'Gateway to Everest and vibrant Sherpa trading hub',
-      image: 'https://images.unsplash.com/photo-1511215579272-6192432f83bc?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      location: 'Namche, Khumbu'
-    }, {
-      id: 3,
-      name: 'Kala Patthar',
-      description: 'Best viewpoint for Everest panoramic views',
-      image: 'https://images.unsplash.com/photo-1669873904455-d2a5f0e2c9da?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      location: 'Gorak Shep, Khumbu'
-    }],
     experiences: [{
       id: 1,
       name: 'Everest Base Camp Trek - 14 Days',
@@ -85,9 +139,14 @@ const DestinationDetail = () => {
       proTips: ['Pack layers for changing weather conditions', 'Bring extra batteries as they drain faster in cold', 'Book teahouses in advance during peak season', 'Carry cash as ATMs are limited']
     }
   };
+
+  // Get related attractions (first 3 attractions for demo)
+  const relatedAttractions = allAttractions.slice(0, 3);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  
   useEffect(() => {
     if (!autoPlay) return;
     const interval = setInterval(() => {
@@ -95,29 +154,32 @@ const DestinationDetail = () => {
     }, 4000);
     return () => clearInterval(interval);
   }, [autoPlay, destination.gallery.length]);
+  
   const openModal = (index: number) => {
     setSelectedImageIndex(index);
     setIsModalOpen(true);
   };
-  return <div className="min-h-screen bg-white">
+
+  return (
+    <div className="min-h-screen bg-white">
       <Header />
 
       {/* Hero Banner */}
       <section className="relative h-[70vh] bg-cover bg-center bg-no-repeat" style={{
-      backgroundImage: `url(${destination.heroImage})`
-    }}>
+        backgroundImage: `url(${destination.heroImage})`
+      }}>
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
         <div className="absolute inset-0 flex items-end">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-20">
             <motion.div initial={{
-            opacity: 0,
-            y: 50
-          }} animate={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.8
-          }}>
+              opacity: 0,
+              y: 50
+            }} animate={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.8
+            }}>
               <Link to="/destinations" className="inline-flex items-center text-white/80 hover:text-white mb-6 transition-colors">
                 <ArrowLeft className="w-5 h-5 mr-2" />
                 Back to Destinations
@@ -139,31 +201,35 @@ const DestinationDetail = () => {
           <div className="lg:col-span-2 space-y-12">
             {/* Overview Section */}
             <motion.section initial={{
-            opacity: 0,
-            y: 30
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.6
-          }}>
+              opacity: 0,
+              y: 30
+            }} whileInView={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.6
+            }}>
               <h2 className="font-bebas uppercase text-tmtn-blue mb-6 text-2xl font-extrabold">
                 Overview
               </h2>
               <div className="prose prose-lg max-w-none text-gray-700 mb-8">
-                {destination.description.split('\n\n').map((paragraph, index) => <p key={index} className="mb-4">
+                {destination.description.split('\n\n').map((paragraph, index) => (
+                  <p key={index} className="mb-4">
                     {paragraph.trim()}
-                  </p>)}
+                  </p>
+                ))}
               </div>
 
               {/* Key Highlights */}
               <div className="mb-8">
                 <h3 className="text-xl font-bold text-gray-900 mb-4">Key Highlights</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {destination.highlights.map((highlight, index) => <div key={index} className="flex items-center text-gray-700">
+                  {destination.highlights.map((highlight, index) => (
+                    <div key={index} className="flex items-center text-gray-700">
                       <div className="w-2 h-2 bg-tmtn-red rounded-full mr-3"></div>
                       {highlight}
-                    </div>)}
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -171,27 +237,29 @@ const DestinationDetail = () => {
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">Best Seasons to Visit</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {destination.bestSeasons.map((season, index) => <div key={index} className="flex items-center p-4 bg-gray-50 rounded-lg">
+                  {destination.bestSeasons.map((season, index) => (
+                    <div key={index} className="flex items-center p-4 bg-gray-50 rounded-lg">
                       <span className="text-3xl mr-4">{season.icon}</span>
                       <div>
                         <div className="font-semibold text-tmtn-blue">{season.months}</div>
                         <div className="text-sm text-gray-600">{season.description}</div>
                       </div>
-                    </div>)}
+                    </div>
+                  ))}
                 </div>
               </div>
             </motion.section>
 
             {/* Photo Gallery */}
             <motion.section initial={{
-            opacity: 0,
-            y: 30
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.6
-          }}>
+              opacity: 0,
+              y: 30
+            }} whileInView={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.6
+            }}>
               <div className="flex items-center justify-between mb-6">
                 <h2 className="font-bebas uppercase text-tmtn-blue font-extrabold text-2xl">
                   Photo Gallery
@@ -214,55 +282,53 @@ const DestinationDetail = () => {
 
               {/* Thumbnail Gallery */}
               <div className="grid grid-cols-6 gap-2">
-                {destination.gallery.map((image, index) => <img key={index} src={image} alt={`Thumbnail ${index + 1}`} className={`w-full h-20 object-cover rounded cursor-pointer transition-opacity ${selectedImageIndex === index ? 'opacity-100 ring-2 ring-tmtn-blue' : 'opacity-70 hover:opacity-100'}`} onClick={() => setSelectedImageIndex(index)} />)}
+                {destination.gallery.map((image, index) => (
+                  <img key={index} src={image} alt={`Thumbnail ${index + 1}`} className={`w-full h-20 object-cover rounded cursor-pointer transition-opacity ${selectedImageIndex === index ? 'opacity-100 ring-2 ring-tmtn-blue' : 'opacity-70 hover:opacity-100'}`} onClick={() => setSelectedImageIndex(index)} />
+                ))}
               </div>
             </motion.section>
 
-            {/* Linked Attractions */}
+            {/* Nearby Attractions with Dynamic Cards */}
             <motion.section initial={{
-            opacity: 0,
-            y: 30
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.6
-          }}>
+              opacity: 0,
+              y: 30
+            }} whileInView={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.6
+            }}>
               <h2 className="font-bebas uppercase text-tmtn-blue mb-6 font-extrabold text-2xl">
                 Nearby Attractions
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {destination.attractions.map(attraction => <Card key={attraction.id} className="group cursor-pointer hover:shadow-lg transition-shadow">
-                    <div className="relative overflow-hidden">
-                      <img src={attraction.image} alt={attraction.name} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
-                    </div>
-                    <CardContent className="p-4">
-                      <h3 className="font-bold text-tmtn-blue mb-2">{attraction.name}</h3>
-                      <p className="text-sm text-gray-600 mb-2">{attraction.description}</p>
-                      <div className="flex items-center text-xs text-gray-500">
-                        <MapPin className="w-3 h-3 mr-1" />
-                        {attraction.location}
-                      </div>
-                    </CardContent>
-                  </Card>)}
+                {relatedAttractions.map((attraction, index) => (
+                  <AttractionCard 
+                    key={attraction.id} 
+                    attraction={attraction} 
+                    index={index}
+                    formatPrice={formatPrice}
+                  />
+                ))}
               </div>
             </motion.section>
 
             {/* Linked Experiences */}
             <motion.section initial={{
-            opacity: 0,
-            y: 30
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.6
-          }}>
+              opacity: 0,
+              y: 30
+            }} whileInView={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.6
+            }}>
               <h2 className="font-bebas uppercase text-tmtn-blue mb-6 font-extrabold text-2xl">
                 Available Experiences
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {destination.experiences.map(experience => <Card key={experience.id} className="group hover:shadow-lg transition-shadow">
+                {destination.experiences.map(experience => (
+                  <Card key={experience.id} className="group hover:shadow-lg transition-shadow">
                     <div className="relative overflow-hidden">
                       <img src={experience.image} alt={experience.name} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
                       <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
@@ -288,9 +354,11 @@ const DestinationDetail = () => {
                       <div className="mb-4">
                         <div className="text-sm text-gray-600 mb-2">Includes:</div>
                         <div className="flex flex-wrap gap-1">
-                          {experience.includes.map((item, index) => <span key={index} className="text-xs bg-gray-100 px-2 py-1 rounded">
+                          {experience.includes.map((item, index) => (
+                            <span key={index} className="text-xs bg-gray-100 px-2 py-1 rounded">
                               {item}
-                            </span>)}
+                            </span>
+                          ))}
                         </div>
                       </div>
 
@@ -298,7 +366,8 @@ const DestinationDetail = () => {
                         Book Now
                       </button>
                     </CardContent>
-                  </Card>)}
+                  </Card>
+                ))}
               </div>
             </motion.section>
           </div>
@@ -315,10 +384,12 @@ const DestinationDetail = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  {destination.travelTips.safety.map((tip, index) => <div key={index} className="flex items-start">
+                  {destination.travelTips.safety.map((tip, index) => (
+                    <div key={index} className="flex items-start">
                       <div className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
                       <span className="text-sm text-gray-700">{tip}</span>
-                    </div>)}
+                    </div>
+                  ))}
                 </CardContent>
               </Card>
 
@@ -331,10 +402,12 @@ const DestinationDetail = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  {destination.travelTips.quickFacts.map((fact, index) => <div key={index} className="flex items-center justify-between">
+                  {destination.travelTips.quickFacts.map((fact, index) => (
+                    <div key={index} className="flex items-center justify-between">
                       <span className="text-sm text-gray-700">{fact.split(':')[0]}:</span>
                       <span className="text-sm font-semibold text-tmtn-blue">{fact.split(':')[1]}</span>
-                    </div>)}
+                    </div>
+                  ))}
                 </CardContent>
               </Card>
 
@@ -347,10 +420,12 @@ const DestinationDetail = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  {destination.travelTips.proTips.map((tip, index) => <div key={index} className="flex items-start">
+                  {destination.travelTips.proTips.map((tip, index) => (
+                    <div key={index} className="flex items-start">
                       <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
                       <span className="text-sm text-gray-700">{tip}</span>
-                    </div>)}
+                    </div>
+                  ))}
                 </CardContent>
               </Card>
             </div>
@@ -359,7 +434,8 @@ const DestinationDetail = () => {
       </div>
 
       {/* Image Modal */}
-      {isModalOpen && <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center">
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center">
           <div className="relative max-w-7xl max-h-full p-4">
             <button onClick={() => setIsModalOpen(false)} className="absolute top-4 right-4 text-white hover:text-gray-300 z-10">
               <X className="w-8 h-8" />
@@ -379,9 +455,12 @@ const DestinationDetail = () => {
               {selectedImageIndex + 1} / {destination.gallery.length}
             </div>
           </div>
-        </div>}
+        </div>
+      )}
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default DestinationDetail;
