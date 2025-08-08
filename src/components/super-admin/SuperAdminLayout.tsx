@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
@@ -14,7 +15,8 @@ import {
   Home,
   LogOut,
   Moon,
-  Sun
+  Sun,
+  UserCheck
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -25,6 +27,7 @@ const sidebarItems = [
   { id: 'experiences', label: 'Experiences', icon: Package, path: '/super-admin/experiences' },
   { id: 'bookings', label: 'Bookings', icon: Calendar, path: '/super-admin/bookings' },
   { id: 'users', label: 'Users', icon: Users, path: '/super-admin/users' },
+  { id: 'tour-guides', label: 'Tour Guides', icon: UserCheck, path: '/super-admin/tour-guides' },
   { id: 'blogs', label: 'Blogs', icon: FileText, path: '/super-admin/blogs' },
   { id: 'faqs', label: 'FAQs', icon: HelpCircle, path: '/super-admin/faqs' },
   { id: 'settings', label: 'Settings', icon: Settings, path: '/super-admin/settings' },
