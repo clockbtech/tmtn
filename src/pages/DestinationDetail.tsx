@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -8,6 +9,7 @@ import { useTranslation } from '../contexts/TranslationContext';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../components/ui/carousel';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import AttractionCard from '../components/shared/AttractionCard';
+import ExperienceCard from '../components/shared/ExperienceCard';
 
 const DestinationDetail = () => {
   const { id } = useParams();
@@ -92,6 +94,76 @@ const DestinationDetail = () => {
     }
   ];
 
+  // Dynamic experiences data (same design as Experiences page)
+  const experiencesData = [
+    {
+      id: 1,
+      title: 'Everest Base Camp Trek',
+      image: 'https://images.unsplash.com/photo-1609660062508-1ac4a930232d?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      location: 'Nepal',
+      rating: 4.9,
+      reviews: 234,
+      price: 1299,
+      duration: '14 days',
+      difficulty: 'Extreme'
+    },
+    {
+      id: 2,
+      title: 'Annapurna Helicopter Tour',
+      image: 'https://images.unsplash.com/photo-1495554698253-681539e9ea84?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      location: 'Nepal',
+      rating: 4.8,
+      reviews: 187,
+      price: 899,
+      duration: '4 hours',
+      difficulty: 'Easy'
+    },
+    {
+      id: 3,
+      title: 'Cultural Heritage Tour',
+      image: 'https://images.unsplash.com/photo-1728145993747-e7b51192076d?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx4fA%3D%3D',
+      location: 'Nepal',
+      rating: 4.7,
+      reviews: 156,
+      price: 299,
+      duration: '3 days',
+      difficulty: 'Easy'
+    },
+    {
+      id: 4,
+      title: 'Pokhara Lake Adventure',
+      image: 'https://images.unsplash.com/photo-1735533441842-33c5e47b22ae?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      location: 'Nepal',
+      rating: 4.6,
+      reviews: 203,
+      price: 199,
+      duration: '2 days',
+      difficulty: 'Moderate'
+    },
+    {
+      id: 5,
+      title: 'Wildlife Safari',
+      image: 'https://images.unsplash.com/photo-1710077539513-6d0b9cf273e2?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx4fA%3D%3D',
+      location: 'Nepal',
+      rating: 4.5,
+      reviews: 128,
+      price: 399,
+      duration: '3 days',
+      difficulty: 'Easy'
+    },
+    {
+      id: 6,
+      title: 'Langtang Valley Trek',
+      image: 'https://images.unsplash.com/photo-1701012563262-5c0cfb7d1f1d?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D',
+      location: 'Nepal',
+      rating: 4.8,
+      reviews: 165,
+      price: 799,
+      duration: '8 days',
+      difficulty: 'Moderate'
+    }
+  ];
+
   // Mock data - in real app this would come from API
   const destination = {
     id: parseInt(id || '1'),
@@ -114,25 +186,6 @@ const DestinationDetail = () => {
       description: 'Clear mountain views and stable weather'
     }],
     gallery: ['https://images.unsplash.com/photo-1513614835783-51537729c8ba?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'https://images.unsplash.com/photo-1529556253689-cf147e0fb3d9?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'https://images.unsplash.com/photo-1571401835393-8c5f35328320?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'https://images.unsplash.com/photo-1571330177234-54304dac2beb?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'https://images.unsplash.com/photo-1745059177820-ddca8ef74f41?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'https://images.unsplash.com/photo-1551932733-09ad7c5b2bc5?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'],
-    experiences: [{
-      id: 1,
-      name: 'Everest Base Camp Trek - 14 Days',
-      description: 'Complete guided trek to Everest Base Camp',
-      image: 'https://images.unsplash.com/photo-1673505413397-0cd0dc4f5854?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      duration: '14 days',
-      difficulty: 'Challenging',
-      price: 2500,
-      includes: ['All meals', 'Accommodation', 'Guide', 'Permits']
-    }, {
-      id: 2,
-      name: 'Helicopter Tour to Base Camp',
-      description: 'Quick helicopter flight to Everest Base Camp',
-      image: 'https://images.unsplash.com/flagged/photo-1571470690590-2080c1276242?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      duration: '1 day',
-      difficulty: 'Easy',
-      price: 1200,
-      includes: ['Helicopter flight', 'Landing at base camp', 'Breakfast']
-    }],
     travelTips: {
       safety: ['Acclimatize properly to prevent altitude sickness', 'Carry altitude sickness medication', 'Stay hydrated and avoid alcohol', 'Follow your guide\'s advice at all times'],
       quickFacts: ['Max Altitude: 5,364m', 'Total Distance: 130km', 'Best Months: Mar-May, Sep-Nov', 'Difficulty: Challenging', 'Duration: 14-16 days'],
@@ -321,7 +374,7 @@ const DestinationDetail = () => {
               </Carousel>
             </motion.section>
 
-            {/* Linked Experiences */}
+            {/* Available Experiences with Carousel */}
             <motion.section initial={{
               opacity: 0,
               y: 30
@@ -334,49 +387,25 @@ const DestinationDetail = () => {
               <h2 className="font-bebas uppercase text-tmtn-blue mb-6 font-extrabold text-2xl">
                 Available Experiences
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {destination.experiences.map(experience => (
-                  <Card key={experience.id} className="group hover:shadow-lg transition-shadow">
-                    <div className="relative overflow-hidden">
-                      <img src={experience.image} alt={experience.name} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
-                      <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
-                        <span className="text-sm font-semibold text-tmtn-blue">
-                          {experience.difficulty}
-                        </span>
-                      </div>
-                    </div>
-                    <CardContent className="p-6">
-                      <h3 className="font-bold text-tmtn-blue mb-2 text-xl">{experience.name}</h3>
-                      <p className="text-gray-600 mb-4">{experience.description}</p>
-                      
-                      <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                        <div className="flex items-center">
-                          <Clock className="w-4 h-4 mr-1" />
-                          {experience.duration}
-                        </div>
-                        <div className="text-2xl font-bold text-tmtn-blue">
-                          {formatPrice(experience.price)}
-                        </div>
-                      </div>
-
-                      <div className="mb-4">
-                        <div className="text-sm text-gray-600 mb-2">Includes:</div>
-                        <div className="flex flex-wrap gap-1">
-                          {experience.includes.map((item, index) => (
-                            <span key={index} className="text-xs bg-gray-100 px-2 py-1 rounded">
-                              {item}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      <button className="w-full btn-gradient text-white py-3 rounded-lg font-semibold">
-                        Book Now
-                      </button>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+              <Carousel className="w-full" opts={{
+                align: "start",
+                loop: true
+              }}>
+                <CarouselContent className="-ml-4">
+                  {experiencesData.map((experience, index) => (
+                    <CarouselItem key={experience.id} className="pl-4 md:basis-1/2">
+                      <ExperienceCard 
+                        experience={experience} 
+                        index={index}
+                        formatPrice={formatPrice}
+                        showWishlistHeart={false}
+                      />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="bg-white shadow-lg border-0 hover:bg-gray-50" />
+                <CarouselNext className="bg-white shadow-lg border-0 hover:bg-gray-50" />
+              </Carousel>
             </motion.section>
           </div>
 
