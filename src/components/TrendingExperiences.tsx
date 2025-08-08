@@ -177,9 +177,6 @@ const TrendingExperiences = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <p className="font-yesteryear text-green-600 text-2xl mb-2">
-            Adventure awaits
-          </p>
           <h2 className="text-4xl lg:text-4xl font-bebas uppercase font-extrabold text-tmtn-blue mb-4">
             Trending Experiences
           </h2>

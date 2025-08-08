@@ -148,9 +148,6 @@ const WhyChooseUs = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <p className="font-yesteryear text-green-400 text-2xl mb-2">
-            Your trusted partner
-          </p>
           <h2 className="text-4xl lg:text-5xl font-bold mb-4 uppercase">
             Why Choose Take Me To Nepal?
           </h2>
