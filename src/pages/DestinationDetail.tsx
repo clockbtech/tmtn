@@ -288,7 +288,7 @@ const DestinationDetail = () => {
               </div>
             </motion.section>
 
-            {/* Nearby Attractions with Dynamic Cards */}
+            {/* Nearby Attractions with Carousel */}
             <motion.section initial={{
               opacity: 0,
               y: 30
@@ -301,16 +301,24 @@ const DestinationDetail = () => {
               <h2 className="font-bebas uppercase text-tmtn-blue mb-6 font-extrabold text-2xl">
                 Nearby Attractions
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {relatedAttractions.map((attraction, index) => (
-                  <AttractionCard 
-                    key={attraction.id} 
-                    attraction={attraction} 
-                    index={index}
-                    formatPrice={formatPrice}
-                  />
-                ))}
-              </div>
+              <Carousel className="w-full" opts={{
+                align: "start",
+                loop: true
+              }}>
+                <CarouselContent className="-ml-4">
+                  {relatedAttractions.map((attraction, index) => (
+                    <CarouselItem key={attraction.id} className="pl-4 md:basis-1/2">
+                      <AttractionCard 
+                        attraction={attraction} 
+                        index={index}
+                        formatPrice={formatPrice}
+                      />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="bg-white shadow-lg border-0 hover:bg-gray-50" />
+                <CarouselNext className="bg-white shadow-lg border-0 hover:bg-gray-50" />
+              </Carousel>
             </motion.section>
 
             {/* Linked Experiences */}
