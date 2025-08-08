@@ -13,7 +13,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Input } from '../components/ui/input';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,13 +37,6 @@ const Attractions = () => {
   const [selectedLocation, setSelectedLocation] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
-  const [isLoading, setIsLoading] = useState(true);
-
-  //const [a, setA]= useState(0);
-
-  //useEffect(() => {
-  //timer  once complete then setA(1);
-//})
 
   useEffect(() => {
     ScrollTrigger.refresh();
@@ -172,33 +164,6 @@ const Attractions = () => {
     setSortBy('name');
     setCurrentPage(1);
   };
-
-     useEffect(() => {
-        // Simulate loading (replace this with your actual loading logic)
-        const timer = setTimeout(() => {
-          setIsLoading(false);
-          ScrollTrigger.refresh();
-        }, 4000); // Adjust time as needed
-    
-  
-    
-        return () => {
-          clearTimeout(timer);
-        };
-      }, []);
-
-if (isLoading) {
-    return (
-      <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
-        <DotLottieReact
-          src="src/assets/Airplane_Lottie_Animation.lottie" // Update this path to your actual lottie file
-          loop
-          autoplay
-          style={{ width: '800px', height: '800px' }}
-        />
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-white font-inter">

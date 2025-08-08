@@ -268,14 +268,14 @@ const TrendingExperiences = () => {
                         </div>
                         <div className="flex items-center">
                           <Users className="w-4 h-4 mr-1" />
-                          <span>13 Person</span>
+                          <span>12 Person</span>
                         </div>
                       </div>
 
                       <div className="flex items-center justify-between">
                         <div>
-                          <span className="text-sm text-gray-600">From </span>
-                          <span className="text-lg text-green-600">
+                          <span className="text-sm text-gray-500">From </span>
+                          <span className="text-lg font-bold text-green-600">
                             {formatPrice(experience.basePrice)}
                           </span>
                           <span className="text-sm text-gray-400 line-through ml-2">
