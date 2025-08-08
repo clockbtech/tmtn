@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import {
   Card,
@@ -58,6 +57,7 @@ import {
   Heart,
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { BlogForm } from './BlogForm';
 
 // Mock data
 const blogs = [
@@ -123,6 +123,7 @@ export const BlogsManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedStatus, setSelectedStatus] = useState('All');
+  const [showBlogForm, setShowBlogForm] = useState(false);
 
   const filteredBlogs = blogs.filter((blog) => {
     const matchesSearch = 
@@ -221,7 +222,7 @@ export const BlogsManagement = () => {
           <h2 className="text-2xl font-bold tracking-tight">Blog Management</h2>
           <p className="text-muted-foreground">Create and manage blog posts and articles</p>
         </div>
-        <Button>
+        <Button onClick={() => setShowBlogForm(true)}>
           <Plus className="h-4 w-4 mr-2" />
           New Blog Post
         </Button>
@@ -431,6 +432,12 @@ export const BlogsManagement = () => {
           </Table>
         </CardContent>
       </Card>
+
+      {/* Blog Form Dialog */}
+      <BlogForm
+        open={showBlogForm}
+        onOpenChange={setShowBlogForm}
+      />
     </div>
   );
 };
