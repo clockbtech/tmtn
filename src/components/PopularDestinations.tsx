@@ -4,12 +4,15 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTranslation } from '../contexts/TranslationContext';
 import { Link } from 'react-router-dom';
+
 gsap.registerPlugin(ScrollTrigger);
+
 const PopularDestinations = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const {
     t
   } = useTranslation();
+
   const destinations = [{
     id: 1,
     nameKey: 'destinations.everest',
@@ -41,6 +44,7 @@ const PopularDestinations = () => {
     descKey: 'destinations.langtang.desc',
     image: 'https://images.unsplash.com/photo-1516132006923-6cf348e5dee2?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   }];
+
   useEffect(() => {
     const cards = gsap.utils.toArray('.destination-card');
     gsap.fromTo(cards, {
@@ -62,6 +66,7 @@ const PopularDestinations = () => {
       }
     });
   }, []);
+
   return <section ref={sectionRef} className="py-20 bg-gray-50" id="destinations">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div initial={{
@@ -73,6 +78,9 @@ const PopularDestinations = () => {
       }} transition={{
         duration: 0.8
       }} className="text-center mb-16">
+          <p className="font-yesteryear text-green-600 text-2xl mb-2">
+            Explore the beauty
+          </p>
           <h2 className="text-4xl lg:text-4xl font-poppins uppercase font-extrabold text-tmtn-blue mb-4">
             {t('destinations.title')}
           </h2>
@@ -117,4 +125,5 @@ const PopularDestinations = () => {
       </div>
     </section>;
 };
+
 export default PopularDestinations;

@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
 
@@ -22,6 +23,7 @@ export default {
 			fontFamily: {
 				'poppins': ['Poppins', 'sans-serif'],
 				'sans': ['Poppins', 'sans-serif'], // Making Poppins the default sans-serif font
+				'yesteryear': ['Yesteryear', 'cursive'], // Adding Yesteryear font
 			},
 			fontSize: {
 				'body': '26.86px',
