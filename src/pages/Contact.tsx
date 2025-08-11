@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useLenisScroll } from '../hooks/useLenisScroll';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ContactHero from '../components/contact/ContactHero';
@@ -8,6 +9,9 @@ import ContactForm from '../components/contact/ContactForm';
 import EmergencyContact from '../components/contact/EmergencyContact';
 
 const Contact = () => {
+  // Initialize Lenis smooth scroll
+  useLenisScroll();
+
   return (
     <div className="min-h-screen bg-white">
       <Header />

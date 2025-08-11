@@ -1,6 +1,8 @@
+
 import React, { useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLenisScroll } from '../hooks/useLenisScroll';
 import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
 import PopularDestinations from '../components/PopularDestinations';
@@ -18,6 +20,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
+  
+  // Initialize Lenis smooth scroll
+  useLenisScroll();
 
   useEffect(() => {
     // Simulate loading (replace this with your actual loading logic)

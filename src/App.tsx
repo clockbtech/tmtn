@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { TranslationProvider } from './contexts/TranslationContext';
@@ -30,6 +29,7 @@ import SuperAdminUsers from './pages/super-admin/SuperAdminUsers';
 import SuperAdminTestimonials from './pages/super-admin/SuperAdminTestimonials';
 import NotFound from './pages/NotFound';
 import { Toaster } from "./components/ui/sonner";
+import LenisWrapper from './components/LenisWrapper';
 
 const queryClient = new QueryClient();
 
@@ -38,38 +38,40 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TranslationProvider>
         <Router>
-          <div className="App">
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/destinations" element={<Destinations />} />
-              <Route path="/destinations/:id" element={<DestinationDetail />} />
-              <Route path="/attractions" element={<Attractions />} />
-              <Route path="/attractions/:id" element={<AttractionsDetail />} />
-              <Route path="/experiences" element={<Experiences />} />
-              <Route path="/experiences/:id" element={<ExperienceDetail />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:id" element={<BlogDetail />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/auth" element={<Auth />} />
-              <Route path="/account" element={<Account />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/booking-complete" element={<BookingComplete />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/super-admin" element={<SuperAdmin />} />
-              <Route path="/super-admin/blogs" element={<SuperAdminBlogs />} />
-              <Route path="/super-admin/bookings" element={<SuperAdminBookings />} />
-              <Route path="/super-admin/destinations" element={<SuperAdminDestinations />} />
-              <Route path="/super-admin/experiences" element={<SuperAdminExperiences />} />
-              <Route path="/super-admin/faqs" element={<SuperAdminFAQs />} />
-              <Route path="/super-admin/settings" element={<SuperAdminSettings />} />
-              <Route path="/super-admin/tour-guides" element={<SuperAdminTourGuides />} />
-              <Route path="/super-admin/users" element={<SuperAdminUsers />} />
-              <Route path="/super-admin/testimonials" element={<SuperAdminTestimonials />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            <Toaster />
-          </div>
+          <LenisWrapper>
+            <div className="App">
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/destinations" element={<Destinations />} />
+                <Route path="/destinations/:id" element={<DestinationDetail />} />
+                <Route path="/attractions" element={<Attractions />} />
+                <Route path="/attractions/:id" element={<AttractionsDetail />} />
+                <Route path="/experiences" element={<Experiences />} />
+                <Route path="/experiences/:id" element={<ExperienceDetail />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:id" element={<BlogDetail />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/auth" element={<Auth />} />
+                <Route path="/account" element={<Account />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/booking-complete" element={<BookingComplete />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/super-admin" element={<SuperAdmin />} />
+                <Route path="/super-admin/blogs" element={<SuperAdminBlogs />} />
+                <Route path="/super-admin/bookings" element={<SuperAdminBookings />} />
+                <Route path="/super-admin/destinations" element={<SuperAdminDestinations />} />
+                <Route path="/super-admin/experiences" element={<SuperAdminExperiences />} />
+                <Route path="/super-admin/faqs" element={<SuperAdminFAQs />} />
+                <Route path="/super-admin/settings" element={<SuperAdminSettings />} />
+                <Route path="/super-admin/tour-guides" element={<SuperAdminTourGuides />} />
+                <Route path="/super-admin/users" element={<SuperAdminUsers />} />
+                <Route path="/super-admin/testimonials" element={<SuperAdminTestimonials />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+              <Toaster />
+            </div>
+          </LenisWrapper>
         </Router>
       </TranslationProvider>
     </QueryClientProvider>

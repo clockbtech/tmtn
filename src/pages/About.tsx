@@ -1,5 +1,7 @@
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLenisScroll } from '../hooks/useLenisScroll';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import AboutHero from '../components/about/AboutHero';
@@ -12,6 +14,9 @@ import Testimonials from '../components/Testimonials';
 const About = () => {
   const [fullscreenVideo, setFullscreenVideo] = useState<{ url: string; title: string } | null>(null);
   const [ripples, setRipples] = useState<Array<{ id: number; x: number; y: number }>>([]);
+
+  // Initialize Lenis smooth scroll
+  useLenisScroll();
 
   const openFullscreen = () => {
     const videoData = {
