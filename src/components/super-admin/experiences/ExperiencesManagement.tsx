@@ -180,7 +180,6 @@ export const ExperiencesManagement = () => {
           </TabsList>
 
           <TabsContent value="basic" className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Experience Name</Label>
                 <Input
@@ -191,6 +190,7 @@ export const ExperiencesManagement = () => {
                   required
                 />
               </div>
+
               <div className="space-y-2">
                 <Label htmlFor="destination">Destination</Label>
                 <Select value={formData.destination} onValueChange={(value) => setFormData(prev => ({ ...prev, destination: value }))}>
@@ -198,13 +198,12 @@ export const ExperiencesManagement = () => {
                     <SelectValue placeholder="Select destination" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="Paris, France">Paris, France</SelectItem>
-                    <SelectItem value="Bali, Indonesia">Bali, Indonesia</SelectItem>
-                    <SelectItem value="Swiss Alps">Swiss Alps</SelectItem>
+                    <SelectItem value="Paris, France">Kathmandu</SelectItem>
+                    <SelectItem value="Bali, Indonesia">Chitwan</SelectItem>
+                    <SelectItem value="Swiss Alps">Pokhara</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
-            </div>
 
             <div className="grid grid-cols-3 gap-4">
               <div className="space-y-2">
