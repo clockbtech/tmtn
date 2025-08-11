@@ -20,7 +20,7 @@ export const DestinationForm = ({ destination, onClose }: DestinationFormProps) 
     name: destination?.name || '',
     description: destination?.description || '',
     fullDescription: destination?.fullDescription || '',
-    category: destination?.category || '',
+    region: destination?.region || '',
     location: destination?.location || '',
     altitude: destination?.altitude || '',
     tags: destination?.tags?.join(', ') || '',
@@ -127,38 +127,19 @@ export const DestinationForm = ({ destination, onClose }: DestinationFormProps) 
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="category">Category</Label>
-              <Select value={formData.category} onValueChange={(value) => setFormData(prev => ({ ...prev, category: value }))}>
+              <Label htmlFor="region">Region</Label>
+              <Select value={formData.region} onValueChange={(value) => setFormData(prev => ({ ...prev, region: value }))}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select category" />
+                  <SelectValue placeholder="Select region" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="City">City</SelectItem>
-                  <SelectItem value="Beach">Beach</SelectItem>
-                  <SelectItem value="Mountain">Mountain</SelectItem>
-                  <SelectItem value="Desert">Desert</SelectItem>
-                  <SelectItem value="Forest">Forest</SelectItem>
+                  <SelectItem value="City">Himalayan</SelectItem>
+                  <SelectItem value="Beach">Hilly</SelectItem>
+                  <SelectItem value="Mountain">Terai</SelectItem>
                 </SelectContent>
               </Select>
             </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="status">Status</Label>
-              <Select value={formData.status} onValueChange={(value) => setFormData(prev => ({ ...prev, status: value }))}>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Active">Active</SelectItem>
-                  <SelectItem value="Inactive">Inactive</SelectItem>
-                  <SelectItem value="Seasonal">Seasonal</SelectItem>
-                  <SelectItem value="Draft">Draft</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
 
           <div className="space-y-2">
             <Label htmlFor="location">Location (Coordinates)</Label>
@@ -189,6 +170,22 @@ export const DestinationForm = ({ destination, onClose }: DestinationFormProps) 
               placeholder="Romance, Culture, History"
             />
           </div>
+
+          <div className="space-y-2">
+              <Label htmlFor="status">Status</Label>
+              <Select value={formData.status} onValueChange={(value) => setFormData(prev => ({ ...prev, status: value }))}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Active">Active</SelectItem>
+                  <SelectItem value="Inactive">Inactive</SelectItem>
+                  <SelectItem value="Seasonal">Seasonal</SelectItem>
+                  <SelectItem value="Draft">Draft</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
         </TabsContent>
 
         <TabsContent value="highlights" className="space-y-4 mt-6">
