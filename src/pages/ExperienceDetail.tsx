@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs'
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
+
 const ExperienceDetail = () => {
   const {
     id
@@ -337,14 +338,36 @@ const ExperienceDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Main Content */}
           <div className="lg:col-span-2">
-            {/* Tabs Navigation */}
+            {/* Tabs Navigation - Made Sticky */}
             <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
-              <TabsList className="grid w-full grid-cols-4 mb-8">
-                <TabsTrigger value="overview">Overview</TabsTrigger>
-                <TabsTrigger value="itinerary">Itinerary</TabsTrigger>
-                <TabsTrigger value="inclusions">Inclusions</TabsTrigger>
-                <TabsTrigger value="reviews">Reviews</TabsTrigger>
-              </TabsList>
+              <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-gray-200 mb-8">
+                <TabsList className="grid w-full grid-cols-4 bg-transparent p-0 h-auto">
+                  <TabsTrigger 
+                    value="overview" 
+                    className="data-[state=active]:bg-tmtn-blue data-[state=active]:text-white py-4 text-base font-medium border-b-2 border-transparent data-[state=active]:border-tmtn-blue rounded-none"
+                  >
+                    Overview
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="itinerary" 
+                    className="data-[state=active]:bg-tmtn-blue data-[state=active]:text-white py-4 text-base font-medium border-b-2 border-transparent data-[state=active]:border-tmtn-blue rounded-none"
+                  >
+                    Itinerary
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="inclusions" 
+                    className="data-[state=active]:bg-tmtn-blue data-[state=active]:text-white py-4 text-base font-medium border-b-2 border-transparent data-[state=active]:border-tmtn-blue rounded-none"
+                  >
+                    Inclusions
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="reviews" 
+                    className="data-[state=active]:bg-tmtn-blue data-[state=active]:text-white py-4 text-base font-medium border-b-2 border-transparent data-[state=active]:border-tmtn-blue rounded-none"
+                  >
+                    Reviews
+                  </TabsTrigger>
+                </TabsList>
+              </div>
 
               <div id="tab-content">
                 {/* Overview Tab */}
