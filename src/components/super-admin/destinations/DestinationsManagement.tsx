@@ -125,6 +125,7 @@ export const DestinationsManagement = () => {
       description: destination?.description || '',
       category: destination?.category || '',
       location: destination?.location || '',
+      altitude: destination?.altitude || '',
       tags: destination?.tags?.join(', ') || '',
       status: destination?.status || 'Active',
     });
@@ -138,7 +139,6 @@ export const DestinationsManagement = () => {
 
     return (
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label htmlFor="name">Destination Name</Label>
             <Input
@@ -149,28 +149,47 @@ export const DestinationsManagement = () => {
               required
             />
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="category">Category</Label>
-            <Select value={formData.category} onValueChange={(value) => setFormData(prev => ({ ...prev, category: value }))}>
-              <SelectTrigger>
-                <SelectValue placeholder="Select category" />
-              </SelectTrigger>
-              <SelectContent>
-                {categories.slice(1).map((category) => (
-                  <SelectItem key={category} value={category}>{category}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+         
+        <div className="space-y-2">
+          <Label>Cover Image</Label>
+          <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center">
+            <Camera className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+            <p className="text-sm text-muted-foreground mb-2">Click to upload cover image</p>
+            <Button type="button" variant="outline" size="sm">
+              Choose Files
+            </Button>
+          </div>
+        </div>
+
+            <div className="space-y-2">
+          <Label>Other Images</Label>
+          <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center">
+            <Camera className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+            <p className="text-sm text-muted-foreground mb-2">Click to upload images</p>
+            <Button type="button" variant="outline" size="sm">
+              Choose Files
+            </Button>
           </div>
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="description">Description</Label>
+          <Label htmlFor="description">Short Description</Label>
           <Textarea
             id="description"
             value={formData.description}
             onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-            placeholder="Enter destination description"
+            placeholder="Enter short destination description"
+            rows={3}
+          />
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="description">Full Description</Label>
+          <Textarea
+            id="description"
+            value={formData.description}
+            onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+            placeholder="Describe the description..."
             rows={3}
           />
         </div>
@@ -184,9 +203,19 @@ export const DestinationsManagement = () => {
             placeholder="e.g., 48.8566° N, 2.3522° E"
           />
         </div>
-
-        <div className="grid grid-cols-2 gap-4">
-          <div className="space-y-2">
+ 
+        <div className="space-y-2">
+            <Label htmlFor="altitude">Altitude</Label>
+            <Input
+              id="altitude"
+              value={formData.altitude}
+              onChange={(e) => setFormData(prev => ({ ...prev, altitude: e.target.value }))}
+              placeholder="Enter altitude"
+              required
+            />
+          </div>
+        
+        <div className="space-y-2">
             <Label htmlFor="tags">Tags (comma separated)</Label>
             <Input
               id="tags"
@@ -195,6 +224,7 @@ export const DestinationsManagement = () => {
               placeholder="Romance, Culture, History"
             />
           </div>
+         
           <div className="space-y-2">
             <Label htmlFor="status">Status</Label>
             <Select value={formData.status} onValueChange={(value) => setFormData(prev => ({ ...prev, status: value }))}>
@@ -209,18 +239,7 @@ export const DestinationsManagement = () => {
               </SelectContent>
             </Select>
           </div>
-        </div>
-
-        <div className="space-y-2">
-          <Label>Images</Label>
-          <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center">
-            <Camera className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-            <p className="text-sm text-muted-foreground mb-2">Click to upload images</p>
-            <Button type="button" variant="outline" size="sm">
-              Choose Files
-            </Button>
-          </div>
-        </div>
+        
 
         <DialogFooter>
           <Button type="button" variant="outline" onClick={onClose}>
