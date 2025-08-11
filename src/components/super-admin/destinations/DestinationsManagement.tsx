@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import {
   Card,
@@ -20,13 +21,10 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import {
   Select,
   SelectContent,
@@ -51,12 +49,11 @@ import {
   Edit,
   Trash2,
   MapPin,
-  Camera,
-  Filter,
   Download,
   Eye,
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { DestinationForm } from './DestinationForm';
 
 // Mock data
 const destinations = [
@@ -119,140 +116,6 @@ export const DestinationsManagement = () => {
     return matchesSearch && matchesCategory && matchesStatus;
   });
 
-  const DestinationForm = ({ destination, onClose }: { destination?: any; onClose: () => void }) => {
-    const [formData, setFormData] = useState({
-      name: destination?.name || '',
-      description: destination?.description || '',
-      category: destination?.category || '',
-      location: destination?.location || '',
-      altitude: destination?.altitude || '',
-      tags: destination?.tags?.join(', ') || '',
-      status: destination?.status || 'Active',
-    });
-
-    const handleSubmit = (e: React.FormEvent) => {
-      e.preventDefault();
-      // Handle form submission
-      console.log('Form submitted:', formData);
-      onClose();
-    };
-
-    return (
-      <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="name">Destination Name</Label>
-            <Input
-              id="name"
-              value={formData.name}
-              onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-              placeholder="Enter destination name"
-              required
-            />
-          </div>
-         
-        <div className="space-y-2">
-          <Label>Cover Image</Label>
-          <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center">
-            <Camera className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-            <p className="text-sm text-muted-foreground mb-2">Click to upload cover image</p>
-            <Button type="button" variant="outline" size="sm">
-              Choose Files
-            </Button>
-          </div>
-        </div>
-
-            <div className="space-y-2">
-          <Label>Other Images</Label>
-          <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center">
-            <Camera className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-            <p className="text-sm text-muted-foreground mb-2">Click to upload images</p>
-            <Button type="button" variant="outline" size="sm">
-              Choose Files
-            </Button>
-          </div>
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="description">Short Description</Label>
-          <Textarea
-            id="description"
-            value={formData.description}
-            onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-            placeholder="Enter short destination description"
-            rows={3}
-          />
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="description">Full Description</Label>
-          <Textarea
-            id="description"
-            value={formData.description}
-            onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-            placeholder="Describe the description..."
-            rows={3}
-          />
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="location">Location (Coordinates)</Label>
-          <Input
-            id="location"
-            value={formData.location}
-            onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
-            placeholder="e.g., 48.8566° N, 2.3522° E"
-          />
-        </div>
- 
-        <div className="space-y-2">
-            <Label htmlFor="altitude">Altitude</Label>
-            <Input
-              id="altitude"
-              value={formData.altitude}
-              onChange={(e) => setFormData(prev => ({ ...prev, altitude: e.target.value }))}
-              placeholder="Enter altitude"
-              required
-            />
-          </div>
-        
-        <div className="space-y-2">
-            <Label htmlFor="tags">Tags (comma separated)</Label>
-            <Input
-              id="tags"
-              value={formData.tags}
-              onChange={(e) => setFormData(prev => ({ ...prev, tags: e.target.value }))}
-              placeholder="Romance, Culture, History"
-            />
-          </div>
-         
-          <div className="space-y-2">
-            <Label htmlFor="status">Status</Label>
-            <Select value={formData.status} onValueChange={(value) => setFormData(prev => ({ ...prev, status: value }))}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="Active">Active</SelectItem>
-                <SelectItem value="Inactive">Inactive</SelectItem>
-                <SelectItem value="Seasonal">Seasonal</SelectItem>
-                <SelectItem value="Draft">Draft</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        
-
-        <DialogFooter>
-          <Button type="button" variant="outline" onClick={onClose}>
-            Cancel
-          </Button>
-          <Button type="submit">
-            {destination ? 'Update Destination' : 'Add Destination'}
-          </Button>
-        </DialogFooter>
-      </form>
-    );
-  };
-
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -268,7 +131,7 @@ export const DestinationsManagement = () => {
               Add Destination
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
+          <DialogContent className="sm:max-w-[800px] max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>Add New Destination</DialogTitle>
               <DialogDescription>
@@ -401,7 +264,7 @@ export const DestinationsManagement = () => {
                             <Edit className="h-4 w-4" />
                           </Button>
                         </DialogTrigger>
-                        <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
+                        <DialogContent className="sm:max-w-[800px] max-h-[90vh] overflow-y-auto">
                           <DialogHeader>
                             <DialogTitle>Edit Destination</DialogTitle>
                             <DialogDescription>
