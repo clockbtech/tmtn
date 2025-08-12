@@ -27,6 +27,7 @@ import SuperAdminSettings from './pages/super-admin/SuperAdminSettings';
 import SuperAdminTourGuides from './pages/super-admin/SuperAdminTourGuides';
 import SuperAdminUsers from './pages/super-admin/SuperAdminUsers';
 import SuperAdminTestimonials from './pages/super-admin/SuperAdminTestimonials';
+import SuperAdminVideoReels from './pages/super-admin/SuperAdminVideoReels';
 import NotFound from './pages/NotFound';
 import { Toaster } from "./components/ui/sonner";
 import LenisWrapper from './components/LenisWrapper';
@@ -67,6 +68,7 @@ function App() {
                 <Route path="/super-admin/tour-guides" element={<SuperAdminTourGuides />} />
                 <Route path="/super-admin/users" element={<SuperAdminUsers />} />
                 <Route path="/super-admin/testimonials" element={<SuperAdminTestimonials />} />
+                <Route path="/super-admin/video-reels" element={<SuperAdminVideoReels />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
               <Toaster />
