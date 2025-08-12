@@ -85,7 +85,6 @@ const Footer = () => {
           }}
         />
         
-        {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-gray-900/90"></div>
 
         {/* Main Footer Content */}
@@ -369,7 +368,13 @@ const Footer = () => {
                 transition={{ duration: 0.6 }} 
                 className="text-gray-400 text-sm mb-4 md:mb-0"
               >
-                © {currentYear} Take Me To Nepal. All rights reserved. | Privacy Policy | Terms of Service
+                © {currentYear} Take Me To Nepal. All rights reserved. | 
+                <Link to="/privacy-policy" className="hover:text-tmtn-red transition-colors duration-200 ml-1">
+                  Privacy Policy
+                </Link> | 
+                <Link to="/terms-of-service" className="hover:text-tmtn-red transition-colors duration-200 ml-1">
+                  Terms of Service
+                </Link>
               </motion.div>
               
               {/* Payment Icons */}
@@ -404,7 +409,6 @@ const Footer = () => {
         </div>
       </footer>
       
-      {/* Back to Top Button with Progress Indicator */}
       <BackToTopButton />
     </>
   );

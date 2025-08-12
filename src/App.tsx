@@ -18,6 +18,8 @@ import Account from './pages/Account';
 import Checkout from './pages/Checkout';
 import BookingComplete from './pages/BookingComplete';
 import FAQ from './pages/FAQ';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 import SuperAdmin from './pages/SuperAdmin';
 import SuperAdminBlogs from './pages/super-admin/SuperAdminBlogs';
 import SuperAdminBookings from './pages/super-admin/SuperAdminBookings';
@@ -61,6 +63,8 @@ function App() {
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/booking-complete" element={<BookingComplete />} />
                 <Route path="/faq" element={<FAQ />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms-of-service" element={<TermsOfService />} />
                 <Route path="/super-admin" element={<SuperAdmin />} />
                 <Route path="/super-admin/blogs" element={<SuperAdminBlogs />} />
                 <Route path="/super-admin/bookings" element={<SuperAdminBookings />} />
