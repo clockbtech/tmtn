@@ -213,7 +213,7 @@ export const ExperiencesManagement = () => {
     };
 
     const getSelectedGuides = () => {
-      if (!Array.isArray(tourGuides) || !Array.isArray(formData.selectedGuides)) {
+      if (!Array.isArray(formData.selectedGuides)) {
         return [];
       }
       return tourGuides.filter(guide => formData.selectedGuides.includes(guide.id));
@@ -319,7 +319,7 @@ export const ExperiencesManagement = () => {
                     <CommandInput placeholder="Search guides..." />
                     <CommandEmpty>No guide found.</CommandEmpty>
                     <CommandGroup>
-                      {Array.isArray(tourGuides) && tourGuides.map((guide) => (
+                      {tourGuides && tourGuides.length > 0 && tourGuides.map((guide) => (
                         <CommandItem
                           key={guide.id}
                           onSelect={() => handleGuideSelection(guide.id)}
