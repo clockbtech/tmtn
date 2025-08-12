@@ -61,7 +61,7 @@ export const VideoReelForm: React.FC<VideoReelFormProps> = ({
     videoUrl: videoReel?.videoUrl || '',
     thumbnailUrl: videoReel?.thumbnailUrl || '',
     destinationTag: videoReel?.destinationTag || '',
-    relatedPackage: videoReel?.relatedPackage || '',
+    relatedPackage: videoReel?.relatedPackage || 'none',
     status: videoReel?.status || 'active',
   });
   const [uploadMethod, setUploadMethod] = useState<'upload' | 'url'>('upload');
@@ -92,10 +92,14 @@ export const VideoReelForm: React.FC<VideoReelFormProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const submitData = {
+      ...formData,
+      relatedPackage: formData.relatedPackage === 'none' ? '' : formData.relatedPackage
+    };
     if (videoReel) {
-      onSave({ ...videoReel, ...formData });
+      onSave({ ...videoReel, ...submitData });
     } else {
-      onSave(formData);
+      onSave(submitData);
     }
   };
 
@@ -219,7 +223,7 @@ export const VideoReelForm: React.FC<VideoReelFormProps> = ({
             <SelectValue placeholder="Select related package (optional)" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">None</SelectItem>
+            <SelectItem value="none">None</SelectItem>
             {mockPackages.map((pkg) => (
               <SelectItem key={pkg} value={pkg}>
                 {pkg}
