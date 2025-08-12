@@ -57,6 +57,34 @@ import { Badge } from '@/components/ui/badge';
 import { PricingSection } from './PricingSection';
 import { ItinerarySection } from './ItinerarySection';
 import { InclusionsSection } from './InclusionsSection';
+import { TourGuideMultiSelect } from './TourGuideMultiSelect';
+
+// Mock data for tour guides
+const mockTourGuides = [
+  {
+    id: '1',
+    name: 'Rajesh Sharma',
+    profileImage: '/lovable-uploads/3909d361-7017-4536-b256-c31d70c7e5b0.png'
+  },
+  {
+    id: '2',
+    name: 'Maya Gurung',
+    profileImage: '/lovable-uploads/a26300b1-f01d-4f86-880d-99c4fc88d181.png'
+  },
+  {
+    id: '3',
+    name: 'Suresh Thapa',
+    profileImage: '/lovable-uploads/b8be241b-a5f1-405b-850a-283612b2441f.png'
+  },
+  {
+    id: '4',
+    name: 'Anita Rai'
+  },
+  {
+    id: '5',
+    name: 'Bikash Tamang'
+  }
+];
 
 // Mock data
 const experiences = [
@@ -131,6 +159,7 @@ export const ExperiencesManagement = () => {
       duration: experience?.duration || '',
       groupSize: experience?.groupSize || '',
       status: experience?.status || 'Draft',
+      selectedGuides: experience?.selectedGuides || [],
       description: '',
       basePrice: '',
       discountedPrice: '',
@@ -226,6 +255,12 @@ export const ExperiencesManagement = () => {
                 />
               </div>
             </div>
+
+            <TourGuideMultiSelect
+              value={formData.selectedGuides}
+              onChange={(guides) => setFormData(prev => ({ ...prev, selectedGuides: guides }))}
+              tourGuides={mockTourGuides}
+            />
 
             <div className="space-y-2">
               <Label htmlFor="description">Description</Label>
