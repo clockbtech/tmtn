@@ -54,6 +54,10 @@ import {
   MapPin,
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { ImageUploadSection } from './ImageUploadSection';
+import { PricingSection } from './PricingSection';
+import { ItinerarySection } from './ItinerarySection';
+import { InclusionsSection } from './InclusionsSection';
 
 // Mock data
 const experiences = [
@@ -126,42 +130,27 @@ export const ExperiencesManagement = () => {
       destination: experience?.destination || '',
       type: experience?.type || '',
       duration: experience?.duration || '',
-      price: experience?.price || '',
       groupSize: experience?.groupSize || '',
       status: experience?.status || 'Draft',
       description: '',
-      inclusions: experience?.inclusions?.join('\n') || '',
-      exclusions: '',
-      itinerary: experience?.itinerary || [{ time: '', activity: '' }],
-      seasonalPricing: experience?.seasonalPricing || {
-        peak: '',
-        regular: '',
-        off: '',
-      },
+      coverImage: '',
+      galleryImages: [],
+      basePrice: '',
+      discountedPrice: '',
+      currency: 'USD',
+      itinerary: [
+        {
+          title: '',
+          subtitle: '',
+          hoursRange: '',
+          distance: '',
+          accommodationTypes: [],
+          meals: []
+        }
+      ],
+      includedItems: [''],
+      notIncludedItems: [''],
     });
-
-    const addItineraryItem = () => {
-      setFormData(prev => ({
-        ...prev,
-        itinerary: [...prev.itinerary, { time: '', activity: '' }]
-      }));
-    };
-
-    const removeItineraryItem = (index: number) => {
-      setFormData(prev => ({
-        ...prev,
-        itinerary: prev.itinerary.filter((_, i) => i !== index)
-      }));
-    };
-
-    const updateItineraryItem = (index: number, field: string, value: string) => {
-      setFormData(prev => ({
-        ...prev,
-        itinerary: prev.itinerary.map((item, i) => 
-          i === index ? { ...item, [field]: value } : item
-        )
-      }));
-    };
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
@@ -172,38 +161,39 @@ export const ExperiencesManagement = () => {
     return (
       <form onSubmit={handleSubmit} className="space-y-4">
         <Tabs value={currentTab} onValueChange={setCurrentTab}>
-          <TabsList className="grid grid-cols-4 w-full">
+          <TabsList className="grid grid-cols-5 w-full">
             <TabsTrigger value="basic">Basic Info</TabsTrigger>
+            <TabsTrigger value="images">Images</TabsTrigger>
             <TabsTrigger value="pricing">Pricing</TabsTrigger>
             <TabsTrigger value="itinerary">Itinerary</TabsTrigger>
-            <TabsTrigger value="details">Details</TabsTrigger>
+            <TabsTrigger value="inclusions">Inclusions</TabsTrigger>
           </TabsList>
 
           <TabsContent value="basic" className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Experience Name</Label>
-                <Input
-                  id="name"
-                  value={formData.name}
-                  onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                  placeholder="Enter experience name"
-                  required
-                />
-              </div>
+            <div className="space-y-2">
+              <Label htmlFor="name">Experience Name</Label>
+              <Input
+                id="name"
+                value={formData.name}
+                onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                placeholder="Enter experience name"
+                required
+              />
+            </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="destination">Destination</Label>
-                <Select value={formData.destination} onValueChange={(value) => setFormData(prev => ({ ...prev, destination: value }))}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select destination" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Paris, France">Kathmandu</SelectItem>
-                    <SelectItem value="Bali, Indonesia">Chitwan</SelectItem>
-                    <SelectItem value="Swiss Alps">Pokhara</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+            <div className="space-y-2">
+              <Label htmlFor="destination">Destination</Label>
+              <Select value={formData.destination} onValueChange={(value) => setFormData(prev => ({ ...prev, destination: value }))}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select destination" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Kathmandu">Kathmandu</SelectItem>
+                  <SelectItem value="Chitwan">Chitwan</SelectItem>
+                  <SelectItem value="Pokhara">Pokhara</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
 
             <div className="grid grid-cols-3 gap-4">
               <div className="space-y-2">
@@ -268,123 +258,40 @@ export const ExperiencesManagement = () => {
             </div>
           </TabsContent>
 
-          <TabsContent value="pricing" className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="basePrice">Base Price ($)</Label>
-              <Input
-                id="basePrice"
-                type="number"
-                value={formData.price}
-                onChange={(e) => setFormData(prev => ({ ...prev, price: e.target.value }))}
-                placeholder="Enter base price"
-              />
-            </div>
+          <TabsContent value="images" className="space-y-4">
+            <ImageUploadSection
+              coverImage={formData.coverImage}
+              galleryImages={formData.galleryImages}
+              onCoverImageChange={(image) => setFormData(prev => ({ ...prev, coverImage: image }))}
+              onGalleryImagesChange={(images) => setFormData(prev => ({ ...prev, galleryImages: images }))}
+            />
+          </TabsContent>
 
-            <div className="space-y-4">
-              <Label>Seasonal Pricing</Label>
-              <div className="grid grid-cols-3 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="peakPrice">Peak Season ($)</Label>
-                  <Input
-                    id="peakPrice"
-                    type="number"
-                    value={formData.seasonalPricing.peak}
-                    onChange={(e) => setFormData(prev => ({
-                      ...prev,
-                      seasonalPricing: { ...prev.seasonalPricing, peak: e.target.value }
-                    }))}
-                    placeholder="Peak price"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="regularPrice">Regular Season ($)</Label>
-                  <Input
-                    id="regularPrice"
-                    type="number"
-                    value={formData.seasonalPricing.regular}
-                    onChange={(e) => setFormData(prev => ({
-                      ...prev,
-                      seasonalPricing: { ...prev.seasonalPricing, regular: e.target.value }
-                    }))}
-                    placeholder="Regular price"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="offPrice">Off Season ($)</Label>
-                  <Input
-                    id="offPrice"
-                    type="number"
-                    value={formData.seasonalPricing.off}
-                    onChange={(e) => setFormData(prev => ({
-                      ...prev,
-                      seasonalPricing: { ...prev.seasonalPricing, off: e.target.value }
-                    }))}
-                    placeholder="Off season price"
-                  />
-                </div>
-              </div>
-            </div>
+          <TabsContent value="pricing" className="space-y-4">
+            <PricingSection
+              basePrice={formData.basePrice}
+              discountedPrice={formData.discountedPrice}
+              currency={formData.currency}
+              onBasePriceChange={(price) => setFormData(prev => ({ ...prev, basePrice: price }))}
+              onDiscountedPriceChange={(price) => setFormData(prev => ({ ...prev, discountedPrice: price }))}
+              onCurrencyChange={(currency) => setFormData(prev => ({ ...prev, currency }))}
+            />
           </TabsContent>
 
           <TabsContent value="itinerary" className="space-y-4">
-            <div className="flex justify-between items-center">
-              <Label>Daily Itinerary</Label>
-              <Button type="button" onClick={addItineraryItem} size="sm">
-                <Plus className="h-4 w-4 mr-2" />
-                Add Item
-              </Button>
-            </div>
-            <div className="space-y-3">
-              {formData.itinerary.map((item, index) => (
-                <div key={index} className="flex gap-3 items-center">
-                  <Input
-                    type="time"
-                    value={item.time}
-                    onChange={(e) => updateItineraryItem(index, 'time', e.target.value)}
-                    className="w-32"
-                  />
-                  <Input
-                    value={item.activity}
-                    onChange={(e) => updateItineraryItem(index, 'activity', e.target.value)}
-                    placeholder="Activity description"
-                    className="flex-1"
-                  />
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={() => removeItineraryItem(index)}
-                    disabled={formData.itinerary.length === 1}
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                </div>
-              ))}
-            </div>
+            <ItinerarySection
+              itinerary={formData.itinerary}
+              onItineraryChange={(itinerary) => setFormData(prev => ({ ...prev, itinerary }))}
+            />
           </TabsContent>
 
-          <TabsContent value="details" className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="inclusions">What's Included (one per line)</Label>
-              <Textarea
-                id="inclusions"
-                value={formData.inclusions}
-                onChange={(e) => setFormData(prev => ({ ...prev, inclusions: e.target.value }))}
-                placeholder="Professional guide&#10;Transportation&#10;Lunch"
-                rows={4}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="exclusions">What's Not Included (one per line)</Label>
-              <Textarea
-                id="exclusions"
-                value={formData.exclusions}
-                onChange={(e) => setFormData(prev => ({ ...prev, exclusions: e.target.value }))}
-                placeholder="Personal expenses&#10;Tips&#10;Additional meals"
-                rows={4}
-              />
-            </div>
+          <TabsContent value="inclusions" className="space-y-4">
+            <InclusionsSection
+              includedItems={formData.includedItems}
+              notIncludedItems={formData.notIncludedItems}
+              onIncludedItemsChange={(items) => setFormData(prev => ({ ...prev, includedItems: items }))}
+              onNotIncludedItemsChange={(items) => setFormData(prev => ({ ...prev, notIncludedItems: items }))}
+            />
           </TabsContent>
         </Tabs>
 
@@ -415,7 +322,7 @@ export const ExperiencesManagement = () => {
               Add Experience
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[800px] max-h-[90vh] overflow-y-auto">
+          <DialogContent className="sm:max-w-[900px] max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>Create New Experience</DialogTitle>
               <DialogDescription>
@@ -588,7 +495,7 @@ export const ExperiencesManagement = () => {
                             <Edit className="h-4 w-4" />
                           </Button>
                         </DialogTrigger>
-                        <DialogContent className="sm:max-w-[800px] max-h-[90vh] overflow-y-auto">
+                        <DialogContent className="sm:max-w-[900px] max-h-[90vh] overflow-y-auto">
                           <DialogHeader>
                             <DialogTitle>Edit Experience</DialogTitle>
                             <DialogDescription>
