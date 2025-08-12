@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import {
   Card,
@@ -42,18 +41,6 @@ import {
   TabsTrigger,
 } from '@/components/ui/tabs';
 import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from '@/components/ui/command';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
-import {
   Plus,
   Search,
   Edit,
@@ -65,13 +52,8 @@ import {
   Clock,
   Star,
   MapPin,
-  Check,
-  ChevronsUpDown,
-  X,
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Checkbox } from '@/components/ui/checkbox';
 import { PricingSection } from './PricingSection';
 import { ItinerarySection } from './ItinerarySection';
 import { InclusionsSection } from './InclusionsSection';
@@ -134,34 +116,6 @@ const experiences = [
   },
 ];
 
-// Mock tour guides data
-const tourGuides = [
-  {
-    id: 1,
-    name: 'Maria Rodriguez',
-    profilePicture: '/api/placeholder/64/64',
-    specialization: 'Mountain Guide',
-  },
-  {
-    id: 2,
-    name: 'James Thompson',
-    profilePicture: '/api/placeholder/64/64',
-    specialization: 'Wildlife Expert',
-  },
-  {
-    id: 3,
-    name: 'Chen Wei',
-    profilePicture: '/api/placeholder/64/64',
-    specialization: 'Cultural Heritage',
-  },
-  {
-    id: 4,
-    name: 'Sarah Johnson',
-    profilePicture: '/api/placeholder/64/64',
-    specialization: 'Adventure Guide',
-  },
-];
-
 export const ExperiencesManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedType, setSelectedType] = useState('All');
@@ -170,7 +124,6 @@ export const ExperiencesManagement = () => {
 
   const ExperienceForm = ({ experience, onClose }: { experience?: any; onClose: () => void }) => {
     const [currentTab, setCurrentTab] = useState('basic');
-    const [guidesDropdownOpen, setGuidesDropdownOpen] = useState(false);
     const [formData, setFormData] = useState({
       name: experience?.name || '',
       destination: experience?.destination || '',
@@ -178,7 +131,6 @@ export const ExperiencesManagement = () => {
       duration: experience?.duration || '',
       groupSize: experience?.groupSize || '',
       status: experience?.status || 'Draft',
-      selectedGuides: experience?.selectedGuides || [],
       description: '',
       basePrice: '',
       discountedPrice: '',
@@ -196,26 +148,6 @@ export const ExperiencesManagement = () => {
       includedItems: [''],
       notIncludedItems: [''],
     });
-
-    const handleGuideSelection = (guideId: number) => {
-      setFormData(prev => ({
-        ...prev,
-        selectedGuides: prev.selectedGuides.includes(guideId)
-          ? prev.selectedGuides.filter(id => id !== guideId)
-          : [...prev.selectedGuides, guideId]
-      }));
-    };
-
-    const removeGuide = (guideId: number) => {
-      setFormData(prev => ({
-        ...prev,
-        selectedGuides: prev.selectedGuides.filter(id => id !== guideId)
-      }));
-    };
-
-    const getSelectedGuides = () => {
-      return tourGuides.filter(guide => formData.selectedGuides.includes(guide.id));
-    };
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
@@ -293,74 +225,6 @@ export const ExperiencesManagement = () => {
                   placeholder="e.g., 2-15 people"
                 />
               </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label>Select Tour Guides</Label>
-              <Popover open={guidesDropdownOpen} onOpenChange={setGuidesDropdownOpen}>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    role="combobox"
-                    aria-expanded={guidesDropdownOpen}
-                    className="w-full justify-between"
-                  >
-                    {formData.selectedGuides.length === 0
-                      ? "Select guides..."
-                      : `${formData.selectedGuides.length} guide(s) selected`
-                    }
-                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-full p-0">
-                  <Command>
-                    <CommandInput placeholder="Search guides..." />
-                    <CommandEmpty>No guide found.</CommandEmpty>
-                    <CommandGroup>
-                      {tourGuides.map((guide) => (
-                        <CommandItem
-                          key={guide.id}
-                          onSelect={() => handleGuideSelection(guide.id)}
-                          className="flex items-center space-x-3 cursor-pointer"
-                        >
-                          <Check
-                            className={`mr-2 h-4 w-4 ${
-                              formData.selectedGuides.includes(guide.id) ? "opacity-100" : "opacity-0"
-                            }`}
-                          />
-                          <Avatar className="h-8 w-8">
-                            <AvatarImage src={guide.profilePicture} alt={guide.name} />
-                            <AvatarFallback>{guide.name.split(' ').map((n: string) => n[0]).join('')}</AvatarFallback>
-                          </Avatar>
-                          <div className="flex-1">
-                            <div className="text-sm font-medium">{guide.name}</div>
-                            <div className="text-xs text-muted-foreground">{guide.specialization}</div>
-                          </div>
-                        </CommandItem>
-                      ))}
-                    </CommandGroup>
-                  </Command>
-                </PopoverContent>
-              </Popover>
-              
-              {/* Selected guides display */}
-              {getSelectedGuides().length > 0 && (
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {getSelectedGuides().map((guide) => (
-                    <Badge key={guide.id} variant="secondary" className="flex items-center gap-2">
-                      <Avatar className="h-4 w-4">
-                        <AvatarImage src={guide.profilePicture} alt={guide.name} />
-                        <AvatarFallback className="text-xs">{guide.name.split(' ').map((n: string) => n[0]).join('')}</AvatarFallback>
-                      </Avatar>
-                      <span className="text-xs">{guide.name}</span>
-                      <X 
-                        className="h-3 w-3 cursor-pointer hover:text-destructive" 
-                        onClick={() => removeGuide(guide.id)}
-                      />
-                    </Badge>
-                  ))}
-                </div>
-              )}
             </div>
 
             <div className="space-y-2">
