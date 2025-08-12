@@ -54,6 +54,8 @@ import {
   MapPin,
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { Checkbox } from '@/components/ui/checkbox';
 import { PricingSection } from './PricingSection';
 import { ItinerarySection } from './ItinerarySection';
 import { InclusionsSection } from './InclusionsSection';
@@ -116,6 +118,34 @@ const experiences = [
   },
 ];
 
+// Mock tour guides data
+const tourGuides = [
+  {
+    id: 1,
+    name: 'Maria Rodriguez',
+    profilePicture: '/api/placeholder/64/64',
+    specialization: 'Mountain Guide',
+  },
+  {
+    id: 2,
+    name: 'James Thompson',
+    profilePicture: '/api/placeholder/64/64',
+    specialization: 'Wildlife Expert',
+  },
+  {
+    id: 3,
+    name: 'Chen Wei',
+    profilePicture: '/api/placeholder/64/64',
+    specialization: 'Cultural Heritage',
+  },
+  {
+    id: 4,
+    name: 'Sarah Johnson',
+    profilePicture: '/api/placeholder/64/64',
+    specialization: 'Adventure Guide',
+  },
+];
+
 export const ExperiencesManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedType, setSelectedType] = useState('All');
@@ -131,6 +161,7 @@ export const ExperiencesManagement = () => {
       duration: experience?.duration || '',
       groupSize: experience?.groupSize || '',
       status: experience?.status || 'Draft',
+      selectedGuides: experience?.selectedGuides || [],
       description: '',
       basePrice: '',
       discountedPrice: '',
@@ -148,6 +179,15 @@ export const ExperiencesManagement = () => {
       includedItems: [''],
       notIncludedItems: [''],
     });
+
+    const handleGuideSelection = (guideId: number, checked: boolean) => {
+      setFormData(prev => ({
+        ...prev,
+        selectedGuides: checked
+          ? [...prev.selectedGuides, guideId]
+          : prev.selectedGuides.filter(id => id !== guideId)
+      }));
+    };
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
@@ -224,6 +264,34 @@ export const ExperiencesManagement = () => {
                   onChange={(e) => setFormData(prev => ({ ...prev, groupSize: e.target.value }))}
                   placeholder="e.g., 2-15 people"
                 />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label>Select Tour Guides</Label>
+              <div className="grid grid-cols-2 gap-3 p-4 border rounded-lg bg-muted/50">
+                {tourGuides.map((guide) => (
+                  <div key={guide.id} className="flex items-center space-x-3">
+                    <Checkbox
+                      id={`guide-${guide.id}`}
+                      checked={formData.selectedGuides.includes(guide.id)}
+                      onCheckedChange={(checked) => handleGuideSelection(guide.id, checked as boolean)}
+                    />
+                    <Avatar className="h-8 w-8">
+                      <AvatarImage src={guide.profilePicture} alt={guide.name} />
+                      <AvatarFallback>{guide.name.split(' ').map((n: string) => n[0]).join('')}</AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1">
+                      <label 
+                        htmlFor={`guide-${guide.id}`}
+                        className="text-sm font-medium cursor-pointer"
+                      >
+                        {guide.name}
+                      </label>
+                      <p className="text-xs text-muted-foreground">{guide.specialization}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
