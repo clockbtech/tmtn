@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import {
   Card,
@@ -213,9 +214,6 @@ export const ExperiencesManagement = () => {
     };
 
     const getSelectedGuides = () => {
-      if (!Array.isArray(formData.selectedGuides)) {
-        return [];
-      }
       return tourGuides.filter(guide => formData.selectedGuides.includes(guide.id));
     };
 
@@ -319,7 +317,7 @@ export const ExperiencesManagement = () => {
                     <CommandInput placeholder="Search guides..." />
                     <CommandEmpty>No guide found.</CommandEmpty>
                     <CommandGroup>
-                      {tourGuides && tourGuides.length > 0 && tourGuides.map((guide) => (
+                      {tourGuides.map((guide) => (
                         <CommandItem
                           key={guide.id}
                           onSelect={() => handleGuideSelection(guide.id)}
