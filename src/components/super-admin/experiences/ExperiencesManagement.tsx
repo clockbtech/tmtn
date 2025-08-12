@@ -52,10 +52,8 @@ import {
   Clock,
   Star,
   MapPin,
-  Camera,
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import { ImageUploadSection } from './ImageUploadSection';
 import { PricingSection } from './PricingSection';
 import { ItinerarySection } from './ItinerarySection';
 import { InclusionsSection } from './InclusionsSection';
@@ -134,8 +132,6 @@ export const ExperiencesManagement = () => {
       groupSize: experience?.groupSize || '',
       status: experience?.status || 'Draft',
       description: '',
-      coverImage: '',
-      galleryImages: [],
       basePrice: '',
       discountedPrice: '',
       currency: 'USD',
@@ -162,9 +158,8 @@ export const ExperiencesManagement = () => {
     return (
       <form onSubmit={handleSubmit} className="space-y-4">
         <Tabs value={currentTab} onValueChange={setCurrentTab}>
-          <TabsList className="grid grid-cols-5 w-full">
+          <TabsList className="grid grid-cols-4 w-full">
             <TabsTrigger value="basic">Basic Info</TabsTrigger>
-            <TabsTrigger value="images">Images</TabsTrigger>
             <TabsTrigger value="pricing">Pricing</TabsTrigger>
             <TabsTrigger value="itinerary">Itinerary</TabsTrigger>
             <TabsTrigger value="inclusions">Inclusions</TabsTrigger>
@@ -232,28 +227,6 @@ export const ExperiencesManagement = () => {
               </div>
             </div>
 
-         <div className="space-y-2">
-            <Label>Cover Image</Label>
-            <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center">
-              <Camera className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-              <p className="text-sm text-muted-foreground mb-2">Click to upload cover image</p>
-              <Button type="button" variant="outline" size="sm">
-                Choose Files
-              </Button>
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <Label>Other Images</Label>
-            <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center">
-              <Camera className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-              <p className="text-sm text-muted-foreground mb-2">Click to upload images</p>
-              <Button type="button" variant="outline" size="sm">
-                Choose Files
-              </Button>
-            </div>
-          </div>
-
             <div className="space-y-2">
               <Label htmlFor="description">Description</Label>
               <Textarea
@@ -279,15 +252,6 @@ export const ExperiencesManagement = () => {
                 </SelectContent>
               </Select>
             </div>
-          </TabsContent>
-
-          <TabsContent value="images" className="space-y-4">
-            <ImageUploadSection
-              coverImage={formData.coverImage}
-              galleryImages={formData.galleryImages}
-              onCoverImageChange={(image) => setFormData(prev => ({ ...prev, coverImage: image }))}
-              onGalleryImagesChange={(images) => setFormData(prev => ({ ...prev, galleryImages: images }))}
-            />
           </TabsContent>
 
           <TabsContent value="pricing" className="space-y-4">
