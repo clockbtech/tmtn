@@ -1,3 +1,4 @@
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { TranslationProvider } from './contexts/TranslationContext';
@@ -28,6 +29,8 @@ import SuperAdminTourGuides from './pages/super-admin/SuperAdminTourGuides';
 import SuperAdminUsers from './pages/super-admin/SuperAdminUsers';
 import SuperAdminTestimonials from './pages/super-admin/SuperAdminTestimonials';
 import SuperAdminVideoReels from './pages/super-admin/SuperAdminVideoReels';
+import SuperAdminPrivacyPolicy from './pages/super-admin/SuperAdminPrivacyPolicy';
+import SuperAdminTermsOfService from './pages/super-admin/SuperAdminTermsOfService';
 import NotFound from './pages/NotFound';
 import { Toaster } from "./components/ui/sonner";
 import LenisWrapper from './components/LenisWrapper';
@@ -69,6 +72,8 @@ function App() {
                 <Route path="/super-admin/users" element={<SuperAdminUsers />} />
                 <Route path="/super-admin/testimonials" element={<SuperAdminTestimonials />} />
                 <Route path="/super-admin/video-reels" element={<SuperAdminVideoReels />} />
+                <Route path="/super-admin/privacy-policy" element={<SuperAdminPrivacyPolicy />} />
+                <Route path="/super-admin/terms-of-service" element={<SuperAdminTermsOfService />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
               <Toaster />

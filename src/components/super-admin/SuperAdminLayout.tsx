@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
@@ -17,7 +18,9 @@ import {
   Sun,
   UserCheck,
   MessageSquare,
-  Video
+  Video,
+  Shield,
+  ScrollText
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -33,6 +36,8 @@ const sidebarItems = [
   { id: 'testimonials', label: 'Testimonials', icon: MessageSquare, path: '/super-admin/testimonials' },
   { id: 'blogs', label: 'Blogs', icon: FileText, path: '/super-admin/blogs' },
   { id: 'faqs', label: 'FAQs', icon: HelpCircle, path: '/super-admin/faqs' },
+  { id: 'privacy-policy', label: 'Privacy Policy', icon: Shield, path: '/super-admin/privacy-policy' },
+  { id: 'terms-of-service', label: 'Terms of Service', icon: ScrollText, path: '/super-admin/terms-of-service' },
   { id: 'settings', label: 'Settings', icon: Settings, path: '/super-admin/settings' },
 ];
 
