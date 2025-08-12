@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import {
   Card,
@@ -134,7 +133,7 @@ const experiences = [
   },
 ];
 
-// Mock tour guides data
+// Mock tour guides data - ensure it's always an array
 const tourGuides = [
   {
     id: 1,
@@ -160,7 +159,7 @@ const tourGuides = [
     profilePicture: '/api/placeholder/64/64',
     specialization: 'Adventure Guide',
   },
-];
+] || []; // Fallback to empty array
 
 export const ExperiencesManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -214,6 +213,9 @@ export const ExperiencesManagement = () => {
     };
 
     const getSelectedGuides = () => {
+      if (!Array.isArray(tourGuides) || !Array.isArray(formData.selectedGuides)) {
+        return [];
+      }
       return tourGuides.filter(guide => formData.selectedGuides.includes(guide.id));
     };
 
@@ -317,7 +319,7 @@ export const ExperiencesManagement = () => {
                     <CommandInput placeholder="Search guides..." />
                     <CommandEmpty>No guide found.</CommandEmpty>
                     <CommandGroup>
-                      {tourGuides.map((guide) => (
+                      {Array.isArray(tourGuides) && tourGuides.map((guide) => (
                         <CommandItem
                           key={guide.id}
                           onSelect={() => handleGuideSelection(guide.id)}
