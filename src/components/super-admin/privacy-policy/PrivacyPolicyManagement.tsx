@@ -6,6 +6,13 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { 
   Plus, 
   Search, 
@@ -58,7 +65,7 @@ const mockSections: PrivacyPolicySection[] = [
 export const PrivacyPolicyManagement = () => {
   const [sections, setSections] = useState<PrivacyPolicySection[]>(mockSections);
   const [searchTerm, setSearchTerm] = useState('');
-  const [isEditing, setIsEditing] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingSection, setEditingSection] = useState<PrivacyPolicySection | null>(null);
   const [formData, setFormData] = useState({
     title: '',
@@ -78,7 +85,7 @@ export const PrivacyPolicyManagement = () => {
       content: section.content,
       status: section.status
     });
-    setIsEditing(true);
+    setIsDialogOpen(true);
   };
 
   const handleAdd = () => {
@@ -88,7 +95,7 @@ export const PrivacyPolicyManagement = () => {
       content: '',
       status: 'draft'
     });
-    setIsEditing(true);
+    setIsDialogOpen(true);
   };
 
   const handleSave = () => {
@@ -123,7 +130,7 @@ export const PrivacyPolicyManagement = () => {
       toast.success('Privacy policy section added successfully');
     }
 
-    setIsEditing(false);
+    setIsDialogOpen(false);
     setEditingSection(null);
   };
 
@@ -133,7 +140,7 @@ export const PrivacyPolicyManagement = () => {
   };
 
   const handleCancel = () => {
-    setIsEditing(false);
+    setIsDialogOpen(false);
     setEditingSection(null);
     setFormData({ title: '', content: '', status: 'draft' });
   };
@@ -192,10 +199,66 @@ export const PrivacyPolicyManagement = () => {
         <CardHeader>
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <CardTitle>Privacy Policy Management</CardTitle>
-            <Button onClick={handleAdd} className="flex items-center gap-2">
-              <Plus className="h-4 w-4" />
-              Add Section
-            </Button>
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+              <DialogTrigger asChild>
+                <Button onClick={handleAdd} className="flex items-center gap-2">
+                  <Plus className="h-4 w-4" />
+                  Add Section
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle>
+                    {editingSection ? 'Edit Section' : 'Add New Section'}
+                  </DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="title">Section Title</Label>
+                      <Input
+                        id="title"
+                        value={formData.title}
+                        onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+                        placeholder="Enter section title"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="status">Status</Label>
+                      <select
+                        id="status"
+                        value={formData.status}
+                        onChange={(e) => setFormData(prev => ({ ...prev, status: e.target.value as 'active' | 'draft' }))}
+                        className="w-full px-3 py-2 border border-input rounded-md"
+                      >
+                        <option value="draft">Draft</option>
+                        <option value="active">Active</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="content">Content</Label>
+                    <Textarea
+                      id="content"
+                      value={formData.content}
+                      onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
+                      placeholder="Enter section content"
+                      rows={6}
+                    />
+                  </div>
+                  <div className="flex gap-2 justify-end">
+                    <Button variant="outline" onClick={handleCancel}>
+                      <X className="h-4 w-4 mr-2" />
+                      Cancel
+                    </Button>
+                    <Button onClick={handleSave}>
+                      <Save className="h-4 w-4 mr-2" />
+                      Save
+                    </Button>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -209,62 +272,6 @@ export const PrivacyPolicyManagement = () => {
               className="pl-10"
             />
           </div>
-
-          {/* Edit Form */}
-          {isEditing && (
-            <Card className="border-dashed">
-              <CardHeader>
-                <CardTitle className="text-lg">
-                  {editingSection ? 'Edit Section' : 'Add New Section'}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="title">Section Title</Label>
-                    <Input
-                      id="title"
-                      value={formData.title}
-                      onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
-                      placeholder="Enter section title"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="status">Status</Label>
-                    <select
-                      id="status"
-                      value={formData.status}
-                      onChange={(e) => setFormData(prev => ({ ...prev, status: e.target.value as 'active' | 'draft' }))}
-                      className="w-full px-3 py-2 border border-input rounded-md"
-                    >
-                      <option value="draft">Draft</option>
-                      <option value="active">Active</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="content">Content</Label>
-                  <Textarea
-                    id="content"
-                    value={formData.content}
-                    onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
-                    placeholder="Enter section content"
-                    rows={4}
-                  />
-                </div>
-                <div className="flex gap-2">
-                  <Button onClick={handleSave}>
-                    <Save className="h-4 w-4 mr-2" />
-                    Save
-                  </Button>
-                  <Button variant="outline" onClick={handleCancel}>
-                    <X className="h-4 w-4 mr-2" />
-                    Cancel
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          )}
 
           {/* Sections List */}
           <div className="space-y-4">
