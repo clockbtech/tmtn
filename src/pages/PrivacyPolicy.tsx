@@ -2,6 +2,7 @@
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import PrivacyPolicyHero from '@/components/legal/PrivacyPolicyHero';
 
 const PrivacyPolicy = () => {
   return (
@@ -9,16 +10,7 @@ const PrivacyPolicy = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="bg-gray-50 py-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Privacy Policy</h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Your privacy is important to us. This privacy policy explains how we collect, use, and protect your information.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PrivacyPolicyHero />
 
       {/* Content Section */}
       <section className="py-16">

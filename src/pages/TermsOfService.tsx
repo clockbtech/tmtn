@@ -2,6 +2,7 @@
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import TermsOfServiceHero from '@/components/legal/TermsOfServiceHero';
 
 const TermsOfService = () => {
   return (
@@ -9,16 +10,7 @@ const TermsOfService = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="bg-gray-50 py-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Terms of Service</h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Please read these terms carefully before using our services. By using our website, you agree to these terms.
-            </p>
-          </div>
-        </div>
-      </section>
+      <TermsOfServiceHero />
 
       {/* Content Section */}
       <section className="py-16">
