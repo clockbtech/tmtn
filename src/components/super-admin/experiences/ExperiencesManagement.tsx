@@ -52,6 +52,7 @@ import {
   Clock,
   Star,
   MapPin,
+  Camera,
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { ImageUploadSection } from './ImageUploadSection';
@@ -230,6 +231,28 @@ export const ExperiencesManagement = () => {
                 />
               </div>
             </div>
+
+         <div className="space-y-2">
+            <Label>Cover Image</Label>
+            <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center">
+              <Camera className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+              <p className="text-sm text-muted-foreground mb-2">Click to upload cover image</p>
+              <Button type="button" variant="outline" size="sm">
+                Choose Files
+              </Button>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label>Other Images</Label>
+            <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center">
+              <Camera className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+              <p className="text-sm text-muted-foreground mb-2">Click to upload images</p>
+              <Button type="button" variant="outline" size="sm">
+                Choose Files
+              </Button>
+            </div>
+          </div>
 
             <div className="space-y-2">
               <Label htmlFor="description">Description</Label>
