@@ -133,7 +133,7 @@ const experiences = [
   },
 ];
 
-// Mock tour guides data - ensure it's always an array
+// Mock tour guides data
 const tourGuides = [
   {
     id: 1,
@@ -159,7 +159,7 @@ const tourGuides = [
     profilePicture: '/api/placeholder/64/64',
     specialization: 'Adventure Guide',
   },
-] || []; // Fallback to empty array
+];
 
 export const ExperiencesManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
