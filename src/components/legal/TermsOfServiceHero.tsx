@@ -6,7 +6,7 @@ const TermsOfServiceHero = () => {
   return (
     <section className="relative bg-cover bg-center bg-no-repeat py-[150px]" 
       style={{
-        backgroundImage: 'url(https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80)'
+        backgroundImage: 'url(https://images.unsplash.com/photo-1738566061710-5325658ebfe7?q=80&w=1700&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)'
       }}>
       <div className="absolute inset-0 bg-gradient-to-r from-green-600/80 to-green-800/80"></div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

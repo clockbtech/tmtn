@@ -386,23 +386,33 @@ const Footer = () => {
               >
                 <span className="text-gray-400 text-sm">We accept:</span>
                 <div className="flex items-center space-x-3">
-                  {/* Visa */}
-                  <div className="flex items-center justify-center w-10 h-6 bg-white rounded text-blue-600 text-xs font-bold">
-                    VISA
-                  </div>
-                  
-                  {/* Credit/Debit Card */}
-                  <div className="flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full">
-                    <CreditCard className="w-4 h-4 text-gray-600" />
-                  </div>
-                  
-                  {/* Apple Pay */}
-                  <div className="flex items-center justify-center w-12 h-6 bg-black rounded text-white text-xs font-semibold">
-                    <svg className="w-6 h-4" viewBox="0 0 24 16" fill="currentColor">
-                      <path d="M7.6 2.7c-.3.4-.9.7-1.4.6-.1-.5.1-1.1.4-1.4.3-.4.9-.7 1.3-.7.1.5 0 1.1-.3 1.5zm.4.8c-.8 0-1.4.4-1.8.4-.4 0-1-.4-1.7-.4-1.2 0-2.3.7-2.9 1.8-1.2 2.1-.3 5.2.9 6.9.6.8 1.3 1.7 2.2 1.7.7 0 1-.4 1.8-.4.8 0 1.1.4 1.8.4.9 0 1.5-.8 2.1-1.6.7-.9 1-1.8 1-1.8s-1.9-.7-1.9-2.8c0-1.9 1.5-2.8 1.6-2.8-.9-1.3-2.3-1.4-2.7-1.4-.5 0-1.1.1-1.4.1zm7.1 3.7c-.4-.3-.9-.5-1.4-.5-.7 0-1.3.4-1.6 1-.3.5-.4 1.1-.4 1.7 0 .6.1 1.2.4 1.7.3.6.9 1 1.6 1 .5 0 1-.2 1.4-.5v.4h.7V6.8h-.7v.4zm-1.3 3.7c-.4 0-.7-.2-.9-.5-.2-.3-.3-.7-.3-1.1 0-.4.1-.8.3-1.1.2-.3.5-.5.9-.5.4 0 .7.2.9.5.2.3.3.7.3 1.1 0 .4-.1.8-.3 1.1-.2.3-.5.5-.9.5zm3.9-3.7c-.4-.3-.9-.5-1.4-.5-.7 0-1.3.4-1.6 1-.3.5-.4 1.1-.4 1.7 0 .6.1 1.2.4 1.7.3.6.9 1 1.6 1 .5 0 1-.2 1.4-.5v.4h.7V6.8h-.7v.4zm-1.3 3.7c-.4 0-.7-.2-.9-.5-.2-.3-.3-.7-.3-1.1 0-.4.1-.8.3-1.1.2-.3.5-.5.9-.5.4 0 .7.2.9.5.2.3.3.7.3 1.1 0 .4-.1.8-.3 1.1-.2.3-.5.5-.9.5z"/>
-                    </svg>
-                  </div>
+                {/* Visa */}
+                <div className="flex items-center justify-center w-10 h-6">
+                  <img
+                    src="/payment-methods/visa.svg" // public folder path
+                    alt="Visa"
+                    className="max-h-full max-w-full object-contain"
+                  />
                 </div>
+
+                {/* Credit/Debit Card */}
+                <div className="flex items-center justify-center w-10 h-6">
+                  <img
+                    src="/payment-methods/mastercard.svg" // public folder path
+                    alt="Credit/Debit Card"
+                    className="max-h-full max-w-full object-contain"
+                  />
+                </div>
+
+                {/* Apple Pay */}
+                <div className="flex items-center justify-center w-10 h-6">
+                  <img
+                    src="/payment-methods/apple-pay.svg" // public folder path
+                    alt="Apple Pay"
+                    className="max-h-full max-w-full object-contain"
+                  />
+                </div>
+              </div>
               </motion.div>
             </div>
           </div>
