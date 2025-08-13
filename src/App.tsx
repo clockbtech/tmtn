@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Lenis from '@studio-freight/lenis'
+import { TranslationProvider } from './contexts/TranslationContext';
 
 import Index from './pages/Index';
 import About from './pages/About';
@@ -60,39 +61,41 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Router>
-        <LenisWrapper>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/destinations" element={<Destinations />} />
-            <Route path="/destinations/:id" element={<DestinationDetail />} />
-            <Route path="/experiences" element={<Experiences />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/checkout/:destinationId" element={<Checkout />} />
-            <Route path="/account" element={<Account />} />
+      <TranslationProvider>
+        <Router>
+          <LenisWrapper>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/destinations" element={<Destinations />} />
+              <Route path="/destinations/:id" element={<DestinationDetail />} />
+              <Route path="/experiences" element={<Experiences />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/checkout/:destinationId" element={<Checkout />} />
+              <Route path="/account" element={<Account />} />
 
-            {/* Super Admin Routes */}
-            <Route path="/super-admin" element={<AdminGuard><SuperAdmin /></AdminGuard>} />
-            <Route path="/super-admin/destinations" element={<AdminGuard><SuperAdminDestinations /></AdminGuard>} />
-            <Route path="/super-admin/attractions" element={<AdminGuard><SuperAdminAttractions /></AdminGuard>} />
-            <Route path="/super-admin/experiences" element={<AdminGuard><SuperAdminExperiences /></AdminGuard>} />
-            <Route path="/super-admin/bookings" element={<AdminGuard><SuperAdminBookings /></AdminGuard>} />
-            <Route path="/super-admin/video-reels" element={<AdminGuard><SuperAdminVideoReels /></AdminGuard>} />
-            <Route path="/super-admin/users" element={<AdminGuard><SuperAdminUsers /></AdminGuard>} />
-            <Route path="/super-admin/tour-guides" element={<AdminGuard><SuperAdminTourGuides /></AdminGuard>} />
-            <Route path="/super-admin/testimonials" element={<AdminGuard><SuperAdminTestimonials /></AdminGuard>} />
-            <Route path="/super-admin/blogs" element={<AdminGuard><SuperAdminBlogs /></AdminGuard>} />
-            <Route path="/super-admin/faqs" element={<AdminGuard><SuperAdminFAQs /></AdminGuard>} />
-            <Route path="/super-admin/privacy-policy" element={<AdminGuard><SuperAdminPrivacyPolicy /></AdminGuard>} />
-            <Route path="/super-admin/terms-of-service" element={<AdminGuard><SuperAdminTermsOfService /></AdminGuard>} />
-            <Route path="/super-admin/settings" element={<AdminGuard><SuperAdminSettings /></AdminGuard>} />
+              {/* Super Admin Routes */}
+              <Route path="/super-admin" element={<AdminGuard><SuperAdmin /></AdminGuard>} />
+              <Route path="/super-admin/destinations" element={<AdminGuard><SuperAdminDestinations /></AdminGuard>} />
+              <Route path="/super-admin/attractions" element={<AdminGuard><SuperAdminAttractions /></AdminGuard>} />
+              <Route path="/super-admin/experiences" element={<AdminGuard><SuperAdminExperiences /></AdminGuard>} />
+              <Route path="/super-admin/bookings" element={<AdminGuard><SuperAdminBookings /></AdminGuard>} />
+              <Route path="/super-admin/video-reels" element={<AdminGuard><SuperAdminVideoReels /></AdminGuard>} />
+              <Route path="/super-admin/users" element={<AdminGuard><SuperAdminUsers /></AdminGuard>} />
+              <Route path="/super-admin/tour-guides" element={<AdminGuard><SuperAdminTourGuides /></AdminGuard>} />
+              <Route path="/super-admin/testimonials" element={<AdminGuard><SuperAdminTestimonials /></AdminGuard>} />
+              <Route path="/super-admin/blogs" element={<AdminGuard><SuperAdminBlogs /></AdminGuard>} />
+              <Route path="/super-admin/faqs" element={<AdminGuard><SuperAdminFAQs /></AdminGuard>} />
+              <Route path="/super-admin/privacy-policy" element={<AdminGuard><SuperAdminPrivacyPolicy /></AdminGuard>} />
+              <Route path="/super-admin/terms-of-service" element={<AdminGuard><SuperAdminTermsOfService /></AdminGuard>} />
+              <Route path="/super-admin/settings" element={<AdminGuard><SuperAdminSettings /></AdminGuard>} />
 
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </LenisWrapper>
-      </Router>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </LenisWrapper>
+        </Router>
+      </TranslationProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
