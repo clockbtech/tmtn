@@ -165,6 +165,7 @@ function App() {
                 </AdminGuard>
               } />
             </Routes>
+            <ReactQueryDevtools initialIsOpen={false} />
           </div>
         </Router>
       </TranslationProvider>
