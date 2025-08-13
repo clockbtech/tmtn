@@ -1,20 +1,20 @@
+
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Lenis from '@studio-freight/lenis'
 
-import Home from './pages/Home';
+import Index from './pages/Index';
 import About from './pages/About';
 import Destinations from './pages/Destinations';
 import DestinationDetail from './pages/DestinationDetail';
 import Experiences from './pages/Experiences';
 import Contact from './pages/Contact';
-import Login from './pages/Login';
-import Register from './pages/Register';
+import Auth from './pages/Auth';
 import NotFound from './pages/NotFound';
-import BookingPage from './pages/BookingPage';
-import Profile from './pages/Profile';
+import Checkout from './pages/Checkout';
+import Account from './pages/Account';
 import SuperAdmin from './pages/SuperAdmin';
 import SuperAdminDestinations from './pages/super-admin/SuperAdminDestinations';
 import SuperAdminExperiences from './pages/super-admin/SuperAdminExperiences';
@@ -41,8 +41,9 @@ function App() {
 
   const AdminGuard = ({ children }: { children: React.ReactNode }) => {
     const storedIsAdmin = localStorage.getItem('isAdmin') === 'true';
-    return storedIsAdmin ? <>{children}</> : <Navigate to="/login" />;
+    return storedIsAdmin ? <>{children}</> : <Navigate to="/auth" />;
   };
+  
   const LenisWrapper = ({children}: {children: React.ReactNode}) => {
     useEffect(() => {
       const lenis = new Lenis()
@@ -62,16 +63,15 @@ function App() {
       <Router>
         <LenisWrapper>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
             <Route path="/destinations" element={<Destinations />} />
             <Route path="/destinations/:id" element={<DestinationDetail />} />
             <Route path="/experiences" element={<Experiences />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<Login setIsAdmin={setIsAdmin} />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/booking/:destinationId" element={<BookingPage />} />
-             <Route path="/profile" element={<Profile />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/checkout/:destinationId" element={<Checkout />} />
+            <Route path="/account" element={<Account />} />
 
             {/* Super Admin Routes */}
             <Route path="/super-admin" element={<AdminGuard><SuperAdmin /></AdminGuard>} />
