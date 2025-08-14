@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
@@ -19,8 +20,7 @@ import {
   MessageSquare,
   Video,
   Shield,
-  ScrollText,
-  Star
+  ScrollText
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -28,7 +28,6 @@ import { cn } from '@/lib/utils';
 const sidebarItems = [
   { id: 'dashboard', label: 'Dashboard', icon: BarChart3, path: '/super-admin' },
   { id: 'destinations', label: 'Destinations', icon: MapPin, path: '/super-admin/destinations' },
-  { id: 'attractions', label: 'Attractions', icon: Star, path: '/super-admin/attractions' },
   { id: 'experiences', label: 'Experiences', icon: Package, path: '/super-admin/experiences' },
   { id: 'bookings', label: 'Bookings', icon: Calendar, path: '/super-admin/bookings' },
   { id: 'video-reels', label: 'Video Reels', icon: Video, path: '/super-admin/video-reels' },
