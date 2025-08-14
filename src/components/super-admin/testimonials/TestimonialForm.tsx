@@ -180,8 +180,9 @@ export const TestimonialForm: React.FC<TestimonialFormProps> = ({
   );
 
   return (
-    <ScrollArea className="h-[80vh]">
-      <form onSubmit={handleSubmit} className="space-y-6 p-4">
+    <div className="h-[80vh] flex flex-col">
+      <ScrollArea className="flex-1 px-4">
+        <form onSubmit={handleSubmit} className="space-y-6 p-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Left Column */}
           <div className="space-y-4">
@@ -274,17 +275,19 @@ export const TestimonialForm: React.FC<TestimonialFormProps> = ({
             {formData.description.length}/500 characters
           </p>
         </div>
-
-        {/* Form Actions */}
-        <div className="flex justify-end gap-3 pt-4 border-t">
+      </form>
+      </ScrollArea>
+      
+      <div className="px-4 py-4 border-t">
+        <div className="flex justify-end gap-3">
           <Button type="button" variant="outline" onClick={onSuccess}>
             Cancel
           </Button>
-          <Button type="submit">
+          <Button type="submit" form="testimonial-form">
             {testimonial ? 'Update Testimonial' : 'Create Testimonial'}
           </Button>
         </div>
-      </form>
-    </ScrollArea>
+      </div>
+    </div>
   );
 };
