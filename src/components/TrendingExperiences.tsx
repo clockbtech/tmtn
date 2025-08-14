@@ -1,14 +1,14 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { Star, ArrowLeft, ArrowRight, MapPin, Clock, Users, Heart } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const TrendingExperiences = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [currency, setCurrency] = useState('USD');
   const [exchangeRate, setExchangeRate] = useState(1);
+  const navigate = useNavigate();
 
   const experiences = [{
     id: 1,
@@ -158,6 +158,12 @@ const TrendingExperiences = () => {
     }
   };
 
+  const handleBookNow = (experienceId: number, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigate(`/experiences/${experienceId}/checkout`);
+  };
+
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
       const scrollAmount = 320;
@@ -210,11 +216,7 @@ const TrendingExperiences = () => {
               }}
             >
               {experiences.map((experience, index) => (
-                <Link
-                  key={experience.id}
-                  to={`/experiences/${experience.id}`}
-                  className="flex-shrink-0 w-80 block"
-                >
+                <div key={experience.id} className="flex-shrink-0 w-80">
                   <motion.div
                     initial={{ opacity: 0, x: 50 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -222,73 +224,78 @@ const TrendingExperiences = () => {
                     whileHover={{ y: -5 }}
                     className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden"
                   >
-                    <div className="relative overflow-hidden">
-                      <img
-                        src={experience.image}
-                        alt={experience.title}
-                        className="w-full h-48 object-cover hover:scale-110 transition-transform duration-500"
-                      />
-                      <div className={`absolute top-4 right-4 ${getDifficultyColor(experience.difficulty)} backdrop-blur-sm rounded-full px-3 py-1`}>
-                        <span className="text-sm font-semibold text-white">
-                          {experience.difficulty}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="p-4">
-                      <div className="flex items-center text-gray-500 text-sm mb-2">
-                        <MapPin className="w-4 h-4 mr-1" />
-                        <span>Nepal</span>
-                      </div>
-
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-1">
-                        {experience.title}
-                      </h3>
-
-                      <div className="flex items-center mb-3">
-                        {[...Array(5)].map((_, i) => (
-                          <Star
-                            key={i}
-                            className={`w-4 h-4 ${
-                              i < Math.floor(experience.rating)
-                                ? 'fill-yellow-400 text-yellow-400'
-                                : 'text-gray-300'
-                            }`}
-                          />
-                        ))}
-                        <span className="text-sm text-gray-600 ml-2">
-                          ({experience.reviews} Review{experience.reviews !== 1 ? 's' : ''})
-                        </span>
-                      </div>
-
-                      <div className="flex items-center text-gray-600 text-sm mb-4 space-x-4">
-                        <div className="flex items-center">
-                          <Clock className="w-4 h-4 mr-1" />
-                          <span>{experience.duration}</span>
-                        </div>
-                        <div className="flex items-center">
-                          <Users className="w-4 h-4 mr-1" />
-                          <span>12 Person</span>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <span className="text-sm text-gray-500">From </span>
-                          <span className="text-lg font-bold text-green-600">
-                            {formatPrice(experience.basePrice)}
-                          </span>
-                          <span className="text-sm text-gray-400 line-through ml-2">
-                            {formatPrice(Math.round(experience.basePrice * 1.2))}
+                    <Link to={`/experiences/${experience.id}`}>
+                      <div className="relative overflow-hidden">
+                        <img
+                          src={experience.image}
+                          alt={experience.title}
+                          className="w-full h-48 object-cover hover:scale-110 transition-transform duration-500"
+                        />
+                        <div className={`absolute top-4 right-4 ${getDifficultyColor(experience.difficulty)} backdrop-blur-sm rounded-full px-3 py-1`}>
+                          <span className="text-sm font-semibold text-white">
+                            {experience.difficulty}
                           </span>
                         </div>
-                        <button className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-colors duration-200">
-                          <Heart className="w-4 h-4" />
-                        </button>
                       </div>
-                    </div>
+
+                      <div className="p-4">
+                        <div className="flex items-center text-gray-500 text-sm mb-2">
+                          <MapPin className="w-4 h-4 mr-1" />
+                          <span>Nepal</span>
+                        </div>
+
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-1">
+                          {experience.title}
+                        </h3>
+
+                        <div className="flex items-center mb-3">
+                          {[...Array(5)].map((_, i) => (
+                            <Star
+                              key={i}
+                              className={`w-4 h-4 ${
+                                i < Math.floor(experience.rating)
+                                  ? 'fill-yellow-400 text-yellow-400'
+                                  : 'text-gray-300'
+                              }`}
+                            />
+                          ))}
+                          <span className="text-sm text-gray-600 ml-2">
+                            ({experience.reviews} Review{experience.reviews !== 1 ? 's' : ''})
+                          </span>
+                        </div>
+
+                        <div className="flex items-center text-gray-600 text-sm mb-4 space-x-4">
+                          <div className="flex items-center">
+                            <Clock className="w-4 h-4 mr-1" />
+                            <span>{experience.duration}</span>
+                          </div>
+                          <div className="flex items-center">
+                            <Users className="w-4 h-4 mr-1" />
+                            <span>12 Person</span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <span className="text-sm text-gray-500">From </span>
+                            <span className="text-lg font-bold text-green-600">
+                              {formatPrice(experience.basePrice)}
+                            </span>
+                            <span className="text-sm text-gray-400 line-through ml-2">
+                              {formatPrice(Math.round(experience.basePrice * 1.2))}
+                            </span>
+                          </div>
+                          <button 
+                            onClick={(e) => handleBookNow(experience.id, e)}
+                            className="bg-tmtn-blue hover:bg-tmtn-blue/90 text-white px-4 py-2 rounded text-sm font-medium transition-colors"
+                          >
+                            Book Now
+                          </button>
+                        </div>
+                      </div>
+                    </Link>
                   </motion.div>
-                </Link>
+                </div>
               ))}
             </div>
           </div>

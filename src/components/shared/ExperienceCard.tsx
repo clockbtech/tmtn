@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Star, MapPin, Clock, Users, Heart } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface Experience {
   id: number;
@@ -33,6 +33,8 @@ const ExperienceCard = ({
   showWishlistHeart = false,
   onHeartClick 
 }: ExperienceCardProps) => {
+  const navigate = useNavigate();
+
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case 'Easy':
@@ -44,6 +46,12 @@ const ExperienceCard = ({
       default:
         return 'bg-gray-500/90';
     }
+  };
+
+  const handleBookNow = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigate(`/experiences/${experience.id}/checkout`);
   };
 
   const title = experience.title || experience.name || '';
@@ -137,7 +145,10 @@ const ExperienceCard = ({
                   <Heart className="w-4 h-4" />
                 </button>
               ) : (
-                <button className="bg-tmtn-blue hover:bg-tmtn-blue/90 text-white px-4 py-2 rounded text-sm font-medium transition-colors">
+                <button 
+                  onClick={handleBookNow}
+                  className="bg-tmtn-blue hover:bg-tmtn-blue/90 text-white px-4 py-2 rounded text-sm font-medium transition-colors"
+                >
                   Book Now
                 </button>
               )}
