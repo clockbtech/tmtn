@@ -11,6 +11,7 @@ import { Button } from '../components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Badge } from '../components/ui/badge';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '../components/ui/pagination';
+
 gsap.registerPlugin(ScrollTrigger);
 
 const Experiences = () => {
@@ -355,7 +356,7 @@ const Experiences = () => {
         </div>
       </section>
 
-      {/* Experiences Grid with TrendingExperiences style */}
+      {/* Experiences Grid with updated card design */}
       <section className="pb-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {filteredAndSortedExperiences.length === 0 ? (
@@ -383,11 +384,23 @@ const Experiences = () => {
                             alt={experience.name} 
                             className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" 
                           />
-                          <div className={`absolute top-4 right-4 ${getDifficultyColor(experience.difficulty)} backdrop-blur-sm rounded-full px-3 py-1`}>
+                          {/* Difficulty tag moved to top left */}
+                          <div className={`absolute top-4 left-4 ${getDifficultyColor(experience.difficulty)} backdrop-blur-sm rounded-full px-3 py-1`}>
                             <span className="text-sm font-semibold text-white">
                               {experience.difficulty}
                             </span>
                           </div>
+                          {/* Wishlist icon added to top right */}
+                          <button 
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              // Handle wishlist functionality here
+                            }}
+                            className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/90 hover:bg-white transition-colors duration-200"
+                          >
+                            <Heart className="w-4 h-4 text-red-500" />
+                          </button>
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </div>
                         
@@ -438,8 +451,15 @@ const Experiences = () => {
                                 {formatPrice(Math.round(experience.price * 1.2))}
                               </span>
                             </div>
-                            <button className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-colors duration-200">
-                              <Heart className="w-4 h-4" />
+                            <button 
+                              onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                // Handle booking
+                              }}
+                              className="bg-tmtn-blue hover:bg-tmtn-blue/90 text-white px-4 py-2 rounded text-sm font-medium transition-colors"
+                            >
+                              Book Now
                             </button>
                           </div>
                         </div>

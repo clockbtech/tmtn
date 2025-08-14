@@ -73,23 +73,27 @@ const ExperienceCard = ({
               alt={title} 
               className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" 
             />
-            <div className={`absolute top-4 right-4 ${getDifficultyColor(experience.difficulty)} backdrop-blur-sm rounded-full px-3 py-1`}>
+            {/* Difficulty tag moved to top left */}
+            <div className={`absolute top-4 left-4 ${getDifficultyColor(experience.difficulty)} backdrop-blur-sm rounded-full px-3 py-1`}>
               <span className="text-sm font-semibold text-white">
                 {experience.difficulty}
               </span>
             </div>
-            {showWishlistHeart && (
-              <button 
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  onHeartClick?.(experience.id);
-                }}
-                className="absolute top-4 left-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/90 hover:bg-white transition-colors duration-200"
-              >
-                <Heart className="w-4 h-4 fill-red-500 text-red-500" />
-              </button>
-            )}
+            {/* Wishlist icon added to top right */}
+            <button 
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (onHeartClick) {
+                  onHeartClick(experience.id);
+                } else {
+                  // Default wishlist functionality
+                }
+              }}
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/90 hover:bg-white transition-colors duration-200"
+            >
+              <Heart className={`w-4 h-4 ${showWishlistHeart ? 'fill-red-500 text-red-500' : 'text-red-500'}`} />
+            </button>
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
           
@@ -140,18 +144,12 @@ const ExperienceCard = ({
                   {formatPrice(Math.round(price * 1.2))}
                 </span>
               </div>
-              {!showWishlistHeart ? (
-                <button className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-colors duration-200">
-                  <Heart className="w-4 h-4" />
-                </button>
-              ) : (
-                <button 
-                  onClick={handleBookNow}
-                  className="bg-tmtn-blue hover:bg-tmtn-blue/90 text-white px-4 py-2 rounded text-sm font-medium transition-colors"
-                >
-                  Book Now
-                </button>
-              )}
+              <button 
+                onClick={handleBookNow}
+                className="bg-tmtn-blue hover:bg-tmtn-blue/90 text-white px-4 py-2 rounded text-sm font-medium transition-colors"
+              >
+                Book Now
+              </button>
             </div>
           </div>
         </div>
