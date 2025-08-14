@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -11,6 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { Card, CardContent } from '@/components/ui/card';
 import { Star, Upload, X, Image as ImageIcon } from 'lucide-react';
 
@@ -180,109 +180,111 @@ export const TestimonialForm: React.FC<TestimonialFormProps> = ({
   );
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Left Column */}
-        <div className="space-y-4">
-          <div>
-            <Label htmlFor="travelerName">Traveler Name *</Label>
-            <Input
-              id="travelerName"
-              value={formData.travelerName}
-              onChange={(e) => handleInputChange('travelerName', e.target.value)}
-              placeholder="Enter traveler's full name"
-              required
-            />
-          </div>
+    <ScrollArea className="h-[80vh]">
+      <form onSubmit={handleSubmit} className="space-y-6 p-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Left Column */}
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="travelerName">Traveler Name *</Label>
+              <Input
+                id="travelerName"
+                value={formData.travelerName}
+                onChange={(e) => handleInputChange('travelerName', e.target.value)}
+                placeholder="Enter traveler's full name"
+                required
+              />
+            </div>
 
-          <div>
-            <Label htmlFor="country">Country *</Label>
-            <Select value={formData.country} onValueChange={(value) => handleInputChange('country', value)}>
-              <SelectTrigger>
-                <SelectValue placeholder="Select country" />
-              </SelectTrigger>
-              <SelectContent>
-                {countries.map((country) => (
-                  <SelectItem key={country} value={country}>
-                    {country}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+            <div>
+              <Label htmlFor="country">Country *</Label>
+              <Select value={formData.country} onValueChange={(value) => handleInputChange('country', value)}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select country" />
+                </SelectTrigger>
+                <SelectContent>
+                  {countries.map((country) => (
+                    <SelectItem key={country} value={country}>
+                      {country}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
 
-          <div>
-            <Label>Star Rating *</Label>
-            <div className="mt-2">
-              {renderStarRating()}
-              <p className="text-sm text-muted-foreground mt-1">
-                Click on stars to rate (Currently: {formData.rating}/5)
-              </p>
+            <div>
+              <Label>Star Rating *</Label>
+              <div className="mt-2">
+                {renderStarRating()}
+                <p className="text-sm text-muted-foreground mt-1">
+                  Click on stars to rate (Currently: {formData.rating}/5)
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <Label htmlFor="status">Status</Label>
+              <Select value={formData.status} onValueChange={(value) => handleInputChange('status', value)}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="draft">Draft</SelectItem>
+                  <SelectItem value="published">Published</SelectItem>
+                  <SelectItem value="pending">Pending Review</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
 
-          <div>
-            <Label htmlFor="status">Status</Label>
-            <Select value={formData.status} onValueChange={(value) => handleInputChange('status', value)}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="draft">Draft</SelectItem>
-                <SelectItem value="published">Published</SelectItem>
-                <SelectItem value="pending">Pending Review</SelectItem>
-              </SelectContent>
-            </Select>
+          {/* Right Column */}
+          <div className="space-y-4">
+            <ImageUploadCard
+              type="profile"
+              preview={profilePicturePreview}
+              onChange={(e) => handleFileChange(e, 'profile')}
+              onRemove={() => removeImage('profile')}
+              title="Profile Picture"
+              description="Upload traveler's profile image"
+            />
+
+            <ImageUploadCard
+              type="trip"
+              preview={tripImagePreview}
+              onChange={(e) => handleFileChange(e, 'trip')}
+              onRemove={() => removeImage('trip')}
+              title="Trip Photo"
+              description="Upload photo from the traveler's trip"
+            />
           </div>
         </div>
 
-        {/* Right Column */}
-        <div className="space-y-4">
-          <ImageUploadCard
-            type="profile"
-            preview={profilePicturePreview}
-            onChange={(e) => handleFileChange(e, 'profile')}
-            onRemove={() => removeImage('profile')}
-            title="Profile Picture"
-            description="Upload traveler's profile image"
+        {/* Description - Full Width */}
+        <div>
+          <Label htmlFor="description">Testimonial Description *</Label>
+          <Textarea
+            id="description"
+            value={formData.description}
+            onChange={(e) => handleInputChange('description', e.target.value)}
+            placeholder="Enter the traveler's detailed feedback about their experience..."
+            className="min-h-[120px]"
+            required
           />
-
-          <ImageUploadCard
-            type="trip"
-            preview={tripImagePreview}
-            onChange={(e) => handleFileChange(e, 'trip')}
-            onRemove={() => removeImage('trip')}
-            title="Trip Photo"
-            description="Upload photo from the traveler's trip"
-          />
+          <p className="text-sm text-muted-foreground mt-1">
+            {formData.description.length}/500 characters
+          </p>
         </div>
-      </div>
 
-      {/* Description - Full Width */}
-      <div>
-        <Label htmlFor="description">Testimonial Description *</Label>
-        <Textarea
-          id="description"
-          value={formData.description}
-          onChange={(e) => handleInputChange('description', e.target.value)}
-          placeholder="Enter the traveler's detailed feedback about their experience..."
-          className="min-h-[120px]"
-          required
-        />
-        <p className="text-sm text-muted-foreground mt-1">
-          {formData.description.length}/500 characters
-        </p>
-      </div>
-
-      {/* Form Actions */}
-      <div className="flex justify-end gap-3 pt-4 border-t">
-        <Button type="button" variant="outline" onClick={onSuccess}>
-          Cancel
-        </Button>
-        <Button type="submit">
-          {testimonial ? 'Update Testimonial' : 'Create Testimonial'}
-        </Button>
-      </div>
-    </form>
+        {/* Form Actions */}
+        <div className="flex justify-end gap-3 pt-4 border-t">
+          <Button type="button" variant="outline" onClick={onSuccess}>
+            Cancel
+          </Button>
+          <Button type="submit">
+            {testimonial ? 'Update Testimonial' : 'Create Testimonial'}
+          </Button>
+        </div>
+      </form>
+    </ScrollArea>
   );
 };
