@@ -3,13 +3,11 @@ import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { Star, ArrowLeft, ArrowRight, MapPin, Clock, Users, Heart } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-
 const TrendingExperiences = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [currency, setCurrency] = useState('USD');
   const [exchangeRate, setExchangeRate] = useState(1);
   const navigate = useNavigate();
-
   const experiences = [{
     id: 1,
     title: 'Everest Base Camp Trek',
@@ -111,7 +109,6 @@ const TrendingExperiences = () => {
     duration: '1 day',
     difficulty: 'Easy'
   }];
-
   useEffect(() => {
     const detectCurrency = async () => {
       try {
@@ -133,7 +130,6 @@ const TrendingExperiences = () => {
     };
     detectCurrency();
   }, []);
-
   const formatPrice = (price: number) => {
     const convertedPrice = Math.round(price * exchangeRate);
     const symbols = {
@@ -144,7 +140,6 @@ const TrendingExperiences = () => {
     };
     return `${symbols[currency as keyof typeof symbols]}${convertedPrice}`;
   };
-
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case 'Easy':
@@ -157,13 +152,11 @@ const TrendingExperiences = () => {
         return 'bg-gray-500/90';
     }
   };
-
   const handleBookNow = (experienceId: number, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     navigate(`/experiences/${experienceId}/checkout`);
   };
-
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
       const scrollAmount = 320;
@@ -173,16 +166,17 @@ const TrendingExperiences = () => {
       });
     }
   };
-
-  return (
-    <section className="py-20 bg-white" id="experiences">
+  return <section className="py-20 bg-white" id="experiences">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
+        <motion.div initial={{
+        opacity: 0,
+        y: 30
+      }} whileInView={{
+        opacity: 1,
+        y: 0
+      }} transition={{
+        duration: 0.8
+      }} className="text-center mb-16">
           <h2 className="text-4xl lg:text-4xl font-bebas uppercase font-extrabold text-tmtn-blue mb-4">
             Trending Experiences
           </h2>
@@ -193,44 +187,33 @@ const TrendingExperiences = () => {
 
         <div className="relative">
           <div className="relative">
-            <button
-              onClick={() => scroll('left')}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-tmtn-blue text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200 -ml-6"
-            >
+            <button onClick={() => scroll('left')} className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-tmtn-blue text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200 -ml-6">
               <ArrowLeft className="w-5 h-5" />
             </button>
 
-            <button
-              onClick={() => scroll('right')}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-tmtn-blue text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200 -mr-6"
-            >
+            <button onClick={() => scroll('right')} className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-tmtn-blue text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200 -mr-6">
               <ArrowRight className="w-5 h-5" />
             </button>
 
-            <div
-              ref={scrollRef}
-              className="flex space-x-6 overflow-x-auto scrollbar-hide pb-4"
-              style={{
-                scrollbarWidth: 'none',
-                msOverflowStyle: 'none'
-              }}
-            >
-              {experiences.map((experience, index) => (
-                <div key={experience.id} className="flex-shrink-0 w-80">
-                  <motion.div
-                    initial={{ opacity: 0, x: 50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5 }}
-                    whileHover={{ y: -5 }}
-                    className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden"
-                  >
+            <div ref={scrollRef} className="flex space-x-6 overflow-x-auto scrollbar-hide pb-4" style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none'
+          }}>
+              {experiences.map((experience, index) => <div key={experience.id} className="flex-shrink-0 w-80">
+                  <motion.div initial={{
+                opacity: 0,
+                x: 50
+              }} whileInView={{
+                opacity: 1,
+                x: 0
+              }} transition={{
+                duration: 0.5
+              }} whileHover={{
+                y: -5
+              }} className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden">
                     <Link to={`/experiences/${experience.id}`}>
                       <div className="relative overflow-hidden">
-                        <img
-                          src={experience.image}
-                          alt={experience.title}
-                          className="w-full h-48 object-cover hover:scale-110 transition-transform duration-500"
-                        />
+                        <img src={experience.image} alt={experience.title} className="w-full h-48 object-cover hover:scale-110 transition-transform duration-500" />
                         <div className={`absolute top-4 right-4 ${getDifficultyColor(experience.difficulty)} backdrop-blur-sm rounded-full px-3 py-1`}>
                           <span className="text-sm font-semibold text-white">
                             {experience.difficulty}
@@ -249,16 +232,7 @@ const TrendingExperiences = () => {
                         </h3>
 
                         <div className="flex items-center mb-3">
-                          {[...Array(5)].map((_, i) => (
-                            <Star
-                              key={i}
-                              className={`w-4 h-4 ${
-                                i < Math.floor(experience.rating)
-                                  ? 'fill-yellow-400 text-yellow-400'
-                                  : 'text-gray-300'
-                              }`}
-                            />
-                          ))}
+                          {[...Array(5)].map((_, i) => <Star key={i} className={`w-4 h-4 ${i < Math.floor(experience.rating) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`} />)}
                           <span className="text-sm text-gray-600 ml-2">
                             ({experience.reviews} Review{experience.reviews !== 1 ? 's' : ''})
                           </span>
@@ -285,24 +259,18 @@ const TrendingExperiences = () => {
                               {formatPrice(Math.round(experience.basePrice * 1.2))}
                             </span>
                           </div>
-                          <button 
-                            onClick={(e) => handleBookNow(experience.id, e)}
-                            className="bg-tmtn-blue hover:bg-tmtn-blue/90 text-white px-4 py-2 rounded text-sm font-medium transition-colors"
-                          >
+                          <button onClick={e => handleBookNow(experience.id, e)} className="bg-tmtn-blue hover:bg-tmtn-blue/90 text-white px-4 py-2 text-sm font-medium transition-colors rounded-full">
                             Book Now
                           </button>
                         </div>
                       </div>
                     </Link>
                   </motion.div>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default TrendingExperiences;
