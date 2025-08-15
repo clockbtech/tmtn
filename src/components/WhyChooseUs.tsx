@@ -198,7 +198,7 @@ const WhyChooseUs = () => {
                   whileHover={{ scale: 1.03 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="relative w-80 h-[500px] rounded-full overflow-hidden shadow-2xl border-4 border-white">
+                  <div className="relative w-80 h-[600px] rounded-full overflow-hidden shadow-2xl border-4 border-white">
                     <img
                       src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1000&auto=format&fit=crop"
                       alt="Nepal Adventure"
@@ -300,7 +300,7 @@ const WhyChooseUs = () => {
             transition={{ duration: 0.2 }}
             className="p-5"
           >
-            <div className="text-2xl lg:text-3xl font-bold text-tmtn-red mb-1">
+            <div className="text-2xl lg:text-3xl font-mono font-bold text-white mb-1">
               {happyTravelers.count.toLocaleString()}+
             </div>
             <div className="text-blue-100 text-sm">
@@ -313,7 +313,7 @@ const WhyChooseUs = () => {
             transition={{ duration: 0.2 }}
             className="p-5"
           >
-            <div className="text-2xl lg:text-3xl font-bold text-tmtn-red mb-1">
+            <div className="text-2xl lg:text-3xl font-mono font-bold text-white mb-1">
               {toursCompleted.count}+
             </div>
             <div className="text-blue-100 text-sm">
@@ -326,7 +326,7 @@ const WhyChooseUs = () => {
             transition={{ duration: 0.2 }}
             className="p-5"
           >
-            <div className="text-2xl lg:text-3xl font-bold text-tmtn-red mb-1">
+            <div className="text-2xl lg:text-3xl font-mono font-bold text-white mb-1">
               {yearsExperience.count}+
             </div>
             <div className="text-blue-100 text-sm">
@@ -339,7 +339,7 @@ const WhyChooseUs = () => {
             transition={{ duration: 0.2 }}
             className="p-5"
           >
-            <div className="text-2xl lg:text-3xl font-bold text-tmtn-red mb-1">
+            <div className="text-2xl lg:text-3xl font-mono font-bold text-white mb-1">
               {satisfactionRate.count}%
             </div>
             <div className="text-blue-100 text-sm">

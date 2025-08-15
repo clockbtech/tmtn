@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUp } from 'lucide-react';
+import { Mountain, Plane } from 'lucide-react';
 
 const BackToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -40,7 +40,7 @@ const BackToTopButton = () => {
         >
           <button
             onClick={scrollToTop}
-            className="relative w-14 h-14 bg-tmtn-red hover:bg-tmtn-red/90 text-white rounded-full shadow-lg transition-all duration-200 flex items-center justify-center group"
+            className="relative w-14 h-14 btn-gradient text-white rounded-full shadow-lg transition-all duration-200 flex items-center justify-center group"
             aria-label="Back to top"
           >
             {/* Progress Circle */}
@@ -71,7 +71,7 @@ const BackToTopButton = () => {
             </svg>
             
             {/* Arrow Icon */}
-            <ArrowUp className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
+            <Mountain className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
           </button>
         </motion.div>
       )}

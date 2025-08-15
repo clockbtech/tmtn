@@ -23,7 +23,6 @@ import TermsOfService from './pages/TermsOfService';
 import SuperAdmin from './pages/SuperAdmin';
 import SuperAdminBlogs from './pages/super-admin/SuperAdminBlogs';
 import SuperAdminBookings from './pages/super-admin/SuperAdminBookings';
-import SuperAdminDestinations from './pages/super-admin/SuperAdminDestinations';
 import SuperAdminExperiences from './pages/super-admin/SuperAdminExperiences';
 import SuperAdminFAQs from './pages/super-admin/SuperAdminFAQs';
 import SuperAdminSettings from './pages/super-admin/SuperAdminSettings';
@@ -36,6 +35,8 @@ import SuperAdminTermsOfService from './pages/super-admin/SuperAdminTermsOfServi
 import NotFound from './pages/NotFound';
 import { Toaster } from "./components/ui/sonner";
 import LenisWrapper from './components/LenisWrapper';
+import SuperAdminAttractions from './pages/super-admin/SuperAdminAttractions';
+import SuperAdminDestinations from './pages/super-admin/SuperAdminDestinations';
 
 const queryClient = new QueryClient();
 
@@ -70,6 +71,7 @@ function App() {
                 <Route path="/super-admin/blogs" element={<SuperAdminBlogs />} />
                 <Route path="/super-admin/bookings" element={<SuperAdminBookings />} />
                 <Route path="/super-admin/destinations" element={<SuperAdminDestinations />} />
+                <Route path="/super-admin/attractions" element={<SuperAdminAttractions />} />
                 <Route path="/super-admin/experiences" element={<SuperAdminExperiences />} />
                 <Route path="/super-admin/faqs" element={<SuperAdminFAQs />} />
                 <Route path="/super-admin/settings" element={<SuperAdminSettings />} />

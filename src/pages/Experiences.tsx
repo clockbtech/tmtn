@@ -382,7 +382,7 @@ const Experiences = () => {
                           <img 
                             src={experience.image} 
                             alt={experience.name} 
-                            className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" 
+                            className="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-500" 
                           />
                           {/* Difficulty tag moved to top left */}
                           <div className={`absolute top-4 left-4 ${getDifficultyColor(experience.difficulty)} backdrop-blur-sm rounded-full px-3 py-1`}>
@@ -404,23 +404,23 @@ const Experiences = () => {
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </div>
                         
-                        <div className="p-4">
-                          <div className="flex items-center text-gray-500 text-sm mb-2">
+                        <div className="p-6">
+                          <div className="flex items-center text-gray-500 text-sm mb-4">
                             <MapPin className="w-4 h-4 mr-1" />
                             <span>Nepal</span>
                           </div>
 
-                          <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-1">
+                          <h3 className="text-lg font-semibold text-gray-900 mb-4 line-clamp-1">
                             {experience.name}
                           </h3>
 
-                          <div className="flex items-center mb-3">
+                          <div className="flex items-center mb-5">
                             {[...Array(5)].map((_, i) => (
                               <Star
                                 key={i}
                                 className={`w-4 h-4 ${
                                   i < Math.floor(experience.rating)
-                                    ? 'fill-yellow-400 text-yellow-400'
+                                    ? 'fill-orange-400 text-orange-400'
                                     : 'text-gray-300'
                                 }`}
                               />
@@ -430,7 +430,7 @@ const Experiences = () => {
                             </span>
                           </div>
 
-                          <div className="flex items-center text-gray-600 text-sm mb-4 space-x-4">
+                          <div className="flex items-center text-gray-600 text-sm mb-6 space-x-4">
                             <div className="flex items-center">
                               <Clock className="w-4 h-4 mr-1" />
                               <span>{experience.duration}</span>
@@ -441,10 +441,12 @@ const Experiences = () => {
                             </div>
                           </div>
 
+                          <div className="w-full h-px bg-gray-200 my-2"></div>
+
                           <div className="flex items-center justify-between">
                             <div>
                               <span className="text-sm text-gray-500">From </span>
-                              <span className="text-xl font-bold text-green-600">
+                              <span className="text-xl font-medium text-green-600">
                                 {formatPrice(experience.price)}
                               </span>
                               <span className="text-sm text-gray-400 line-through ml-2">
@@ -457,7 +459,7 @@ const Experiences = () => {
                                 e.stopPropagation();
                                 // Handle booking
                               }}
-                              className="bg-tmtn-blue hover:bg-tmtn-blue/90 text-white px-4 py-2 rounded text-sm font-medium transition-colors"
+                              className="btn-gradient text-white px-4 py-2 rounded-full text-sm font-medium transition-colors"
                             >
                               Book Now
                             </button>

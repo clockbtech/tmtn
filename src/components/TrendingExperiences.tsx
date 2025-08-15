@@ -1,15 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { gsap } from 'gsap';
 import { Star, ArrowLeft, ArrowRight, MapPin, Clock, Users, Heart } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
 
 const TrendingExperiences = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
   const [currency, setCurrency] = useState('USD');
   const [exchangeRate, setExchangeRate] = useState(1);
   const navigate = useNavigate();
-
   const experiences = [{
     id: 1,
     title: 'Everest Base Camp Trek',
@@ -112,7 +116,7 @@ const TrendingExperiences = () => {
     difficulty: 'Easy'
   }];
 
-  useEffect(() => {
+ useEffect(() => {
     const detectCurrency = async () => {
       try {
         // In a real implementation, you would use ipapi.co or similar service
@@ -164,16 +168,6 @@ const TrendingExperiences = () => {
     navigate(`/experiences/${experienceId}/checkout`);
   };
 
-  const scroll = (direction: 'left' | 'right') => {
-    if (scrollRef.current) {
-      const scrollAmount = 320;
-      scrollRef.current.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth'
-      });
-    }
-  };
-
   return (
     <section className="py-20 bg-white" id="experiences">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -192,33 +186,19 @@ const TrendingExperiences = () => {
         </motion.div>
 
         <div className="relative">
-          <div className="relative">
-            <button
-              onClick={() => scroll('left')}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-tmtn-blue text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200 -ml-6"
-            >
-              <ArrowLeft className="w-5 h-5" />
-            </button>
-
-            <button
-              onClick={() => scroll('right')}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-tmtn-blue text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200 -mr-6"
-            >
-              <ArrowRight className="w-5 h-5" />
-            </button>
-
-            <div
-              ref={scrollRef}
-              className="flex space-x-6 overflow-x-auto scrollbar-hide pb-4"
-              style={{
-                scrollbarWidth: 'none',
-                msOverflowStyle: 'none'
-              }}
-            >
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+              slidesToScroll: 1, // Only move one item at a time
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-6 pb-10">
               {experiences.map((experience, index) => (
-                <div key={experience.id} className="flex-shrink-0 w-80">
+                <CarouselItem key={experience.id} className="pl-6 basis-[21.25rem] w-96">
                   <motion.div
-                    initial={{ opacity: 0, x: 50 }}
+                    // initial={{ opacity: 0, x: 50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5 }}
                     whileHover={{ y: -5 }}
@@ -264,7 +244,7 @@ const TrendingExperiences = () => {
                               key={i}
                               className={`w-4 h-4 ${
                                 i < Math.floor(experience.rating)
-                                  ? 'fill-yellow-400 text-yellow-400'
+                                  ? 'fill-orange-400 text-orange-400'
                                   : 'text-gray-300'
                               }`}
                             />
@@ -285,10 +265,12 @@ const TrendingExperiences = () => {
                           </div>
                         </div>
 
+                        <div className="w-full h-px bg-gray-200 my-2"></div>
+
                         <div className="flex items-center justify-between">
                           <div>
                             <span className="text-sm text-gray-500">From </span>
-                            <span className="text-lg font-bold text-green-600">
+                            <span className="text-lg font-medium text-green-600">
                               {formatPrice(experience.basePrice)}
                             </span>
                             <span className="text-sm text-gray-400 line-through ml-2">
@@ -297,7 +279,7 @@ const TrendingExperiences = () => {
                           </div>
                           <button
                             onClick={e => handleBookNow(experience.id, e)}
-                            className="bg-tmtn-blue hover:bg-tmtn-blue/90 text-white px-4 py-2 text-sm font-medium transition-colors rounded-full"
+                            className="btn-gradient text-white px-4 py-2 text-sm font-medium transition-colors rounded-full"
                           >
                             Book Now
                           </button>
@@ -305,10 +287,20 @@ const TrendingExperiences = () => {
                       </div>
                     </Link>
                   </motion.div>
-                </div>
+                </CarouselItem>
               ))}
-            </div>
-          </div>
+            </CarouselContent>
+            
+            {/* Custom Previous Button */}
+            <CarouselPrevious className="absolute left-0 top-1/2 -translate-y-1/2 -ml-6 p-3 bg-tmtn-blue text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200 text-white">
+              <ArrowLeft className="w-5 h-5" />
+            </CarouselPrevious>
+            
+            {/* Custom Next Button */}
+            <CarouselNext className="absolute right-0 top-1/2 -translate-y-1/2 -mr-6 p-3 bg-tmtn-blue text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200">
+              <ArrowRight className="w-5 h-5" />
+            </CarouselNext>
+          </Carousel>
         </div>
       </div>
     </section>

@@ -137,7 +137,7 @@ const ExperienceCard = ({
             <div className="flex items-center justify-between">
               <div>
                 <span className="text-sm text-gray-500">From </span>
-                <span className="text-xl font-bold text-green-600">
+                <span className="text-xl font-medium text-green-600">
                   {formatPrice(price)}
                 </span>
                 <span className="text-sm text-gray-400 line-through ml-2">

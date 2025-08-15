@@ -125,7 +125,7 @@ const HeroSection = () => {
                     boxShadow: '0 10px 30px rgba(255, 125, 51, 0.4)'
                   }}
                   whileTap={{ scale: 0.95 }}
-                  className="btn-gradient text-white px-8 py-3 rounded-full text-lg font-tm-sans tracking-wider"
+                  className="btn-gradient text-white px-8 py-3 rounded-full text-lg font-poppins tracking-wider"
                 >
                   <Link to="/Destinations" className="block w-full h-full">
                     Discover Nepal
